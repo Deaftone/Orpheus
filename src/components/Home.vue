@@ -1,36 +1,15 @@
-<template class="flex">  
-   <div class="flex flex-col justify-between h-screen bg-gray-900" style="width:250px">
-      <header class="bg-gray-800 py-4">
-        Orpheus
-      </header>
-      <div class="text-left" style="padding-left:20px;padding-top:10px">
-        <a class="text-xl font-bold">My Library</a>
-        <ul style="padding-left:20px;padding-top:5px">
-          <li class="hover:underline">Albums</li>
-          <li class="hover:underline">Artists</li>
-          <li class="hover:underline">Tracks</li>
-        </ul>
-      </div>
-      <footer class="mt-auto bg-gray-800 py-4">
-        Footer
-      </footer>
-    </div>
-    <div class="flex flex-col justify-between w-screen bg-red-500">
-      <section class="bg-blue-900 py-4">
-        Content
-      </section>
-      <div>
-        <a>test</a>
-      </div>
-      <footer class="mt-auto bg-gray-800 py-4">
-        Content Footer
-      </footer>
-    </div>
+<template> 
+  <div class="shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300 grid grid-flow-col grid-cols-4 grid-rows-1 gap-10" style="padding:50px">
+       <div class="bg-gray-900 content-center rounded"><a>test</a></div>
+       <div class="bg-gray-900 content-center rounded"><a>test</a></div>
+       <div class="bg-gray-900 content-center rounded"><a>test</a></div>
+       <div class="bg-gray-900 content-center rounded"><a>test</a></div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Home',
   props: {
     msg: String
   }
@@ -43,7 +22,5 @@ export default {
  * We'll use CSS grids for the base template
  * More info on https://cssgrid.io/ by @wesbos
  */
-#main {
-  display: flex;
-}
+
 </style>
