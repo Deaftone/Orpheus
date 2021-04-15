@@ -1,7 +1,7 @@
 <template class="flex">  
    <div class="flex flex-col justify-between h-screen bg-gray-800" style="width:250px;position:fixed">
       <header class="bg-gray-800 py-4 text-left text-2xl font-bold" style="z-index:2;padding-left:20px;">
-        <h1 class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-blue-300 to-pink-900">Orpheus</h1> 
+        <h1 class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-blue-300 to-pink-900" @click='goTo("")' >Orpheus</h1> 
       </header>
       <header class="bg-gray-900 py-4 w-screen" style="position:fixed;background-color:rgba(23, 23, 23)">
         HEADER
@@ -9,8 +9,8 @@
       <div class="text-left" style="padding-left:20px;padding-top:10px">
         <a class="text-xl font-bold">My Library</a>
         <ul style="padding-left:20px;padding-top:5px">
-          <li class="s-item">Albums</li>
-          <li class="s-item">Artists</li>
+          <li class="s-item" @click='goTo("test")' >Albums</li>
+          <li class="s-item" @click='goTo("arists")'>Artists</li>
           <li class="s-item">Tracks</li>
         </ul>
       </div>
@@ -28,7 +28,13 @@
 <script>
 
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+    goTo(p) {
+      console.log(p)
+      this.$router.push({path: `/${p}`});
+    }
+  }
 }
 </script>
 
