@@ -114,7 +114,6 @@
       </section>
     </div>
     <footer class="mt-auto bg-gray-900 p-5 absolute bottom-0 w-full text-center">
-      Content Footer
       <Player />
     </footer>
   </main>
