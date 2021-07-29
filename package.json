@@ -12,6 +12,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^3.0.0-4",
+    "@vueform/slider": "^2.0.3",
     "pcm-player": "^0.0.11",
     "vue": "^3.0.5",
     "vue-router": "^4.0.6"
