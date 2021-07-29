@@ -1,0 +1,48 @@
+{
+    "editor.detectIndentation": false,
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "eslint.validate": [
+        {
+          "language": "vue",
+          "autoFix": true
+        },
+        {
+          "language": "html",
+          "autoFix": true
+        },
+        {
+          "language": "javascript",
+          "autoFix": true
+        }
+      ],
+    "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+    },
+"files.exclude": {
+"**/.git": true,
+"**/.DS_Store": true,
+"**/__pycache__": true,
+"**/.pytest_cache": true,
+"**/node_modules": true,
+"node_modules": true,
+"venv": true,
+"*.sublime-*": true,
+"env*": true
+},
+"search.exclude": {
+"**/node_modules": true,
+"**/bower_components": true,
+"**/env": true,
+"**/venv": true
+},
+"files.watcherExclude": {
+"**/.git/objects/**": true,
+"**/.git/subtree-cache/**": true,
+"**/node_modules/**": true,
+"**/env/**": true,
+"**/venv/**": true,
+"env-*": true
+}
+}
