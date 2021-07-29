@@ -1,52 +1,67 @@
 <template>
-  <main class="">
-    <a>{{ currentTrack }}</a>
-    <div id="controls">
-      <div
-        id="volume"
-        class="w-20"
-      >
-        <Slider
-          v-model="volume"
-          :step="-1"
-          :max="1"
-          :tooltips="false"
-          @update="volumeChange"
-        />
+  <main>
+    <div
+      id="container"
+      class="grid grid-cols-3 grid-row-1 "
+    >
+      <!-- This is hacked I couldnt get it allign center vertically any other way then puttin it inside a div -->
+      <div class="flex justify-center items-center">
+        <div
+          id="volume"
+          class="w-20"
+        >
+          <Slider
+            v-model="volume"
+            :step="-1"
+            :max="1"
+            :tooltips="false"
+            @update="volumeChange"
+          />
+        </div>
       </div>
-      <!-- Previous Button -->
-      <button
-        class="text-gray-800 font-bold py-2 px-4 co"
-        @click="previosTrack"
+
+      <div
+        id="playControls"
+        class="col-start-2"
       >
-        <font-awesome-icon
-          icon="fast-backward"
-          color="gray"
-        />
-      </button>
-      <!-- Play Button -->
-      <button
-        class="text-gray-800 font-bold py-2 px-4 co"
-        @click="playPause"
-      >
-        <font-awesome-icon
-          :icon="currentIcon"
-          color="gray"
-        />
-      </button>
-      <!-- Next Button -->
-      <button
-        class="text-gray-800 font-bold py-2 px-4 co"
-        @click="nextTrack"
-      >
-        <font-awesome-icon
-          icon="fast-forward"
-          color="gray"
-        />
-      </button>
+        <!-- Previous Button -->
+        <button
+          class="text-gray-800 font-bold py-2 px-4 co"
+          @click="previosTrack"
+        >
+          <font-awesome-icon
+            icon="fast-backward"
+            color="gray"
+          />
+        </button>
+        <!-- Play Button -->
+        <button
+          class="text-gray-800 font-bold py-2 px-4 co"
+          @click="playPause"
+        >
+          <font-awesome-icon
+            :icon="currentIcon"
+            color="gray"
+          />
+        </button>
+        <!-- Next Button -->
+        <button
+          class="text-gray-800 font-bold py-2 px-4 co"
+          @click="nextTrack"
+        >
+          <font-awesome-icon
+            icon="fast-forward"
+            color="gray"
+          />
+        </button>
+      </div>
+      <div class="col-start-3 flex items-center justify-center">
+        <a>{{ currentTrack }}</a>
+      </div>
       <audio
         id="appPlayer"
         ref="appPlayer"
+        class="hidden"
         name="appPlayer"
         style="hidden"
       />
