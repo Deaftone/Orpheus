@@ -2,7 +2,7 @@
   <main>
     <div
       id="container"
-      class="grid grid-cols-3 grid-row-1 "
+      class="grid grid-cols-3 grid-row-1 text-sm"
     >
       <!-- This is hacked I couldnt get it allign center vertically any other way then puttin it inside a div -->
       <div class="flex justify-center items-center">
@@ -67,14 +67,16 @@
       />
     </div>
 
-    <a>{{ eTime }} / {{ duration }}</a>
-    <div id="playbar">
-      <Slider
-        v-model="percentPlayed"
-        :step="-1"
-        :tooltips="false"
-        @update="barChange"
-      />
+    <div class="grid grid-row-1 w-full text-xs">
+      <a>{{ eTime }} / {{ duration }}</a>
+      <div id="playbar">
+        <Slider
+          v-model="percentPlayed"
+          :step="-1"
+          :tooltips="false"
+          @update="barChange"
+        />
+      </div>
     </div>
   </main>
 </template>
