@@ -79,6 +79,8 @@ export default {
   },
   watch: {
     nowPlaying (newPlaying, oldPlaying ) {
+      console.log(newPlaying)
+      console.log('Updated')
       let oldP
       if(oldPlaying) {
         oldP = document.getElementById(oldPlaying.id) 
@@ -122,6 +124,9 @@ export default {
   },
   methods: {
     playTrack(title, id) {
+      const index = this.songs.findIndex(x => x.id === id)
+      const songs = this.songs.slice(index + 1, this.songs.length)
+      this.$store.commit('setQueue', songs)
       this.$store.commit('setNowPlaying', {title: title, id: id})
     },
     onElementObserved(e) {
