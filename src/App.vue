@@ -1,31 +1,28 @@
 <template>  
-  <main class="h-screen flex">
-    <div class="w-72 h-screen bg-gray-500 overflow-hidden">
-      <header class="bg-gray-900 py-5 text-center text-2xl font-bold">
+  <main class="flex h-screen">
+    <div class="w-56 h-screen overflow-hidden bg-gray-500">
+      <header class="py-5 text-2xl font-bold text-center bg-gray-900">
         <h1
-          class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-blue-300 to-pink-900"
+          class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-blue-300 to-pink-900"
           @click="goTo(&quot;&quot;)"
         >
           Orpheus
         </h1> 
       </header>
-      <nav class="bg-gray-900 h-full p-4">
+      <nav class="h-full p-4 pl-4 bg-gray-900">
         <a class="text-xl font-bold">My Library</a>
         <ul style="padding-left:20px;padding-top:5px">
           <li
             class="s-item"
-            @click="goTo(&quot;test&quot;)"
+            @click="goTo(&quot;AlbumDetails&quot;)"
           >
             Albums
           </li>
           <li
             class="s-item"
-            @click="goTo(&quot;arists&quot;)"
+            @click="goTo(&quot;ArtistList&quot;)"
           >
             Artists
-          </li>
-          <li class="s-item">
-            Tracks
           </li>
           <li class="s-item">
             Tracks
@@ -106,20 +103,20 @@
       </nav>
     </div>
     <div
-      class="flex flex-col justify-between  overflow-hidden w-full bg-red-400"
+      class="flex flex-col justify-between w-full bg-gray-00"
       style="padding-bottom:4.5rem"
     >
-      <header class="bg-gray-900 p-2 text-center">
+      <header class="p-2 text-center bg-gray-900">
         <div class="flex float-right">
           <SearchBox />
         </div>
         Content Header
       </header>
-      <section class="overflow-y-scroll ">      
+      <section class="h-full overflow-y-scroll">
         <router-view />
       </section>
     </div>
-    <footer class="mt-auto bg-gray-900 p-2 absolute bottom-0 w-full text-center">
+    <footer class="absolute bottom-0 w-full p-2 mt-auto text-center bg-gray-900">
       <Player />
     </footer>
   </main>
@@ -131,14 +128,23 @@ import SearchBox from "./components/SearchBox.vue"
 
 export default {
   name: 'App',
-    components: {
-        Player,
-        SearchBox
-    },
+  components: {
+    Player,
+    SearchBox
+  },
+  data() {
+    return {
+    }
+  },
+  computed: {
+    count () {
+      return this.$store.state.count
+    }
+  },
   methods: {
     goTo(p) {
       console.log(p)
-      this.$router.push({path: `/${p}`});
+      this.$router.push({path: `/${p}`})
     }
   }
 }
