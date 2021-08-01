@@ -2,7 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import ArtistList from '../components/Artist/ArtistList.vue'
 import AlbumDetails from '../components/Album/AlbumDetails.vue'
-
+import ArtistDetails from '../components/Artist/ArtistDetails.vue'
 import Home from '../components/Home.vue'
 
 const routes = [
@@ -17,9 +17,17 @@ const routes = [
     component: ArtistList
   },
   {
-    path: '/AlbumDetails',
+    path: '/AlbumDetails/:id',
     name: 'AlbumDetails',
-    component: AlbumDetails
+    component: AlbumDetails,
+    props: true
+  },
+  
+  {
+    path: '/ArtistDetails/:id',
+    name: 'ArtistDetails',
+    component: ArtistDetails,
+    props: true
   }
 ]
 
