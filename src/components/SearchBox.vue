@@ -1,7 +1,7 @@
 <template>  
-  <div class="pt-2 pb-2 relative mx-auto text-gray-600">
+  <div class="relative pt-2 pb-2 mx-auto text-gray-600">
     <input
-      class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+      class="h-10 px-5 pr-16 text-sm bg-white border-2 border-gray-300 rounded-lg focus:outline-none"
       type="search"
       name="search"
       placeholder="Search"
@@ -9,11 +9,11 @@
     >
     <button
       type="submit"
-      class="absolute right-0 top-0 mt-5 mr-4"
+      class="absolute top-0 right-0 mt-5 mr-4"
     >
       <svg
         id="Capa_1"
-        class="text-gray-600 h-4 w-4 fill-current"
+        class="w-4 h-4 text-gray-600 fill-current"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
         version="1.1"
@@ -42,9 +42,9 @@ export default {
     }
   },
   methods: {
-      updateSearch(e) {
-          this.search = e
-      }
+    updateSearch(e) {
+      this.search = e
+    }
   }
 }
 </script>

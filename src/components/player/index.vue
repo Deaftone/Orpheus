@@ -1,11 +1,12 @@
 <template>
   <main>
+    <!-- Test -->
     <div
       id="container"
-      class="grid grid-cols-3 grid-row-1 text-sm"
+      class="grid grid-cols-3 text-sm grid-row-1"
     >
       <!-- This is hacked I couldnt get it allign center vertically any other way then puttin it inside a div -->
-      <div class="flex justify-center items-center">
+      <div class="flex items-center justify-center">
         <div
           id="volume"
           class="w-20"
@@ -26,7 +27,7 @@
       >
         <!-- Previous Button -->
         <button
-          class="text-gray-800 font-bold py-2 px-4 co"
+          class="px-4 py-2 font-bold text-gray-800 co"
           @click="previosTrack"
         >
           <font-awesome-icon
@@ -36,7 +37,7 @@
         </button>
         <!-- Play Button -->
         <button
-          class="text-gray-800 font-bold py-2 px-4 co"
+          class="px-4 py-2 font-bold text-gray-800 co"
           @click="playPause"
         >
           <font-awesome-icon
@@ -46,7 +47,7 @@
         </button>
         <!-- Next Button -->
         <button
-          class="text-gray-800 font-bold py-2 px-4 co"
+          class="px-4 py-2 font-bold text-gray-800 co"
           @click="nextTrack"
         >
           <font-awesome-icon
@@ -55,7 +56,7 @@
           />
         </button>
       </div>
-      <div class="col-start-3 flex items-center justify-center">
+      <div class="flex items-center justify-center col-start-3">
         <a>{{ currentTrack }}</a>
       </div>
       <audio
@@ -67,7 +68,7 @@
       />
     </div>
 
-    <div class="grid grid-row-1 w-full text-xs">
+    <div class="grid w-full text-xs grid-row-1">
       <a>{{ eTime }} / {{ duration }}</a>
       <div id="playbar">
         <Slider
@@ -86,101 +87,111 @@ import Slider from '@vueform/slider'
 import '../../freqtimeupdate'
 
 export default ({
-    name: "Player",
-    components: {
-        Slider
-    },
-      data() {
-        return {
-          appPlayer: undefined,
-          currentTrack: '',
-          isPlaying: false,
-          paused: false,
-          currentIcon: 'play',
-          percentPlayed: 0,
-          eTime: '00:00',
-          volume: 0.2,
-          duration: '00:00'
+  name: "Player",
+  components: {
+    Slider
+  },
+  data() {
+    return {
+      appPlayer: undefined,
+      currentTrack: '',
+      isPlaying: false,
+      paused: false,
+      currentIcon: 'play',
+      percentPlayed: 0,
+      eTime: '00:00',
+      volume: 0.2,
+      duration: '00:00'
+    }
+  },
+  computed: {
+    nowPlaying () {
+      return this.$store.state.nowPlaying
+    }
+  },
+  mounted() {
+    this.$nextTick(function() {
+      this.appPlayer = this.$refs.appPlayer
+      this.appPlayer.volume = this.volume
+      this.$watch("isPlaying",function() {
+        if(this.isPlaying) {
+          console.log("Audio playback started.")
+          //prevent starting multiple listeners at the same time
+          if(!this.listenerActive) {
+            console.log('Add listener')
+            this.listenerActive=true
+            //for a more consistent timeupdate, include freqtimeupdate.js and replace both instances of 'timeupdate' with 'freqtimeupdate'
+            //frequent.add(this.appPlayer, this.playbackListener);
+            this.appPlayer.addEventListener("freqtimeupdate",this.playbackListener)
+          }
         }
+      })
+    })
+  },
+  methods: {
+    convertTime(seconds){
+      const format = val => `0${Math.floor(val)}`.slice(-2)
+      //var hours = seconds / 3600;
+      const minutes = (seconds % 3600) / 60
+      return [minutes, seconds % 60].map(format).join(":")
     },
-    mounted() {
-        this.$nextTick(function() {
-            this.appPlayer = this.$refs.appPlayer
-            this.appPlayer.volume = this.volume
-                this.$watch("isPlaying",function() {
-                    if(this.isPlaying) {
-                      console.log("Audio playback started.");
-                      //prevent starting multiple listeners at the same time
-                      if(!this.listenerActive) {
-                        console.log('Add listener')
-                        this.listenerActive=true;
-                        //for a more consistent timeupdate, include freqtimeupdate.js and replace both instances of 'timeupdate' with 'freqtimeupdate'
-                        //frequent.add(this.appPlayer, this.playbackListener);
-                        this.appPlayer.addEventListener("freqtimeupdate",this.playbackListener);
-                      }
-                    }
-                });
-        })
+    increment() {
+      this.$store.commit('increment')
+      console.log(this.$store.state.count)
     },
-    methods: {
-        convertTime(seconds){
-                const format = val => `0${Math.floor(val)}`.slice(-2);
-                var hours = seconds / 3600;
-                var minutes = (seconds % 3600) / 60;
-                return [minutes, seconds % 60].map(format).join(":");
-        },
-        barChange(e){
-            var time = e / 100 * this.appPlayer.duration
-            var diff = Math.abs( time - this.appPlayer.currentTime );
-            if(diff > 0.1) {
-                console.log(diff)
-                this.appPlayer.currentTime = time
-            }
-        },
-        previosTrack(){
-            this.playTrack('brightside.flac')
-            console.log('Previous track clicked')
-        },
-        nextTrack() {
-            this.playTrack('sober.flac')
-            console.log('Next track clicked')
-        },
-        volumeChange (e) {
-            this.appPlayer.volume = e
-        },
-        playPause() {
-            if(this.paused) {
-                console.log('Play/Pause -- Resume')
-                this.isPlaying = true
-                this.paused = false
-                this.appPlayer.play()
-                this.currentIcon = "pause"
-            } else if (!this.appPlayer.src) {
-                console.log('Play/Pause -- Inital play load track')
-                this.playTrack('brightside.flac')
-            } else {
-                console.log('Play/Pause -- Pause')
-                this.isPlaying = false
-                this.paused = true
-                this.appPlayer.pause()
-                this.currentIcon = "play"
-            }
-        },
-        playTrack(track) {
-                this.appPlayer.src = track
-                this.appPlayer.play()
-                this.isPlaying = true
-                this.currentIcon = "pause"
-                this.currentTrack = this.appPlayer.src
-        },
-        playbackListener() {
-            var percentage = (this.appPlayer.currentTime / this.appPlayer.duration) * 100;
-            this.duration = this.convertTime(this.appPlayer.duration);
-            this.percentPlayed = percentage
-            var seconds = this.appPlayer.currentTime;
-            this.eTime = this.convertTime(seconds);
-            this.playbackTime = this.appPlayer.currentTime;
-        }
+    barChange(e){
+      const time = e / 100 * this.appPlayer.duration
+      const diff = Math.abs( time - this.appPlayer.currentTime )
+      if(diff > 0.1) {
+        console.log(diff)
+        this.appPlayer.currentTime = time
+      }
     },
+    previosTrack(){
+      this.playTrack('brightside.flac')
+      console.log('Previous track clicked')
+    },
+    nextTrack() {
+      this.playTrack('sober.flac')
+      console.log('Next track clicked')
+    },
+    volumeChange (e) {
+      this.appPlayer.volume = e
+    },
+    playPause() {
+      if(this.paused) {
+        console.log('Play/Pause -- Resume')
+        this.isPlaying = true
+        this.paused = false
+        this.appPlayer.play()
+        this.currentIcon = "pause"
+      } else if (!this.appPlayer.src) {
+        console.log('Play/Pause -- Inital play load track')
+        this.playTrack('brightside.flac')
+      } else {
+        console.log('Play/Pause -- Pause')
+        this.isPlaying = false
+        this.paused = true
+        this.appPlayer.pause()
+        this.currentIcon = "play"
+      }
+    },
+    playTrack(track) {
+      this.appPlayer.src = track
+      this.appPlayer.play()
+      this.isPlaying = true
+      this.currentIcon = "pause"
+      this.currentTrack = this.appPlayer.src
+      this.$store.commit('setNowPlaying', this.appPlayer.src)
+    },
+    playbackListener() {
+      const percentage = (this.appPlayer.currentTime / this.appPlayer.duration) * 100
+      this.duration = this.convertTime(this.appPlayer.duration)
+      this.percentPlayed = percentage
+      const seconds = this.appPlayer.currentTime
+      this.eTime = this.convertTime(seconds)
+      this.playbackTime = this.appPlayer.currentTime
+    }
+  },
 })
 </script>
