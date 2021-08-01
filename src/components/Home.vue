@@ -1,171 +1,171 @@
 <template> 
   <div
-    class="shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300 grid grid-flow-col grid-cols-4 grid-rows-1 gap-10"
+    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
     style="padding:50px"
   >
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
   </div>
   <div
-    class="shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300 grid grid-flow-col grid-cols-4 grid-rows-1 gap-10"
+    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
     style="padding:50px"
   >
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
   </div>
   <div
-    class="shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300 grid grid-flow-col grid-cols-4 grid-rows-1 gap-10"
+    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
     style="padding:50px"
   >
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
   </div>
   <div
-    class="shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300 grid grid-flow-col grid-cols-4 grid-rows-1 gap-10"
+    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
     style="padding:50px"
   >
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
   </div>
   <div
-    class="shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300 grid grid-flow-col grid-cols-4 grid-rows-1 gap-10"
+    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
     style="padding:50px"
   >
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
   </div>
   <div
-    class="shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300 grid grid-flow-col grid-cols-4 grid-rows-1 gap-10"
+    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
     style="padding:50px"
   >
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
   </div>
   <div
-    class="shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300 grid grid-flow-col grid-cols-4 grid-rows-1 gap-10"
+    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
     style="padding:50px"
   >
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
   </div>
   <div
-    class="shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300 grid grid-flow-col grid-cols-4 grid-rows-1 gap-10"
+    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
     style="padding:50px"
   >
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
   </div>
   <div
-    class="shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300 grid grid-flow-col grid-cols-4 grid-rows-1 gap-10"
+    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
     style="padding:50px"
   >
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
   </div>
   <div
-    class="shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300 grid grid-flow-col grid-cols-4 grid-rows-1 gap-10"
+    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
     style="padding:50px"
   >
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
-    <div class="bg-gray-900 content-center rounded">
+    <div class="content-center bg-gray-900 rounded">
       <a>test</a>
     </div>
   </div>
