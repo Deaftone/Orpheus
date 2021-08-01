@@ -65,6 +65,7 @@
         class="hidden"
         name="appPlayer"
         style="hidden"
+        preload
       />
     </div>
 
@@ -107,6 +108,12 @@ export default ({
   computed: {
     nowPlaying () {
       return this.$store.state.nowPlaying
+    }
+  },
+  watch: {
+    nowPlaying (newPlaying, oldPlaying ) {
+      console.log(newPlaying)
+      this.playTrack(`http://192.168.1.13:4533/rest/stream?u=doom&t=57447d1e0c77a04388d4cf5745b520ec&s=558dbf&f=json&v=1.8.0&c=NavidromeUI&id=${newPlaying.id}&_=1627823120382`)
     }
   },
   mounted() {
@@ -165,10 +172,7 @@ export default ({
         this.paused = false
         this.appPlayer.play()
         this.currentIcon = "pause"
-      } else if (!this.appPlayer.src) {
-        console.log('Play/Pause -- Inital play load track')
-        this.playTrack('brightside.flac')
-      } else {
+      }  else {
         console.log('Play/Pause -- Pause')
         this.isPlaying = false
         this.paused = true
@@ -177,12 +181,12 @@ export default ({
       }
     },
     playTrack(track) {
+      console.log("Got play track " + track)
       this.appPlayer.src = track
       this.appPlayer.play()
       this.isPlaying = true
       this.currentIcon = "pause"
-      this.currentTrack = this.appPlayer.src
-      this.$store.commit('setNowPlaying', this.appPlayer.src)
+      this.currentTrack = this.$store.state.nowPlaying.title
     },
     playbackListener() {
       const percentage = (this.appPlayer.currentTime / this.appPlayer.duration) * 100
