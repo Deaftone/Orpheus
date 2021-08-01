@@ -14,5 +14,20 @@
     "plugins": [
     ],
     "rules": {
+        "semi": ["error", "never"],
+        "indent": [
+			"error",
+			2
+		],
+        "prefer-const": [
+			"error",
+			{
+				"ignoreReadBeforeAssign": true
+			}
+		],
+		"space-before-function-paren": "off",
+		"no-var": "error",
+		"no-console": "off",
+		"no-unused-expressions": 0,
     }
   }
