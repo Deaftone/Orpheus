@@ -66,10 +66,11 @@
         name="appPlayer"
         style="hidden"
         preload
+        @ended="nextTrack"
       />
     </div>
 
-    <div class="grid w-full text-xs grid-row-1">
+    <div class="grid w-full pb-1 text-xs grid-row-1">
       <a>{{ eTime }} / {{ duration }}</a>
       <div id="playbar">
         <Slider
@@ -111,12 +112,18 @@ export default ({
     }
   },
   watch: {
+    // This watch triggers playTrack. by doing       this.$store.commit('setNowPlaying', {title: track.title, id: track.id})
+    // Do not do that inside the playTrack function as it will cause a infinite loop
     nowPlaying (newPlaying, oldPlaying ) {
-      console.log(newPlaying)
-      this.playTrack(`http://192.168.1.13:4533/rest/stream?u=***REMOVED***&t=***REMOVED***&s=558dbf&f=json&v=1.8.0&c=NavidromeUI&id=${newPlaying.id}&_=1627823120382`)
+      if(oldPlaying){
+        console.log(oldPlaying)
+        this.$store.commit('setPreviousPlaying', {title: oldPlaying.title, id: oldPlaying.id})
+      }
+      this.playTrack(newPlaying)
     }
   },
   mounted() {
+
     this.$nextTick(function() {
       this.appPlayer = this.$refs.appPlayer
       this.appPlayer.volume = this.volume
@@ -134,6 +141,7 @@ export default ({
         }
       })
     })
+
   },
   methods: {
     convertTime(seconds){
@@ -141,10 +149,6 @@ export default ({
       //var hours = seconds / 3600;
       const minutes = (seconds % 3600) / 60
       return [minutes, seconds % 60].map(format).join(":")
-    },
-    increment() {
-      this.$store.commit('increment')
-      console.log(this.$store.state.count)
     },
     barChange(e){
       const time = e / 100 * this.appPlayer.duration
@@ -155,11 +159,17 @@ export default ({
       }
     },
     previosTrack(){
-      this.playTrack('brightside.flac')
+      const track = this.$store.state.previousPlaying     
+      console.log(this.$store.state.previousPlaying)         
+      //this.playTrack(this.$store.state.previousPlaying)
+      this.$store.commit('setNowPlaying', {title: track.title, id: track.id})
+
       console.log('Previous track clicked')
     },
     nextTrack() {
-      this.playTrack('sober.flac')
+      const track = this.$store.state.queue.shift()
+      //this.playTrack(track)
+      this.$store.commit('setNowPlaying', {title: track.title, id: track.id})
       console.log('Next track clicked')
     },
     volumeChange (e) {
@@ -182,11 +192,11 @@ export default ({
     },
     playTrack(track) {
       console.log("Got play track " + track)
-      this.appPlayer.src = track
+      this.appPlayer.src = `http://192.168.1.13:4533/rest/stream?u=***REMOVED***&t=***REMOVED***&s=558dbf&f=json&v=1.8.0&c=NavidromeUI&id=${track.id}&_=1627823120382`
       this.appPlayer.play()
       this.isPlaying = true
       this.currentIcon = "pause"
-      this.currentTrack = this.$store.state.nowPlaying.title
+      this.currentTrack = track.title
     },
     playbackListener() {
       const percentage = (this.appPlayer.currentTime / this.appPlayer.duration) * 100
