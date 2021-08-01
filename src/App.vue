@@ -24,6 +24,12 @@
           >
             Artists
           </li>
+          <li
+            class="s-item"
+            @click="goTo(&quot;ArtistDetails&quot;)"
+          >
+            Artist
+          </li>
           <li class="s-item">
             Tracks
           </li>
