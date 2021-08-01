@@ -4,18 +4,9 @@
     "eslint.format.enable": true,
     "eslint.lintTask.enable": true,
     "eslint.validate": [
-        {
-          "language": "vue",
-          "autoFix": true
-        },
-        {
-          "language": "html",
-          "autoFix": true
-        },
-        {
-          "language": "javascript",
-          "autoFix": true
-        }
+        "vue",
+        "html",
+        "javascript",
       ],
     "editor.codeActionsOnSave": {
             "source.fixAll.eslint": true
