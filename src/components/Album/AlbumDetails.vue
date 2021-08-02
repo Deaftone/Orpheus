@@ -10,7 +10,10 @@
       >
       <div class="flex flex-col justify-center w-screen pl-10 m-auto">
         <span class="text-6xl font-bold">{{ title }}</span>
-        <span class="pt-5 text-3xl font-bold text-pink-400">{{ artist }}</span>
+        <span
+          class="pt-5 text-3xl font-bold text-pink-400"
+          @click=" $router.push({path: `/ArtistDetails/${artistId}`}) "
+        >{{ artist }}</span>
       </div>
     </div>
     <div
@@ -19,7 +22,7 @@
     />
     <div
       ref="albumBar"
-      class="sticky top-0 w-full p-1 pl-40 pr-40 -mt-5 text-sm transition"
+      class="sticky top-0 w-full p-1 pl-40 pr-40 -mt-5 text-sm transitio"
     >
       <a>#</a>
       <div class="float-right">
@@ -58,7 +61,6 @@
 </template>
 
 <script>
-import apiAxios from '../../utils/apiAxios'
 import axios from '../../utils/apiAxios'
 
 export default {
@@ -69,6 +71,7 @@ export default {
       observer: null,
       title: '',
       artist: '',
+      artistId: '',
       songs: []
     }
   },
@@ -89,9 +92,11 @@ export default {
       const newP = document.getElementById(newPlaying.id)
 
       if(oldP) {
-        oldP.classList.remove("border-solid", "border-4", "border-pink-500")
+        oldP.classList.remove("border-solid", "border-4", "border-pink-500", 'animate-pulse')
       }
-      newP.classList.add("border-solid", "border-4", "border-pink-500")
+      if(newP) {
+        newP.classList.add("border-solid", "border-4", "border-pink-500", 'animate-pulse')
+      }
     }
   }, 
   created() {
@@ -113,6 +118,7 @@ export default {
     console.log(album)
     this.title = album.name
     this.artist = album.artist
+    this.artistId = album.artistId
     this.cover = `http://192.168.1.13:4533/rest/getCoverArt?u=${axios.defaults.params.u}&s=${axios.defaults.params.s}&t=${axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${this.id}&size=300`
     for(const song of album.song) {
       this.songs.push({id: song.id, number: song.track, title: song.title, type: String(song.contentType).slice(6,20).toUpperCase(), length: 'FIX'})
