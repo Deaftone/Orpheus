@@ -3,7 +3,7 @@
     <div
       v-for="album in albums"
       :key="album.id"
-      class="flex justify-center p-1 rounded-lg bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500"
+      class="flex justify-center p-1 rounded-lg bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600"
     >
       <div
         class="text-center"
@@ -11,7 +11,7 @@
         "
       >
         <img
-          class="rounded-full"
+          class="rounded-md"
           :src="album.cover"
         >
         <a>{{ album.title }}</a>
