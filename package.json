@@ -6,6 +6,9 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
+    "start-server": "vite",
+    "test": "jest",
+    "ci": "start-server-and-test start-server http-get://localhost:3000 test",
     "electron:start": "electron ."
   },
   "dependencies": {
@@ -28,6 +31,10 @@
     "eslint-plugin-vue": "^7.0.0",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.7",
-    "vite": "^2.4.4"
+    "start-server-and-test": "^1.13.1",
+    "vite": "^2.4.4",
+    "jest": "^27.0.6",
+    "jest-puppeteer": "^5.0.4",
+    "puppeteer": "^9.1.1",
   }
 }
