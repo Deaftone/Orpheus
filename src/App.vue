@@ -14,96 +14,15 @@
         <ul style="padding-left:20px;padding-top:5px">
           <li
             class="s-item"
-            @click="goTo(&quot;AlbumDetails&quot;)"
-          >
-            Albums
-          </li>
-          <li
-            class="s-item"
             @click="goTo(&quot;ArtistList&quot;)"
           >
             Artists
           </li>
           <li
             class="s-item"
-            @click="goTo(&quot;ArtistDetails&quot;)"
+            @click="goTo(&quot;AlbumDetails&quot;)"
           >
-            Artist
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
-          </li>
-          <li class="s-item">
-            Tracks
+            Albums
           </li>
         </ul>
       </nav>
@@ -169,14 +88,14 @@ export default {
 }
 
 :root {
-  --slider-connect-bg: rgba(244, 114, 182);
+  --slider-connect-bg: rgb(241, 78, 162);
   --slider-handle-ring-color: #3B82F630;
   --slider-handle-bg: rgb(65, 65, 65);
   --slider-bg: rgb(65, 65, 65);
-  --slider-handle-width: 12px;
-  --slider-handle-height: 12px;
-  --slider-height: 4px;
-  --slider-handle-ring-width: 2px;
-  --slider-tooltip-radius: 2px;
+  --slider-handle-width: 16px;
+  --slider-handle-height: 16px;
+  --slider-height: 9px;
+  --slider-handle-ring-width: 3px;
+  --slider-tooltip-radius: 3px;
 }
 </style>
