@@ -83,20 +83,7 @@ export default {
   watch: {
     nowPlaying (newPlaying, oldPlaying ) {
       console.log(newPlaying)
-      console.log('Updated')
-      let oldP
-      if(oldPlaying) {
-        oldP = document.getElementById(oldPlaying.id) 
-      }
-
-      const newP = document.getElementById(newPlaying.id)
-
-      if(oldP) {
-        oldP.classList.remove("border-solid", "border-4", "border-pink-500", 'animate-pulse')
-      }
-      if(newP) {
-        newP.classList.add("border-solid", "border-4", "border-pink-500", 'animate-pulse')
-      }
+      this.highLightNowPlaying(oldPlaying, newPlaying)
     }
   }, 
   created() {
@@ -115,14 +102,28 @@ export default {
       id: this.id
     }})).data
     const album = data['subsonic-response']['album']
-    console.log(album)
     this.title = album.name
     this.artist = album.artist
     this.artistId = album.artistId
+    const currentlyPlaying = this.$store.state.nowPlaying || ''
+    let tempPlaying = null
     this.cover = `http://192.168.1.13:4533/rest/getCoverArt?u=${axios.defaults.params.u}&s=${axios.defaults.params.s}&t=${axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${this.id}&size=300`
     for(const song of album.song) {
       this.songs.push({id: song.id, number: song.track, title: song.title, type: String(song.contentType).slice(6,20).toUpperCase(), length: 'FIX'})
+      
+      // Check if currently playing song in in this track list. If so save and highlight it
+      if(song.id === currentlyPlaying.id) {
+        tempPlaying = {title: song.title, id: song.id}
+      }
     }
+
+    this.$nextTick(function () {
+
+      if(tempPlaying){
+        this.highLightNowPlaying(null, tempPlaying)
+
+      }
+    })
   },
 
   unmounted(){
@@ -140,7 +141,24 @@ export default {
         this.$refs.albumBar.classList.toggle("bg-gray-900", !isIntersecting)
       })
 
-    }
+    },
+    highLightNowPlaying(oldPlaying, newPlaying) {
+      console.log(newPlaying)
+      let oldP
+
+      if(oldPlaying) {
+        oldP = document.getElementById(oldPlaying.id) 
+      }
+
+      const newP = document.getElementById(newPlaying.id)
+
+      if(oldP) {
+        oldP.classList.remove("border-solid", "border-4", "border-pink-500", 'animate-pulse')
+      }
+      if(newP) {
+        newP.classList.add("border-solid", "border-4", "border-pink-500", 'animate-pulse')
+      }
+    },
   }
   ,
 }
