@@ -1,6 +1,6 @@
 <template>  
   <main class="flex h-screen">
-    <div class="w-56 h-screen overflow-hidden bg-gray-500">
+    <div class="w-40 h-screen overflow-hidden bg-gray-800">
       <header class="py-5 text-2xl font-bold text-center bg-gray-900">
         <h1
           class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-blue-300 to-pink-900"
