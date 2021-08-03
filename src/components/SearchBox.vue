@@ -1,15 +1,15 @@
 <template>  
-  <div class="relative pt-2 pb-2 mx-auto text-gray-600">
+  <div class="relative pt-1 pb-1 mx-auto text-gray-600">
     <input
-      class="h-10 px-5 pr-16 text-sm bg-white border-2 border-gray-300 rounded-lg focus:outline-none"
+      ref="search"
+      class="px-5 pr-16 text-sm bg-white border-2 border-gray-300 rounded-lg h-9 focus:outline-none"
       type="search"
-      name="search"
       placeholder="Search"
       @input="updateSearch"
     >
     <button
       type="submit"
-      class="absolute top-0 right-0 mt-5 mr-4"
+      class="absolute top-0 right-0 mt-4 mr-4"
     >
       <svg
         id="Capa_1"
@@ -41,9 +41,14 @@ export default {
       search: '',
     }
   },
+  watch:{
+    $route (){
+      this.$store.commit('setSearchQuery', null)
+      this.$refs.search.value = ""    }
+  },
   methods: {
     updateSearch(e) {
-      this.search = e
+      this.$store.commit('setSearchQuery', e.target.value)
     }
   }
 }
