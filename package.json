@@ -35,6 +35,6 @@
     "vite": "^2.4.4",
     "jest": "^27.0.6",
     "jest-puppeteer": "^5.0.4",
-    "puppeteer": "^9.1.1",
+    "puppeteer": "^9.1.1"
   }
 }
