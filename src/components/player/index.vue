@@ -14,7 +14,6 @@
           <Slider
             v-model="volume"
             :step="-1"
-            :max="1"
             :tooltips="false"
             @update="volumeChange"
           />
@@ -173,7 +172,7 @@ export default ({
       console.log('Next track clicked')
     },
     volumeChange (e) {
-      this.appPlayer.volume = e
+      this.appPlayer.volume = e / 100 / 2
     },
     playPause() {
       if(this.paused) {
