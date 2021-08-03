@@ -5,7 +5,8 @@ export const store = createStore({
     return {
       previousPlaying: null,
       nowPlaying: null,
-      queue: []
+      queue: [],
+      searchQuery: null
     }
   },
   mutations: {
@@ -20,6 +21,9 @@ export const store = createStore({
     },
     addToQueue (state, p) {
       state.queue.push(p) 
+    },
+    setSearchQuery (state, p) {
+      state.searchQuery = p 
     }
   }
 })
