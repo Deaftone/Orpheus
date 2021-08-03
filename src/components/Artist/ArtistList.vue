@@ -1,5 +1,5 @@
 <template>  
-  <div class="grid w-full grid-cols-1 gap-4 p-5 md:grid-cols-6 lg:grid-cols-10">
+  <div class="grid w-full grid-cols-1 gap-4 p-5 md:grid-cols-6 lg:grid-cols-10 ">
     <div
       v-for="artist in artists"
       :key="artist.id"
