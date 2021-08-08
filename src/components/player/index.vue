@@ -58,9 +58,15 @@
       <div
         class="flex items-center justify-center col-start-3"
       >
-        <a>{{ currentTrack.artist }}</a>
+        <a
+          class="hover:text-pink-500"
+          @click="goTo('ArtistDetails/' + currentTrack.artistId)"
+        >{{ currentTrack.artist }}</a>
         <a> &nbsp;-&nbsp; </a>
-        <a @click="goTo('AlbumDetails/' + currentTrack.albumId)">{{ currentTrack.title }}</a>
+        <a
+          class="hover:text-pink-500"
+          @click="goTo('AlbumDetails/' + currentTrack.albumId)"
+        >{{ currentTrack.title }}</a>
       </div>
       <audio
         id="appPlayer"
@@ -166,7 +172,7 @@ export default ({
     previosTrack(){
       const track = this.$store.state.previousPlaying     
       //this.playTrack(this.$store.state.previousPlaying)
-      this.$store.commit('setNowPlaying', {title: track.title, id: track.id, aristId: track.artistId, albumId: track.albumId, artist: track.artist})
+      this.$store.commit('setNowPlaying', {title: track.title, id: track.id, artistId: track.artistId, albumId: track.albumId, artist: track.artist})
 
       console.log('Previous track clicked')
     },
@@ -174,7 +180,7 @@ export default ({
       const track = this.$store.state.queue.shift()
       //this.playTrack(track)
       console.log(JSON.stringify(track))
-      this.$store.commit('setNowPlaying', {title: track.title, id: track.id, aristId: track.artistId, albumId: track.albumId, artist: track.artist})
+      this.$store.commit('setNowPlaying', {title: track.title, id: track.id, artistId: track.artistId, albumId: track.albumId, artist: track.artist})
       console.log('Next track clicked')
     },
     volumeChange (e) {
