@@ -11,18 +11,17 @@
         class="grid grid-cols-3 grid-rows-2"
         style="grid-template-columns:auto 1fr"
       >
-        <div class="h-16 col-start-1 row-span-2 pr-20">
+        <div class="flex pr-10 ">
           <img
-            class="border-2 border-gray-500 border-solid rounded-md "
+            class="border-2 border-gray-500 border-solid rounded-md"
             :src="artistImage"
-            @load="imageLoaded"
           >
         </div>
-        <div class="h-16 col-span-2 col-start-2 row-start-1 mt-5">
+        <div class="col-span-2 col-start-2 row-start-1 mt-10">
           <span class="text-6xl font-bold">{{ artistName }}</span>
-        </div>
-        <div class="h-16 col-start-2 row-start-2 ">
-          <span style="">{{ bio }}</span>
+          <p style="">
+            {{ bio }}
+          </p>
         </div>
       </div>
     </div>
@@ -73,7 +72,7 @@ export default {
     this.artistName = data['subsonic-response']['artist'].name
     const albumIndex = data['subsonic-response']['artist']['album']
     for(const album of albumIndex){
-      this.albums.push({id: album.id, title: album.title, cover: `http://192.168.1.13:4533/rest/getCoverArt?u=${apiAxios.defaults.params.u}&s=${apiAxios.defaults.params.s}&t=${apiAxios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300`})
+      this.albums.push({id: album.id, title: album.title, cover: `http://192.168.1.18:4533/rest/getCoverArt?u=${apiAxios.defaults.params.u}&s=${apiAxios.defaults.params.s}&t=${apiAxios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300`})
     }
 
 
