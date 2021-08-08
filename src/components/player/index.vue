@@ -55,8 +55,12 @@
           />
         </button>
       </div>
-      <div class="flex items-center justify-center col-start-3">
-        <a>{{ currentTrack }}</a>
+      <div
+        class="flex items-center justify-center col-start-3"
+      >
+        <a>{{ currentTrack.artist }}</a>
+        <a> &nbsp;-&nbsp; </a>
+        <a @click="goTo('AlbumDetails/' + currentTrack.albumId)">{{ currentTrack.title }}</a>
       </div>
       <audio
         id="appPlayer"
@@ -115,14 +119,12 @@ export default ({
     // Do not do that inside the playTrack function as it will cause a infinite loop
     nowPlaying (newPlaying, oldPlaying ) {
       if(oldPlaying){
-        console.log(oldPlaying)
         this.$store.commit('setPreviousPlaying', {title: oldPlaying.title, id: oldPlaying.id})
       }
       this.playTrack(newPlaying)
     }
   },
   mounted() {
-
     this.$nextTick(function() {
       this.appPlayer = this.$refs.appPlayer
       this.appPlayer.volume = this.volume
@@ -149,6 +151,10 @@ export default ({
       const minutes = (seconds % 3600) / 60
       return [minutes, seconds % 60].map(format).join(":")
     },
+    goTo(p) {
+      console.log(p)
+      this.$router.push({path: `/${p}`})
+    },
     barChange(e){
       const time = e / 100 * this.appPlayer.duration
       const diff = Math.abs( time - this.appPlayer.currentTime )
@@ -159,16 +165,16 @@ export default ({
     },
     previosTrack(){
       const track = this.$store.state.previousPlaying     
-      console.log(this.$store.state.previousPlaying)         
       //this.playTrack(this.$store.state.previousPlaying)
-      this.$store.commit('setNowPlaying', {title: track.title, id: track.id})
+      this.$store.commit('setNowPlaying', {title: track.title, id: track.id, aristId: track.artistId, albumId: track.albumId, artist: track.artist})
 
       console.log('Previous track clicked')
     },
     nextTrack() {
       const track = this.$store.state.queue.shift()
       //this.playTrack(track)
-      this.$store.commit('setNowPlaying', {title: track.title, id: track.id})
+      console.log(JSON.stringify(track))
+      this.$store.commit('setNowPlaying', {title: track.title, id: track.id, aristId: track.artistId, albumId: track.albumId, artist: track.artist})
       console.log('Next track clicked')
     },
     volumeChange (e) {
@@ -190,12 +196,13 @@ export default ({
       }
     },
     playTrack(track) {
-      console.log("Got play track " + track)
-      this.appPlayer.src = `http://192.168.1.13:4533/rest/stream?u=doom&t=57447d1e0c77a04388d4cf5745b520ec&s=558dbf&f=json&v=1.8.0&c=NavidromeUI&id=${track.id}&_=1627823120382`
+      console.log("Got play track " + JSON.stringify(track))
+      this.appPlayer.src = `http://192.168.1.18:4533/rest/stream?u=doom&t=57447d1e0c77a04388d4cf5745b520ec&s=558dbf&f=json&v=1.8.0&c=NavidromeUI&id=${track.id}&_=1627823120382`
       this.appPlayer.play()
       this.isPlaying = true
       this.currentIcon = "pause"
-      this.currentTrack = track.title
+      this.currentTrack = track
+
     },
     playbackListener() {
       const percentage = (this.appPlayer.currentTime / this.appPlayer.duration) * 100
