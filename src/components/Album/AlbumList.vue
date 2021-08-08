@@ -56,7 +56,7 @@ export default {
     }})).data
     const albums = data['subsonic-response']['albumList']['album']
     for(const album of albums){
-      this.albums.push({name: album.title, id: album.id, cover: `http://192.168.1.13:4533/rest/getCoverArt?u=${axios.defaults.params.u}&s=${axios.defaults.params.s}&t=${axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300`})
+      this.albums.push({name: album.title, id: album.id, cover: `http://192.168.1.18:4533/rest/getCoverArt?u=${axios.defaults.params.u}&s=${axios.defaults.params.s}&t=${axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300`})
     }
   },
 }
