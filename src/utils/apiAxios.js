@@ -1,6 +1,6 @@
 import axios from 'axios'
 const apiAxios = axios.create({
-  baseURL: 'http://192.168.1.13:4533/rest/',
+  baseURL: 'http://192.168.1.18:4533/rest/',
   timeout: 1000,
   headers: { 'Content-Type': 'application/json' },
   params: { 
@@ -14,7 +14,7 @@ const apiAxios = axios.create({
 })
 
 const getCover = function (id){
-  return `http://192.168.1.13:4533/rest/getCoverArt?u=${apiAxios.defaults.params.u}&s=${apiAxios.defaults.params.s}&t=${apiAxios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${id}`
+  return `http://192.168.1.18:4533/rest/getCoverArt?u=${apiAxios.defaults.params.u}&s=${apiAxios.defaults.params.s}&t=${apiAxios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${id}`
 }
 
 
