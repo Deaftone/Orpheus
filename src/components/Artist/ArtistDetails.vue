@@ -13,14 +13,15 @@
       >
         <div class="h-16 col-start-1 row-span-2 pr-20">
           <img
-            class="border-2 border-gray-500 border-solid rounded-md h-96"
+            class="border-2 border-gray-500 border-solid rounded-md "
             :src="artistImage"
+            @load="imageLoaded"
           >
         </div>
-        <div class="h-16 col-span-2 col-start-2 row-start-2 ">
+        <div class="h-16 col-span-2 col-start-2 row-start-1 mt-5">
           <span class="text-6xl font-bold">{{ artistName }}</span>
         </div>
-        <div class="h-16 col-start-2 row-start-3 ">
+        <div class="h-16 col-start-2 row-start-2 ">
           <span style="">{{ bio }}</span>
         </div>
       </div>
@@ -79,6 +80,30 @@ export default {
     const artistImage = await axios.get(`http://localhost:3001/${this.artistName}`)
     this.artistImage = artistImage.data.image
     this.bio = artistImage.data.bio.slice(0, 1435) + '....'
+  },
+  methods: {
+    imageLoaded(e) {
+      const width = e.target.width
+      const height = e.target.height
+      console.log(`OHeight: ${height} OWidth: ${width}`)
+      const displayPixels = 350
+
+      const nHeight = e.target.naturalHeight
+      const nWidth = e.target.naturalWidth
+      let newHeight, newWidth
+
+      if (nHeight > nWidth) {
+        newHeight = displayPixels
+        newWidth = Math.round((nWidth / nHeight) * displayPixels)
+      } else {
+        newWidth = displayPixels
+        newHeight = Math.round((nHeight / nWidth) * displayPixels)
+      }
+ 
+      console.log(`Height: ${newHeight} Width: ${newWidth}`)
+      e.target.width = newWidth
+      e.target.height = newHeight
+    },
   }
 }
 </script>
