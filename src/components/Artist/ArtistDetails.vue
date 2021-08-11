@@ -11,7 +11,7 @@
         class="grid grid-cols-3 grid-rows-2"
         style="grid-template-columns:auto 1fr"
       >
-        <div class="flex pr-10 ">
+        <div class="flex row-start-1 pr-10">
           <img
             class="border-2 border-gray-500 border-solid rounded-md"
             :src="artistImage"
