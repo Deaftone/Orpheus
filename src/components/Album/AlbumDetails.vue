@@ -135,7 +135,7 @@ export default {
       const index = this.songs.findIndex(x => x.id === id)
       const songs = this.songs.slice(index + 1, this.songs.length)
       this.$store.commit('setQueue', songs)
-      this.$store.commit('setNowPlaying', {title: title, id: id, aristId: this.artistId, albumId: this.albumId, artist: this.artist})
+      this.$store.commit('setNowPlaying', {title: title, id: id, artistId: this.artistId, albumId: this.albumId, artist: this.artist})
     },
     onElementObserved(e) {
       e.forEach(({ target, isIntersecting}) => {
