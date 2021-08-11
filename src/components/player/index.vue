@@ -90,17 +90,23 @@
         />
       </div>
     </div>
+    <AvCanvas
+      v-if="myAnalyser"
+      :audioAnalyser="myAnalyser"
+    />
   </main>
 </template>
 
 <script>
 import Slider from '@vueform/slider'
+import AvCanvas from "./visualiser/index.vue"
 import '../../freqtimeupdate'
 
 export default ({
   name: "Player",
   components: {
-    Slider
+    Slider,
+    AvCanvas
   },
   data() {
     return {
@@ -108,10 +114,11 @@ export default ({
       currentTrack: '',
       isPlaying: false,
       paused: false,
+      myAnalyser: null,
       currentIcon: 'play',
       percentPlayed: 0,
       eTime: '00:00',
-      volume: 0.2,
+      volume: 0.11255000000000001,
       duration: '00:00'
     }
   },
@@ -130,10 +137,12 @@ export default ({
       this.playTrack(newPlaying)
     }
   },
+  created() {
+  },
   mounted() {
+    this.createAnalyser()
+    this.appPlayer = this.$refs.appPlayer
     this.$nextTick(function() {
-      this.appPlayer = this.$refs.appPlayer
-      this.appPlayer.volume = this.volume
       this.$watch("isPlaying",function() {
         if(this.isPlaying) {
           console.log("Audio playback started.")
@@ -161,6 +170,16 @@ export default ({
       console.log(p)
       this.$router.push({path: `/${p}`})
     },
+    createAnalyser(){
+      const ctx = new AudioContext()
+      const src = ctx.createMediaElementSource(this.$refs.appPlayer)
+      ctx.crossOrigin = 'anonymous'
+      this.$refs.appPlayer.crossOrigin = 'anonymous'
+      this.myAnalyser = ctx.createAnalyser()
+      src.connect(this.myAnalyser)
+      this.myAnalyser.fftSize = 8192
+      this.myAnalyser.connect(ctx.destination)
+    },
     barChange(e){
       const time = e / 100 * this.appPlayer.duration
       const diff = Math.abs( time - this.appPlayer.currentTime )
@@ -185,6 +204,7 @@ export default ({
     },
     volumeChange (e) {
       this.appPlayer.volume = e / 100 / 2
+      console.log(this.appPlayer.volume)
     },
     playPause() {
       if(this.paused) {
@@ -192,19 +212,23 @@ export default ({
         this.isPlaying = true
         this.paused = false
         this.appPlayer.play()
+        this.$store.commit('setIsPlaying', true)
         this.currentIcon = "pause"
       }  else {
         console.log('Play/Pause -- Pause')
         this.isPlaying = false
         this.paused = true
         this.appPlayer.pause()
+        this.$store.commit('setIsPlaying', false)
         this.currentIcon = "play"
       }
     },
     playTrack(track) {
+      this.appPlayer.volume = 0.11255000000000001
       console.log("Got play track " + JSON.stringify(track))
       this.appPlayer.src = `http://192.168.1.18:4533/rest/stream?u=doom&t=57447d1e0c77a04388d4cf5745b520ec&s=558dbf&f=json&v=1.8.0&c=NavidromeUI&id=${track.id}&_=1627823120382`
       this.appPlayer.play()
+      this.$store.commit('setIsPlaying', true)
       this.isPlaying = true
       this.currentIcon = "pause"
       this.currentTrack = track
