@@ -6,7 +6,8 @@ export const store = createStore({
       previousPlaying: null,
       nowPlaying: null,
       queue: [],
-      searchQuery: null
+      searchQuery: null,
+      isPlaying: false
     }
   },
   mutations: {
@@ -24,6 +25,9 @@ export const store = createStore({
     },
     setSearchQuery (state, p) {
       state.searchQuery = p 
+    },
+    setIsPlaying(state, p){
+      state.isPlaying = p
     }
   }
 })
