@@ -1,9 +1,16 @@
 const colors = require('tailwindcss/colors')
-
 module.exports = {
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  purge: {
+    content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+    options: {
+      safelist: [
+        /data-theme$/,
+      ]
+    },
+  },
   darkMode: 'class', // or 'media' or 'class'
   theme: {
+    
     colors: {
       // Build your palette here
       transparent: 'transparent',
@@ -19,5 +26,13 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require('@vueform/slider/tailwind')],
+  plugins: [require('@vueform/slider/tailwind'), require('daisyui')],
+  daisyui: {
+    styled: true,
+    themes: true,
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
+  },
 }
