@@ -1,5 +1,5 @@
 <template>  
-  <div class="grid w-full grid-cols-1 gap-5 pt-10 pb-10 bg-gradient-to-b from-gray-800 to-gray-900">
+  <div class="grid w-full grid-cols-1 gap-5 pt-10 pb-10 ">
     <div
       ref="albumInfo"
       class="flex pl-40 pr-40"
@@ -11,7 +11,7 @@
       <div class="flex flex-col justify-center w-screen pl-10 m-auto">
         <span class="text-6xl font-bold">{{ title }}</span>
         <span
-          class="pt-5 text-3xl font-bold text-pink-400"
+          class="pt-5 text-3xl font-bold text-primary"
           @click=" $router.push({path: `/ArtistDetails/${artistId}`}) "
         >{{ artist }}</span>
       </div>
@@ -22,7 +22,7 @@
     />
     <div
       ref="albumBar"
-      class="sticky top-0 w-full p-1 pl-40 pr-40 -mt-5 text-sm transitio"
+      class="sticky top-0 w-full p-1 pl-40 pr-40 -mt-5 text-sm bg-base-200"
     >
       <a>#</a>
       <div class="float-right">
@@ -38,7 +38,7 @@
         v-for="song in songs"
         :id="song.id"
         :key="song.number"
-        class="flex justify-center p-1 text-lg rounded-lg bg-gradient-to-r from-gray-600 to-gray-700 "
+        class="flex justify-center p-1 text-lg rounded-lg bg-base-300 "
         @click="playTrack(song.title, song.id)"
       >
         <div class="w-full p-2">
@@ -51,7 +51,7 @@
           <div class="float-right ">
             <a>{{ song.length }}</a>
           </div>
-          <div class="float-right pl-1 pr-1 mr-5 text-sm bg-gray-800 border-4 border-pink-500 border-solid rounded-lg">
+          <div class="float-right pl-1 pr-1 mr-5 text-sm bg-gray-800 border-4 border-solid rounded-lg border-primary">
             <a>{{ song.type }}</a>
           </div>
         </div>
@@ -154,10 +154,10 @@ export default {
       const newP = document.getElementById(newPlaying.id)
 
       if(oldP) {
-        oldP.classList.remove("border-solid", "border-4", "border-pink-500", 'animate-pulse')
+        oldP.classList.remove("border-solid", "border-4", "border-primary", 'animate-bounce')
       }
       if(newP) {
-        newP.classList.add("border-solid", "border-4", "border-pink-500", 'animate-pulse')
+        newP.classList.add("border-solid", "border-4", "border-primary", 'animate-bounce')
       }
     },
   }
@@ -168,7 +168,5 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.active {
-    background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
+
 </style>

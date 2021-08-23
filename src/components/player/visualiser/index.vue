@@ -30,13 +30,18 @@ export default {
       capsColor: '#FFF',
       brickHeight: 0,
       brickSpace: 2,
-      symmetric: false
+      symmetric: false,
+      backgroundColor: getComputedStyle(document.getElementsByClassName('bg-base-100')[0]).backgroundColor
     }
   },
 
   computed: {
     isPlaying () {
       return this.$store.state.isPlaying
+    },
+    getBackgroundColor(){
+      console.log(`Current heme is ${this.$store.state.currentTheme}`)
+      return this.$store.state.currentTheme
     }
   },
   watch: {
@@ -46,12 +51,20 @@ export default {
       if(isPlaying){
         this.mainLoop()
       }
+    },
+    getBackgroundColor (){
+      console.log(`Watch ${this.$store.state.currentTheme}`)
+
+      this.backgroundColor = getComputedStyle(document.getElementsByClassName('bg-base-100')[0]).backgroundColor
     }
   },
   beforeUnmount: function () {
+    this.observer.disconnect()
     window.removeEventListener("resize", this.handleResize)
   },
   mounted: function () {
+    console.log(document.getElementsByTagName('footer'))
+
     window.addEventListener("resize", this.handleResize)
     this.myCanvas = this.$refs.canvas
     this.cHeight = this.myCanvas.height -2 
@@ -73,6 +86,13 @@ export default {
         this.myCanvas.parentElement.getBoundingClientRect().width
       this.myCanvas.height =
         this.myCanvas.parentElement.getBoundingClientRect().height
+    },
+    onClassChange(classAttrValue) {
+      console.log(classAttrValue)
+      const classList = classAttrValue.split(' ')
+      if (classList.includes('fully-in-viewport')) {
+        console.log('has fully-in-viewport')
+      }
     },
     mainLoop() {
       if(!this.isPlaying) {
@@ -104,7 +124,7 @@ export default {
       // Resets the canvas to black
       const w = this.myCanvas.width
       const h = this.myCanvas.height
-      this.myCtx.fillStyle = "#171717"
+      this.myCtx.fillStyle = this.backgroundColor
       this.myCtx.fillRect(0, 0, w, h)
     },
     _drawBar (barWidth, barHeight, barX) {
