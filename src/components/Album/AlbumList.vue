@@ -1,20 +1,26 @@
 <template>  
-  <div class="grid w-full grid-cols-1 gap-4 p-5 md:grid-cols-6 lg:grid-cols-10">
-    <div
+  <div class="grid grid-cols-1 gap-4 p-5 md:grid-cols-6 lg:grid-cols-10">
+    <div 
       v-for="album in filterAlbums"
       :key="album.id"
-      class="flex justify-center p-1 transition-opacity rounded-lg bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500"
+      class="shadow-xl h-52 card image-full "
       @click=" $router.push({path: `/AlbumDetails/${album.id}`})
       "
     >
-      <div class="text-center transition-opacity">
+      <figure>
         <img
-          class="rounded-full"
           :src="album.cover"
+          width="300px"
+          height="300px"
         >
-        <a>{{ album.name }}</a>
+      </figure> 
+      <div class="justify-end card-body">
+        <div class="text-center transition-opacity" />
+        <h3 class="text-center card-title">
+          <a>{{ album.name }}</a>
+        </h3> 
       </div>
-    </div>
+    </div> 
   </div>
 </template>
 
