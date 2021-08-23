@@ -13,8 +13,4 @@
       font-weight: 500;
       src: url(/fonts/proxima-nova/500-medium.woff) format("woff");
     }
-
-    body {
-        background-color: rgba(23, 23, 23);
-    }
 }
