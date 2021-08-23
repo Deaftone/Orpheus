@@ -1,13 +1,27 @@
 <template>
-  <div class="relative">
+  <!--   <div class="relative">
     <div
       class="bg-fixed bg-image"
       style="background-image: url('https://www.umusic.ca/wp-content/uploads/2019/06/Billie-Eilish-banner.jpg');"
     />
     <div
-      class="absolute top-0 p-20 pt-14"
+      class="absolute top-0 p-20 pt-6"
     >
-      <div
+      <div class="card card-side text-neutral-content">
+        <figure class="p-6">
+          <img
+            :src="artistImage"
+            class="rounded-lg shadow-lg"
+          >
+        </figure> 
+        <div class=" card-body">
+          <h2 class="card-title">
+            <span class="text-6xl font-bold">{{ artistName }}</span>
+          </h2> 
+          <p>{{ bio }}</p> 
+        </div>
+      </div> -->
+  <!--       <div
         class="grid grid-cols-3 grid-rows-2"
         style="grid-template-columns:auto 1fr"
       >
@@ -23,8 +37,8 @@
             {{ bio }}
           </p>
         </div>
-      </div>
-    </div>
+      </div> -->
+  <!--  </div>
     <div class="pt-3 pb-3 pl-40">
       <span class="text-2xl">Albums</span>
     </div>
@@ -47,6 +61,53 @@
         </div>
       </div>
     </div>
+  </div> -->
+  <div class="p-5">
+    <div
+      class="flex w-full px-4 py-5 bg-cover shadow-2xl card bg-base-200"
+      style="background-image: url(&quot;https://www.umusic.ca/wp-content/uploads/2019/06/Billie-Eilish-banner.jpg&quot;);"
+    >
+      <div
+        class="items-center card card-side text-neutral-content h-96"
+      >
+        <div class="object-fill w-full ml-10">
+          <img
+            :src="artistImage"
+            class="w-full shadow-2xl object-fit"
+          >
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">
+            {{ artistName }}
+          </h2> 
+          <p>{{ bio }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pt-3 pb-3 pl-40">
+    <span class="text-2xl">Albums</span>
+  </div>
+  <div class="grid w-full gap-4 pl-40 pr-40 xl:grid-cols-8 lg:grid-cols-5 md:grid-cols-3">
+    <div 
+      v-for="album in albums"
+      :key="album.id"
+      class="shadow-xl card image-full "
+      @click=" $router.push({path: `/AlbumDetails/${album.id}`})"
+    >
+      <figure>
+        <img 
+          class="rounded-md"
+          :src="album.cover"
+        >
+      </figure> 
+      <div class="justify-end card-body">
+        <div class="text-center transition-opacity" />
+        <h2 class="text-center card-title">
+          {{ album.title }}
+        </h2> 
+      </div>
+    </div> 
   </div>
 </template>
 
