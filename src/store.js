@@ -7,7 +7,8 @@ export const store = createStore({
       nowPlaying: null,
       queue: [],
       searchQuery: null,
-      isPlaying: false
+      isPlaying: false,
+      currentTheme: null
     }
   },
   mutations: {
@@ -28,6 +29,9 @@ export const store = createStore({
     },
     setIsPlaying(state, p){
       state.isPlaying = p
+    },
+    setCurrentTheme(state, p){
+      state.currentTheme = p
     }
   }
 })
