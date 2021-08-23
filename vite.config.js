@@ -2,7 +2,6 @@ import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 //import path from 'path'
 //import ViewLauncherVuePlugin from '@view-launcher/rollup-plugin-vue'
-import viteTips from 'vite-plugin-tips'
 export default defineConfig(({ mode }) => {
   // load the .env file
   // you may want to create one like `.env.development.local`
@@ -15,6 +14,7 @@ export default defineConfig(({ mode }) => {
         allow: ['..']
       }
     },
+    // base: path.resolve(__dirname, './dist/'),
     plugins: [
       /*       ViewLauncherVuePlugin({
         entry: path.resolve(__dirname, 'src/main.js'),
@@ -22,7 +22,6 @@ export default defineConfig(({ mode }) => {
         editor: env.VITE_EDITOR || 'vscode',
       }), */
       vue(),
-      viteTips(),
     ],
   }
 })
