@@ -12,12 +12,15 @@
         <span class="text-6xl font-bold">{{ title }}</span>
         <span
           class="pt-5 text-3xl font-bold text-primary"
+        ><a
+          class="cursor-pointer"
           @click=" $router.push({path: `/ArtistDetails/${artistId}`}) "
-        >{{ artist }}</span>
+        >{{ artist }}</a></span>
       </div>
     </div>
     <div
       ref="sticky"
+      class=""
       style="height:0.1px"
     />
     <div
@@ -38,7 +41,7 @@
         v-for="song in songs"
         :id="song.id"
         :key="song.number"
-        class="flex justify-center p-1 text-lg rounded-lg bg-base-300 "
+        class="flex justify-center p-1 text-lg rounded-lg cursor-pointer bg-base-300 "
         @click="playTrack(song.title, song.id)"
       >
         <div class="w-full p-2">
@@ -51,7 +54,7 @@
           <div class="float-right ">
             <a>{{ song.length }}</a>
           </div>
-          <div class="float-right pl-1 pr-1 mr-5 text-sm bg-gray-800 border-4 border-solid rounded-lg border-primary">
+          <div class="float-right pl-1 pr-1 mr-5 text-sm border-4 border-solid rounded-lg border-primary">
             <a>{{ song.type }}</a>
           </div>
         </div>
@@ -92,7 +95,7 @@ export default {
       this.onElementObserved, 
       {
         root: null,
-        threshold: 1.0,
+        threshold: 0.9,
       }
     )
   },
@@ -139,9 +142,8 @@ export default {
     },
     onElementObserved(e) {
       e.forEach(({ target, isIntersecting}) => {
-        this.$refs.albumBar.classList.toggle("bg-gray-900", !isIntersecting)
+        this.$refs.albumBar.classList.toggle("bg-base-200", !isIntersecting)
       })
-
     },
     highLightNowPlaying(oldPlaying, newPlaying) {
       console.log(newPlaying)
