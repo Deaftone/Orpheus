@@ -18,6 +18,10 @@
             @update="volumeChange"
           />
         </div>
+        <a
+          class="pl-10 cursor-pointer hover:text-primary"
+          @click="toggleVis"
+        >Visualiser</a>
       </div>
 
       <div
@@ -59,12 +63,12 @@
         class="flex items-center justify-center col-start-3"
       >
         <a
-          class="hover:text-pink-500"
+          class="cursor-pointer hover:text-primary"
           @click="goTo('ArtistDetails/' + currentTrack.artistId)"
         >{{ currentTrack.artist }}</a>
         <a> &nbsp;-&nbsp; </a>
         <a
-          class="hover:text-pink-500"
+          class="cursor-pointer hover:text-primary"
           @click="goTo('AlbumDetails/' + currentTrack.albumId)"
         >{{ currentTrack.title }}</a>
       </div>
@@ -91,7 +95,7 @@
       </div>
     </div>
     <AvCanvas
-      v-if="myAnalyser"
+      v-if="myAnalyser && visToggled"
       :audioAnalyser="myAnalyser"
     />
   </main>
@@ -115,6 +119,9 @@ export default ({
       isPlaying: false,
       paused: false,
       myAnalyser: null,
+      myAnalyserHidden: null,
+      ctx: null,
+      visToggled: false,
       currentIcon: 'play',
       percentPlayed: 0,
       eTime: '00:00',
@@ -160,6 +167,15 @@ export default ({
 
   },
   methods: {
+    toggleVis(){
+      /* 
+        Fix me
+        For some reason when creating a new AudioCtx the player volume goes up
+        I would like to have it destroyed when hidden
+      */
+      this.visToggled ^= true
+
+    },
     convertTime(seconds){
       const format = val => `0${Math.floor(val)}`.slice(-2)
       //var hours = seconds / 3600;
@@ -171,14 +187,14 @@ export default ({
       this.$router.push({path: `/${p}`})
     },
     createAnalyser(){
-      const ctx = new AudioContext()
-      const src = ctx.createMediaElementSource(this.$refs.appPlayer)
-      ctx.crossOrigin = 'anonymous'
+      this.ctx = new AudioContext()
+      const src = this.ctx.createMediaElementSource(this.$refs.appPlayer)
+      this.ctx.crossOrigin = 'anonymous'
       this.$refs.appPlayer.crossOrigin = 'anonymous'
-      this.myAnalyser = ctx.createAnalyser()
+      this.myAnalyser = this.ctx.createAnalyser()
       src.connect(this.myAnalyser)
       this.myAnalyser.fftSize = 8192
-      this.myAnalyser.connect(ctx.destination)
+      this.myAnalyser.connect(this.ctx.destination)
     },
     barChange(e){
       const time = e / 100 * this.appPlayer.duration
