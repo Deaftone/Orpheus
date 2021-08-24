@@ -65,26 +65,21 @@
   <div class="p-5">
     <div
       class="flex w-full px-4 py-5 bg-cover shadow-2xl card bg-base-200"
-      style="background-image: url(&quot;https://www.umusic.ca/wp-content/uploads/2019/06/Billie-Eilish-banner.jpg&quot;);"
+      style="background-image: url(&quot;https://fanart.tv/fanart/music/7291957b-c463-4275-a41c-a104c9e2337f/artistbackground/jackson-alan-51ef75d7e1ed8.jpg&quot;);background-position-y:-100px"
     >
       <div
-        class="items-center card card-side text-neutral-content h-96"
-      >
-        <div class="object-fill w-full ml-10">
-          <img
-            :src="artistImage"
-            class="w-full shadow-2xl object-fit"
-          >
-        </div>
-        <div class="card-body">
-          <h2 class="card-title">
-            {{ artistName }}
-          </h2> 
-          <p>{{ bio }}</p>
-        </div>
-      </div>
+        class="items-center card card-side text-neutral-content"
+        style="height:600px"
+      />
     </div>
   </div>
+  <div class="h-64 p-10 card-body">
+    <h2 class="card-title">
+      {{ artistName }}
+    </h2> 
+    <p>{{ bio }}</p>
+  </div>
+  <div class="divider" /> 
   <div class="pt-3 pb-3 pl-40">
     <span class="text-2xl">Albums</span>
   </div>
