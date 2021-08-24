@@ -49,13 +49,13 @@
             <span class="w-full text-xl font-bold">My Library</span>
             <ul style="padding-left:20px;padding-top:5px">
               <li
-                class="s-item"
+                class="cursor-pointer s-item hover:text-primary"
                 @click="goTo(&quot;ArtistList&quot;)"
               >
                 Artists
               </li>
               <li
-                class="s-item"
+                class="cursor-pointer s-item hover:text-primary"
                 @click="goTo(&quot;AlbumDetails&quot;)"
               >
                 Albums
@@ -121,10 +121,10 @@ export default {
 <style>
 
 :root {
-  --slider-connect-bg: 'rgb(241, 78, 162)';
-  --slider-handle-ring-color: #3B82F630;
-  --slider-handle-bg: rgb(65, 65, 65);
-  --slider-bg: rgb(65, 65, 65);
+  --slider-connect-bg: hsl(var(--p));
+  --slider-handle-ring-color: hsl(var(--af));
+  --slider-handle-bg: hsl(var(--pf));
+  --slider-bg: hsl(var(--b3));
   --slider-handle-width: 16px;
   --slider-handle-height: 16px;
   --slider-height: 9px;
