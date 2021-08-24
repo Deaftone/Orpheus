@@ -31,6 +31,7 @@ export default {
       brickHeight: 0,
       brickSpace: 2,
       symmetric: false,
+      barColor: null,
       backgroundColor: getComputedStyle(document.getElementsByClassName('bg-base-100')[0]).backgroundColor
     }
   },
@@ -54,13 +55,12 @@ export default {
     },
     getBackgroundColor (){
       console.log(`Watch ${this.$store.state.currentTheme}`)
-
       this.backgroundColor = getComputedStyle(document.getElementsByClassName('bg-base-100')[0]).backgroundColor
+      this.setBarColor()
     }
   },
   beforeUnmount: function () {
-    this.observer.disconnect()
-    window.removeEventListener("resize", this.handleResize)
+    this.myCanvas = null
   },
   mounted: function () {
     console.log(document.getElementsByTagName('footer'))
@@ -74,9 +74,7 @@ export default {
     this.myCanvas.height =
       this.myCanvas.parentElement.getBoundingClientRect().height
 
-    this.gradient = this.myCtx.createLinearGradient(0, 0, 0, 150)
-    this.gradient.addColorStop(0.5, '#f50782')
-    this.gradient.addColorStop(0, '#f14ea2')
+    this.setBarColor()
     this.caps = Array.apply(null, Array(8192 / 2)).map(() => 0)
     this.mainLoop()
   },
@@ -86,6 +84,11 @@ export default {
         this.myCanvas.parentElement.getBoundingClientRect().width
       this.myCanvas.height =
         this.myCanvas.parentElement.getBoundingClientRect().height
+    },
+    setBarColor(){
+      const primary = getComputedStyle(document.documentElement).getPropertyValue('--p').split(' ')
+      this.barColor = this.HSLToRGB(primary[0],primary[1].replace('%',''),primary[2].replace('%',''))
+
     },
     onClassChange(classAttrValue) {
       console.log(classAttrValue)
@@ -98,7 +101,7 @@ export default {
       if(!this.isPlaying) {
         return
       }
-      
+      if(!this.myCanvas) return
       const frqBits = this.audioAnalyser.frequencyBinCount
       const data = new Uint8Array(frqBits)
       const barWidth = this.barWidth >= this.myCanvas.width ? this.myCanvas.width : this.barWidth
@@ -114,11 +117,40 @@ export default {
         if (this.capsHeight) {
           this._drawCap(index, barWidth, x, bits)
         }
-        this.myCtx.fillStyle = this.gradient
+        this.myCtx.fillStyle = this.barColor
         this._drawBar(barWidth, barHeight, x)
         x += barWidth + this.barSpace
       })
       setTimeout(requestAnimationFrame(this.mainLoop), 3000)
+    },
+    HSLToRGB(h,s,l) {
+      s /= 100
+      l /= 100
+
+      let c = (1 - Math.abs(2 * l - 1)) * s,
+        x = c * (1 - Math.abs((h / 60) % 2 - 1)),
+        m = l - c/2,
+        r = 0,
+        g = 0,
+        b = 0
+      if (0 <= h && h < 60) {
+        r = c; g = x; b = 0  
+      } else if (60 <= h && h < 120) {
+        r = x; g = c; b = 0
+      } else if (120 <= h && h < 180) {
+        r = 0; g = c; b = x
+      } else if (180 <= h && h < 240) {
+        r = 0; g = x; b = c
+      } else if (240 <= h && h < 300) {
+        r = x; g = 0; b = c
+      } else if (300 <= h && h < 360) {
+        r = c; g = 0; b = x
+      }
+      r = Math.round((r + m) * 255)
+      g = Math.round((g + m) * 255)
+      b = Math.round((b + m) * 255)
+
+      return "rgb(" + r + "," + g + "," + b + ")"
     },
     _fillCanvasBG () {
       // Resets the canvas to black
