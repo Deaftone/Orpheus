@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="bg-neutral text-neutral-content">
     <!-- Test -->
     <div
       id="container"
@@ -83,9 +83,14 @@
       />
     </div>
 
-    <div class="grid w-full pb-1 text-xs grid-row-1">
+    <div
+      id="barC"
+      class="grid w-full pb-3 text-xs grid-row-1 "
+    >
       <a>{{ eTime }} / {{ duration }}</a>
-      <div id="playbar">
+      <div
+        id="playbar"
+      >
         <Slider
           v-model="percentPlayed"
           :step="-1"
@@ -174,6 +179,7 @@ export default ({
         I would like to have it destroyed when hidden
       */
       this.visToggled ^= true
+      document.getElementById('barC').classList.toggle('pb-3')
 
     },
     convertTime(seconds){
