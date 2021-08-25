@@ -83,7 +83,7 @@
   <div class="pt-3 pb-3 pl-40">
     <span class="text-2xl">Albums</span>
   </div>
-  <div class="grid w-full gap-4 pl-40 pr-40 xl:grid-cols-8 lg:grid-cols-5 md:grid-cols-3">
+  <div class="grid w-full gap-4 pb-10 pl-40 pr-40 xl:grid-cols-8 lg:grid-cols-5 md:grid-cols-3">
     <div 
       v-for="album in albums"
       :key="album.id"

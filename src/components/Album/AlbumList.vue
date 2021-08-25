@@ -1,9 +1,9 @@
 <template>  
-  <div class="grid grid-cols-1 gap-4 p-5 md:grid-cols-6 lg:grid-cols-10">
+  <div class="grid w-full gap-4 p-5 xl:grid-cols-9 lg:grid-cols-5 md:grid-cols-3">
     <div 
       v-for="album in filterAlbums"
       :key="album.id"
-      class="shadow-xl h-52 card image-full "
+      class="shadow-xl h-52 card image-full w-52"
       @click=" $router.push({path: `/AlbumDetails/${album.id}`})
       "
     >
