@@ -11,7 +11,9 @@
         </div>
       </div>
     </nav> -->
-    <div class="h-8 navbar bg-neutral text-neutral-content">
+    <TitleBar />
+
+    <div class="navbar bg-neutral text-neutral-content">
       <div class="flex-1 hidden px-2 mx-2 lg:flex">
         <span class="text-lg font-bold">
           Orpheus
@@ -23,27 +25,10 @@
       <div class="flex-1 lg:flex-none">
         <ThemeSwitcher />
       </div>
-      <!--       <div class="flex-none">
-        <button class="btn btn-square btn-ghost">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="inline-block w-6 h-6 stroke-current"
-          >             
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />             
-          </svg>
-        </button>
-      </div> -->
     </div>
 
-    <div class="flex flex-col flex-grow w-full overflow-hidden sm:flex-row">
-      <div class="flex-grow-0 flex-shrink w-1/3 sm:w-1/3 md:w-40">
+    <div class="flex flex-col flex-grow w-full overflow-hidden sm:flex-row ">
+      <div class="flex-grow-0 flex-shrink w-1/3 sm:w-1/3 md:w-40 bg-neutral text-neutral-content">
         <div class="sticky top-0 p-4 rounded-xl">
           <nav class="h-full">
             <span class="w-full text-xl font-bold">My Library</span>
@@ -81,13 +66,15 @@
 import Player from "./components/player/index.vue"
 import SearchBox from "./components/SearchBox.vue"
 import ThemeSwitcher from "./components/ThemeSwitcher.vue"
-
+import { invoke } from '@tauri-apps/api/tauri'
+import TitleBar from "./components/TitleBar.vue"
 export default {
   name: 'App',
   components: {
     Player,
     SearchBox,
-    ThemeSwitcher
+    ThemeSwitcher,
+    TitleBar
   },
   data() {
     return {
@@ -98,8 +85,21 @@ export default {
     count () {
       return this.$store.state.count
     }
+  },
+  mounted: function (){
+    // With the Tauri global script:
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // This will wait for the window to load, but you could
+      // run this function on whatever trigger you want
+      this.loaded()
+    })
   },  
   methods: {
+    loaded(){
+      console.log('Splash removed')
+      invoke('close_splashscreen')
+    },
     goTo(p) {
       console.log(p)
       this.$router.push({path: `/${p}`})
