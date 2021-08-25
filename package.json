@@ -9,6 +9,7 @@
     "serve": "vite preview",
     "start-server": "vite",
     "test": "jest",
+    "info": "tauri ",
     "ci": "start-server-and-test start-server http-get://localhost:3000 test",
     "electron:start": "electron ."
   },
