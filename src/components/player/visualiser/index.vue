@@ -55,7 +55,7 @@ export default {
     },
     getBackgroundColor (){
       console.log(`Watch ${this.$store.state.currentTheme}`)
-      this.backgroundColor = getComputedStyle(document.getElementsByClassName('bg-base-100')[0]).backgroundColor
+      this.setBackgroundColor()
       this.setBarColor()
     }
   },
@@ -73,8 +73,10 @@ export default {
       this.myCanvas.parentElement.getBoundingClientRect().width
     this.myCanvas.height =
       this.myCanvas.parentElement.getBoundingClientRect().height
-
+      
+    this.setBackgroundColor()
     this.setBarColor()
+    console.log(this.backgroundColor)
     this.caps = Array.apply(null, Array(8192 / 2)).map(() => 0)
     this.mainLoop()
   },
@@ -86,9 +88,16 @@ export default {
         this.myCanvas.parentElement.getBoundingClientRect().height
     },
     setBarColor(){
-      const primary = getComputedStyle(document.documentElement).getPropertyValue('--p').split(' ')
-      this.barColor = this.HSLToRGB(primary[0],primary[1].replace('%',''),primary[2].replace('%',''))
+      /*       const primary = getComputedStyle(document.documentElement).getPropertyValue('--bc').split(' ')
+      this.barColor = this.HSLToRGB(primary[0],primary[1].replace('%',''),primary[2].replace('%','')) */
+      this.barColor = getComputedStyle(document.getElementById("titleBar")).textDecoration
+    },
+    setBackgroundColor(){
+      //const primary = getComputedStyle(document.documentElement).getPropertyValue('--n').split(' ')
 
+      //      this.backgroundColor = this.HSLToRGB(primary[0],primary[1].replace('%',''),primary[2].replace('%',''))
+      this.backgroundColor = getComputedStyle(document.getElementById("titleBar")).backgroundColor
+      console.log(this.backgroundColor)
     },
     onClassChange(classAttrValue) {
       console.log(classAttrValue)
