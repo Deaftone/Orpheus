@@ -3,5 +3,4 @@ node_modules
 dist
 dist-ssr
 *.local
-public/brightside.flac
-public/sober.flac
+notes
