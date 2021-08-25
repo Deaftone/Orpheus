@@ -1,0 +1,80 @@
+{
+  "package": {
+    "productName": "vite-tauri-template",
+    "version": "0.1.0"
+  },
+  "build": {
+    "distDir": "../dist",
+    "devPath": "http://localhost:3000",
+    "beforeDevCommand": "",
+    "beforeBuildCommand": ""
+  },
+  "tauri": {
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.tauri.dev",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "resources": [],
+      "externalBin": [],
+      "copyright": "",
+      "category": "DeveloperTool",
+      "shortDescription": "",
+      "longDescription": "",
+      "deb": {
+        "depends": [],
+        "useBootstrapper": false
+      },
+      "macOS": {
+        "frameworks": [],
+        "minimumSystemVersion": "",
+        "useBootstrapper": false,
+        "exceptionDomain": "",
+        "signingIdentity": null,
+        "entitlements": null
+      },
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "updater": {
+      "active": false
+    },
+    "allowlist": {
+      "all": true,
+      "http": {
+        "all": true
+      }
+    },
+    
+    "windows": [
+      {
+        "title": "Orpheus",
+        "width": 1920,
+        "height": 1080,
+        "resizable": true,
+        "url": "index.html",
+        "visible": false,
+        "decorations": false
+      },
+      {
+        "width": 300,
+        "height": 500,
+        "decorations": false,
+        "url": "splashscreen.html",
+        "label": "splashscreen"
+      }
+    ],
+    "security": {
+        "csp":""
+    }
+  }
+}
