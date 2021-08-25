@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+const { resolve } = require('path')
 //import path from 'path'
 //import ViewLauncherVuePlugin from '@view-launcher/rollup-plugin-vue'
 export default defineConfig(({ mode }) => {
@@ -8,6 +9,14 @@ export default defineConfig(({ mode }) => {
   //const env = loadEnv(mode, __dirname)
 
   return {
+    build: {
+      rollupOptions: {
+        input: {
+          main: resolve(__dirname, 'index.html'),
+          nested: resolve(__dirname, 'splashscreen.html')
+        }
+      }
+    },
     server: {
       fs: {
         // Allow serving files from one level up to the project root
@@ -22,6 +31,10 @@ export default defineConfig(({ mode }) => {
         editor: env.VITE_EDITOR || 'vscode',
       }), */
       vue(),
+      
     ],
+    define: {
+      'process.env': {}
+    }
   }
 })
