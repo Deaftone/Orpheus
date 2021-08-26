@@ -3,15 +3,16 @@
     <div 
       v-for="album in filterAlbums"
       :key="album.id"
-      class="shadow-xl h-52 card image-full w-52"
+      class="shadow-xl card image-full"
       @click=" $router.push({path: `/AlbumDetails/${album.id}`})
       "
     >
       <figure>
         <img
           :src="album.cover"
-          width="300px"
           height="300px"
+          width="300px"
+          class="object-contain"
         >
       </figure> 
       <div class="justify-end card-body">
