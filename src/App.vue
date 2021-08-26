@@ -28,9 +28,9 @@
     </div>
 
     <div class="flex flex-col flex-grow w-full overflow-hidden sm:flex-row ">
-      <div class="flex-grow-0 flex-shrink w-1/3 sm:w-1/3 md:w-40 bg-neutral text-neutral-content">
+      <div class="flex-grow-0 flex-shrink hidden w-1/3 md:inline-flex sm:w-1/3 md:w-40 bg-neutral text-neutral-content md:visible">
         <div class="sticky top-0 p-4 rounded-xl">
-          <nav class="h-full">
+          <nav class="h-full ">
             <span class="w-full text-xl font-bold">My Library</span>
             <ul style="padding-left:20px;padding-top:5px">
               <li

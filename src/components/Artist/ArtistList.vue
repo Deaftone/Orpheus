@@ -1,9 +1,9 @@
 <template>  
-  <div class="grid w-full gap-4 p-5 xl:grid-cols-11 lg:grid-cols-5 md:grid-cols-3">
+  <div class="grid w-full gap-1 p-5 lg:gap-4 xl:grid-cols-11 lg:grid-cols-5">
     <div 
       v-for="artist in artists"
       :key="artist.id"
-      class=""
+      class="mx-auto"
       @click=" $router.push({path: `/ArtistDetails/${artist.id}`})
       "
     >
