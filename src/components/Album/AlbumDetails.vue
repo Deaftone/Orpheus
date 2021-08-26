@@ -5,7 +5,7 @@
       class="flex pl-40 pr-40"
     >
       <img
-        class="shadow-lg"
+        class="shadow-xl"
         :src="cover"
       >
       <div class="flex flex-col justify-center w-screen pl-10 m-auto">
