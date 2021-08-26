@@ -2,16 +2,16 @@
   <div class="grid w-full grid-cols-1 gap-5 pt-10 pb-10 ">
     <div
       ref="albumInfo"
-      class="flex pl-40 pr-40"
+      class="pl-40 pr-40 lg:flex"
     >
       <img
         class="shadow-xl"
         :src="cover"
       >
       <div class="flex flex-col justify-center w-screen pl-10 m-auto">
-        <span class="text-6xl font-bold">{{ title }}</span>
+        <span class="text-xl font-bold lg:text-6xl">{{ title }}</span>
         <span
-          class="pt-5 text-3xl font-bold text-primary"
+          class="pt-5 font-bold lg:text-3xl text-primary"
         ><a
           class="cursor-pointer"
           @click=" $router.push({path: `/ArtistDetails/${artistId}`}) "
@@ -25,7 +25,7 @@
     />
     <div
       ref="albumBar"
-      class="sticky top-0 w-full p-1 pl-40 pr-40 -mt-5 text-sm bg-base-200"
+      class="sticky top-0 w-full p-1 pl-5 pr-5 -mt-5 text-sm lg:pl-40 lg:pr-40 bg-base-200"
     >
       <a>#</a>
       <div class="float-right">
@@ -36,7 +36,7 @@
       </div>
       <a class="pl-7">Title</a>
     </div>
-    <div class="grid w-full grid-cols-1 gap-5 pl-40 pr-40">
+    <div class="grid w-full grid-cols-1 gap-5 pl-5 pr-5 lg:pr-40 lg:pl-40">
       <div
         v-for="song in songs"
         :id="song.id"

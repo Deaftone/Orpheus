@@ -9,11 +9,13 @@
       class="cursor-pointer text-primary titlebar-button hover:text-primary-focus"
       icon="window-minimize"
       color="gray"
+      @click="minimize"
     />
     <font-awesome-icon
       class="cursor-pointer text-primary titlebar-button hover:text-primary-focus"
       icon="window-maximize"
       color="gray"
+      @click="toggleMaximize"
     />
     <font-awesome-icon
       class="cursor-pointer text-primary titlebar-button hover:text-primary-focus"
@@ -31,6 +33,12 @@ export default {
   methods:{
     close(){
       appWindow.close()
+    },
+    toggleMaximize(){
+      appWindow.toggleMaximize()
+    },minimize(){
+      appWindow.minimize()
+      appWindow.res
     }
   }
 }
