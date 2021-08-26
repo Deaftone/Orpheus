@@ -1,20 +1,18 @@
 <template>  
-  <div class="grid w-full gap-4 p-5 xl:grid-cols-9 lg:grid-cols-5 md:grid-cols-3">
+  <div class="grid w-full gap-4 p-5 xl:grid-cols-11 lg:grid-cols-5 md:grid-cols-3">
     <div 
       v-for="artist in artists"
       :key="artist.id"
-      class="shadow-xl card image-full h-52 w-52"
+      class=""
       @click=" $router.push({path: `/ArtistDetails/${artist.id}`})
       "
     >
-      <figure>
-        <img src="https://e-cdn-images.dzcdn.net/images/artist/8b6e535e08ad7c5cb312102a5ede6c1e/264x264-000000-80-0-0.jpg">
-      </figure> 
-      <div class="justify-end card-body">
-        <div class="text-center transition-opacity" />
-        <h2 class="text-center card-title">
-          {{ artist.name }}
-        </h2> 
+      <img
+        class="rounded-full shadow-xl ring ring-primary"
+        src="https://e-cdn-images.dzcdn.net/images/artist/8b6e535e08ad7c5cb312102a5ede6c1e/264x264-000000-80-0-0.jpg"
+      >
+      <div class="font-bold text-center">
+        <a>{{ artist.name }}</a>
       </div>
     </div> 
     <!--     <div

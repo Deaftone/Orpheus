@@ -64,8 +64,10 @@
   </div> -->
   <div class="p-5">
     <div
+      id="banner"
       class="flex w-full px-4 py-5 bg-cover shadow-2xl card bg-base-200"
-      style="background-image: url(&quot;https://fanart.tv/fanart/music/7291957b-c463-4275-a41c-a104c9e2337f/artistbackground/jackson-alan-51ef75d7e1ed8.jpg&quot;);background-position-y:-100px"
+      :style="{ 'background-image': 'url(' + artistBanner + ')' }"
+      style="background-position-y:-100px"
     >
       <div
         class="items-center card card-side text-neutral-content"
@@ -87,22 +89,19 @@
     <div 
       v-for="album in albums"
       :key="album.id"
-      class="shadow-xl card image-full "
+      class="cursor-pointer"
       @click=" $router.push({path: `/AlbumDetails/${album.id}`})"
     >
-      <figure>
+      <div
+        class="shadow-2xl"
+      >
         <img 
           class="rounded-md"
           :src="album.cover"
         >
-      </figure> 
-      <div class="justify-end card-body">
-        <div class="text-center transition-opacity" />
-        <h2 class="text-center card-title">
-          {{ album.title }}
-        </h2> 
       </div>
-    </div> 
+      <a>{{ album.title }} </a>
+    </div>
   </div>
 </template>
 
@@ -118,6 +117,7 @@ export default {
       artistName: '',
       albums: [],
       artistImage: '',
+      artistBanner: '',
       bio: '',
     }
   },
@@ -135,6 +135,9 @@ export default {
     const artistImage = await axios.get(`http://localhost:3001/${this.artistName}`)
     this.artistImage = artistImage.data.image
     this.bio = artistImage.data.bio.slice(0, 1435) + '....'
+
+    this.artistBanner = artistImage.data.banner
+    console.log(artistImage.data)
   },
   methods: {
     imageLoaded(e) {
