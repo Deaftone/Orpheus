@@ -152,7 +152,6 @@ export default ({
   created() {
   },
   mounted() {
-    this.createAnalyser()
     this.appPlayer = this.$refs.appPlayer
     this.$nextTick(function() {
       this.$watch("isPlaying",function() {
@@ -173,6 +172,7 @@ export default ({
   },
   methods: {
     toggleVis(){
+      
       /* 
         Fix me
         For some reason when creating a new AudioCtx the player volume goes up
@@ -246,6 +246,8 @@ export default ({
       }
     },
     playTrack(track) {
+      if(!this.myAnalyser) this.createAnalyser()
+
       this.appPlayer.volume = 0.11255000000000001
       console.log("Got play track " + JSON.stringify(track))
       this.appPlayer.src = `http://192.168.1.18:4533/rest/stream?u=***REMOVED***&t=***REMOVED***&s=558dbf&f=json&v=1.8.0&c=NavidromeUI&id=${track.id}&_=1627823120382`
