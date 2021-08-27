@@ -32,7 +32,7 @@ export default {
       brickSpace: 2,
       symmetric: false,
       barColor: null,
-      backgroundColor: getComputedStyle(document.getElementsByClassName('bg-base-100')[0]).backgroundColor
+      backgroundColor: null
     }
   },
 
@@ -41,7 +41,6 @@ export default {
       return this.$store.state.isPlaying
     },
     getBackgroundColor(){
-      console.log(`Current heme is ${this.$store.state.currentTheme}`)
       return this.$store.state.currentTheme
     }
   },
@@ -76,7 +75,7 @@ export default {
       
     this.setBackgroundColor()
     this.setBarColor()
-    console.log(this.backgroundColor)
+    console.log(this.barColor)
     this.caps = Array.apply(null, Array(8192 / 2)).map(() => 0)
     this.mainLoop()
   },
@@ -88,19 +87,12 @@ export default {
         this.myCanvas.parentElement.getBoundingClientRect().height
     },
     setBarColor(){
-      /*       const primary = getComputedStyle(document.documentElement).getPropertyValue('--bc').split(' ')
-      this.barColor = this.HSLToRGB(primary[0],primary[1].replace('%',''),primary[2].replace('%','')) */
-      this.barColor = getComputedStyle(document.getElementById("titleBar")).textDecoration
+      this.barColor = getComputedStyle(document.getElementById("menuBar")).color
     },
     setBackgroundColor(){
-      //const primary = getComputedStyle(document.documentElement).getPropertyValue('--n').split(' ')
-
-      //      this.backgroundColor = this.HSLToRGB(primary[0],primary[1].replace('%',''),primary[2].replace('%',''))
       this.backgroundColor = getComputedStyle(document.getElementById("titleBar")).backgroundColor
-      console.log(this.backgroundColor)
     },
     onClassChange(classAttrValue) {
-      console.log(classAttrValue)
       const classList = classAttrValue.split(' ')
       if (classList.includes('fully-in-viewport')) {
         console.log('has fully-in-viewport')
@@ -136,10 +128,10 @@ export default {
       s /= 100
       l /= 100
 
-      let c = (1 - Math.abs(2 * l - 1)) * s,
-        x = c * (1 - Math.abs((h / 60) % 2 - 1)),
-        m = l - c/2,
-        r = 0,
+      const c = (1 - Math.abs(2 * l - 1)) * s
+      const  x = c * (1 - Math.abs((h / 60) % 2 - 1))
+      const  m = l - c/2
+      let r = 0,
         g = 0,
         b = 0
       if (0 <= h && h < 60) {
