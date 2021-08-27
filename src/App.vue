@@ -13,7 +13,10 @@
     </nav> -->
     <TitleBar />
 
-    <div class="navbar bg-neutral text-neutral-content">
+    <div
+      id="menuBar"
+      class="navbar bg-neutral text-neutral-content"
+    >
       <div class="flex-1 hidden px-2 mx-2 lg:flex">
         <span class="text-lg font-bold">
           Orpheus
