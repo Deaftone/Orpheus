@@ -67,10 +67,10 @@
 
 <script>
 import Player from "./components/player/index.vue"
-import SearchBox from "./components/SearchBox.vue"
-import ThemeSwitcher from "./components/ThemeSwitcher.vue"
+import SearchBox from "./components/Util/SearchBox.vue"
+import ThemeSwitcher from "./components/Util/ThemeSwitcher.vue"
 import { invoke } from '@tauri-apps/api/tauri'
-import TitleBar from "./components/TitleBar.vue"
+import TitleBar from "./components/Main/TitleBar.vue"
 export default {
   name: 'App',
   components: {
