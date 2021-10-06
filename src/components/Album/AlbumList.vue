@@ -1,13 +1,26 @@
 <template>  
-  <div class="grid w-full gap-4 p-5 xl:grid-cols-9 lg:grid-cols-5 md:grid-cols-3">
-    <div 
-      v-for="album in filterAlbums"
-      :key="album.id"
-      class="shadow-xl card image-full"
-      @click=" $router.push({path: `/AlbumDetails/${album.id}`})
-      "
-    >
-      <figure>
+  <div class="m-5">
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8">
+      <div 
+        v-for="album in filterAlbums"
+        :key="album.id"
+        class="shadow-xl card image-full"
+        @click=" $router.push({path: `/AlbumDetails/${album.id}`})
+        "
+      >
+        <figure>
+          <img
+            class="object-contain"
+            :src="album.cover"
+          >
+        </figure>
+        <div class="justify-center card-body">
+          <div class="text-center transition-opacity" />
+          <h3 class="text-center">
+            <a>{{ album.name }}</a>
+          </h3> 
+        </div> 
+      <!--       <figure>
         <img
           :src="album.cover"
           height="300px"
@@ -17,11 +30,12 @@
       </figure> 
       <div class="justify-end card-body">
         <div class="text-center transition-opacity" />
-        <h3 class="text-center card-title">
+        <h3 class="text-center">
           <a>{{ album.name }}</a>
         </h3> 
-      </div>
-    </div> 
+      </div> -->
+      </div> 
+    </div>
   </div>
 </template>
 
