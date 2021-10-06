@@ -11,7 +11,8 @@
         </div>
       </div>
     </nav> -->
-    <TitleBar />
+
+    <TitleBar v-if="isTauri()" />
 
     <div
       id="menuBar"
@@ -95,7 +96,9 @@ export default {
 
       // This will wait for the window to load, but you could
       // run this function on whatever trigger you want
-      this.loaded()
+      if(this.isTauri()){
+        this.loaded()
+      }
     })
   },  
   methods: {
@@ -111,11 +114,17 @@ export default {
       if(this.isOpen){
         this.isOpen = false
         console.log('Got close')
-
+ 
       } else {
         console.log('Got open')
         this.isOpen = true
       }
+    },
+    isTauri(){
+      if(window.__TAURI__){
+        console.log('Tauri')
+        return true
+      } return false
     }
   }
 }
