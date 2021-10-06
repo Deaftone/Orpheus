@@ -1,6 +1,6 @@
 <template>  
   <div class="grid w-full grid-cols-1 gap-5 pt-10 pb-10 ">
-    <div
+    <!--     <div
       ref="albumInfo"
       class="pl-40 pr-40 lg:flex"
     >
@@ -17,6 +17,27 @@
           @click=" $router.push({path: `/ArtistDetails/${artistId}`}) "
         >{{ artist }}</a></span>
       </div>
+    </div> -->
+    <div class="pl-20 pr-20 lg:pr-40 lg:pl-40">
+      <div class="card md:card-side bg-base-300">
+        <figure>
+          <img
+            class="object-contain w-full h-72"
+            :src="cover"
+          >
+        </figure> 
+        <div class="card-body">
+          <h2 class="text-xl font-bold card-title lg:text-6xl ">
+            {{ title }}
+          </h2> 
+          <div class="card-actions text-primary">
+            <a
+              class="cursor-pointer"
+              @click=" $router.push({path: `/ArtistDetails/${artistId}`}) "
+            >{{ artist }}</a>
+          </div>
+        </div>
+      </div> 
     </div>
     <div
       ref="sticky"
@@ -41,7 +62,7 @@
         v-for="song in songs"
         :id="song.id"
         :key="song.number"
-        class="flex justify-center p-1 text-lg rounded-lg cursor-pointer bg-base-300 "
+        class="flex justify-center p-1 text-lg rounded-lg cursor-pointer bg-base-300"
         @click="playTrack(song.title, song.id)"
       >
         <div class="w-full p-2">
@@ -112,7 +133,7 @@ export default {
     this.albumId = album.id
     const currentlyPlaying = this.$store.state.nowPlaying || ''
     let tempPlaying = null
-    this.cover = `http://192.168.1.18:4533/rest/getCoverArt?u=${axios.defaults.params.u}&s=${axios.defaults.params.s}&t=${axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${this.id}&size=300`
+    this.cover = `http://192.168.1.18:4533/rest/getCoverArt?u=${axios.defaults.params.u}&s=${axios.defaults.params.s}&t=${axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${this.id}`
     for(const song of album.song) {
       this.songs.push({id: song.id, number: song.track, title: song.title, artistId: album.artistId, albumId: album.id, artist: album.artist, type: String(song.contentType).slice(6,20).toUpperCase(), length: 'FIX'})
       // Check if currently playing song in in this track list. If so save and highlight it
@@ -156,10 +177,10 @@ export default {
       const newP = document.getElementById(newPlaying.id)
 
       if(oldP) {
-        oldP.classList.remove("border-solid", "border-4", "border-primary", 'animate-bounce')
+        oldP.classList.remove("gradient-border","border-solid", "border-4", "border-primary")
       }
       if(newP) {
-        newP.classList.add("border-solid", "border-4", "border-primary", 'animate-bounce')
+        newP.classList.add("gradient-border","border-solid", "border-4", "border-primary")
       }
     },
   }
@@ -170,5 +191,21 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+.gradient-border {
+  --borderWidth: 3px;
+  position: relative;
+  animation: animatedgradient 1s ease alternate infinite;
+}
+
+
+@keyframes animatedgradient {
+	0% {
+    border-color: var(--sf);
+	}
+	50% {
+    border-color: var(--pf);
+	}
+
+}
 
 </style>
