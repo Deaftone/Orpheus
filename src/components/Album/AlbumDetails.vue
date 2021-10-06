@@ -1,5 +1,5 @@
 <template>  
-  <div class="grid w-full grid-cols-1 gap-5 pt-10 pb-10 ">
+  <div class="grid grid-cols-1 gap-5 pt-10 pb-10">
     <!--     <div
       ref="albumInfo"
       class="pl-40 pr-40 lg:flex"
@@ -18,8 +18,8 @@
         >{{ artist }}</a></span>
       </div>
     </div> -->
-    <div class="pl-20 pr-20 lg:pr-40 lg:pl-40">
-      <div class="card md:card-side bg-base-300">
+    <div class="flex justify-center w-full pl-10 pr-10 lg:pr-40 lg:pl-40 lg:block">
+      <div class="card lg:card-side bg-base-300">
         <figure>
           <img
             class="object-contain w-full h-72"
@@ -44,6 +44,7 @@
       class=""
       style="height:0.1px"
     />
+    <!-- Bug where the currently playing track is above this in z-index -->
     <div
       ref="albumBar"
       class="sticky top-0 w-full p-1 pl-5 pr-5 -mt-5 text-sm lg:pl-40 lg:pr-40 bg-base-200"
