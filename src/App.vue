@@ -16,11 +16,33 @@
 
     <div
       id="menuBar"
-      class="navbar bg-neutral text-neutral-content"
+      class="h-6 navbar bg-neutral text-neutral-content"
     >
-      <div class="flex-1 hidden px-2 mx-2 lg:flex">
+      <div class="hidden px-2 mx-2 lg:flex">
         <span class="text-lg font-bold">
           Orpheus
+        </span>
+      </div> 
+      <div class="flex-1 hidden px-4 mx-2 lg:flex">
+        <span class="text-lg font-bold">
+          <button
+            class="px-4 py-2 font-bold text-gray-800 co"
+            @click="$router.go(-1)"
+          >
+            <font-awesome-icon
+              icon="arrow-left"
+              color="gray"
+            />
+          </button>
+          <button
+            class="px-4 py-2 font-bold text-gray-800 co"
+            @click="$router.go(1)"
+          >
+            <font-awesome-icon
+              icon="arrow-right"
+              color="gray"
+            />
+          </button>
         </span>
       </div> 
       <div class="flex-1 lg:flex-none">
@@ -55,7 +77,7 @@
       </div>
       <main
         role="main"
-        class="flex-grow w-full h-full overflow-auto"
+        class="w-full h-full overflow-auto"
       >
         <router-view />
       </main>
@@ -67,7 +89,7 @@
 </template>
 
 <script>
-import Player from "./components/player/index.vue"
+import Player from "./components/Player/index.vue"
 import SearchBox from "./components/Util/SearchBox.vue"
 import ThemeSwitcher from "./components/Util/ThemeSwitcher.vue"
 import { invoke } from '@tauri-apps/api/tauri'
