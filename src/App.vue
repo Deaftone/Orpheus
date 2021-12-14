@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import Player from "./components/Player/index.vue"
+import Player from "./components/Player/Index.vue"
 import SearchBox from "./components/Util/SearchBox.vue"
 import ThemeSwitcher from "./components/Util/ThemeSwitcher.vue"
 import { invoke } from '@tauri-apps/api/tauri'
