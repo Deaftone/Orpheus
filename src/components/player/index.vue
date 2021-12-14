@@ -18,10 +18,10 @@
             @update="volumeChange"
           />
         </div>
-        <a
+        <!--         <a
           class="pl-10 cursor-pointer hover:text-primary"
           @click="toggleVis"
-        >Visualiser</a>
+        >Visualiser</a> -->
       </div>
 
       <div
@@ -90,6 +90,7 @@
       <a>{{ eTime }} / {{ duration }}</a>
       <div
         id="playbar"
+        class="mt-2 mb-2 ml-96 mr-96"
       >
         <Slider
           v-model="percentPlayed"
@@ -99,23 +100,22 @@
         />
       </div>
     </div>
-    <AvCanvas
+    <!--     <AvCanvas
       v-if="myAnalyser && visToggled"
       :audioAnalyser="myAnalyser"
-    />
+    /> -->
   </main>
 </template>
 
 <script>
 import Slider from '@vueform/slider'
-import AvCanvas from "./visualiser/index.vue"
 import '../../freqtimeupdate'
 
 export default ({
   name: "Player",
   components: {
     Slider,
-    AvCanvas
+    //AvCanvas
   },
   data() {
     return {
