@@ -1,64 +1,18 @@
 <template>
   <div class="flex flex-col h-screen overflow-hidden">
-    <!-- <nav class="flex flex-wrap items-center justify-between p-1">
-      <div class="flex items-center mr-6 text-white flex-no-shrink">
-        <span class="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-300 ">Tailwind CSS</span>
-      </div>
-      <div class="flex-grow block w-full lg:flex lg:items-center lg:w-auto">
-        <div class="text-sm lg:flex-grow" />
-        <div>
-          
-        </div>
-      </div>
-    </nav> -->
-
     <TitleBar v-if="isTauri()" />
-
-    <div
-      id="menuBar"
-      class="h-6 navbar bg-neutral text-neutral-content"
-    >
-      <div class="hidden px-2 mx-2 lg:flex">
-        <span class="text-lg font-bold">
-          Orpheus
-        </span>
-      </div> 
-      <div class="flex-1 hidden px-4 mx-2 lg:flex">
-        <span class="text-lg font-bold">
-          <button
-            class="px-4 py-2 font-bold text-gray-800 co"
-            @click="$router.go(-1)"
-          >
-            <font-awesome-icon
-              icon="arrow-left"
-              color="gray"
-            />
-          </button>
-          <button
-            class="px-4 py-2 font-bold text-gray-800 co"
-            @click="$router.go(1)"
-          >
-            <font-awesome-icon
-              icon="arrow-right"
-              color="gray"
-            />
-          </button>
-        </span>
-      </div> 
-      <div class="flex-1 lg:flex-none">
-        <SearchBox />
-      </div> 
-      <div class="flex-1 lg:flex-none">
-        <ThemeSwitcher />
-      </div>
-    </div>
-
-    <div class="flex flex-col flex-grow w-full overflow-hidden sm:flex-row ">
+    
+    <div class="flex flex-col flex-grow w-full h-full overflow-hidden sm:flex-row">
       <div class="flex-grow-0 flex-shrink hidden w-1/3 md:inline-flex sm:w-1/3 md:w-40 bg-neutral text-neutral-content md:visible">
         <div class="sticky top-0 p-4 rounded-xl">
           <nav class="h-full ">
-            <span class="w-full text-xl font-bold">My Library</span>
-            <ul style="padding-left:20px;padding-top:5px">
+            <div class="pb-5 lg:flex">
+              <span class="text-2xl font-bold">
+                Orpheus
+              </span>
+            </div> 
+            <span class="w-full text-lg font-bold">My Library</span>
+            <ul class="pl-5">
               <li
                 class="cursor-pointer s-item hover:text-primary"
                 @click="goTo(&quot;ArtistList&quot;)"
@@ -75,12 +29,17 @@
           </nav>
         </div>
       </div>
-      <main
-        role="main"
-        class="w-full h-full overflow-auto"
-      >
-        <router-view />
-      </main>
+      <div class="flex flex-col justify-between w-full">
+        <header>
+          <MenuBar />
+        </header>
+        <main
+          role="main"
+          class="w-full h-full overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700 "
+        >
+          <router-view />
+        </main>
+      </div>
     </div>
     <footer class="mt-auto text-center">
       <Player />
@@ -90,17 +49,15 @@
 
 <script>
 import Player from "./components/Player/Index.vue"
-import SearchBox from "./components/Util/SearchBox.vue"
-import ThemeSwitcher from "./components/Util/ThemeSwitcher.vue"
+import MenuBar from "./components/Main/MenuBar.vue"
 import { invoke } from '@tauri-apps/api/tauri'
 import TitleBar from "./components/Main/TitleBar.vue"
 export default {
   name: 'App',
   components: {
     Player,
-    SearchBox,
-    ThemeSwitcher,
-    TitleBar
+    TitleBar,
+    MenuBar
   },
   data() {
     return {
@@ -164,6 +121,7 @@ export default {
   --slider-height: 9px;
   --slider-handle-ring-width: 3px;
   --slider-tooltip-radius: 3px;
+
 }
 
 </style>
