@@ -2,7 +2,7 @@
   <div
     id="titleBar"
     data-tauri-drag-region
-    class="pt-1 titlebar bg-neutral text-primary"
+    class="pt-1 pb-5 titlebar bg-neutral text-primary"
   >
     <font-awesome-icon
       id="minIcon"
