@@ -3,7 +3,7 @@
     <div class="form-control">
       <input
         ref="search"
-        class="input input-ghost"
+        class="input input-ghost hover:bg-neutral focus:bg-neutral"
         type="search"
         placeholder="Search"
         @input="updateSearch"
