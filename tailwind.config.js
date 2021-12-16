@@ -17,7 +17,7 @@ module.exports = {
       pink: colors.pink,
     }
   },
-  plugins: [require('@vueform/slider/tailwind'), require('daisyui')],
+  plugins: [require('@vueform/slider/tailwind'), require('daisyui'),  require('tailwind-scrollbar')],
   daisyui: {
     styled: true,
     themes: true,
