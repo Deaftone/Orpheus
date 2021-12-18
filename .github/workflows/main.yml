@@ -47,9 +47,9 @@ jobs:
           # An additional cache key that is stable over multiple jobs
           sharedKey: test
           # The working directory this action should operate in
-          working-directory: ./
+          working-directory: src-tauri/
           # The target dir that should be cleaned and persisted, defaults to `./target`
-          target-dir: ./src-tauri/target
+          target-dir: ./target
       - name: install app dependencies and build it
         run: npm install && npm run build
       - uses: tauri-apps/tauri-action@v0
