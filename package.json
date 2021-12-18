@@ -27,21 +27,21 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.14.0",
     "@tauri-apps/cli": "^1.0.0-beta.10",
     "@vitejs/plugin-vue": "^2.0.0",
     "@vue/compiler-sfc": "^3.0.5",
     "autoprefixer": "^10.4.0",
     "concurrently": "^6.2.1",
     "electron": "^13.1.7",
-    "eslint": "^6.7.2",
-    "eslint-plugin-standard": "^4.1.0",
-    "eslint-plugin-vue": "^7.0.0",
+    "eslint": "^8.5.0",
     "jest": "^27.0.6",
     "jest-puppeteer": "^5.0.4",
     "postcss": "^8.4.5",
     "puppeteer": "^9.1.1",
     "start-server-and-test": "^1.13.1",
     "tailwindcss": "^3.0.2",
+    "unplugin-vue-components": "^0.17.9",
     "vite": "^2.7.2",
     "vite-plugin-tips": "^1.0.2"
   }

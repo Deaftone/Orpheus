@@ -1,4 +1,4 @@
-<template>  
+<template>
   <div class="flex-1 lg:flex-none">
     <div class="form-control">
       <input
@@ -7,7 +7,7 @@
         type="search"
         placeholder="Search"
         @input="updateSearch"
-      >
+      />
     </div>
   </div>
 </template>
@@ -20,10 +20,11 @@ export default {
       search: '',
     }
   },
-  watch:{
-    $route (){
+  watch: {
+    $route() {
       this.$store.commit('setSearchQuery', null)
-      this.$refs.search.value = ""    }
+      this.$refs.search.value = ""
+    }
   },
   methods: {
     updateSearch(e) {
@@ -35,5 +36,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>

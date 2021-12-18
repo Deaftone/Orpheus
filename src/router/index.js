@@ -1,22 +1,24 @@
 // router/index.js
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory
+} from 'vue-router'
 import ArtistList from '../components/Artist/ArtistList.vue'
 import AlbumDetails from '../components/Album/AlbumDetails.vue'
 import AlbumList from '../components/Album/AlbumList.vue'
 import ArtistDetails from '../components/Artist/ArtistDetails.vue'
 import Home from '../components/Home.vue'
 
-const routes = [
-  {
+const routes = [{
     path: '/',
     name: 'Home',
     component: Home
-  }, 
+  },
   {
     path: '/artistList',
     name: 'ArtistList',
     component: ArtistList
-  }, 
+  },
   {
     path: '/AlbumDetails',
     name: 'AlbumList',
@@ -28,7 +30,7 @@ const routes = [
     component: AlbumDetails,
     props: true
   },
-  
+
   {
     path: '/ArtistDetails/:id',
     name: 'ArtistDetails',
@@ -37,5 +39,8 @@ const routes = [
   }
 ]
 
-const router = createRouter({ history: createWebHistory(), routes })
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
 export default router

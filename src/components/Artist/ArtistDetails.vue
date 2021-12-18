@@ -20,7 +20,7 @@
           </h2> 
           <p>{{ bio }}</p> 
         </div>
-      </div> -->
+  </div>-->
   <!--       <div
         class="grid grid-cols-3 grid-rows-2"
         style="grid-template-columns:auto 1fr"
@@ -37,7 +37,7 @@
             {{ bio }}
           </p>
         </div>
-      </div> -->
+  </div>-->
   <!--  </div>
     <div class="pt-3 pb-3 pl-40">
       <span class="text-2xl">Albums</span>
@@ -61,7 +61,7 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>-->
   <div class="p-5">
     <div
       id="banner"
@@ -69,38 +69,28 @@
       :style="{ 'background-image': 'url(' + artistBanner + ')' }"
       style="background-position-y:-100px"
     >
-      <div
-        class="items-center card card-side text-neutral-content"
-        style="height:600px"
-      />
+      <div class="items-center card card-side text-neutral-content" style="height:600px" />
     </div>
   </div>
   <div class="h-64 p-10 card-body">
-    <h2 class="card-title">
-      {{ artistName }}
-    </h2> 
+    <h2 class="card-title">{{ artistName }}</h2>
     <p>{{ bio }}</p>
   </div>
-  <div class="divider" /> 
+  <div class="divider" />
   <div class="pt-3 pb-3 pl-40">
     <span class="text-2xl">Albums</span>
   </div>
   <div class="grid w-full gap-4 pb-10 pl-40 pr-40 xl:grid-cols-8 lg:grid-cols-5 md:grid-cols-3">
-    <div 
+    <div
       v-for="album in albums"
       :key="album.id"
       class="cursor-pointer"
-      @click=" $router.push({path: `/AlbumDetails/${album.id}`})"
+      @click="$router.push({ path: `/AlbumDetails/${album.id}` })"
     >
-      <div
-        class="shadow-2xl"
-      >
-        <img 
-          class="rounded-md"
-          :src="album.cover"
-        >
+      <div class="shadow-2xl">
+        <img class="rounded-md" :src="album.cover" />
       </div>
-      <a>{{ album.title }} </a>
+      <a>{{ album.title }}</a>
     </div>
   </div>
 </template>
@@ -110,7 +100,7 @@ import apiAxios from '../../utils/apiAxios'
 import axios from 'axios'
 export default {
   name: 'ArtistDetails',
-  props: {id: {type: String, required: true}},
+  props: { id: { type: String, required: true } },
   data() {
     return {
       name: '',
@@ -121,14 +111,16 @@ export default {
       bio: '',
     }
   },
-  async mounted(){
-    const data = (await apiAxios.get('/getArtist', {params: {
-      id: this.id
-    }})).data
+  async mounted() {
+    const data = (await apiAxios.get('/getArtist', {
+      params: {
+        id: this.id
+      }
+    })).data
     this.artistName = data['subsonic-response']['artist'].name
     const albumIndex = data['subsonic-response']['artist']['album']
-    for(const album of albumIndex){
-      this.albums.push({id: album.id, title: album.title, cover: `https://navi.raspi.local/rest/getCoverArt?u=${apiAxios.defaults.params.u}&s=${apiAxios.defaults.params.s}&t=${apiAxios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300`})
+    for (const album of albumIndex) {
+      this.albums.push({ id: album.id, title: album.title, cover: `https://navi.raspi.local/rest/getCoverArt?u=${apiAxios.defaults.params.u}&s=${apiAxios.defaults.params.s}&t=${apiAxios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300` })
     }
 
 
@@ -157,7 +149,7 @@ export default {
         newWidth = displayPixels
         newHeight = Math.round((nHeight / nWidth) * displayPixels)
       }
- 
+
       console.log(`Height: ${newHeight} Width: ${newWidth}`)
       e.target.width = newWidth
       e.target.height = newHeight
@@ -168,19 +160,16 @@ export default {
 
 <style scoped>
 .bg-image {
-  
-  
   filter: blur(7px);
   -webkit-filter: blur(7px);
-  
-  height: 500px; 
+
+  height: 500px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .info {
-
 }
 </style>
 

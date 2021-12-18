@@ -1,4 +1,5 @@
 import { defineConfig, loadEnv } from 'vite'
+import Components from 'unplugin-vue-components/vite'
 import vue from '@vitejs/plugin-vue'
 const { resolve } = require('path')
 //import path from 'path'
@@ -30,6 +31,7 @@ export default defineConfig(({ mode }) => {
         theme: 'dark',
         editor: env.VITE_EDITOR || 'vscode',
       }), */
+      Components({ /* options */ }),
       vue(),
       
     ],

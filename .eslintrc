@@ -1,31 +1,5 @@
 {
-    "root": true,
-    "env": {
-        "browser": true,
-        "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-recommended",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 2020
-    },
-    "plugins": [
-    ],
-    "rules": {
-        "semi": ["error", "never"],
-        "indent": ["error", 2],
-        "prefer-const": [
-			"error",
-			{
-				"ignoreReadBeforeAssign": true
-			}
-		],
-        "vue/attribute-hyphenation": 0,
-		"space-before-function-paren": "off",
-		"no-var": "error",
-		"no-console": "off",
-		"no-unused-expressions": 0,
-    }
-  }
+  "extends": [
+    "@antfu"
+  ]
+}

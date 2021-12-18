@@ -1,9 +1,5 @@
-<template> 
-  <div
-    id="titleBar"
-    data-tauri-drag-region
-    class="pt-1 pb-5 titlebar bg-neutral text-primary"
-  >
+<template>
+  <div id="titleBar" data-tauri-drag-region class="pt-1 pb-5 titlebar bg-neutral text-primary">
     <font-awesome-icon
       id="minIcon"
       class="cursor-pointer text-primary titlebar-button hover:text-primary-focus"
@@ -30,13 +26,13 @@
 import { appWindow } from '@tauri-apps/api/window'
 export default {
   name: 'TitleBar',
-  methods:{
-    close(){
+  methods: {
+    close() {
       appWindow.close()
     },
-    toggleMaximize(){
+    toggleMaximize() {
       appWindow.toggleMaximize()
-    },minimize(){
+    }, minimize() {
       appWindow.minimize()
       appWindow.res
     }
@@ -50,7 +46,6 @@ export default {
   user-select: none;
   display: flex;
   justify-content: flex-end;
-
 }
 .titlebar-button {
   display: inline-flex;

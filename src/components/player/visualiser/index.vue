@@ -1,10 +1,6 @@
 <template>
   <div class="av__visualizer">
-    <canvas
-      ref="canvas"
-      class="w-full"
-      height="40"
-    />
+    <canvas ref="canvas" class="w-full" height="40" />
   </div>
 </template>
 
@@ -37,22 +33,22 @@ export default {
   },
 
   computed: {
-    isPlaying () {
+    isPlaying() {
       return this.$store.state.isPlaying
     },
-    getBackgroundColor(){
+    getBackgroundColor() {
       return this.$store.state.currentTheme
     }
   },
   watch: {
     // This watch triggers playTrack. by doing       this.$store.commit('setNowPlaying', {title: track.title, id: track.id})
     // Do not do that inside the playTrack function as it will cause a infinite loop
-    isPlaying (isPlaying) {
-      if(isPlaying){
+    isPlaying(isPlaying) {
+      if (isPlaying) {
         this.mainLoop()
       }
     },
-    getBackgroundColor (){
+    getBackgroundColor() {
       console.log(`Watch ${this.$store.state.currentTheme}`)
       this.setBackgroundColor()
       this.setBarColor()
@@ -66,13 +62,13 @@ export default {
 
     window.addEventListener("resize", this.handleResize)
     this.myCanvas = this.$refs.canvas
-    this.cHeight = this.myCanvas.height -2 
+    this.cHeight = this.myCanvas.height - 2
     this.myCtx = this.myCanvas.getContext("2d")
     this.myCanvas.width =
       this.myCanvas.parentElement.getBoundingClientRect().width
     this.myCanvas.height =
       this.myCanvas.parentElement.getBoundingClientRect().height
-      
+
     this.setBackgroundColor()
     this.setBarColor()
     console.log(this.barColor)
@@ -86,10 +82,10 @@ export default {
       this.myCanvas.height =
         this.myCanvas.parentElement.getBoundingClientRect().height
     },
-    setBarColor(){
+    setBarColor() {
       this.barColor = getComputedStyle(document.getElementById("menuBar")).color
     },
-    setBackgroundColor(){
+    setBackgroundColor() {
       this.backgroundColor = getComputedStyle(document.getElementById("titleBar")).backgroundColor
     },
     onClassChange(classAttrValue) {
@@ -99,10 +95,10 @@ export default {
       }
     },
     mainLoop() {
-      if(!this.isPlaying) {
+      if (!this.isPlaying) {
         return
       }
-      if(!this.myCanvas) return
+      if (!this.myCanvas) return
       const frqBits = this.audioAnalyser.frequencyBinCount
       const data = new Uint8Array(frqBits)
       const barWidth = this.barWidth >= this.myCanvas.width ? this.myCanvas.width : this.barWidth
@@ -124,18 +120,18 @@ export default {
       })
       setTimeout(requestAnimationFrame(this.mainLoop), 3000)
     },
-    HSLToRGB(h,s,l) {
+    HSLToRGB(h, s, l) {
       s /= 100
       l /= 100
 
       const c = (1 - Math.abs(2 * l - 1)) * s
-      const  x = c * (1 - Math.abs((h / 60) % 2 - 1))
-      const  m = l - c/2
+      const x = c * (1 - Math.abs((h / 60) % 2 - 1))
+      const m = l - c / 2
       let r = 0,
         g = 0,
         b = 0
       if (0 <= h && h < 60) {
-        r = c; g = x; b = 0  
+        r = c; g = x; b = 0
       } else if (60 <= h && h < 120) {
         r = x; g = c; b = 0
       } else if (120 <= h && h < 180) {
@@ -153,14 +149,14 @@ export default {
 
       return "rgb(" + r + "," + g + "," + b + ")"
     },
-    _fillCanvasBG () {
+    _fillCanvasBG() {
       // Resets the canvas to black
       const w = this.myCanvas.width
       const h = this.myCanvas.height
       this.myCtx.fillStyle = this.backgroundColor
       this.myCtx.fillRect(0, 0, w, h)
     },
-    _drawBar (barWidth, barHeight, barX) {
+    _drawBar(barWidth, barHeight, barX) {
       if (this.brickHeight) {
         this._drawBrickBar(barWidth, barHeight, barX)
       } else {
@@ -170,7 +166,7 @@ export default {
         )
       }
     },
-    _drawBrickBar (barWidth, barHeight, barX) {
+    _drawBrickBar(barWidth, barHeight, barX) {
       for (let b = 0; b < barHeight; b += this.brickHeight + this.brickSpace) {
         this.myCtx.fillRect(
           barX, this.myCanvas.height - barHeight + b - this._symAlign(barHeight),
@@ -182,7 +178,7 @@ export default {
      * Draw cap for each bar and animate caps falling down.
      * @private
      */
-    _drawCap (index, barwidth, barX, barY) {
+    _drawCap(index, barwidth, barX, barY) {
       const cap = this.caps[index] <= barY
         ? barY
         : this.caps[index] - this.capsDropSpeed
@@ -197,7 +193,7 @@ export default {
       }
       this.caps[index] = cap
     },
-    _symAlign (barHeight) {
+    _symAlign(barHeight) {
       return this.symmetric ? ((this.myCanvas.height - barHeight) / 2) : 0
     }
   },

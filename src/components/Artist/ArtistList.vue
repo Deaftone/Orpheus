@@ -1,20 +1,20 @@
-<template>  
+<template>
   <div class="grid w-full gap-1 p-5 lg:gap-4 xl:grid-cols-11 lg:grid-cols-5">
-    <div 
+    <div
       v-for="artist in artists"
       :key="artist.id"
       class="mx-auto"
-      @click=" $router.push({path: `/ArtistDetails/${artist.id}`})
+      @click="$router.push({ path: `/ArtistDetails/${artist.id}` })
       "
     >
       <img
         class="rounded-full shadow-xl ring ring-primary"
         src="https://e-cdn-images.dzcdn.net/images/artist/8b6e535e08ad7c5cb312102a5ede6c1e/264x264-000000-80-0-0.jpg"
-      >
+      />
       <div class="font-bold text-center">
         <a>{{ artist.name }}</a>
       </div>
-    </div> 
+    </div>
     <!--     <div
       v-for="artist in artists"
       :key="artist.id"
@@ -23,7 +23,7 @@
       "
     >
 
-    </div> -->
+    </div>-->
   </div>
 </template>
 
@@ -36,13 +36,13 @@ export default {
       artists: [],
     }
   },
-  async mounted(){
+  async mounted() {
     const data = (await axios.get('/getArtists')).data
     const artistIndex = data['subsonic-response']['artists']['index']
-    for(const index of artistIndex){
-      for(const artist of index.artist) {
+    for (const index of artistIndex) {
+      for (const artist of index.artist) {
         console.log(artist)
-        this.artists.push({name: artist.name, id: artist.id})
+        this.artists.push({ name: artist.name, id: artist.id })
       }
     }
   },
@@ -50,6 +50,5 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
 

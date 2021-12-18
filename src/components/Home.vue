@@ -1,4 +1,4 @@
-<template> 
+<template>
   <div
     class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
     style="padding:50px"
@@ -186,5 +186,4 @@ export default {
  * We'll use CSS grids for the base template
  * More info on https://cssgrid.io/ by @wesbos
  */
-
 </style>

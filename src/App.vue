@@ -1,30 +1,26 @@
 <template>
   <div class="flex flex-col h-screen overflow-hidden">
     <TitleBar v-if="isTauri()" />
-    
+
     <div class="flex flex-col flex-grow w-full h-full overflow-hidden sm:flex-row">
-      <div class="flex-grow-0 flex-shrink hidden w-1/3 md:inline-flex sm:w-1/3 md:w-40 bg-neutral text-neutral-content md:visible">
+      <div
+        class="flex-grow-0 flex-shrink hidden w-1/3 md:inline-flex sm:w-1/3 md:w-40 bg-neutral text-neutral-content md:visible"
+      >
         <div class="sticky top-0 p-4 rounded-xl">
-          <nav class="h-full ">
+          <nav class="h-full">
             <div class="pb-5 lg:flex">
-              <span class="text-2xl font-bold">
-                Orpheus
-              </span>
-            </div> 
+              <span class="text-2xl font-bold">Orpheus</span>
+            </div>
             <span class="w-full text-lg font-bold">My Library</span>
             <ul class="pl-5">
               <li
                 class="cursor-pointer s-item hover:text-primary"
                 @click="goTo(&quot;ArtistList&quot;)"
-              >
-                Artists
-              </li>
+              >Artists</li>
               <li
                 class="cursor-pointer s-item hover:text-primary"
                 @click="goTo(&quot;AlbumDetails&quot;)"
-              >
-                Albums
-              </li>
+              >Albums</li>
             </ul>
           </nav>
         </div>
@@ -35,7 +31,7 @@
         </header>
         <main
           role="main"
-          class="w-full h-full overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700 "
+          class="w-full h-full overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700"
         >
           <router-view />
         </main>
@@ -48,59 +44,51 @@
 </template>
 
 <script>
-import Player from "./components/Player/Index.vue"
-import MenuBar from "./components/Main/MenuBar.vue"
-import { invoke } from '@tauri-apps/api/tauri'
-import TitleBar from "./components/Main/TitleBar.vue"
+
 export default {
   name: 'App',
-  components: {
-    Player,
-    TitleBar,
-    MenuBar
-  },
   data() {
     return {
       isOpen: true
     }
   },
   computed: {
-    count () {
+    count() {
       return this.$store.state.count
     }
   },
-  mounted: function (){
+  mounted: function () {
     // With the Tauri global script:
     document.addEventListener('DOMContentLoaded', () => {
 
       // This will wait for the window to load, but you could
       // run this function on whatever trigger you want
-      if(this.isTauri()){
+      if (this.isTauri()) {
         this.loaded()
       }
     })
-  },  
+  },
   methods: {
-    loaded(){
+    loaded() {
       console.log('Splash removed')
       invoke('close_splashscreen')
     },
     goTo(p) {
       console.log(p)
-      this.$router.push({path: `/${p}`})
+      this.$router.push({ path: `/${p}` })
     },
-    open(){
-      if(this.isOpen){
+    open() {
+      if (this.isOpen) {
         this.isOpen = false
         console.log('Got close')
- 
+
       } else {
         console.log('Got open')
         this.isOpen = true
       }
     },
-    isTauri(){
-      if(window.__TAURI__){
+    isTauri() {
+      if (window.__TAURI__) {
         console.log('Tauri')
         return true
       } return false
@@ -110,7 +98,6 @@ export default {
 </script>
 
 <style>
-
 :root {
   --slider-connect-bg: hsl(var(--p));
   --slider-handle-ring-color: hsl(var(--af));
@@ -121,7 +108,5 @@ export default {
   --slider-height: 9px;
   --slider-handle-ring-width: 3px;
   --slider-tooltip-radius: 3px;
-
 }
-
 </style>
