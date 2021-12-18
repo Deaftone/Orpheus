@@ -250,7 +250,7 @@ export default ({
 
       this.appPlayer.volume = 0.11255000000000001
       console.log("Got play track " + JSON.stringify(track))
-      this.appPlayer.src = `http://192.168.1.18:4533/rest/stream?u=doom&t=57447d1e0c77a04388d4cf5745b520ec&s=558dbf&f=json&v=1.8.0&c=NavidromeUI&id=${track.id}&_=1627823120382`
+      this.appPlayer.src = `https://navi.raspi.local/rest/stream?u=doom&t=57447d1e0c77a04388d4cf5745b520ec&s=558dbf&f=json&v=1.8.0&c=NavidromeUI&id=${track.id}&_=1627823120382`
       this.appPlayer.play()
       this.$store.commit('setIsPlaying', true)
       this.isPlaying = true
