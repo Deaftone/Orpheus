@@ -47,7 +47,7 @@
     <!-- Bug where the currently playing track is above this in z-index -->
     <div
       ref="albumBar"
-      class="sticky top-0 w-full p-1 pl-5 pr-5 -mt-5 text-sm lg:pl-40 lg:pr-40 bg-base-200"
+      class="sticky top-0 w-full p-1 pl-5 pr-5 -mt-5 text-sm lg:pl-40 lg:pr-40 bg-base-200 z-1"
     >
       <a>#</a>
       <div class="float-right">
@@ -98,6 +98,8 @@ export default {
       artist: '',
       artistId: '',
       albumId: '',
+      cover: '',
+      albumName: '',
       songs: []
     }
   },
@@ -136,7 +138,7 @@ export default {
     let tempPlaying = null
     this.cover = `https://navi.raspi.local/rest/getCoverArt?u=${axios.defaults.params.u}&s=${axios.defaults.params.s}&t=${axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${this.id}`
     for(const song of album.song) {
-      this.songs.push({id: song.id, number: song.track, title: song.title, artistId: album.artistId, albumId: album.id, artist: album.artist, type: String(song.contentType).slice(6,20).toUpperCase(), length: 'FIX'})
+      this.songs.push({id: song.id, number: song.track, title: song.title, albumName: this.title, cover: this.cover, artistId: album.artistId, albumId: album.id, artist: album.artist, type: String(song.contentType).slice(6,20).toUpperCase(), length: 'FIX'})
       // Check if currently playing song in in this track list. If so save and highlight it
       if(song.id === currentlyPlaying.id) {
         tempPlaying = {title: song.title, id: song.id}
@@ -160,7 +162,7 @@ export default {
       const index = this.songs.findIndex(x => x.id === id)
       const songs = this.songs.slice(index + 1, this.songs.length)
       this.$store.commit('setQueue', songs)
-      this.$store.commit('setNowPlaying', {title: title, id: id, artistId: this.artistId, albumId: this.albumId, artist: this.artist})
+      this.$store.commit('setNowPlaying', {title: title, id: id, artistId: this.artistId, albumId: this.albumId, artist: this.artist, albumName: this.title, cover: this.cover})
     },
     onElementObserved(e) {
       e.forEach(({ target, isIntersecting}) => {
