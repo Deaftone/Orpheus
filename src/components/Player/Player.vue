@@ -144,9 +144,11 @@ export default ({
     // Do not do that inside the playTrack function as it will cause a infinite loop
     nowPlaying (newPlaying, oldPlaying ) {
       if(oldPlaying){
-        this.$store.commit('setPreviousPlaying', {title: oldPlaying.title, id: oldPlaying.id})
+        
+        this.$store.commit('setPreviousPlaying', {title: oldPlaying.title, id: oldPlaying.id, artistId: oldPlaying.artistId, albumId: oldPlaying.albumId, artist: oldPlaying.artist, albumName: oldPlaying.albumName, cover: oldPlaying.cover})
       }
       this.playTrack(newPlaying)
+      this.setMediaControls(newPlaying.title, newPlaying.artist, newPlaying.albumName, newPlaying.cover)
     }
   },
   created() {
@@ -182,6 +184,25 @@ export default ({
       document.getElementById('barC').classList.toggle('pb-3')
 
     },
+    setMediaControls(title, artist, album, src){
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: title,
+          artist: artist,
+          album: album,
+          artwork: [
+            { src: src, sizes: '256x256', type: 'image/png' },
+          ]
+        })
+
+        navigator.mediaSession.setActionHandler('play', () => {this.playPause()})
+        navigator.mediaSession.setActionHandler('pause', () => {this.playPause()})
+        navigator.mediaSession.setActionHandler('previoustrack', () => {this.previosTrack()})
+        navigator.mediaSession.setActionHandler('nexttrack', () => {this.nextTrack()})
+
+      }
+
+    },
     convertTime(seconds){
       const format = val => `0${Math.floor(val)}`.slice(-2)
       //var hours = seconds / 3600;
@@ -213,7 +234,7 @@ export default ({
     previosTrack(){
       const track = this.$store.state.previousPlaying     
       //this.playTrack(this.$store.state.previousPlaying)
-      this.$store.commit('setNowPlaying', {title: track.title, id: track.id, artistId: track.artistId, albumId: track.albumId, artist: track.artist})
+      this.$store.commit('setNowPlaying', {title: track.title, id: track.id, artistId: track.artistId, albumId: track.albumId, artist: track.artist, albumName: track.albumName, cover: track.cover})
 
       console.log('Previous track clicked')
     },
@@ -221,7 +242,7 @@ export default ({
       const track = this.$store.state.queue.shift()
       //this.playTrack(track)
       console.log(JSON.stringify(track))
-      this.$store.commit('setNowPlaying', {title: track.title, id: track.id, artistId: track.artistId, albumId: track.albumId, artist: track.artist})
+      this.$store.commit('setNowPlaying', {title: track.title, id: track.id, artistId: track.artistId, albumId: track.albumId, artist: track.artist, albumName: track.albumName, cover: track.cover})
       console.log('Next track clicked')
     },
     volumeChange (e) {
