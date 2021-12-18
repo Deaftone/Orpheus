@@ -128,7 +128,7 @@ export default {
     this.artistName = data['subsonic-response']['artist'].name
     const albumIndex = data['subsonic-response']['artist']['album']
     for(const album of albumIndex){
-      this.albums.push({id: album.id, title: album.title, cover: `http://192.168.1.18:4533/rest/getCoverArt?u=${apiAxios.defaults.params.u}&s=${apiAxios.defaults.params.s}&t=${apiAxios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300`})
+      this.albums.push({id: album.id, title: album.title, cover: `https://navi.raspi.local/rest/getCoverArt?u=${apiAxios.defaults.params.u}&s=${apiAxios.defaults.params.s}&t=${apiAxios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300`})
     }
 
 

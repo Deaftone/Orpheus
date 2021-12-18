@@ -29,7 +29,7 @@
       </div> 
       <ul
         tabindex="0"
-        class="p-2 shadow menu dropdown-content bg-neutral rounded-box w-52"
+        class="p-2 overflow-auto overflow-y-scroll shadow scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 menu dropdown-content bg-neutral rounded-box w-52 h-96"
       >
         <li
           v-for="theme in themes"
