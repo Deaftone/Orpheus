@@ -39,6 +39,17 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y webkit2gtk-4.0
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v1.3.0
+        with:
+          # An additional key for the cache
+          key: test
+          # An additional cache key that is stable over multiple jobs
+          sharedKey: test
+          # The working directory this action should operate in
+          working-directory: src-tauri/
+          # The target dir that should be cleaned and persisted, defaults to `./target`
+          target-dir: ./target
       - name: install app dependencies and build it
         run: npm install && npm run build
       - uses: tauri-apps/tauri-action@v0
