@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import Player from "./components/Player/Index.vue"
+import Player from "./components/Player/Player.vue"
 import MenuBar from "./components/Main/MenuBar.vue"
 import { invoke } from '@tauri-apps/api/tauri'
 import TitleBar from "./components/Main/TitleBar.vue"
