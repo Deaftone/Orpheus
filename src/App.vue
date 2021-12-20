@@ -116,9 +116,9 @@ export default {
   --slider-handle-ring-color: hsl(var(--af));
   --slider-handle-bg: hsl(var(--pf));
   --slider-bg: hsl(var(--b3));
-  --slider-handle-width: 16px;
-  --slider-handle-height: 16px;
-  --slider-height: 9px;
+  --slider-handle-width: 12px;
+  --slider-handle-height: 12px;
+  --slider-height: 4px;
   --slider-handle-ring-width: 3px;
   --slider-tooltip-radius: 3px;
 
