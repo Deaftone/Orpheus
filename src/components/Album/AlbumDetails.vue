@@ -110,7 +110,7 @@ export default {
   },
   watch: {
     nowPlaying (newPlaying, oldPlaying ) {
-      console.log(newPlaying)
+      //console.log(newPlaying)
       this.highLightNowPlaying(oldPlaying, newPlaying)
     }
   }, 
@@ -159,10 +159,15 @@ export default {
   },
   methods: {
     playTrack(title, id) {
+
+      // Get clicked song index 
       const index = this.songs.findIndex(x => x.id === id)
-      const songs = this.songs.slice(index + 1, this.songs.length)
+      // Slice songs at picked index
+      const songs = this.songs.slice(index, this.songs.length)
       this.$store.commit('setQueue', songs)
-      this.$store.commit('setNowPlaying', {title: title, id: id, artistId: this.artistId, albumId: this.albumId, artist: this.artist, albumName: this.title, cover: this.cover})
+      // Here we are reseting the counters for the queue 
+      this.$store.commit('setPlayingIndex', 0)
+      this.$store.commit('setNowPlaying', 0)
     },
     onElementObserved(e) {
       e.forEach(({ target, isIntersecting}) => {
@@ -170,7 +175,7 @@ export default {
       })
     },
     highLightNowPlaying(oldPlaying, newPlaying) {
-      console.log(newPlaying)
+      //console.log(newPlaying)
       let oldP
 
       if(oldPlaying) {

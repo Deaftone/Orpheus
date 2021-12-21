@@ -6,6 +6,7 @@ export const store = createStore({
       previousPlaying: null,
       nowPlaying: null,
       queue: [],
+      previousQueue: [],
       searchQuery: null,
       isPlaying: false,
       currentTheme: null
@@ -24,6 +25,9 @@ export const store = createStore({
     addToQueue (state, p) {
       state.queue.push(p) 
     },
+    addToPQueue (state, p){
+      state.previousQueue.push(p)
+    },
     setSearchQuery (state, p) {
       state.searchQuery = p 
     },
@@ -33,6 +37,11 @@ export const store = createStore({
     setCurrentTheme(state, p){
       state.currentTheme = p
     }
+  },
+  getters: {
+    getLastPlayed (state){
+      return state.previousQueue.pop()
+    },
   }
 })
   

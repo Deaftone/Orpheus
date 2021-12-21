@@ -47,6 +47,8 @@ export const playerStore = createStore({
       previousPlaying: null,
       nowPlaying: null,
       queue: [],
+      previousQueue: [],
+      playingIndex: 0,
       searchQuery: null,
       isPlaying: false,
       currentTheme: null
@@ -54,7 +56,18 @@ export const playerStore = createStore({
   },
   mutations: {
     setNowPlaying (state, p) {
-      state.nowPlaying = p
+      state.nowPlaying = state.queue[p]
+    },
+    setPlayingIndex (state, p){
+      state.playingIndex = p 
+    },
+    nextTrack (state, p){
+      const tp = state.playingIndex + 1
+      if(state.queue[tp]) state.playingIndex++
+
+    },
+    previousTrack (state, p){
+      if(state.playingIndex > 0) state.playingIndex--
     },
     setPreviousPlaying (state, p) {
       state.previousPlaying = p
@@ -65,6 +78,9 @@ export const playerStore = createStore({
     addToQueue (state, p) {
       state.queue.push(p) 
     },
+    addToPQueue (state, p){
+      state.previousQueue.push(p)
+    },
     setSearchQuery (state, p) {
       state.searchQuery = p 
     },
@@ -74,6 +90,12 @@ export const playerStore = createStore({
     setCurrentTheme(state, p){
       state.currentTheme = p
     }
+  },
+  getters: {
+    getLastPlayed: state => {
+      console.log(state)
+      return state.pop()
+    },
   }
 })
   

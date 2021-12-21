@@ -137,18 +137,21 @@ export default ({
   computed: {
     nowPlaying () {
       return this.$store.state.nowPlaying
+    },
+    playingIndex (){
+      return this.$store.state.playingIndex
     }
   },
   watch: {
     // This watch triggers playTrack. by doing       this.$store.commit('setNowPlaying', {title: track.title, id: track.id})
     // Do not do that inside the playTrack function as it will cause a infinite loop
     nowPlaying (newPlaying, oldPlaying ) {
-      if(oldPlaying){
-        
-        this.$store.commit('setPreviousPlaying', {title: oldPlaying.title, id: oldPlaying.id, artistId: oldPlaying.artistId, albumId: oldPlaying.albumId, artist: oldPlaying.artist, albumName: oldPlaying.albumName, cover: oldPlaying.cover})
-      }
       this.playTrack(newPlaying)
-      this.setMediaControls(newPlaying.title, newPlaying.artist, newPlaying.albumName, newPlaying.cover)
+      this.setMediaControls(this.currentTrack.title, this.currentTrack.artist, this.currentTrack.albumName, this.currentTrack.cover)
+
+    },
+    playingIndex (newPlaying, oldPlaying ) {
+      this.$store.commit('setNowPlaying',newPlaying )
     }
   },
   created() {
@@ -186,12 +189,13 @@ export default ({
     },
     setMediaControls(title, artist, album, src){
       if ('mediaSession' in navigator) {
+        // eslint-disable-next-line no-undef
         navigator.mediaSession.metadata = new MediaMetadata({
           title: title,
           artist: artist,
           album: album,
           artwork: [
-            { src: src, sizes: '256x256', type: 'image/png' },
+            { src: src || '', sizes: '256x256', type: 'image/png' },
           ]
         })
 
@@ -232,17 +236,24 @@ export default ({
       }
     },
     previosTrack(){
-      const track = this.$store.state.previousPlaying     
-      //this.playTrack(this.$store.state.previousPlaying)
-      this.$store.commit('setNowPlaying', {title: track.title, id: track.id, artistId: track.artistId, albumId: track.albumId, artist: track.artist, albumName: track.albumName, cover: track.cover})
-
+      //const track = this.$store.state.previousQueue.pop()
+      this.$store.commit('previousTrack')
+      //if(track) this.$store.commit('setNowPlaying',track )
       console.log('Previous track clicked')
     },
     nextTrack() {
-      const track = this.$store.state.queue.shift()
-      //this.playTrack(track)
-      console.log(JSON.stringify(track))
-      this.$store.commit('setNowPlaying', {title: track.title, id: track.id, artistId: track.artistId, albumId: track.albumId, artist: track.artist, albumName: track.albumName, cover: track.cover})
+      console.log(this.$store.state.queue.length)
+      console.log(this.$store.state.playingIndex)
+      this.$store.commit('nextTrack')
+      
+      //const track = this.$store.state.queue.shift()
+      //console.log(JSON.stringify(track))
+      //if(track){
+      //console.log(this.$store.state.playingIndex)
+      //this.$store.commit('addToPQueue',{title: this.currentTrack.title, id: this.currentTrack.id, artistId: this.currentTrack.artistId, albumId: this.currentTrack.albumId, artist: this.currentTrack.artist, albumName: this.currentTrack.albumName, cover: this.currentTrack.cover})
+      //this.$store.commit('setNowPlaying', {title: track.title, id: track.id, artistId: track.artistId, albumId: track.albumId, artist: track.artist, albumName: track.albumName, cover: track.cover})
+      //}
+  
       console.log('Next track clicked')
     },
     volumeChange (e) {
