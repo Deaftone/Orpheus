@@ -19,21 +19,7 @@
           <h3 class="text-center">
             <a>{{ album.name }}</a>
           </h3> 
-        </div> 
-      <!--       <figure>
-        <img
-          :src="album.cover"
-          height="300px"
-          width="300px"
-          class="object-contain"
-        >
-      </figure> 
-      <div class="justify-end card-body">
-        <div class="text-center transition-opacity" />
-        <h3 class="text-center">
-          <a>{{ album.name }}</a>
-        </h3> 
-      </div> -->
+        </div>
       </div> 
     </div>
   </div>
