@@ -41,7 +41,8 @@
         </main>
       </div>
     </div>
-    <footer class="mt-auto text-center">
+    <!-- If we remove the pt-1 and bg we get a weird 1 px size bug for the background image on the ArtistDetails page -->
+    <footer class="pt-1 text-center bg-base-200">
       <Player />
     </footer>
   </div>
