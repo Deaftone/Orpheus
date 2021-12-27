@@ -1,106 +1,55 @@
 <template>
-  <!--   <div class="relative">
+  <div
+    :style="{ 'background-image': 'url(' + artistBanner + ')' }"
+    class="h-full bg-image"
+  >
     <div
-      class="bg-fixed bg-image"
-      style="background-image: url('https://www.umusic.ca/wp-content/uploads/2019/06/Billie-Eilish-banner.jpg');"
-    />
-    <div
-      class="absolute top-0 p-20 pt-6"
+      class="h-full p-10 bg-filter"
     >
-      <div class="card card-side text-neutral-content">
-        <figure class="p-6">
+      <div class="card lg:card-side ">
+        <figure>
           <img
+            class="object-contain w-full h-96"
             :src="artistImage"
-            class="rounded-lg shadow-lg"
           >
         </figure> 
-        <div class=" card-body">
-          <h2 class="card-title">
-            <span class="text-6xl font-bold">{{ artistName }}</span>
+        <div class="card-body">
+          <h2 class="text-xl font-bold card-title lg:text-6xl ">
+            {{ artistName }}
           </h2> 
-          <p>{{ bio }}</p> 
+          <div class="card-actions text-primary">
+            <a
+              class="cursor-pointer"
+            >{{ bio }}</a>
+          </div>
         </div>
-      </div> -->
-  <!--       <div
-        class="grid grid-cols-3 grid-rows-2"
-        style="grid-template-columns:auto 1fr"
-      >
-        <div class="flex row-start-1 pr-10">
-          <img
-            class="border-2 border-gray-500 border-solid rounded-md"
-            :src="artistImage"
-          >
-        </div>
-        <div class="col-span-2 col-start-2 row-start-1 mt-10">
-          <span class="text-6xl font-bold">{{ artistName }}</span>
-          <p style="">
-            {{ bio }}
-          </p>
-        </div>
-      </div> -->
-  <!--  </div>
-    <div class="pt-3 pb-3 pl-40">
-      <span class="text-2xl">Albums</span>
-    </div>
-    <div class="grid w-full grid-cols-1 gap-4 pb-10 pl-40 pr-40 md:grid-cols-6 lg:grid-cols-10">
-      <div
-        v-for="album in albums"
-        :key="album.id"
-        class="justify-center p-1 bg-gray-600 rounded-lg"
-      >
-        <div
-          class="text-center"
+      </div> 
+      <div class="divider" /> 
+      <div class="pt-3 pb-3 pl-30">
+        <span class="text-2xl">Albums</span>
+      </div>
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8">
+        <div 
+          v-for="album in albums"
+          :key="album.id"
+          class="shadow-xl card image-full"
           @click=" $router.push({path: `/AlbumDetails/${album.id}`})
           "
         >
-          <img
-            class="rounded-md"
-            :src="album.cover"
-          >
-          <a>{{ album.title }}</a>
+          <figure>
+            <img
+              class="object-contain"
+              :src="album.cover"
+            >
+          </figure>
+          <div class="justify-center card-body">
+            <div class="text-center transition-opacity" />
+            <h3 class="text-center">
+              <a>{{ album.title }}</a>
+            </h3> 
+          </div>
         </div>
       </div>
-    </div>
-  </div> -->
-  <div class="p-5">
-    <div
-      id="banner"
-      class="flex w-full px-4 py-5 bg-cover shadow-2xl card bg-base-200"
-      :style="{ 'background-image': 'url(' + artistBanner + ')' }"
-      style="background-position-y:-100px"
-    >
-      <div
-        class="items-center card card-side text-neutral-content"
-        style="height:600px"
-      />
-    </div>
-  </div>
-  <div class="h-64 p-10 card-body">
-    <h2 class="card-title">
-      {{ artistName }}
-    </h2> 
-    <p>{{ bio }}</p>
-  </div>
-  <div class="divider" /> 
-  <div class="pt-3 pb-3 pl-40">
-    <span class="text-2xl">Albums</span>
-  </div>
-  <div class="grid w-full gap-4 pb-10 pl-40 pr-40 xl:grid-cols-8 lg:grid-cols-5 md:grid-cols-3">
-    <div 
-      v-for="album in albums"
-      :key="album.id"
-      class="cursor-pointer"
-      @click=" $router.push({path: `/AlbumDetails/${album.id}`})"
-    >
-      <div
-        class="shadow-2xl"
-      >
-        <img 
-          class="rounded-md"
-          :src="album.cover"
-        >
-      </div>
-      <a>{{ album.title }} </a>
     </div>
   </div>
 </template>
@@ -137,50 +86,19 @@ export default {
     this.bio = artistImage.data.bio.slice(0, 1435) + '....'
 
     this.artistBanner = artistImage.data.banner
-    console.log(artistImage.data)
-  },
-  methods: {
-    imageLoaded(e) {
-      const width = e.target.width
-      const height = e.target.height
-      console.log(`OHeight: ${height} OWidth: ${width}`)
-      const displayPixels = 350
 
-      const nHeight = e.target.naturalHeight
-      const nWidth = e.target.naturalWidth
-      let newHeight, newWidth
-
-      if (nHeight > nWidth) {
-        newHeight = displayPixels
-        newWidth = Math.round((nWidth / nHeight) * displayPixels)
-      } else {
-        newWidth = displayPixels
-        newHeight = Math.round((nHeight / nWidth) * displayPixels)
-      }
- 
-      console.log(`Height: ${newHeight} Width: ${newWidth}`)
-      e.target.width = newWidth
-      e.target.height = newHeight
-    },
   }
 }
 </script>
 
 <style scoped>
 .bg-image {
-  
-  
-  filter: blur(7px);
-  -webkit-filter: blur(7px);
-  
-  height: 500px; 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-
-.info {
-
+.bg-filter {
+  backdrop-filter: blur(7px) brightness(30%);
 }
 </style>
 
