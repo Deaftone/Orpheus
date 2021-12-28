@@ -65,7 +65,7 @@ export default {
       name: '',
       artistName: '',
       albums: [],
-      artistImage: '',
+      artistImage: 'https://www.offset.com/images/v2/artist_bio_placeholder.png',
       artistBanner: '',
       bio: '',
     }
