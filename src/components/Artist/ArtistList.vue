@@ -9,7 +9,7 @@
     >
       <img
         class="rounded-full shadow-xl ring ring-primary"
-        src="https://e-cdn-images.dzcdn.net/images/artist/8b6e535e08ad7c5cb312102a5ede6c1e/264x264-000000-80-0-0.jpg"
+        src="https://www.offset.com/images/v2/artist_bio_placeholder.png"
       >
       <div class="font-bold text-center">
         <a>{{ artist.name }}</a>
