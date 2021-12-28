@@ -1,7 +1,7 @@
 pipeline {
     agent { 
       docker { 
-        image 'node/stretch:latest' 
+        image 'node:stretch' 
         } 
       }
       stages {
