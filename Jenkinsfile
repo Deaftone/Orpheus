@@ -1,7 +1,7 @@
 pipeline {
     agent { 
       docker { 
-        image 'node:17-alpine' 
+        image '112madgamer/jenkins_rust_node:latest' 
         } 
       }
       stages {
