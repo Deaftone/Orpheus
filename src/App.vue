@@ -3,16 +3,16 @@
     <TitleBar v-if="isTauri()" />
     
     <div class="flex flex-col flex-grow w-full h-full overflow-hidden sm:flex-row">
-      <div class="flex-grow-0 flex-shrink hidden w-1/3 md:inline-flex sm:w-1/3 md:w-40 bg-neutral text-neutral-content md:visible">
-        <div class="sticky top-0 p-4 rounded-xl">
+      <div class="flex-grow-0 flex-shrink hidden p-3 md:inline-flex bg-neutral md:visible">
+        <div class="sticky top-0 flex rounded-xl ">
           <nav class="h-full ">
             <div class="pb-5 lg:flex">
               <span class="text-2xl font-bold">
                 Orpheus
               </span>
             </div> 
-            <span class="w-full text-lg font-bold">My Library</span>
-            <ul class="pl-5">
+            <span class="w-full text-lg font-bold">Library</span>
+            <ul class="pl-2">
               <li
                 class="cursor-pointer s-item hover:text-primary"
                 @click="goTo(&quot;ArtistList&quot;)"
