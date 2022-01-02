@@ -130,7 +130,7 @@ export default ({
       currentIcon: 'play',
       percentPlayed: 0,
       eTime: '00:00',
-      volume: 0.11255000000000001,
+      volume: 25,
       duration: '00:00'
     }
   },
@@ -145,12 +145,12 @@ export default ({
   watch: {
     // This watch triggers playTrack. by doing       this.$store.commit('setNowPlaying', {title: track.title, id: track.id})
     // Do not do that inside the playTrack function as it will cause a infinite loop
-    nowPlaying (newPlaying, oldPlaying ) {
+    nowPlaying (newPlaying ) {
       this.playTrack(newPlaying)
       this.setMediaControls(this.currentTrack.title, this.currentTrack.artist, this.currentTrack.albumName, this.currentTrack.cover)
 
     },
-    playingIndex (newPlaying, oldPlaying ) {
+    playingIndex (newPlaying ) {
       this.$store.commit('setNowPlaying',newPlaying )
     }
   },
@@ -158,6 +158,7 @@ export default ({
   },
   mounted() {
     this.appPlayer = this.$refs.appPlayer
+    this.volumeChange(25)
     this.$nextTick(function() {
       this.$watch("isPlaying",function() {
         if(this.isPlaying) {
@@ -257,7 +258,7 @@ export default ({
       console.log('Next track clicked')
     },
     volumeChange (e) {
-      this.appPlayer.volume = e / 100 / 2
+      this.appPlayer.volume = e / 100 / 2 
       console.log(this.appPlayer.volume)
     },
     playPause() {
@@ -280,7 +281,6 @@ export default ({
     playTrack(track) {
       if(!this.myAnalyser) this.createAnalyser()
 
-      this.appPlayer.volume = 0.11255000000000001
       console.log("Got play track " + JSON.stringify(track))
       this.appPlayer.src = `https://navi.raspi.local/rest/stream?u=***REMOVED***&t=***REMOVED***&s=558dbf&f=json&v=1.8.0&c=NavidromeUI&id=${track.id}&_=1627823120382`
       this.appPlayer.play()
