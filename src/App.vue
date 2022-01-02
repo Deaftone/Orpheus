@@ -37,8 +37,15 @@
           role="main"
           class="w-full h-full overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700 "
         >
-          <router-view />
+          <router-view v-slot="{ Component }">
+            <transition name="fade">
+              <component :is="Component" />
+            </transition>
+          </router-view>
         </main>
+      </div>
+      <div class="flex flex-col w-64 bg-base-200">
+        <RightSidebar />
       </div>
     </div>
     <!-- If we remove the pt-1 and bg we get a weird 1 px size bug for the background image on the ArtistDetails page -->
@@ -53,12 +60,14 @@ import Player from "./components/Player/Player.vue"
 import MenuBar from "./components/Main/MenuBar.vue"
 import { invoke } from '@tauri-apps/api/tauri'
 import TitleBar from "./components/Main/TitleBar.vue"
+import RightSidebar from "./components/Main/RightSidebar.vue"
 export default {
   name: 'App',
   components: {
     Player,
     TitleBar,
-    MenuBar
+    MenuBar,
+    RightSidebar
   },
   data() {
     return {
@@ -124,5 +133,14 @@ export default {
   --slider-tooltip-radius: 3px;
 
 }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
 
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>
