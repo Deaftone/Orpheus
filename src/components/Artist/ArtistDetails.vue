@@ -1,10 +1,10 @@
 <template>
   <div
     :style="{ 'background-image': 'url(' + artistBanner + ')' }"
-    class="h-full bg-image"
+    class="h-full bg-image "
   >
     <div
-      class="h-full p-10 bg-filter"
+      class="h-full p-10 bg-filter "
     >
       <div class="card lg:card-side ">
         <figure>
@@ -44,9 +44,9 @@
           </figure>
           <div class="justify-center card-body">
             <div class="text-center transition-opacity" />
-            <h3 class="text-center">
-              <a>{{ album.title }}</a>
-            </h3> 
+            <a class="text-center text-clip overflow-hidden ... w-24 h-24">
+              {{ album.title }}
+            </a> 
           </div>
         </div>
       </div>
