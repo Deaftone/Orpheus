@@ -1,172 +1,19 @@
 <template> 
-  <div
-    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
-    style="padding:50px"
-  >
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
+  <div class="relative flex overflow-x-hidden">
+    <div class="py-12 animate-marquee whitespace-nowrap">
+      <span class="mx-4 text-4xl">Marquee Item 1</span>
+      <span class="mx-4 text-4xl">Marquee Item 2</span>
+      <span class="mx-4 text-4xl">Marquee Item 3</span>
+      <span class="mx-4 text-4xl">Marquee Item 4</span>
+      <span class="mx-4 text-4xl">Marquee Item 5</span>
     </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-  </div>
-  <div
-    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
-    style="padding:50px"
-  >
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-  </div>
-  <div
-    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
-    style="padding:50px"
-  >
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-  </div>
-  <div
-    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
-    style="padding:50px"
-  >
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-  </div>
-  <div
-    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
-    style="padding:50px"
-  >
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-  </div>
-  <div
-    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
-    style="padding:50px"
-  >
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-  </div>
-  <div
-    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
-    style="padding:50px"
-  >
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-  </div>
-  <div
-    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
-    style="padding:50px"
-  >
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-  </div>
-  <div
-    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
-    style="padding:50px"
-  >
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-  </div>
-  <div
-    class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-10 shadow-2xl bg-gradient-to-r from-pink-500 to-blue-300"
-    style="padding:50px"
-  >
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
-    </div>
-    <div class="content-center bg-gray-900 rounded">
-      <a>test</a>
+
+    <div class="absolute top-0 py-12 animate-marquee2 whitespace-nowrap">
+      <span class="mx-4 text-4xl">Marquee Item 1</span>
+      <span class="mx-4 text-4xl">Marquee Item 2</span>
+      <span class="mx-4 text-4xl">Marquee Item 3</span>
+      <span class="mx-4 text-4xl">Marquee Item 4</span>
+      <span class="mx-4 text-4xl">Marquee Item 5</span>
     </div>
   </div>
 </template>
