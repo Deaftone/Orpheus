@@ -63,13 +63,14 @@
         "height": 1080,
         "resizable": true,
         "url": "index.html",
-        "visible": false,
+        "visible": true,
         "decorations": false
       },
       {
         "width": 300,
         "height": 500,
         "decorations": false,
+        "visible": false,
         "url": "splashscreen.html",
         "label": "splashscreen"
       }
