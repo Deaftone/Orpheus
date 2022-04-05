@@ -93,7 +93,7 @@ export default {
   methods: {
     loaded(){
       console.log('Splash removed')
-      invoke('close_splashscreen')
+      //invoke('close_splashscreen')
     },
     goTo(p) {
       console.log(p)
