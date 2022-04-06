@@ -41,7 +41,6 @@
     </div>
     <div
       ref="sticky"
-      class=""
       style="height:0.1px"
     />
     <!-- Bug where the currently playing track is above this in z-index -->
