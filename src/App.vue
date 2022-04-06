@@ -17,12 +17,20 @@
                 class="cursor-pointer s-item hover:text-primary"
                 @click="goTo(&quot;ArtistList&quot;)"
               >
+                <font-awesome-icon
+                  icon="microphone-alt"
+                  color="gray"
+                />
                 Artists
               </li>
               <li
                 class="cursor-pointer s-item hover:text-primary"
                 @click="goTo(&quot;AlbumDetails&quot;)"
               >
+                <font-awesome-icon
+                  icon="compact-disc"
+                  color="gray"
+                />
                 Albums
               </li>
             </ul>
