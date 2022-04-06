@@ -106,7 +106,7 @@ export default {
       this.offset += 56
     },
     onElementObserved(e) {
-      e.forEach(({ target, isIntersecting}) => {
+      e.forEach(() => {
         this.getAlbums()
       })
     },
