@@ -1,85 +1,3 @@
-<template>
-  <div class="grid grid-cols-1 gap-5 pt-10 pb-10">
-    <!--     <div
-      ref="albumInfo"
-      class="pl-40 pr-40 lg:flex"
-    >
-      <img
-        class="shadow-xl"
-        :src="cover"
-      >
-      <div class="flex flex-col justify-center w-screen pl-10 m-auto">
-        <span class="text-xl font-bold lg:text-6xl">{{ title }}</span>
-        <span
-          class="pt-5 font-bold lg:text-3xl text-primary"
-        ><a
-          class="cursor-pointer"
-          @click=" $router.push({path: `/ArtistDetails/${artistId}`}) "
-        >{{ artist }}</a></span>
-      </div>
-    </div>-->
-    <div class="flex justify-center w-full pl-10 pr-10 lg:pr-40 lg:pl-40 lg:block">
-      <div class="card lg:card-side bg-base-300">
-        <figure>
-          <img class="object-contain w-full h-72" :src="cover">
-        </figure>
-        <div class="card-body">
-          <h2 class="text-xl font-bold card-title lg:text-6xl">
-            {{ title }}
-          </h2>
-          <div class="card-actions text-primary">
-            <a
-              class="cursor-pointer"
-              @click="$router.push({ path: `/ArtistDetails/${artistId}` })"
-            >{{ artist }}</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div ref="sticky" style="height:0.1px" />
-    <!-- Bug where the currently playing track is above this in z-index -->
-    <div
-      ref="albumBar"
-      class="sticky top-0 w-full p-1 pl-5 pr-5 -mt-5 text-sm lg:pl-40 lg:pr-40 bg-base-200 z-1"
-    >
-      <a>#</a>
-      <div class="float-right">
-        <a>Length</a>
-      </div>
-      <div class="float-right pr-5">
-        <a>Type</a>
-      </div>
-      <a class="pl-7">Title</a>
-    </div>
-    <div class="grid w-full grid-cols-1 gap-5 pl-5 pr-5 lg:pr-40 lg:pl-40">
-      <div
-        v-for="song in songs"
-        :id="song.id"
-        :key="song.number"
-        class="flex justify-center p-1 text-lg rounded-lg cursor-pointer bg-base-300"
-        @click="playTrack(song.title, song.id)"
-      >
-        <div class="w-full p-2">
-          <div class="float-left pr-3">
-            <a>{{ song.number }}</a>
-          </div>
-          <div class="float-left">
-            <a>{{ song.title }}</a>
-          </div>
-          <div class="float-right">
-            <a>{{ song.length }}</a>
-          </div>
-          <div
-            class="float-right pl-1 pr-1 mr-5 text-sm border-4 border-solid rounded-lg border-primary"
-          >
-            <a>{{ song.type }}</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script>
 import axios from '../../utils/apiAxios'
 
@@ -184,6 +102,70 @@ export default {
   ,
 }
 </script>
+
+<template>
+  <div class="grid grid-cols-1 gap-5 pt-10 pb-10">
+    <div class="flex justify-center w-full pl-10 pr-10 lg:pr-40 lg:pl-40 lg:block">
+      <div class="card lg:card-side bg-base-300">
+        <figure>
+          <img class="object-contain w-full h-72" :src="cover">
+        </figure>
+        <div class="card-body">
+          <h2 class="text-xl font-bold card-title lg:text-6xl">
+            {{ title }}
+          </h2>
+          <div class="card-actions text-primary">
+            <a
+              class="cursor-pointer"
+              @click="$router.push({ path: `/ArtistDetails/${artistId}` })"
+            >{{ artist }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ref="sticky" style="height:0.1px" />
+    <!-- Bug where the currently playing track is above this in z-index -->
+    <div
+      ref="albumBar"
+      class="sticky top-0 w-full p-1 pl-5 pr-5 -mt-5 text-sm lg:pl-40 lg:pr-40 bg-base-200 z-1"
+    >
+      <a>#</a>
+      <div class="float-right">
+        <a>Length</a>
+      </div>
+      <div class="float-right pr-5">
+        <a>Type</a>
+      </div>
+      <a class="pl-7">Title</a>
+    </div>
+    <div class="grid w-full grid-cols-1 gap-5 pl-5 pr-5 lg:pr-40 lg:pl-40">
+      <div
+        v-for="song in songs"
+        :id="song.id"
+        :key="song.number"
+        class="flex justify-center p-1 text-lg rounded-lg cursor-pointer bg-base-300"
+        @click="playTrack(song.title, song.id)"
+      >
+        <div class="w-full p-2">
+          <div class="float-left pr-3">
+            <a>{{ song.number }}</a>
+          </div>
+          <div class="float-left">
+            <a>{{ song.title }}</a>
+          </div>
+          <div class="float-right">
+            <a>{{ song.length }}</a>
+          </div>
+          <div
+            class="float-right pl-1 pr-1 mr-5 text-sm border-4 border-solid rounded-lg border-primary"
+          >
+            <a>{{ song.type }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

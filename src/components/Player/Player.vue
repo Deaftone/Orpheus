@@ -18,10 +18,10 @@
             @update="volumeChange"
           />
         </div>
-        <!--         <a
+        <a
           class="pl-10 cursor-pointer hover:text-primary"
           @click="toggleVis"
-        >Visualiser</a> -->
+        >Visualiser</a> 
       </div>
 
       <div
@@ -100,22 +100,22 @@
         />
       </div>
     </div>
-    <!--     <AvCanvas
+    <AvCanvas
       v-if="myAnalyser && visToggled"
-      :audioAnalyser="myAnalyser"
-    /> -->
+      :audio-analyser="myAnalyser"
+    /> 
   </main>
 </template>
 
 <script>
 import Slider from '@vueform/slider'
 import '../../freqtimeupdate'
-
+import AvCanvas from './Visualiser.vue'
 export default ({
   name: "Player",
   components: {
     Slider,
-    //AvCanvas
+    AvCanvas
   },
   data() {
     return {
@@ -126,6 +126,7 @@ export default ({
       myAnalyser: null,
       myAnalyserHidden: null,
       ctx: null,
+      src: null,
       visToggled: false,
       currentIcon: 'play',
       percentPlayed: 0,
@@ -185,7 +186,15 @@ export default ({
         I would like to have it destroyed when hidden
       */
       this.visToggled ^= true
-      document.getElementById('barC').classList.toggle('pb-3')
+      if (this.visToggled){
+        //this.src.connect(this.myAnalyser)
+        //this.myAnalyser.connect(this.ctx.destination)
+      } else{
+        //this.src.disconnect(this.myAnalyser)
+        //this.myAnalyser.disconnect(this.ctx.destination)
+
+      }
+      //document.getElementById('barC').classList.toggle('pb-3')
 
     },
     setMediaControls(title, artist, album, src){
@@ -220,11 +229,11 @@ export default ({
     },
     createAnalyser(){
       this.ctx = new AudioContext()
-      const src = this.ctx.createMediaElementSource(this.$refs.appPlayer)
+      this.src = this.ctx.createMediaElementSource(this.$refs.appPlayer)
       this.ctx.crossOrigin = 'anonymous'
       this.$refs.appPlayer.crossOrigin = 'anonymous'
       this.myAnalyser = this.ctx.createAnalyser()
-      src.connect(this.myAnalyser)
+      this.src.connect(this.myAnalyser)
       this.myAnalyser.fftSize = 8192
       this.myAnalyser.connect(this.ctx.destination)
     },
