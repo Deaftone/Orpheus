@@ -2,32 +2,37 @@
   <div class="m-5">
     <div
       id="list"
-      class="grid gap-5 resultgrid-cols-1 result sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8"
+      class="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-7"
     >
       <div 
         v-for="album in filterAlbums"
         :key="album.id"
-        class="shadow-xl w-94 h-94 card image-full "
+        class="rounded shadow-xl bg-neutral card"
         @click=" $router.push({path: `/AlbumDetails/${album.id}`})
         "
       >
-        <figure>
-          <img :src="album.cover">
-        </figure>
-        <div class="justify-center card-body">
-          <div class="text-center transition-opacity" />
-          <a class="text-center text-clip overflow-hidden ... w-24 h-24">
-            {{ album.name }}
-          </a> 
+        <div>  
+          <div class="overflow-hidden">
+            <figure>
+              <img
+                :src="album.cover"
+                style="width:244px;height:244px"
+              >
+            </figure>
+            <div class="justify-center card-body">
+              <p class="text-center text-ellipsis overflow-hidden ...">
+                {{ truncateString(album.name, 18) }}
+              </p> 
+            </div>
+          </div>
         </div>
       </div>
-
-      <div
-        ref="sticky"
-        class=""
-        style="height:0.1px"
-      />
     </div>
+    <div
+      ref="sticky"
+      class=""
+      style="height:0.1px"
+    />
   </div>
 </template>
 
@@ -77,19 +82,18 @@ export default {
     )
   },
    async mounted(){
-         this.observer.observe(this.$refs.sticky)
-
-/*     const data = (await axios.get('/getAlbumList', {params: {
-      type: 'newest',
-      size: 50
-    }})).data
-    const albums = data['subsonic-response']['albumList']['album']
-    for(const album of albums){
-      this.albums.push({name: album.title, id: album.id, cover: `https://navi.raspi.local/rest/getCoverArt?u=${axios.defaults.params.u}&s=${axios.defaults.params.s}&t=${axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300`})
-    }
-    this.offset += 50 */
+     //await this.getAlbums()
+     console.log(this.$refs.sticky)
+      this.observer.observe(this.$refs.sticky)
   }, 
   methods:{
+    truncateString(str, num) {
+      if (str.length > num) {
+        return str.slice(0, num) + "...";
+      } else {
+        return str;
+      }
+    },
     async getAlbums(){
 
       console.log('Got album call')
@@ -106,7 +110,7 @@ export default {
       this.offset += 56
     },
     onElementObserved(e) {
-      e.forEach(() => {
+      e.forEach(({ target, isIntersecting}) => {
         this.getAlbums()
       })
     },
