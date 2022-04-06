@@ -15,13 +15,13 @@
             :id="element.id + '_scroller'"
             class="whitespace-nowrap"
           >
-            <span class="">{{ element.artist }} - {{ element.title }}</span>
+            <span class="text-primary">&nbsp;{{ element.artist }}</span><span class=""> - {{ element.title }}</span>
           </div>
           <div
             :id="element.id + '_scroller2'"
             class="absolute top-0 whitespace-nowrap"
           >
-            <span class="">{{ element.artist }} - {{ element.title }}</span>
+            <span class="text-primary">&nbsp;{{ element.artist }}</span><span class=""> - {{ element.title }}</span>
           </div>
         </div>
       </li>
