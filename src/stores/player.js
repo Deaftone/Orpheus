@@ -1,48 +1,60 @@
-/* import { defineStore } from 'pinia'
+import { defineStore } from 'pinia'
 
-export const playerStore = defineStore('player', {
-  state: () => {
-    return {
-      previousPlaying: null,
-      nowPlaying: null,
-      queue: [],
-      searchQuery: null,
-      isPlaying: false,
-      currentTheme: null
-    }
-  },
-  // could also be defined as
-  // state: () => ({ count: 0 })
+export const usePlayerStore = defineStore('player', {
+  state: () => ({
+    previousPlaying: null,
+    nowPlaying: null,
+    queue: [],
+    previousQueue: [],
+    playingIndex: 0,
+    searchQuery: null,
+    isPlaying: false,
+  }),
+
   actions: {
-    setNowPlaying (payload) {
+    setNowPlaying(payload) {
       this.nowPlaying = payload
     },
-    setPreviousPlaying (payload) {
-      console.log(payload)
+    setPreviousPlaying(payload) {
       this.previousPlaying = payload
     },
-    setQueue (payload ) {
+    setQueue(payload) {
       this.queue = payload
     },
-    addToQueue (payload) {
-      this.queue.push(payload) 
+    addToQueue(payload) {
+      this.queue.push(payload)
     },
-    setSearchQuery (payload) {
-      this.searchQuery = payload 
+    addToPQueue(payload) {
+      this.previousQueue.push(payload)
     },
-    setIsPlaying(payload){
+    setSearchQuery(payload) {
+      this.searchQuery = payload
+    },
+    setIsPlaying(payload) {
       this.isPlaying = payload
     },
-    setCurrentTheme(payload){
+    setPlayingIndex(payload) {
+      this.playingIndex = payload
+    },
+    setCurrentTheme(payload) {
       this.currentTheme = payload
-    }
+    },
+    previousTrack() {
+      if (this.playingIndex > 0)
+        this.playingIndex--
+    },
+    nextTrack() {
+      const tp = this.playingIndex + 1
+      if (this.queue[tp])
+        this.playingIndex++
+    },
   },
-}) */
+})
 
-import { createStore } from 'vuex'
+/* import { createStore } from 'vuex'
 
 export const playerStore = createStore({
-  state () {
+  state() {
     return {
       previousPlaying: null,
       nowPlaying: null,
@@ -51,51 +63,52 @@ export const playerStore = createStore({
       playingIndex: 0,
       searchQuery: null,
       isPlaying: false,
-      currentTheme: null
+      currentTheme: null,
     }
   },
   mutations: {
-    setNowPlaying (state, p) {
+    setNowPlaying(state, p) {
       state.nowPlaying = state.queue[p]
     },
-    setPlayingIndex (state, p){
-      state.playingIndex = p 
+    setPlayingIndex(state, p) {
+      state.playingIndex = p
     },
-    nextTrack (state, p){
+    nextTrack(state, p) {
       const tp = state.playingIndex + 1
-      if(state.queue[tp]) state.playingIndex++
-
+      if (state.queue[tp])
+        state.playingIndex++
     },
-    previousTrack (state, p){
-      if(state.playingIndex > 0) state.playingIndex--
+    previousTrack(state, p) {
+      if (state.playingIndex > 0)
+        state.playingIndex--
     },
-    setPreviousPlaying (state, p) {
+    setPreviousPlaying(state, p) {
       state.previousPlaying = p
     },
-    setQueue (state, p ) {
+    setQueue(state, p) {
       state.queue = p
     },
-    addToQueue (state, p) {
-      state.queue.push(p) 
+    addToQueue(state, p) {
+      state.queue.push(p)
     },
-    addToPQueue (state, p){
+    addToPQueue(state, p) {
       state.previousQueue.push(p)
     },
-    setSearchQuery (state, p) {
-      state.searchQuery = p 
+    setSearchQuery(state, p) {
+      state.searchQuery = p
     },
-    setIsPlaying(state, p){
+    setIsPlaying(state, p) {
       state.isPlaying = p
     },
-    setCurrentTheme(state, p){
+    setCurrentTheme(state, p) {
       state.currentTheme = p
-    }
+    },
   },
   getters: {
-    getLastPlayed: state => {
+    getLastPlayed: (state) => {
       console.log(state)
       return state.pop()
     },
-  }
+  },
 })
-  
+ */
