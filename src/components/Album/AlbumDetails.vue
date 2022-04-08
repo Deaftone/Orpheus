@@ -1,90 +1,53 @@
 <script>
+import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import axios from '../../utils/apiAxios'
-
+import { usePlayerStore } from '../../stores/player'
 export default {
   name: 'AlbumDetails',
   props: { id: { type: String, required: true } },
-  data() {
-    return {
-      observer: null,
-      title: '',
-      artist: '',
-      artistId: '',
-      albumId: '',
-      cover: '',
-      albumName: '',
-      songs: [],
-    }
-  },
-  computed: {
-    nowPlaying() {
-      return this.$store.state.nowPlaying
-    },
-  },
-  watch: {
-    nowPlaying(newPlaying, oldPlaying) {
-      // console.log(newPlaying)
-      this.highLightNowPlaying(oldPlaying, newPlaying)
-    },
-  },
-  created() {
-    this.observer = new IntersectionObserver(
-      this.onElementObserved,
+  setup(props) {
+    const store = usePlayerStore()
+    const sticky = ref(null)
+    const albumBar = ref(null)
+    const info = reactive({})
+    const songs = reactive([])
+    let title
+    let artist
+    let artistId
+    let albumId
+    const nowPlaying = computed(() => store.nowPlaying)
+    const observer = new IntersectionObserver(
+      onElementObserved,
       {
         root: null,
         threshold: 0.9,
       },
     )
-  },
-  async mounted() {
-    this.observer.observe(this.$refs.sticky)
-
-    const data = (await axios.get('/getAlbum', {
-      params: {
-        id: this.id,
-      },
-    })).data
-    const album = data['subsonic-response'].album
-    this.title = album.name
-    this.artist = album.artist
-    this.artistId = album.artistId
-    this.albumId = album.id
-    const currentlyPlaying = this.$store.state.nowPlaying || ''
-    let tempPlaying = null
-    this.cover = `https://navi.raspi.local/rest/getCoverArt?u=${axios.defaults.params.u}&s=${axios.defaults.params.s}&t=${axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${this.id}`
-    for (const song of album.song) {
-      this.songs.push({ id: song.id, number: song.track, title: song.title, albumName: this.title, cover: this.cover, artistId: album.artistId, albumId: album.id, artist: album.artist, type: String(song.contentType).slice(6, 20).toUpperCase(), length: 'FIX' })
-      // Check if currently playing song in in this track list. If so save and highlight it
-      if (song.id === currentlyPlaying.id)
-        tempPlaying = { title: song.title, id: song.id }
-    }
-
-    this.$nextTick(function() {
-      if (tempPlaying)
-        this.highLightNowPlaying(null, tempPlaying)
+    watch(nowPlaying, (newValue, oldPlaying) => {
+      highLightNowPlaying(oldPlaying, newValue)
     })
-  },
-  unmounted() {
-    this.observer.disconnect()
-  },
-  methods: {
-    playTrack(title, id) {
+    function playTrack(title, id) {
       // Get clicked song index
       const index = this.songs.findIndex(x => x.id === id)
       // Slice songs at picked index
-      const songs = this.songs.slice(index, this.songs.length)
-      this.$store.commit('setQueue', songs)
-      // Here we are reseting the counters for the queue
-      this.$store.commit('setPlayingIndex', 0)
-      this.$store.commit('setNowPlaying', 0)
-    },
-    onElementObserved(e) {
+      const _songs = this.songs.slice(index, this.songs.length)
+      console.log(_songs)
+      store.setQueue(_songs)
+      store.setPlayingIndex(0)
+      store.setNowPlaying(_songs[0])
+    }
+    function convertTime(seconds) {
+      const format = val => `0${Math.floor(val)}`.slice(-2)
+      // var hours = seconds / 3600;
+      const minutes = (seconds % 3600) / 60
+      return [minutes, seconds % 60].map(format).join(':')
+    }
+    function onElementObserved(e) {
       e.forEach(({ target, isIntersecting }) => {
-        this.$refs.albumBar.classList.toggle('bg-base-200', !isIntersecting)
+        // albumBar.value.classList.toggle('bg-base-200', !isIntersecting)
       })
-    },
-    highLightNowPlaying(oldPlaying, newPlaying) {
-      // console.log(newPlaying)
+    }
+    function highLightNowPlaying(oldPlaying, newPlaying) {
       let oldP
 
       if (oldPlaying)
@@ -97,9 +60,50 @@ export default {
 
       if (newP)
         newP.classList.add('gradient-border', 'border-solid', 'border-4', 'border-primary')
-    },
-  }
-  ,
+    }
+    onMounted(async() => {
+      observer.observe(sticky.value)
+
+      const data = (await axios.get('/getAlbum', {
+        params: {
+          id: props.id,
+        },
+      })).data
+      const album = data['subsonic-response'].album
+      info.title = album.name
+      info.artist = album.artist
+      info.artistId = album.artistId
+      info.albumId = album.id
+      const currentlyPlaying = store.nowPlaying || ''
+      let tempPlaying = null
+      info.cover = `https://navi.raspi.local/rest/getCoverArt?u=${axios.defaults.params.u}&s=${axios.defaults.params.s}&t=${axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${props.id}`
+      for (const song of album.song) {
+        console.log(song)
+        songs.push({ id: song.id, number: 'FIX', title: song.title, cover: info.cover, albumName: info.title, artistId: album.artistId, albumId: album.id, artist: album.artist, type: String(song.contentType).slice(6, 20).toUpperCase(), length: convertTime(song.duration) })
+        // Check if currently playing song in in this track list. If so save and highlight it
+        if (song.id === currentlyPlaying.id)
+          tempPlaying = { title: song.title, id: song.id }
+      }
+
+      /*       this.$nextTick(function() {
+        if (tempPlaying)
+          this.highLightNowPlaying(null, tempPlaying)
+      }) */
+    })
+    onUnmounted(() => {
+      observer.disconnect()
+    })
+
+    return {
+      nowPlaying,
+      playTrack,
+      onElementObserved,
+      highLightNowPlaying,
+      sticky,
+      songs,
+      info,
+    }
+  },
 }
 </script>
 
@@ -108,17 +112,17 @@ export default {
     <div class="flex justify-center w-full pl-10 pr-10 lg:pr-40 lg:pl-40 lg:block">
       <div class="card lg:card-side bg-base-300">
         <figure>
-          <img class="object-contain w-full h-72" :src="cover">
+          <img class="object-contain w-full h-72" :src="info.cover">
         </figure>
         <div class="card-body">
           <h2 class="text-xl font-bold card-title lg:text-6xl">
-            {{ title }}
+            {{ info.title }}
           </h2>
           <div class="card-actions text-primary">
             <a
               class="cursor-pointer"
-              @click="$router.push({ path: `/ArtistDetails/${artistId}` })"
-            >{{ artist }}</a>
+              @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
+            >{{ info.artist }}</a>
           </div>
         </div>
       </div>
