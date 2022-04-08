@@ -1,6 +1,25 @@
-<template>  
+<script>
+import { onMounted, ref } from 'vue'
+import axios from '../../utils/apiAxios'
+export default {
+  setup() {
+    const artists = ref([])
+
+    onMounted(async() => {
+      const data = (await axios.get('/getArtists')).data
+      const artistIndex = data['subsonic-response'].artists.index
+      for (const index of artistIndex) {
+        for (const artist of index.artist)
+          artists.value.push({ name: artist.name, id: artist.id })
+      }
+    })
+    return { artists }
+  },
+}
+</script>
+<template>
   <div class="grid w-full grid-cols-3 gap-4 p-5 xl:grid-cols-11 lg:grid-cols-6">
-    <div 
+    <div
       v-for="artist in artists"
       :key="artist.id"
       class="mx-auto"
@@ -14,7 +33,7 @@
       <div class="font-bold text-center">
         <a>{{ artist.name }}</a>
       </div>
-    </div> 
+    </div>
     <!--     <div
       v-for="artist in artists"
       :key="artist.id"
@@ -27,29 +46,6 @@
   </div>
 </template>
 
-<script>
-import axios from '../../utils/apiAxios'
-export default {
-  name: 'AristsList',
-  data() {
-    return {
-      artists: [],
-    }
-  },
-  async mounted(){
-    const data = (await axios.get('/getArtists')).data
-    const artistIndex = data['subsonic-response']['artists']['index']
-    for(const index of artistIndex){
-      for(const artist of index.artist) {
-        console.log(artist)
-        this.artists.push({name: artist.name, id: artist.id})
-      }
-    }
-  },
-}
-</script>
-
 <style scoped>
 
 </style>
-
