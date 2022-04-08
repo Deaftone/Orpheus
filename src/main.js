@@ -1,12 +1,16 @@
 import { createApp } from 'vue'
+
+import './index.css'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faArrowLeft, faArrowRight, faCompactDisc, faFastBackward, faFastForward, faMicrophoneAlt, faPause, faPlay, faWindowClose, faWindowMaximize, faWindowMinimize } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
-import './index.css'
-import { library } from "@fortawesome/fontawesome-svg-core"
-import { faPlay, faPause, faFastForward, faCompactDisc, faMicrophoneAlt ,faFastBackward, faWindowClose, faWindowMaximize, faWindowMinimize, faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
-import { playerStore } from './stores/player'
 
+const app = createApp(App)
+app.use(createPinia())
+app.use(router)
 library.add(faPlay)
 library.add(faWindowMinimize)
 library.add(faWindowClose)
@@ -18,4 +22,5 @@ library.add(faFastForward)
 library.add(faPause)
 library.add(faCompactDisc)
 library.add(faMicrophoneAlt)
-createApp(App).use(playerStore).use(router).component("font-awesome-icon", FontAwesomeIcon).mount('#app')
+app.component('FontAwesomeIcon', FontAwesomeIcon)
+app.mount('#app')
