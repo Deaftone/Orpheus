@@ -10,31 +10,31 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
-  }, 
+    component: Home,
+  },
   {
     path: '/artistList',
     name: 'ArtistList',
-    component: ArtistList
-  }, 
+    component: ArtistList,
+  },
   {
     path: '/AlbumDetails',
     name: 'AlbumList',
-    component: AlbumList
+    component: AlbumList,
   },
   {
     path: '/AlbumDetails/:id',
     name: 'AlbumDetails',
     component: AlbumDetails,
-    props: true
+    props: true,
   },
-  
+
   {
     path: '/ArtistDetails/:id',
     name: 'ArtistDetails',
     component: ArtistDetails,
-    props: true
-  }
+    props: true,
+  },
 ]
 
 const router = createRouter({ history: createWebHistory(), routes })
