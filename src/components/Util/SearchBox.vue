@@ -1,4 +1,4 @@
-<template>  
+<template>
   <div class="flex-1 lg:flex-none">
     <div class="form-control">
       <input
@@ -20,16 +20,17 @@ export default {
       search: '',
     }
   },
-  watch:{
-    $route (){
+  watch: {
+    $route() {
       this.$store.commit('setSearchQuery', null)
-      this.$refs.search.value = ""    }
+      this.$refs.search.value = ''
+    },
   },
   methods: {
     updateSearch(e) {
       this.$store.commit('setSearchQuery', e.target.value)
-    }
-  }
+    },
+  },
 }
 </script>
 
