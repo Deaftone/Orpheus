@@ -1,5 +1,49 @@
+<script>
+import { useGenericStore } from '../../stores/generic'
+export default {
+  setup() {
+    const store = useGenericStore()
+    const themes = [
+      'light',
+      'dark',
+      'cupcake',
+      'bumblebee',
+      'emerald',
+      'corporate',
+      'synthwave',
+      'retro',
+      'cyberpunk',
+      'valentine',
+      'halloween',
+      'garden',
+      'forest',
+      'aqua',
+      'lofi',
+      'pastel',
+      'fantasy',
+      'wireframe',
+      'black',
+      'luxury',
+      'dracula',
+      'cmyk',
+      'autumn',
+      'business',
+      'acid',
+      'lemonade',
+      'night',
+      'coffee',
+      'winter',
 
-<template>  
+    ]
+    function themeSwitch(theme) {
+      document.documentElement.setAttribute('data-theme', theme)
+      store.setCurrentTheme(theme)
+    }
+    return { themes, themeSwitch }
+  },
+}
+</script>
+<template>
   <div
     title="Change Theme"
     class="dropdown dropdown-end"
@@ -26,7 +70,7 @@
           viewBox="0 0 1792 1792"
           class="inline-block w-4 h-4 ml-1 fill-current"
         ><path d="M1395 736q0 13-10 23l-466 466q-10 10-23 10t-23-10l-466-466q-10-10-10-23t10-23l50-50q10-10 23-10t23 10l393 393 393-393q10-10 23-10t23 10l50 50q10 10 10 23z" /></svg>
-      </div> 
+      </div>
       <ul
         tabindex="0"
         class="p-2 overflow-auto overflow-y-scroll shadow scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 menu dropdown-content bg-neutral rounded-box w-52 h-96"
@@ -42,30 +86,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'ThemeSwitcher',
-  data() {
-    return {
-      themes: [
-      "light", "dark", "cupcake", "bumblebee", "emerald", "corporate", "synthwave", "retro", "cyberpunk", "valentine", "halloween", "garden", "forest", "aqua", "lofi", "pastel", "fantasy", "wireframe", "black", "luxury", "dracula", "cmyk", "autumn", "business", "acid", "lemonade", "night", "coffee", "winter"
-      ]
-    }
-  },
-  methods: {
-    themeSwitch(theme) {
-      console.log(theme)
-      document.documentElement.setAttribute("data-theme", theme)
-      this.$store.commit('setCurrentTheme', theme)
-
-    },
-    test(e) {
-      console.log(e)
-    }
-  }
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
