@@ -1,7 +1,67 @@
+<script>
+import Player from './components/Player/Player.vue'
+import MenuBar from './components/Main/MenuBar.vue'
+import TitleBar from './components/Main/TitleBar.vue'
+import RightSidebar from './components/Main/RightSidebar.vue'
+export default {
+  name: 'App',
+  components: {
+    Player,
+    TitleBar,
+    MenuBar,
+    RightSidebar,
+  },
+  data() {
+    return {
+      isOpen: true,
+    }
+  },
+  computed: {
+    count() {
+      return this.$store.state.count
+    },
+  },
+  mounted() {
+    // With the Tauri global script:
+    document.addEventListener('DOMContentLoaded', () => {
+      // This will wait for the window to load, but you could
+      // run this function on whatever trigger you want
+      if (this.isTauri())
+        this.loaded()
+    })
+  },
+  methods: {
+    loaded() {
+      console.log('Splash removed')
+      // invoke('close_splashscreen')
+    },
+    goTo(p) {
+      console.log(p)
+      this.$router.push({ path: `/${p}` })
+    },
+    open() {
+      if (this.isOpen) {
+        this.isOpen = false
+        console.log('Got close')
+      }
+      else {
+        console.log('Got open')
+        this.isOpen = true
+      }
+    },
+    isTauri() {
+      if (window.__TAURI__) {
+        console.log('Tauri')
+        return true
+      } return false
+    },
+  },
+}
+</script>
 <template>
   <div class="flex flex-col h-screen overflow-hidden">
     <TitleBar v-if="isTauri()" />
-    
+
     <div class="flex flex-col flex-grow w-full h-full overflow-hidden sm:flex-row">
       <div class="flex-grow-0 flex-shrink hidden p-3 md:inline-flex bg-neutral md:visible">
         <div class="sticky top-0 flex rounded-xl ">
@@ -10,7 +70,7 @@
               <span class="text-2xl font-bold">
                 Orpheus
               </span>
-            </div> 
+            </div>
             <span class="w-full text-lg font-bold">Library</span>
             <ul class="pl-2">
               <li
@@ -63,70 +123,6 @@
   </div>
 </template>
 
-<script>
-import Player from "./components/Player/Player.vue"
-import MenuBar from "./components/Main/MenuBar.vue"
-import { invoke } from '@tauri-apps/api/tauri'
-import TitleBar from "./components/Main/TitleBar.vue"
-import RightSidebar from "./components/Main/RightSidebar.vue"
-export default {
-  name: 'App',
-  components: {
-    Player,
-    TitleBar,
-    MenuBar,
-    RightSidebar
-  },
-  data() {
-    return {
-      isOpen: true
-    }
-  },
-  computed: {
-    count () {
-      return this.$store.state.count
-    }
-  },
-  mounted: function (){
-    // With the Tauri global script:
-    document.addEventListener('DOMContentLoaded', () => {
-
-      // This will wait for the window to load, but you could
-      // run this function on whatever trigger you want
-      if(this.isTauri()){
-        this.loaded()
-      }
-    })
-  },  
-  methods: {
-    loaded(){
-      console.log('Splash removed')
-      //invoke('close_splashscreen')
-    },
-    goTo(p) {
-      console.log(p)
-      this.$router.push({path: `/${p}`})
-    },
-    open(){
-      if(this.isOpen){
-        this.isOpen = false
-        console.log('Got close')
- 
-      } else {
-        console.log('Got open')
-        this.isOpen = true
-      }
-    },
-    isTauri(){
-      if(window.__TAURI__){
-        console.log('Tauri')
-        return true
-      } return false
-    }
-  }
-}
-</script>
-
 <style>
 
 :root {
@@ -145,7 +141,6 @@ export default {
 .fade-leave-active {
   transition: opacity 0.3s ease;
 }
-
 
 .fade-enter-from,
 .fade-leave-to {
