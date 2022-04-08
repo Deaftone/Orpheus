@@ -1,4 +1,4 @@
-<template> 
+<template>
   <div
     id="menuBar"
     class="h-6 navbar bg-base-100 text-neutral-content"
@@ -24,10 +24,10 @@
           />
         </button>
       </span>
-    </div> 
+    </div>
     <div class="flex-1 lg:flex-none">
-      <SearchBox />
-    </div> 
+      <!-- <SearchBox /> -->
+    </div>
     <div class="flex-1 lg:flex-none">
       <ThemeSwitcher />
     </div>
@@ -35,14 +35,14 @@
 </template>
 
 <script>
-import ThemeSwitcher from "../Util/ThemeSwitcher.vue"
-import SearchBox from "../Util/SearchBox.vue"
+import ThemeSwitcher from '../Util/ThemeSwitcher.vue'
+import SearchBox from '../Util/SearchBox.vue'
 
 export default {
   name: 'MenuBar',
   components: {
     SearchBox,
-    ThemeSwitcher
+    ThemeSwitcher,
   },
 }
 </script>

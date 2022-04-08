@@ -1,6 +1,87 @@
+<script >
+import draggable from 'vuedraggable'
+import { computed, ref, watch } from 'vue'
+import { usePlayerStore } from '../../stores/player'
+export default {
+
+  setup() {
+    const store = usePlayerStore()
+
+    const playingQueue = computed(() => store.queue)
+    const nowPlaying = ref(store.nowPlaying)
+
+    watch(nowPlaying, (currentValue, oldPlaying) => {
+      // Absolute hack. We need to delay the highlighting of the now playing on the sidebar or else its no rendered when we call to highlight
+      setTimeout(() => {
+        this.highLightNowPlaying(oldPlaying, newPlaying)
+      }, 10)
+    })
+
+    function highLightNowPlaying(oldPlaying, newPlaying) {
+      console.log(`High${newPlaying.title}`)
+      let oldP
+
+      if (oldPlaying)
+        oldP = document.getElementById(`${oldPlaying.id}_sidebar`)
+
+      const newP = document.getElementById(`${newPlaying.id}_sidebar`)
+
+      if (oldP) {
+        document.getElementById(`${oldPlaying.id}_scroller`).classList.remove('animate-marquee')
+        document.getElementById(`${oldPlaying.id}_scroller2`).classList.remove('animate-marquee2')
+
+        oldP.classList.remove('gradient-border', 'border-solid', 'border-4', 'border-primary')
+      }
+      if (newP) {
+        document.getElementById(`${newPlaying.id}_scroller`).classList.add('animate-marquee')
+        document.getElementById(`${newPlaying.id}_scroller2`).classList.add('animate-marquee2')
+
+        newP.classList.add('gradient-border', 'border-solid', 'border-4', 'border-primary')
+      }
+    }
+
+    function setQueue(value) {
+      store.commit('setQueue', value)
+    }
+
+    return {
+      playingQueue,
+      nowPlaying,
+    }
+  },
+  /*   computed: {
+    playingQueue() {
+      return store.state.queue
+    },
+    nowPlaying() {
+      return store.state.nowPlaying
+    },
+    queue: {
+      get() {
+        return store.state.queue
+      },
+      set(value) {
+        store.commit('setQueue', value)
+      },
+    },
+  }, */
+/*   watch: {
+    playingQueue(newQueue) {
+      this.queue = newQueue
+    },
+    nowPlaying(newPlaying, oldPlaying) {
+      // Absolute hack. We need to delay the highlighting of the now playing on the sidebar or else its no rendered when we call to highlight
+      setTimeout(() => {
+        this.highLightNowPlaying(oldPlaying, newPlaying)
+      }, 10)
+    },
+  }, */
+}
+</script>
+
 <template>
   <draggable
-    v-model="queue"
+    v-model="playingQueue"
     tag="ul"
     class="overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700"
     item-key="id"
@@ -56,66 +137,4 @@
       </div>
     </li>
   </draggable> -->
-</template> 
-<script>
-import draggable from 'vuedraggable'
-export default {
-  name: 'RightSideBar',
-  components: {
-    draggable,
-  },
-
-  computed: {
-    playingQueue () {
-      return this.$store.state.queue
-    },
-    nowPlaying (){
-      return this.$store.state.nowPlaying
-    },
-    queue: {
-        get() {
-            return this.$store.state.queue
-        },
-        set(value) {
-            this.$store.commit('setQueue', value)
-        }
-    }
-  },
-  watch: {
-    playingQueue(newQueue) {
-      this.queue = newQueue
-    },
-    nowPlaying(newPlaying,oldPlaying){
-      // Absolute hack. We need to delay the highlighting of the now playing on the sidebar or else its no rendered when we call to highlight
-      setTimeout(() => {
-        this.highLightNowPlaying(oldPlaying, newPlaying)
-      }, 10)
-    }
-  },
-  methods: {
-    highLightNowPlaying(oldPlaying, newPlaying) {
-      console.log('High' + newPlaying.title)
-      let oldP
-
-      if(oldPlaying) {
-        oldP = document.getElementById(oldPlaying.id + '_sidebar') 
-      }
-
-      const newP = document.getElementById(newPlaying.id + '_sidebar')
-
-      if(oldP) {
-        document.getElementById(oldPlaying.id + '_scroller').classList.remove('animate-marquee')
-        document.getElementById(oldPlaying.id + '_scroller2').classList.remove('animate-marquee2')
-
-        oldP.classList.remove("gradient-border","border-solid", "border-4", "border-primary")
-      }
-      if(newP) {
-        document.getElementById(newPlaying.id + '_scroller').classList.add('animate-marquee')
-        document.getElementById(newPlaying.id + '_scroller2').classList.add('animate-marquee2')
-
-        newP.classList.add("gradient-border","border-solid", "border-4", "border-primary")
-      }
-    },
-  }
-}
-</script>
+</template>
