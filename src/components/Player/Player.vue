@@ -1,3 +1,228 @@
+<script>
+import Slider from '@vueform/slider'
+import '../../freqtimeupdate'
+import { computed, onMounted, ref, watch } from 'vue'
+import { usePlayerStore } from '../../stores/player'
+import AvCanvas from './Visualiser.vue'
+export default ({
+  components: {
+    Slider,
+    AvCanvas,
+  },
+  setup() {
+    const store = usePlayerStore()
+    const appPlayer = ref(null)
+    const nowPlaying = computed(() => store.nowPlaying)
+    const playingIndex = computed(() => store.playingIndex)
+    const isPlaying = computed(() => store.isPlaying)
+    const eTime = ref('00:00')
+    const duration = ref('00:00')
+    const percentPlayed = ref(0)
+    const currentIcon = ref('play')
+    let listenerActive = false
+    let paused = false
+    watch(isPlaying, (currentValue, oldValue) => {
+      console.log('test')
+      if (isPlaying.value)
+        console.log('Audio playback started.')
+      console.log(listenerActive)
+      // prevent starting multiple listeners at the same time
+      if (!listenerActive) {
+        console.log('Add listener')
+        duration.value = convertTime(appPlayer.value.duration)
+
+        listenerActive = true
+        // for a more consistent timeupdate, include freqtimeupdate.js and replace both instances of 'timeupdate' with 'freqtimeupdate'
+        // frequent.add(appPlayer, this.playbackListener)
+        appPlayer.value.addEventListener('freqtimeupdate', playbackListener)
+      }
+    })
+    watch(nowPlaying, (newValue, oldValue) => {
+      console.log(`Now playing old ${oldValue}`)
+      console.log(`Now playing update ${newValue}`)
+      console.log(newValue.cover)
+      playTrack(newValue)
+      setMediaControls(newValue.title, newValue.artist, newValue.albumName, newValue.cover)
+      store.setNowPlaying(newValue)
+    })
+    watch(playingIndex, (newValue, oldValue) => {
+      store.setPlayingIndex(newValue)
+    })
+    /*     watch(newPlaying, (currentValue, newValue) => {
+
+    }) */
+    onMounted(async() => {
+      volumeChange(25)
+    })
+
+    function toggleVis() {
+      /*
+        Fix me
+        For some reason when creating a new AudioCtx the player volume goes up
+        I would like to have it destroyed when hidden
+      */
+      this.visToggled ^= true
+      if (this.visToggled) {
+        // this.src.connect(this.myAnalyser)
+        // this.myAnalyser.connect(this.ctx.destination)
+      }
+      else {
+        // this.src.disconnect(this.myAnalyser)
+        // this.myAnalyser.disconnect(this.ctx.destination)
+
+      }
+      // document.getElementById('barC').classList.toggle('pb-3')
+    }
+    function setMediaControls(title, artist, album, src) {
+      if ('mediaSession' in navigator) {
+        // eslint-disable-next-line no-undef
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title,
+          artist,
+          album,
+          artwork: [
+            { src: src || '', sizes: '256x256', type: 'image/png' },
+          ],
+        })
+
+        navigator.mediaSession.setActionHandler('play', () => { playPause() })
+        navigator.mediaSession.setActionHandler('pause', () => { playPause() })
+        navigator.mediaSession.setActionHandler('previoustrack', () => { previosTrack() })
+        navigator.mediaSession.setActionHandler('nexttrack', () => { nextTrack() })
+      }
+    }
+    function convertTime(seconds) {
+      const format = val => `0${Math.floor(val)}`.slice(-2)
+      // var hours = seconds / 3600;
+      const minutes = (seconds % 3600) / 60
+      return [minutes, seconds % 60].map(format).join(':')
+    }
+    function goTo(p) {
+      console.log(p)
+      this.$router.push({ path: `/${p}` })
+    }
+    function createAnalyser() {
+      this.ctx = new AudioContext()
+      this.src = this.ctx.createMediaElementSource(appPlayer)
+      this.ctx.crossOrigin = 'anonymous'
+      this.$refs.appPlayer.crossOrigin = 'anonymous'
+      this.myAnalyser = this.ctx.createAnalyser()
+      this.src.connect(this.myAnalyser)
+      this.myAnalyser.fftSize = 8192
+      this.myAnalyser.connect(this.ctx.destination)
+    }
+    function barChange(e) {
+      const time = e / 100 * appPlayer.value.duration
+      const diff = Math.abs(time - appPlayer.value.currentTime)
+      if (diff > 0.1) {
+        console.log(diff)
+        appPlayer.value.currentTime = time
+      }
+    }
+    function previosTrack() {
+      const track = store.previousQueue.pop()
+      store.previousTrack()
+      if (track)
+        store.setNowPlaying(track)
+
+      console.log('Previous track clicked')
+    }
+    function nextTrack() {
+      // console.log(this.$store.state.queue.length)
+      // console.log(this.$store.state.playingIndex)
+      console.log(`Adding to pqueue${JSON.stringify(store.nowPlaying)}`)
+      store.addToPQueue(store.nowPlaying)
+      store.nextTrack()
+      const track = store.queue[store.playingIndex]
+      console.log(`Next track update ${JSON.stringify(track)}`)
+      if (track)
+        store.setNowPlaying(track)
+    }
+    function volumeChange(e) {
+      appPlayer.value.volume = e / 100 / 2
+      console.log(appPlayer.value.volume)
+    }
+    function playPause() {
+      if (paused) {
+        console.log('Play/Pause -- Resume')
+        store.isPlaying = true
+        paused = false
+        appPlayer.value.play()
+        store.setIsPlaying(true)
+        currentIcon.value = 'pause'
+      }
+      else {
+        console.log('Play/Pause -- Pause')
+        store.isPlaying = false
+        paused = true
+        appPlayer.value.pause()
+        store.setIsPlaying(false)
+        currentIcon.value = 'play'
+      }
+    }
+    function playTrack(track) {
+      /*       if (!this.myAnalyser)
+        this.createAnalyser()
+ */
+      console.log(`Got play track ${JSON.stringify(track)}`)
+      appPlayer.value.src = `https://navi.raspi.local/rest/stream?u=***REMOVED***&t=***REMOVED***&s=558dbf&f=json&v=1.8.0&c=NavidromeUI&id=${track.id}&_=1627823120382`
+      appPlayer.value.play()
+      store.setIsPlaying(true)
+      currentIcon.value = 'pause'
+    }
+    function playbackListener() {
+      const percentage = (appPlayer.value.currentTime / appPlayer.value.duration) * 100
+      duration.value = convertTime(appPlayer.value.duration)
+      percentPlayed.value = percentage
+      const seconds = appPlayer.value.currentTime
+      eTime.value = convertTime(seconds)
+      // this.playbackTime = appPlayer.value.currentTime
+    }
+    const clicked = false
+
+    function togglePlayButton() {
+      if (store.isPlaying) {
+        currentIcon.value = 'play'
+        console.log('Set to play')
+      }
+      else {
+        currentIcon.value = 'pause'
+        console.log('Set to pause')
+      }
+    }
+    return {
+      nowPlaying,
+      playingIndex,
+      appPlayer,
+      convertTime,
+      goTo,
+      createAnalyser,
+      barChange,
+      previosTrack,
+      nextTrack,
+      eTime,
+      duration,
+      volumeChange,
+      playPause,
+      percentPlayed,
+      playTrack,
+      playbackListener,
+      currentIcon,
+    }
+  },
+  data() {
+    return {
+      myAnalyser: null,
+      myAnalyserHidden: null,
+      ctx: null,
+      src: null,
+      visToggled: false,
+      volume: 25,
+    }
+  },
+})
+</script>
+
 <template>
   <main class="bg-neutral text-neutral-content">
     <!-- Test -->
@@ -21,7 +246,7 @@
         <a
           class="pl-10 cursor-pointer hover:text-primary"
           @click="toggleVis"
-        >Visualiser</a> 
+        >Visualiser</a>
       </div>
 
       <div
@@ -60,17 +285,18 @@
         </button>
       </div>
       <div
+        v-if="nowPlaying"
         class="flex items-center justify-center col-start-3"
       >
         <a
           class="cursor-pointer hover:text-primary"
-          @click="goTo('ArtistDetails/' + currentTrack.artistId)"
-        >{{ currentTrack.artist }}</a>
+          @click="goTo('ArtistDetails/' + nowPlaying.artistId)"
+        >{{ nowPlaying.artist }}</a>
         <a> &nbsp;-&nbsp; </a>
         <a
           class="cursor-pointer hover:text-primary"
-          @click="goTo('AlbumDetails/' + currentTrack.albumId)"
-        >{{ currentTrack.title }}</a>
+          @click="goTo('AlbumDetails/' + nowPlaying.albumId)"
+        >{{ nowPlaying.title }}</a>
       </div>
       <audio
         id="appPlayer"
@@ -103,210 +329,6 @@
     <AvCanvas
       v-if="myAnalyser && visToggled"
       :audio-analyser="myAnalyser"
-    /> 
+    />
   </main>
 </template>
-
-<script>
-import Slider from '@vueform/slider'
-import '../../freqtimeupdate'
-import AvCanvas from './Visualiser.vue'
-export default ({
-  name: "Player",
-  components: {
-    Slider,
-    AvCanvas
-  },
-  data() {
-    return {
-      appPlayer: undefined,
-      currentTrack: '',
-      isPlaying: false,
-      paused: false,
-      myAnalyser: null,
-      myAnalyserHidden: null,
-      ctx: null,
-      src: null,
-      visToggled: false,
-      currentIcon: 'play',
-      percentPlayed: 0,
-      eTime: '00:00',
-      volume: 25,
-      duration: '00:00'
-    }
-  },
-  computed: {
-    nowPlaying () {
-      return this.$store.state.nowPlaying
-    },
-    playingIndex (){
-      return this.$store.state.playingIndex
-    }
-  },
-  watch: {
-    // This watch triggers playTrack. by doing       this.$store.commit('setNowPlaying', {title: track.title, id: track.id})
-    // Do not do that inside the playTrack function as it will cause a infinite loop
-    nowPlaying (newPlaying ) {
-      this.playTrack(newPlaying)
-      this.setMediaControls(this.currentTrack.title, this.currentTrack.artist, this.currentTrack.albumName, this.currentTrack.cover)
-
-    },
-    playingIndex (newPlaying ) {
-      this.$store.commit('setNowPlaying',newPlaying )
-    }
-  },
-  created() {
-  },
-  mounted() {
-    this.appPlayer = this.$refs.appPlayer
-    this.volumeChange(25)
-    this.$nextTick(function() {
-      this.$watch("isPlaying",function() {
-        if(this.isPlaying) {
-          console.log("Audio playback started.")
-          //prevent starting multiple listeners at the same time
-          if(!this.listenerActive) {
-            console.log('Add listener')
-            this.listenerActive=true
-            //for a more consistent timeupdate, include freqtimeupdate.js and replace both instances of 'timeupdate' with 'freqtimeupdate'
-            //frequent.add(this.appPlayer, this.playbackListener);
-            this.appPlayer.addEventListener("freqtimeupdate",this.playbackListener)
-          }
-        }
-      })
-    })
-
-  },
-  methods: {
-    toggleVis(){
-      
-      /* 
-        Fix me
-        For some reason when creating a new AudioCtx the player volume goes up
-        I would like to have it destroyed when hidden
-      */
-      this.visToggled ^= true
-      if (this.visToggled){
-        //this.src.connect(this.myAnalyser)
-        //this.myAnalyser.connect(this.ctx.destination)
-      } else{
-        //this.src.disconnect(this.myAnalyser)
-        //this.myAnalyser.disconnect(this.ctx.destination)
-
-      }
-      //document.getElementById('barC').classList.toggle('pb-3')
-
-    },
-    setMediaControls(title, artist, album, src){
-      if ('mediaSession' in navigator) {
-        // eslint-disable-next-line no-undef
-        navigator.mediaSession.metadata = new MediaMetadata({
-          title: title,
-          artist: artist,
-          album: album,
-          artwork: [
-            { src: src || '', sizes: '256x256', type: 'image/png' },
-          ]
-        })
-
-        navigator.mediaSession.setActionHandler('play', () => {this.playPause()})
-        navigator.mediaSession.setActionHandler('pause', () => {this.playPause()})
-        navigator.mediaSession.setActionHandler('previoustrack', () => {this.previosTrack()})
-        navigator.mediaSession.setActionHandler('nexttrack', () => {this.nextTrack()})
-
-      }
-
-    },
-    convertTime(seconds){
-      const format = val => `0${Math.floor(val)}`.slice(-2)
-      //var hours = seconds / 3600;
-      const minutes = (seconds % 3600) / 60
-      return [minutes, seconds % 60].map(format).join(":")
-    },
-    goTo(p) {
-      console.log(p)
-      this.$router.push({path: `/${p}`})
-    },
-    createAnalyser(){
-      this.ctx = new AudioContext()
-      this.src = this.ctx.createMediaElementSource(this.$refs.appPlayer)
-      this.ctx.crossOrigin = 'anonymous'
-      this.$refs.appPlayer.crossOrigin = 'anonymous'
-      this.myAnalyser = this.ctx.createAnalyser()
-      this.src.connect(this.myAnalyser)
-      this.myAnalyser.fftSize = 8192
-      this.myAnalyser.connect(this.ctx.destination)
-    },
-    barChange(e){
-      const time = e / 100 * this.appPlayer.duration
-      const diff = Math.abs( time - this.appPlayer.currentTime )
-      if(diff > 0.1) {
-        console.log(diff)
-        this.appPlayer.currentTime = time
-      }
-    },
-    previosTrack(){
-      //const track = this.$store.state.previousQueue.pop()
-      this.$store.commit('previousTrack')
-      //if(track) this.$store.commit('setNowPlaying',track )
-      console.log('Previous track clicked')
-    },
-    nextTrack() {
-      console.log(this.$store.state.queue.length)
-      console.log(this.$store.state.playingIndex)
-      this.$store.commit('nextTrack')
-      
-      //const track = this.$store.state.queue.shift()
-      //console.log(JSON.stringify(track))
-      //if(track){
-      //console.log(this.$store.state.playingIndex)
-      //this.$store.commit('addToPQueue',{title: this.currentTrack.title, id: this.currentTrack.id, artistId: this.currentTrack.artistId, albumId: this.currentTrack.albumId, artist: this.currentTrack.artist, albumName: this.currentTrack.albumName, cover: this.currentTrack.cover})
-      //this.$store.commit('setNowPlaying', {title: track.title, id: track.id, artistId: track.artistId, albumId: track.albumId, artist: track.artist, albumName: track.albumName, cover: track.cover})
-      //}
-  
-      console.log('Next track clicked')
-    },
-    volumeChange (e) {
-      this.appPlayer.volume = e / 100 / 2 
-      console.log(this.appPlayer.volume)
-    },
-    playPause() {
-      if(this.paused) {
-        console.log('Play/Pause -- Resume')
-        this.isPlaying = true
-        this.paused = false
-        this.appPlayer.play()
-        this.$store.commit('setIsPlaying', true)
-        this.currentIcon = "pause"
-      }  else {
-        console.log('Play/Pause -- Pause')
-        this.isPlaying = false
-        this.paused = true
-        this.appPlayer.pause()
-        this.$store.commit('setIsPlaying', false)
-        this.currentIcon = "play"
-      }
-    },
-    playTrack(track) {
-      if(!this.myAnalyser) this.createAnalyser()
-
-      console.log("Got play track " + JSON.stringify(track))
-      this.appPlayer.src = `https://navi.raspi.local/rest/stream?u=***REMOVED***&t=***REMOVED***&s=558dbf&f=json&v=1.8.0&c=NavidromeUI&id=${track.id}&_=1627823120382`
-      this.appPlayer.play()
-      this.$store.commit('setIsPlaying', true)
-      this.isPlaying = true
-      this.currentIcon = "pause"
-      this.currentTrack = track
-
-    },
-    playbackListener() {
-      const percentage = (this.appPlayer.currentTime / this.appPlayer.duration) * 100
-      this.duration = this.convertTime(this.appPlayer.duration)
-      this.percentPlayed = percentage
-      const seconds = this.appPlayer.currentTime
-      this.eTime = this.convertTime(seconds)
-      this.playbackTime = this.appPlayer.currentTime
-    }
-  },
-})
-</script>
