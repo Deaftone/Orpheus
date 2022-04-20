@@ -1,6 +1,6 @@
 <script>
-import { onMounted, ref } from 'vue'
-import axios from '../../utils/apiAxios'
+import { inject, onMounted, ref } from 'vue'
+import apollo from '../../utils/apiAxios'
 export default {
   props: {
     size: {
@@ -9,9 +9,10 @@ export default {
     },
   },
   setup(props) {
+    const $apollo = inject('$apollo')
     const artists = ref([])
     onMounted(async() => {
-      const data = (await axios.get('/getArtists')).data
+      const data = (await $apollo.axios.get('/getArtists')).data
       const artistIndex = data['subsonic-response'].artists.index
       for (const index of artistIndex) {
         for (const artist of index.artist)
