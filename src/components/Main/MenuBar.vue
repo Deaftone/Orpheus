@@ -1,3 +1,15 @@
+<script>
+import ThemeSwitcher from '../Util/ThemeSwitcher.vue'
+import SearchBox from '../Util/SearchBox.vue'
+
+export default {
+  name: 'MenuBar',
+  components: {
+    SearchBox,
+    ThemeSwitcher,
+  },
+}
+</script>
 <template>
   <div
     id="menuBar"
@@ -33,16 +45,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import ThemeSwitcher from '../Util/ThemeSwitcher.vue'
-import SearchBox from '../Util/SearchBox.vue'
-
-export default {
-  name: 'MenuBar',
-  components: {
-    SearchBox,
-    ThemeSwitcher,
-  },
-}
-</script>

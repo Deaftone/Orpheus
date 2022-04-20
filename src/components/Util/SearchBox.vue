@@ -1,17 +1,3 @@
-<template>
-  <div class="flex-1 lg:flex-none">
-    <div class="form-control">
-      <input
-        ref="search"
-        class="input input-ghost hover:bg-neutral focus:bg-neutral"
-        type="search"
-        placeholder="Search"
-        @input="updateSearch"
-      >
-    </div>
-  </div>
-</template>
-
 <script>
 export default {
   name: 'SearchBox',
@@ -33,6 +19,19 @@ export default {
   },
 }
 </script>
+<template>
+  <div class="flex-1 lg:flex-none">
+    <div class="form-control">
+      <input
+        ref="search"
+        class="input input-ghost hover:bg-neutral focus:bg-neutral"
+        type="search"
+        placeholder="Search"
+        @input="updateSearch"
+      >
+    </div>
+  </div>
+</template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
