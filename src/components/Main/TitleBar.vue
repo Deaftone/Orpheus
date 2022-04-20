@@ -1,4 +1,22 @@
-<template> 
+<script>
+import { appWindow } from '@tauri-apps/api/window'
+export default {
+  name: 'TitleBar',
+  methods: {
+    close() {
+      appWindow.close()
+    },
+    toggleMaximize() {
+      appWindow.toggleMaximize()
+    },
+    minimize() {
+      appWindow.minimize()
+      // appWindow.res
+    },
+  },
+}
+</script>
+<template>
   <div
     id="titleBar"
     data-tauri-drag-region
@@ -25,24 +43,6 @@
     />
   </div>
 </template>
-
-<script>
-import { appWindow } from '@tauri-apps/api/window'
-export default {
-  name: 'TitleBar',
-  methods:{
-    close(){
-      appWindow.close()
-    },
-    toggleMaximize(){
-      appWindow.toggleMaximize()
-    },minimize(){
-      appWindow.minimize()
-      appWindow.res
-    }
-  }
-}
-</script>
 
 <style scoped>
 .titlebar {
