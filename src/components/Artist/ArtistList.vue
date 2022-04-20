@@ -2,9 +2,14 @@
 import { onMounted, ref } from 'vue'
 import axios from '../../utils/apiAxios'
 export default {
-  setup() {
+  props: {
+    size: {
+      type: Number,
+      default: 56,
+    },
+  },
+  setup(props) {
     const artists = ref([])
-
     onMounted(async() => {
       const data = (await axios.get('/getArtists')).data
       const artistIndex = data['subsonic-response'].artists.index
@@ -20,9 +25,9 @@ export default {
 <template>
   <div class="grid w-full grid-cols-3 gap-4 p-5 xl:grid-cols-11 lg:grid-cols-6">
     <div
-      v-for="artist in artists"
+      v-for="artist in artists.slice(0, size)"
       :key="artist.id"
-      class="mx-auto"
+      class="mx-auto transition duration-300 ease-in-out delay-150 hover:-translate-y-1 hover:scale-105"
       @click=" $router.push({path: `/ArtistDetails/${artist.id}`})
       "
     >
