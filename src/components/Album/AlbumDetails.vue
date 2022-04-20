@@ -1,5 +1,5 @@
 <script>
-import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import axios from '../../utils/apiAxios'
 import { usePlayerStore } from '../../stores/player'
 export default {
@@ -11,10 +11,6 @@ export default {
     const albumBar = ref(null)
     const info = reactive({})
     const songs = reactive([])
-    let title
-    let artist
-    let artistId
-    let albumId
     const nowPlaying = computed(() => store.nowPlaying)
     const observer = new IntersectionObserver(
       onElementObserved,
@@ -44,7 +40,7 @@ export default {
     }
     function onElementObserved(e) {
       e.forEach(({ target, isIntersecting }) => {
-        // albumBar.value.classList.toggle('bg-base-200', !isIntersecting)
+        albumBar.value.classList.toggle('bg-base-200', !isIntersecting)
       })
     }
     function highLightNowPlaying(oldPlaying, newPlaying) {
@@ -56,10 +52,10 @@ export default {
       const newP = document.getElementById(newPlaying.id)
 
       if (oldP)
-        oldP.classList.remove('gradient-border', 'border-solid', 'border-4', 'border-primary')
+        oldP.classList.remove('gradient-border', 'border-solid', 'border-4', 'border-primary', 'font-bold')
 
       if (newP)
-        newP.classList.add('gradient-border', 'border-solid', 'border-4', 'border-primary')
+        newP.classList.add('gradient-border', 'border-solid', 'border-4', 'border-primary', 'font-bold')
     }
     onMounted(async() => {
       observer.observe(sticky.value)
@@ -85,10 +81,10 @@ export default {
           tempPlaying = { title: song.title, id: song.id }
       }
 
-      /*       this.$nextTick(function() {
+      nextTick(() => {
         if (tempPlaying)
-          this.highLightNowPlaying(null, tempPlaying)
-      }) */
+          highLightNowPlaying(null, tempPlaying)
+      })
     })
     onUnmounted(() => {
       observer.disconnect()
@@ -97,6 +93,7 @@ export default {
     return {
       nowPlaying,
       playTrack,
+      albumBar,
       onElementObserved,
       highLightNowPlaying,
       sticky,
@@ -114,7 +111,7 @@ export default {
         <figure>
           <img class="object-contain w-full h-72" :src="info.cover">
         </figure>
-        <div class="card-body">
+        <div class="card-body ">
           <h2 class="text-xl font-bold card-title lg:text-6xl">
             {{ info.title }}
           </h2>
@@ -147,7 +144,7 @@ export default {
         v-for="song in songs"
         :id="song.id"
         :key="song.number"
-        class="flex justify-center p-1 text-lg rounded-lg cursor-pointer bg-base-300"
+        class="flex justify-center p-1 text-lg transition duration-300 ease-in-out delay-150 rounded-lg shadow cursor-pointer bg-base-300 hover:scale-105"
         @click="playTrack(song.title, song.id)"
       >
         <div class="w-full p-2">
