@@ -1,4 +1,5 @@
 <script>
+import { invoke } from '@tauri-apps/api/tauri'
 import Player from './components/Player/Player.vue'
 import MenuBar from './components/Main/MenuBar.vue'
 import TitleBar from './components/Main/TitleBar.vue'
@@ -61,24 +62,57 @@ export default {
 <template>
   <div class="flex flex-col h-screen overflow-hidden">
     <TitleBar v-if="isTauri()" />
-
     <div class="flex flex-col flex-grow w-full h-full overflow-hidden sm:flex-row">
       <div class="flex-grow-0 flex-shrink hidden p-3 md:inline-flex bg-neutral md:visible">
         <div class="sticky top-0 flex rounded-xl ">
           <nav class="h-full ">
-            <div class="pb-5 lg:flex">
+            <!--             <div class="pb-5 lg:flex">
               <span class="text-2xl font-bold">
                 Orpheus
               </span>
+            </div> -->
+            <div
+              class="relative flex items-center justify-center w-12 h-12 mx-auto mt-2 mb-2 text-green-500 transition-all duration-300 ease-linear bg-gray-400 shadow-lg cursor-pointer tooltip tooltip-right hover:bg-green-600 dark:bg-base-100 hover:text-white hover:rounded-xl rounded-3xl hover:bg-primary"
+              data-tip="Home"
+              @click="goTo(&quot;/&quot;)"
+            >
+              <font-awesome-icon
+                icon="home"
+                class=""
+                color="gray"
+              />
             </div>
-            <span class="w-full text-lg font-bold">Library</span>
-            <ul class="pl-2">
+            <div class="divider" />
+            <div
+              class="relative flex items-center justify-center w-12 h-12 mx-auto mt-2 mb-2 text-green-500 transition-all duration-300 ease-linear bg-gray-400 shadow-lg cursor-pointer tooltip tooltip-right hover:bg-green-600 dark:bg-base-100 hover:text-white hover:rounded-xl rounded-3xl hover:bg-primary"
+              data-tip="Artists"
+              @click="goTo(&quot;ArtistList&quot;)"
+            >
+              <font-awesome-icon
+                icon="microphone-alt"
+                class=""
+                color="gray"
+              />
+            </div>
+
+            <div
+              data-tip="Albums"
+
+              class="relative flex items-center justify-center w-12 h-12 mx-auto mt-2 mb-2 text-green-500 transition-all duration-300 ease-linear bg-gray-400 shadow-lg cursor-pointer tooltip tooltip-right hover:bg-green-600 dark:bg-base-100 hover:text-white hover:rounded-xl rounded-3xl hover:bg-primary"
+              @click="goTo(&quot;AlbumDetails&quot;)"
+            >
+              <font-awesome-icon
+                icon="compact-disc"
+                class=""
+                color="gray"
+              />
+            </div>
+            <!--             <ul class="pl-2">
               <li
                 class="cursor-pointer s-item hover:text-primary"
-                @click="goTo(&quot;ArtistList&quot;)"
               >
                 <font-awesome-icon
-                  icon="microphone-alt"
+                  icon="compact-disc"
                   color="gray"
                 />
                 Artists
@@ -93,7 +127,7 @@ export default {
                 />
                 Albums
               </li>
-            </ul>
+            </ul> -->
           </nav>
         </div>
       </div>
@@ -112,12 +146,12 @@ export default {
           </router-view>
         </main>
       </div>
-      <div class="flex flex-col w-64 bg-base-200">
+      <div class="flex flex-col w-64 bg-neutral">
         <RightSidebar />
       </div>
     </div>
     <!-- If we remove the pt-1 and bg we get a weird 1 px size bug for the background image on the ArtistDetails page -->
-    <footer class="pt-1 text-center bg-base-200">
+    <footer class="text-center bg-base-200">
       <Player />
     </footer>
   </div>
