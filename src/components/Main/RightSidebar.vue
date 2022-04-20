@@ -3,7 +3,9 @@ import draggable from 'vuedraggable'
 import { computed, ref, watch } from 'vue'
 import { usePlayerStore } from '../../stores/player'
 export default {
-
+  components: {
+    draggable,
+  },
   setup() {
     const store = usePlayerStore()
 
@@ -16,6 +18,8 @@ export default {
         this.highLightNowPlaying(oldPlaying, newPlaying)
       }, 10)
     })
+
+    console.log(playingQueue.value)
 
     function highLightNowPlaying(oldPlaying, newPlaying) {
       console.log(`High${newPlaying.title}`)
@@ -89,7 +93,7 @@ export default {
     <template #item="{element}">
       <li
         :id="element.id + '_sidebar'"
-        class="items-center justify-between p-2 m-2 text-sm rounded-lg shadow cursor-move bg-base-100"
+        class="items-center justify-between p-3 m-3 text-sm transition duration-300 ease-in-out delay-150 rounded-lg shadow-xl cursor-move bg-base-100 hover:scale-105"
       >
         <div class="relative flex overflow-x-hidden">
           <div
