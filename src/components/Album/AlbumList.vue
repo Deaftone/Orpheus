@@ -5,6 +5,12 @@ export default {
   name: 'AlbumList',
   components: {
   },
+  props: {
+    size: {
+      type: Number,
+      default: 56,
+    },
+  },
   data() {
     return {
       albums: [],
@@ -14,18 +20,18 @@ export default {
   },
   computed: {
     filterAlbums() {
-      const query = this.$store.state.searchQuery
+      /*       const query = this.$store.state.searchQuery
       if (query) {
         console.log(query)
         const albums = this.albums.filter((album) => {
           return album.name.toLowerCase().includes(String(query).toLowerCase())
         })
         return albums
-      }
-      else {
-        console.log('Return full')
-        return this.albums
-      }
+      } */
+      // else {
+      console.log('Return full')
+      return this.albums
+      // }
     },
   },
   watch: {
@@ -61,7 +67,7 @@ export default {
       const data = (await axios.get('/getAlbumList', {
         params: {
           type: 'newest',
-          size: 56,
+          size: this.size,
           offset: this.offset,
         },
       })).data
@@ -90,7 +96,7 @@ export default {
       <div
         v-for="album in filterAlbums"
         :key="album.id"
-        class="rounded shadow-xl bg-neutral card"
+        class="transition duration-300 ease-in-out delay-150 shadow-xl rounded-xl bg-neutral card hover:-translate-y-1 hover:scale-105 "
         @click="$router.push({ path: `/AlbumDetails/${album.id}` })
         "
       >
@@ -99,9 +105,9 @@ export default {
             <figure>
               <img :src="album.cover" style="width:244px;height:244px">
             </figure>
-            <div class="justify-center card-body">
+            <div class="justify-center pt-5 pb-5 card-body">
               <p
-                class="text-center text-ellipsis overflow-hidden ..."
+                class="text-center "
               >
                 {{ truncateString(album.name, 18) }}
               </p>
