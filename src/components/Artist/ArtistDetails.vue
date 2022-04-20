@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios'
-import apiAxios from '../../utils/apiAxios'
+import apollo from '../../utils/apiAxios'
 export default {
   name: 'ArtistDetails',
   props: { id: { type: String, required: true } },
@@ -15,7 +15,7 @@ export default {
     }
   },
   async mounted() {
-    const data = (await apiAxios.get('/getArtist', {
+    const data = (await apollo.server.get('/getArtist', {
       params: {
         id: this.id,
       },
@@ -23,7 +23,7 @@ export default {
     this.artistName = data['subsonic-response'].artist.name
     const albumIndex = data['subsonic-response'].artist.album
     for (const album of albumIndex)
-      this.albums.push({ id: album.id, title: album.title, cover: `https://navi.raspi.local/rest/getCoverArt?u=${apiAxios.defaults.params.u}&s=${apiAxios.defaults.params.s}&t=${apiAxios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300` })
+      this.albums.push({ id: album.id, title: album.title, cover: `https://navi.raspi.local/rest/getCoverArt?u=${apollo.server.defaults.params.u}&s=${apollo.server.defaults.params.s}&t=${apollo.server.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300` })
 
     const artistImage = await axios.get(`http://localhost:3001/${this.artistName}`)
     this.artistImage = artistImage.data.image

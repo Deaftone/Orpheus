@@ -1,10 +1,10 @@
 <script>
-import axios from '../../utils/apiAxios'
 import 'v3-infinite-loading/lib/style.css'
 export default {
   name: 'AlbumList',
   components: {
   },
+  inject: ['$apollo'],
   props: {
     size: {
       type: Number,
@@ -38,7 +38,7 @@ export default {
     searchQuery(query) {
       console.log(query)
     },
-  },
+  }, // injecting in a component that wants it
   created() {
     this.observer = new IntersectionObserver(
       this.onElementObserved,
@@ -64,7 +64,7 @@ export default {
     async getAlbums() {
       console.log('Got album call')
       console.log(this.offset)
-      const data = (await axios.get('/getAlbumList', {
+      const data = (await this.$apollo.axios.get('/getAlbumList', {
         params: {
           type: 'newest',
           size: this.size,
@@ -73,7 +73,7 @@ export default {
       })).data
       const albums = data['subsonic-response'].albumList.album
       for (const album of albums)
-        this.albums.push({ name: album.title, id: album.id, cover: `https://navi.raspi.local/rest/getCoverArt?u=${axios.defaults.params.u}&s=${axios.defaults.params.s}&t=${axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300` })
+        this.albums.push({ name: album.title, id: album.id, cover: `https://navi.raspi.local/rest/getCoverArt?u=${this.$apollo.axios.defaults.params.u}&s=${this.$apollo.axios.defaults.params.s}&t=${this.$apollo.axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300` })
 
       this.offset += 56
     },

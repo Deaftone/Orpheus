@@ -1,11 +1,13 @@
 <script>
-import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
-import axios from '../../utils/apiAxios'
+import { computed, inject, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import apollo from '../../utils/apiAxios'
 import { usePlayerStore } from '../../stores/player'
+
 export default {
   name: 'AlbumDetails',
   props: { id: { type: String, required: true } },
   setup(props) {
+    const $apollo = inject('$apollo')
     const store = usePlayerStore()
     const sticky = ref(null)
     const albumBar = ref(null)
@@ -59,8 +61,7 @@ export default {
     }
     onMounted(async() => {
       observer.observe(sticky.value)
-
-      const data = (await axios.get('/getAlbum', {
+      const data = (await $apollo.axios.get('/getAlbum', {
         params: {
           id: props.id,
         },
@@ -72,7 +73,8 @@ export default {
       info.albumId = album.id
       const currentlyPlaying = store.nowPlaying || ''
       let tempPlaying = null
-      info.cover = `https://navi.raspi.local/rest/getCoverArt?u=${axios.defaults.params.u}&s=${axios.defaults.params.s}&t=${axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${props.id}`
+
+      info.cover = $apollo.getCover(props.id)
       for (const song of album.song) {
         console.log(song)
         songs.push({ id: song.id, number: 'FIX', title: song.title, cover: info.cover, albumName: info.title, artistId: album.artistId, albumId: album.id, artist: album.artist, type: String(song.contentType).slice(6, 20).toUpperCase(), length: convertTime(song.duration) })
