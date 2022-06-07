@@ -1,42 +1,43 @@
 <script>
-import axios from 'axios'
-import apollo from '../../utils/apiAxios'
+import { inject, onMounted, reactive } from 'vue'
+
 export default {
   name: 'ArtistDetails',
   props: { id: { type: String, required: true } },
-  data() {
+  setup(props) {
+    const $apollo = inject('$apollo')
+    const info = reactive({})
+    const albums = reactive([])
+    info.artistImage = 'https://www.offset.com/images/v2/artist_bio_placeholder.png'
+    onMounted(async() => {
+      const data = (await $apollo.axios.get('/getArtist', {
+        params: {
+          id: props.id,
+        },
+      })).data
+      info.artistName = data['subsonic-response'].artist.name
+      info.albumIndex = data['subsonic-response'].artist.album
+      for (const album of info.albumIndex)
+        albums.push({ id: album.id, title: album.title, cover: `https://navi.raspi.local/rest/getCoverArt?u=${$apollo.axios.defaults.params.u}&s=${$apollo.axios.defaults.params.s}&t=${$apollo.axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300` })
+
+      const artistImage = await $apollo.axios.get(`http://localhost:3001/${info.artistName}`)
+      info.artistImage = artistImage.data.image
+      info.bio = `${artistImage.data.bio.slice(0, 1435)}....`
+
+      info.artistBanner = info.artistImage.data.banner
+    })
+
     return {
-      name: '',
-      artistName: '',
-      albums: [],
-      artistImage: 'https://www.offset.com/images/v2/artist_bio_placeholder.png',
-      artistBanner: '',
-      bio: '',
+      info,
+      albums,
     }
-  },
-  async mounted() {
-    const data = (await apollo.server.get('/getArtist', {
-      params: {
-        id: this.id,
-      },
-    })).data
-    this.artistName = data['subsonic-response'].artist.name
-    const albumIndex = data['subsonic-response'].artist.album
-    for (const album of albumIndex)
-      this.albums.push({ id: album.id, title: album.title, cover: `https://navi.raspi.local/rest/getCoverArt?u=${apollo.server.defaults.params.u}&s=${apollo.server.defaults.params.s}&t=${apollo.server.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300` })
-
-    const artistImage = await axios.get(`http://localhost:3001/${this.artistName}`)
-    this.artistImage = artistImage.data.image
-    this.bio = `${artistImage.data.bio.slice(0, 1435)}....`
-
-    this.artistBanner = artistImage.data.banner
   },
 }
 </script>
 
 <template>
   <div
-    :style="{ 'background-image': 'url(' + artistBanner + ')' }"
+    :style="{ 'background-image': 'url(' + info.artistBanner + ')' }"
     class="h-full bg-image "
   >
     <div
@@ -46,17 +47,17 @@ export default {
         <figure>
           <img
             class="object-contain w-full h-96"
-            :src="artistImage"
+            :src="info.artistImage"
           >
         </figure>
         <div class="card-body">
           <h2 class="text-xl font-bold card-title lg:text-6xl ">
-            {{ artistName }}
+            {{ info.artistName }}
           </h2>
           <div class="card-actions text-primary">
             <a
               class="cursor-pointer"
-            >{{ bio }}</a>
+            >{{ info.bio }}</a>
           </div>
         </div>
       </div>
