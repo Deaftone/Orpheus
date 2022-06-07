@@ -91,7 +91,7 @@ export default {
   <div class="m-5">
     <div
       id="list"
-      class="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-7"
+      class="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8"
     >
       <div
         v-for="album in filterAlbums"
@@ -102,9 +102,8 @@ export default {
       >
         <div>
           <div class="overflow-hidden">
-            <figure>
-              <img :src="album.cover" style="width:244px;height:244px">
-            </figure>
+            <img :src="album.cover" style="width:auto;height:auto">
+
             <div class="justify-center pt-5 pb-5 card-body">
               <p
                 class="text-center "
