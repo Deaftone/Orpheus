@@ -16,6 +16,7 @@ export default {
   },
 }
 </script>
+
 <template>
   <div
     id="titleBar"

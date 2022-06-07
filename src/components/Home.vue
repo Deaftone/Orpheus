@@ -9,6 +9,7 @@ export default {
   },
 }
 </script>
+
 <template>
   <div class="grid justify-center">
     <div class="p-10 text-xl shadow-xl stats">
@@ -63,11 +64,11 @@ export default {
 </template>
 
 <style src="@vueform/slider/themes/default.css"></style>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 /*
  * We'll use CSS grids for the base template
  * More info on https://cssgrid.io/ by @wesbos
  */
-
 </style>
