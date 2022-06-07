@@ -10,6 +10,7 @@ export default {
   },
 }
 </script>
+
 <template>
   <div
     id="menuBar"

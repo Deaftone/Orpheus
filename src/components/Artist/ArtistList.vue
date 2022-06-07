@@ -1,6 +1,5 @@
 <script>
 import { inject, onMounted, ref } from 'vue'
-import apollo from '../../utils/apiAxios'
 export default {
   props: {
     size: {

@@ -51,7 +51,7 @@ export default ({
     /*     watch(newPlaying, (currentValue, newValue) => {
 
     }) */
-    onMounted(async() => {
+    onMounted(async () => {
       volumeChange(25)
     })
 
@@ -75,7 +75,6 @@ export default ({
     }
     function setMediaControls(title, artist, album, src) {
       if ('mediaSession' in navigator) {
-        // eslint-disable-next-line no-undef
         navigator.mediaSession.metadata = new MediaMetadata({
           title,
           artist,
@@ -290,12 +289,12 @@ export default ({
       >
         <a
           class="cursor-pointer hover:text-primary"
-          @click="goTo('ArtistDetails/' + nowPlaying.artistId)"
+          @click="goTo(`ArtistDetails/${nowPlaying.artistId}`)"
         >{{ nowPlaying.artist }}</a>
         <a> &nbsp;-&nbsp; </a>
         <a
           class="cursor-pointer hover:text-primary"
-          @click="goTo('AlbumDetails/' + nowPlaying.albumId)"
+          @click="goTo(`AlbumDetails/${nowPlaying.albumId}`)"
         >{{ nowPlaying.title }}</a>
       </div>
       <audio
