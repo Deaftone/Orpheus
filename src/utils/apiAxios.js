@@ -7,7 +7,7 @@ class ApolloConnector {
     console.log(userName)
     this.axios = axios.create({
       baseURL: 'https://navi.raspi.local/rest/',
-      timeout: 1000,
+      timeout: 5000,
       headers: { 'Content-Type': 'application/json' },
       params: {
         u: userName,
