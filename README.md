@@ -22,3 +22,4 @@ Tauri only allows connection to https endpoints so you will need to reverse prox
 
 ![ops_1](https://i.imgur.com/bOjPwTX.png)
 ![ops_2](https://i.imgur.com/jZ5jU7v.png)
+![ops_3](https://i.imgur.com/xmegG09.png)
