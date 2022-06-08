@@ -18,7 +18,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^3.0.0-4",
-    "@tauri-apps/api": "^1.0.0-rc.3",
+    "@tauri-apps/api": "^1.0.0-rc.6",
     "@vueform/slider": "^2.0.8",
     "axios": "^0.21.1",
     "daisyui": "^2.15.2",
@@ -30,7 +30,7 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1.0.0-rc.8",
+    "@tauri-apps/cli": "^1.0.0-rc.13",
     "@vitejs/plugin-vue": "^2.0.0",
     "@vue/compiler-sfc": "^3.0.5",
     "autoprefixer": "^10.4.0",
