@@ -62,15 +62,7 @@ export default {
         return str
     },
     async getAlbums() {
-      console.log('Got album call')
-      console.log(this.offset)
-      const data = (await this.$apollo.axios.get('/getAlbumList', {
-        params: {
-          type: 'newest',
-          size: this.size,
-          offset: this.offset,
-        },
-      })).data
+      const data = await this.$apollo.getAlbums(this.size, this.offset)
       const albums = data['subsonic-response'].albumList.album
       for (const album of albums)
         this.albums.push({ name: album.title, id: album.id, cover: `https://navi.raspi.local/rest/getCoverArt?u=${this.$apollo.axios.defaults.params.u}&s=${this.$apollo.axios.defaults.params.s}&t=${this.$apollo.axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300` })

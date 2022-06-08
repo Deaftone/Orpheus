@@ -59,13 +59,10 @@ export default {
       if (newP)
         newP.classList.add('gradient-border', 'border-solid', 'border-4', 'border-primary', 'font-bold')
     }
-    onMounted(async() => {
+    onMounted(async () => {
       observer.observe(sticky.value)
-      const data = (await $apollo.axios.get('/getAlbum', {
-        params: {
-          id: props.id,
-        },
-      })).data
+
+      const data = await $apollo.getArtistAlbums(props.id)
       const album = data['subsonic-response'].album
       info.title = album.name
       info.artist = album.artist

@@ -9,12 +9,8 @@ export default {
     const info = reactive({})
     const albums = reactive([])
     info.artistImage = 'https://www.offset.com/images/v2/artist_bio_placeholder.png'
-    onMounted(async() => {
-      const data = (await $apollo.axios.get('/getArtist', {
-        params: {
-          id: props.id,
-        },
-      })).data
+    onMounted(async () => {
+      const data = await $apollo.getArist(props.id)
       info.artistName = data['subsonic-response'].artist.name
       info.albumIndex = data['subsonic-response'].artist.album
       for (const album of info.albumIndex)
@@ -37,7 +33,7 @@ export default {
 
 <template>
   <div
-    :style="{ 'background-image': 'url(' + info.artistBanner + ')' }"
+    :style="{ 'background-image': `url(${info.artistBanner})` }"
     class="h-full bg-image "
   >
     <div
@@ -70,7 +66,7 @@ export default {
           v-for="album in albums"
           :key="album.id"
           class="rounded shadow-xl bg-neutral w-94 h-94 "
-          @click=" $router.push({path: `/AlbumDetails/${album.id}`})
+          @click=" $router.push({ path: `/AlbumDetails/${album.id}` })
           "
         >
           <div>
