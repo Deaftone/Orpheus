@@ -10,13 +10,14 @@ export default {
     const albums = reactive([])
     info.artistImage = 'https://www.offset.com/images/v2/artist_bio_placeholder.png'
     onMounted(async () => {
-      const data = await $apollo.getArist(props.id)
+      const data = await $apollo.getArtist(props.id)
       info.artistName = data['subsonic-response'].artist.name
       info.albumIndex = data['subsonic-response'].artist.album
       for (const album of info.albumIndex)
         albums.push({ id: album.id, title: album.title, cover: `https://navi.raspi.local/rest/getCoverArt?u=${$apollo.axios.defaults.params.u}&s=${$apollo.axios.defaults.params.s}&t=${$apollo.axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300` })
 
       const artistImage = await $apollo.axios.get(`http://localhost:3001/${info.artistName}`)
+      console.log(artistImage)
       info.artistImage = artistImage.data.image
       info.bio = `${artistImage.data.bio.slice(0, 1435)}....`
 
@@ -42,7 +43,8 @@ export default {
       <div class="card lg:card-side ">
         <figure>
           <img
-            class="object-contain w-full h-96"
+            class="object-contain"
+            style="width:auto;height:auto"
             :src="info.artistImage"
           >
         </figure>
