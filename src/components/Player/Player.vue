@@ -4,6 +4,9 @@ import '../../freqtimeupdate'
 import { computed, onMounted, ref, watch } from 'vue'
 import { usePlayerStore } from '../../stores/player'
 import AvCanvas from './Visualiser.vue'
+const userName = import.meta.env.VITE_USERNAME
+const token = import.meta.env.VITE_TOKEN
+const s = import.meta.env.VITE_S
 export default ({
   components: {
     Slider,
@@ -164,7 +167,7 @@ export default ({
         this.createAnalyser()
  */
       console.log(`Got play track ${JSON.stringify(track)}`)
-      appPlayer.value.src = `https://navi.raspi.local/rest/stream?u=***REMOVED***&t=***REMOVED***&s=558dbf&f=json&v=1.8.0&c=NavidromeUI&id=${track.id}&_=1627823120382`
+      appPlayer.value.src = `https://navi.raspi.local/rest/stream?u=${userName}&t=${token}&s=${s}&f=json&v=1.8.0&c=NavidromeUI&id=${track.id}&_=1627823120382`
       appPlayer.value.play()
       store.setIsPlaying(true)
       currentIcon.value = 'pause'

@@ -1,14 +1,18 @@
 import axios from 'axios'
+const userName = import.meta.env.VITE_USERNAME
+const token = import.meta.env.VITE_TOKEN
+const s = import.meta.env.VITE_S
 class ApolloConnector {
   constructor() {
+    console.log(userName)
     this.axios = axios.create({
       baseURL: 'https://navi.raspi.local/rest/',
       timeout: 1000,
       headers: { 'Content-Type': 'application/json' },
       params: {
-        u: '***REMOVED***',
-        t: '***REMOVED***',
-        s: '558dbf',
+        u: userName,
+        t: token,
+        s,
         f: 'json',
         c: 'Orpheus',
         v: '1.8.0',
