@@ -27,7 +27,7 @@ export default {
 <template>
   <div class="grid w-full grid-cols-3 gap-4 p-5 xl:grid-cols-11 lg:grid-cols-6">
     <div
-      v-for="artist in artists.slice(0, size)"
+      v-for="artist in artists"
       :key="artist.id"
       class="mx-auto transition duration-300 ease-in-out delay-150 hover:-translate-y-1 hover:scale-105"
       @click=" $router.push({ path: `/ArtistDetails/${artist.id}` })
