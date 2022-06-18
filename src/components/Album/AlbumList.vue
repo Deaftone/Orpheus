@@ -10,6 +10,10 @@ export default {
       type: Number,
       default: 56,
     },
+    scroller: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -51,7 +55,10 @@ export default {
   async mounted() {
     // await this.getAlbums()
     console.log(this.$refs.sticky)
-    this.observer.observe(this.$refs.sticky)
+    if (this.scroller)
+      this.observer.observe(this.$refs.sticky)
+    else
+      this.getAlbums()
   },
   methods: {
     truncateString(str, num) {
