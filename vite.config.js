@@ -10,13 +10,14 @@ export default defineConfig(() => {
 
   return {
     build: {
+      target: ['es2021', 'chrome97', 'safari13'],
+      minify: !process.env.TAURI_DEBUG,
+      sourcemap: !!process.env.TAURI_DEBUG,
+      emptyOutDir: true,
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'index.html'),
           nested: resolve(__dirname, 'splashscreen.html'),
-        },
-        output: {
-          inlineDynamicImports: true,
         },
       },
     },

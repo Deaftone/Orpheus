@@ -1,8 +1,8 @@
 const colors = require('tailwindcss/colors')
 module.exports = {
   content: [
-    './index.html','splashscreen.html',
-    './src/**/*.{vue,js,ts,jsx,tsx}'
+    './index.html', 'splashscreen.html',
+    './src/**/*.{vue,js,ts,jsx,tsx}',
   ],
   theme: {
     colors: {
@@ -31,9 +31,9 @@ module.exports = {
           '100%': { transform: 'translateX(0%)' },
         },
       },
-    }
+    },
   },
-  plugins: [require('@vueform/slider/tailwind'), require('daisyui'),  require('tailwind-scrollbar')],
+  plugins: [require('@vueform/slider/tailwind'), require('daisyui'), require('tailwind-scrollbar')],
   daisyui: {
     styled: true,
     themes: true,
