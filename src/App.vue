@@ -34,7 +34,7 @@ export default {
   methods: {
     loaded() {
       console.log('Splash removed')
-      // invoke('close_splashscreen')
+      invoke('close_splashscreen')
     },
     goTo(p) {
       console.log(p)
@@ -59,6 +59,7 @@ export default {
   },
 }
 </script>
+
 <template>
   <div class="flex flex-col h-screen overflow-hidden">
     <TitleBar v-if="isTauri()" />
@@ -158,15 +159,14 @@ export default {
 </template>
 
 <style>
-
 :root {
   --slider-connect-bg: hsl(var(--p));
   --slider-handle-ring-color: hsl(var(--af));
   --slider-handle-bg: hsl(var(--pf));
   --slider-bg: hsl(var(--b3));
-  --slider-handle-width: 12px;
-  --slider-handle-height: 12px;
-  --slider-height: 4px;
+  --slider-handle-width: 13px;
+  --slider-handle-height: 13px;
+  --slider-height: 8px;
   --slider-handle-ring-width: 3px;
   --slider-tooltip-radius: 3px;
 
