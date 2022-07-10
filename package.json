@@ -3,15 +3,12 @@
   "version": "0.0.0",
   "main": "main.js",
   "scripts": {
-    "dev": "concurrently \"vite\" \"tauri dev\"",
-    "build": "vite build && tauri build",
-    "debug": "vite build && tauri build --debug",
+    "dev-web": "vite",
+    "build-vite": "vite build",
+    "build": "vite-tauri build",
     "serve": "vite preview",
-    "start-server": "vite",
-    "test": "jest",
-    "info": "tauri info",
-    "ci": "start-server-and-test start-server http-get://localhost:3000 test",
-    "electron:start": "electron ."
+    "dev": "vite-tauri dev",
+    "test": "jest"
   },
   "dependencies": {
     "@antfu/eslint-config": "^0.25.1",
@@ -19,8 +16,9 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^3.0.0-4",
     "@tauri-apps/api": "^1.0.2",
-    "@vueform/slider": "^2.0.8",
+    "@vueform/slider": "^2.0.10",
     "axios": "^0.21.1",
+    "axios-tauri-adapter": "^0.1.1",
     "daisyui": "^2.18.1",
     "dotenv": "^16.0.1",
     "pinia": "^2.0.14",
@@ -45,6 +43,7 @@
     "start-server-and-test": "^1.13.1",
     "tailwindcss": "^3.1.5",
     "vite": "^2.9.14",
+    "vite-plugin-tauri": "^2.1.0",
     "vite-plugin-tips": "^1.0.2"
   }
 }
