@@ -29,7 +29,6 @@ export default {
       const index = this.songs.findIndex(x => x.id === id)
       // Slice songs at picked index
       const _songs = this.songs.slice(index, this.songs.length)
-      console.log(_songs)
       store.setQueue(_songs)
       store.setPlayingIndex(0)
       store.setNowPlaying(_songs[0])
@@ -61,25 +60,18 @@ export default {
     }
     onMounted(async () => {
       observer.observe(sticky.value)
-
-      const data = await $apollo.getArtistAlbums(props.id)
-      const album = data['subsonic-response'].album
-      info.title = album.name
-      info.artist = album.artist
-      info.artistId = album.artistId
-      info.albumId = album.id
-      const currentlyPlaying = store.nowPlaying || ''
-      let tempPlaying = null
-
+      const data = await $apollo.getArtistAlbum(props.id)
+      info.title = data.name
+      info.artist = data.artistName
+      info.artistId = data.artistId
+      info.albumId = data.id
+      const tempPlaying = null
       info.cover = $apollo.getCover(props.id)
-      for (const song of album.song) {
-        console.log(song)
-        songs.push({ id: song.id, number: 'FIX', title: song.title, cover: info.cover, albumName: info.title, artistId: album.artistId, albumId: album.id, artist: album.artist, type: String(song.contentType).slice(6, 20).toUpperCase(), length: convertTime(song.duration) })
-        // Check if currently playing song in in this track list. If so save and highlight it
-        if (song.id === currentlyPlaying.id)
-          tempPlaying = { title: song.title, id: song.id }
-      }
 
+      for (const song of data.songs)
+        songs.push({ id: song.id, number: 'FIX', title: song.title, cover: info.cover, albumName: info.title, artistId: info.artistId, albumId: info.albumId, artist: info.artist, type: 'test', length: 'test' })
+
+      // Check if currently playing song in in this track list. If so save and highlight it
       nextTick(() => {
         if (tempPlaying)
           highLightNowPlaying(null, tempPlaying)

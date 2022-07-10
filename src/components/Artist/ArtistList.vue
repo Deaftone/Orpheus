@@ -13,11 +13,8 @@ export default {
     const artists = ref([])
     onMounted(async () => {
       const data = await $apollo.getArtists()
-      const artistIndex = data['subsonic-response'].artists.index
-      for (const index of artistIndex) {
-        for (const artist of index.artist)
-          artists.value.push({ name: artist.name, id: artist.id })
-      }
+      for (const artist of data)
+        artists.value.push({ name: artist.name, id: artist.id })
     })
     return { artists }
   },

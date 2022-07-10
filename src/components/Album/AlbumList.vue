@@ -69,12 +69,12 @@ export default {
         return str
     },
     async getAlbums() {
-      const data = await this.$apollo.getAlbums(this.size, this.offset)
-      const albums = data['subsonic-response'].albumList.album
-      for (const album of albums)
-        this.albums.push({ name: album.title, id: album.id, cover: `https://navi.raspi.local/rest/getCoverArt?u=${this.$apollo.axios.defaults.params.u}&s=${this.$apollo.axios.defaults.params.s}&t=${this.$apollo.axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${album.id}&size=300` })
-
-      this.offset += 56
+      const data = await this.$apollo.getAlbums()
+      console.log(data.data)
+      for (const album of data.data)
+        this.albums.push({ name: album.name, id: album.id })
+      /*       for (const album of data)
+        console.log(album) */
     },
     onElementObserved(e) {
       e.forEach(({ target, isIntersecting }) => {

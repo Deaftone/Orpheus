@@ -1,7 +1,7 @@
 <script>
 import Slider from '@vueform/slider'
 import '../../freqtimeupdate'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, inject, onMounted, ref, watch } from 'vue'
 import { usePlayerStore } from '../../stores/player'
 import AvCanvas from './Visualiser.vue'
 const userName = import.meta.env.VITE_USERNAME
@@ -13,6 +13,7 @@ export default ({
     AvCanvas,
   },
   setup() {
+    const $apollo = inject('$apollo')
     const store = usePlayerStore()
     const appPlayer = ref(null)
     const nowPlaying = computed(() => store.nowPlaying)
@@ -167,7 +168,7 @@ export default ({
         this.createAnalyser()
  */
       console.log(`Got play track ${JSON.stringify(track)}`)
-      appPlayer.value.src = `https://navi.raspi.local/rest/stream?u=${userName}&t=${token}&s=${s}&f=json&v=1.8.0&c=NavidromeUI&id=${track.id}&_=1627823120382`
+      appPlayer.value.src = $apollo.stream(track.id)
       appPlayer.value.play()
       store.setIsPlaying(true)
       currentIcon.value = 'pause'
