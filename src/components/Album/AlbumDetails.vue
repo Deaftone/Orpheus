@@ -1,13 +1,13 @@
 <script>
 import { computed, inject, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
-import apollo from '../../utils/apiAxios'
+import deaftone from '../../utils/apiAxios'
 import { usePlayerStore } from '../../stores/player'
 
 export default {
   name: 'AlbumDetails',
   props: { id: { type: String, required: true } },
   setup(props) {
-    const $apollo = inject('$apollo')
+    const $deaftone = inject('$deaftone')
     const store = usePlayerStore()
     const sticky = ref(null)
     const albumBar = ref(null)
@@ -60,13 +60,13 @@ export default {
     }
     onMounted(async () => {
       observer.observe(sticky.value)
-      const data = await $apollo.getArtistAlbum(props.id)
+      const data = await $deaftone.getArtistAlbum(props.id)
       info.title = data.name
       info.artist = data.artistName
       info.artistId = data.artistId
       info.albumId = data.id
       const tempPlaying = null
-      info.cover = $apollo.getCover(props.id)
+      info.cover = $deaftone.getCover(props.id)
 
       for (const song of data.songs)
         songs.push({ id: song.id, number: 'FIX', title: song.title, cover: info.cover, albumName: info.title, artistId: info.artistId, albumId: info.albumId, artist: info.artist, type: 'test', length: 'test' })

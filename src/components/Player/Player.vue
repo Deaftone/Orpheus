@@ -13,7 +13,7 @@ export default ({
     AvCanvas,
   },
   setup() {
-    const $apollo = inject('$apollo')
+    const $deaftone = inject('$deaftone')
     const store = usePlayerStore()
     const appPlayer = ref(null)
     const nowPlaying = computed(() => store.nowPlaying)
@@ -168,7 +168,7 @@ export default ({
         this.createAnalyser()
  */
       console.log(`Got play track ${JSON.stringify(track)}`)
-      appPlayer.value.src = $apollo.stream(track.id)
+      appPlayer.value.src = $deaftone.stream(track.id)
       appPlayer.value.play()
       store.setIsPlaying(true)
       currentIcon.value = 'pause'

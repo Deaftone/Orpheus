@@ -4,12 +4,12 @@ const userName = import.meta.env.VITE_USERNAME
 const token = import.meta.env.VITE_TOKEN
 const s = import.meta.env.VITE_S
 
-class ApolloConnector {
+class DeaftoneConnector {
   constructor() {
     console.log(userName)
     this.axios = axios.create({
       adapter: window.__TAURI__ ? axiosTauriAdapter : null,
-      baseURL: 'https://apollo.raspi.local',
+      baseURL: 'https://deaftone.raspi.local',
       timeout: 5000,
       headers: { 'Content-Type': 'application/json' },
     })
@@ -59,4 +59,4 @@ class ApolloConnector {
   }
 }
 
-export default ApolloConnector
+export default DeaftoneConnector

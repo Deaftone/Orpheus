@@ -5,16 +5,16 @@ export default {
   name: 'ArtistDetails',
   props: { id: { type: String, required: true } },
   setup(props) {
-    const $apollo = inject('$apollo')
+    const $deaftone = inject('$deaftone')
     const info = reactive({})
     const albums = reactive([])
     info.artistImage = 'https://www.offset.com/images/v2/artist_bio_placeholder.png'
     onMounted(async () => {
-      const data = await $apollo.getArtist(props.id)
+      const data = await $deaftone.getArtist(props.id)
       for (const album of data.albums)
         albums.push({ id: album.id, title: album.name, cover: '' })
 
-      const artistImage = await $apollo.axios.get(`http://localhost:3001/${info.artistName}`)
+      const artistImage = await $deaftone.axios.get(`http://localhost:3001/${info.artistName}`)
       console.log(artistImage)
       info.artistImage = artistImage.data.image
       info.bio = `${artistImage.data.bio.slice(0, 1435)}....`

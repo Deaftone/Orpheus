@@ -4,7 +4,7 @@ export default {
   name: 'AlbumList',
   components: {
   },
-  inject: ['$apollo'],
+  inject: ['$deaftone'],
   props: {
     size: {
       type: Number,
@@ -69,7 +69,7 @@ export default {
         return str
     },
     async getAlbums() {
-      const data = await this.$apollo.getAlbums()
+      const data = await this.$deaftone.getAlbums()
       console.log(data.data)
       for (const album of data.data)
         this.albums.push({ name: album.name, id: album.id })
