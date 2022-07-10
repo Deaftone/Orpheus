@@ -7,7 +7,7 @@ use tauri::Manager;
 
 // Create the command:
 #[tauri::command]
-fn close_splashscreen(window: tauri::Window) {
+async fn close_splashscreen(window: tauri::Window) {
   // Close splashscreen
   if let Some(splashscreen) = window.get_window("splashscreen") {
     splashscreen.close().unwrap();
