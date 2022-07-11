@@ -138,6 +138,7 @@ export default {
         </header>
         <main
           role="main"
+
           class="w-full h-full overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700 "
         >
           <router-view v-slot="{ Component }">

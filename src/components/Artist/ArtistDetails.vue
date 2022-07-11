@@ -11,14 +11,17 @@ export default {
     info.artistImage = 'https://www.offset.com/images/v2/artist_bio_placeholder.png'
     onMounted(async () => {
       const data = await $deaftone.getArtist(props.id)
+      console.log(data.name)
       for (const album of data.albums)
-        albums.push({ id: album.id, title: album.name, cover: '' })
+        albums.push({ id: album.id, title: album.name, cover: 'https://e.snmc.io/i/600/w/39e1badce8994960bfb051184dacea0b/7585491/pierre-bourne-the-life-of-pierre-4-Cover-Art.jpg' })
 
-      const artistImage = await $deaftone.axios.get(`http://localhost:3001/${info.artistName}`)
-      console.log(artistImage)
-      info.artistImage = artistImage.data.image
-      info.bio = `${artistImage.data.bio.slice(0, 1435)}....`
-
+      // const artistImage = await $deaftone.axios.get(`http://localhost:3001/${info.artistName}`)
+      // console.log(artistImage)
+      // info.artistImage = artistImage.data.image
+      // info.bio = `${artistImage.data.bio.slice(0, 1435)}....`
+      info.artistImage = data.image
+      info.bio = data.bio
+      info.artistName = data.name
       info.artistBanner = info.artistImage.data.banner
     })
 
@@ -32,17 +35,16 @@ export default {
 
 <template>
   <div
-    :style="{ 'background-image': `url(${info.artistBanner})` }"
-    class="h-full bg-image "
+    class="h-full bg-image bg-[url(https://media.vogue.co.uk/photos/60898f2d9825ee933d17acfb/2:3/w_2240,c_limit/Billie%20Eilish%20insert_02.jpg)]"
   >
     <div
-      class="h-full p-10 bg-filter "
+      class="h-full p-10 bg-filter"
     >
       <div class="card lg:card-side ">
         <figure>
           <img
             class="object-contain"
-            style="width:auto;height:auto"
+            style="width:320px;height:320px"
             :src="info.artistImage"
           >
         </figure>
@@ -65,15 +67,14 @@ export default {
         <div
           v-for="album in albums"
           :key="album.id"
-          class="rounded shadow-xl bg-neutral w-94 h-94 "
+          class="rounded shadow-xl bg-neutral "
           @click=" $router.push({ path: `/AlbumDetails/${album.id}` })
           "
         >
           <div>
-            <div class="max-w-sm overflow-hidden ">
+            <div class="overflow-hidden ">
               <img
-                class="w-96 h-94"
-                style="width:200px;height:200px"
+                style="width:auto;height:auto"
                 :src="album.cover"
               >
               <div class="justify-center p-4">
@@ -91,9 +92,10 @@ export default {
 
 <style scoped>
 .bg-image {
-  background-position: center;
-  background-repeat: no-repeat;
+
   background-size: cover;
+  background-attachment: fixed;
+
 }
 .bg-filter {
   backdrop-filter: blur(7px) brightness(30%);

@@ -72,7 +72,7 @@ export default {
       const data = await this.$deaftone.getAlbums()
       console.log(data.data)
       for (const album of data.data)
-        this.albums.push({ name: album.name, id: album.id })
+        this.albums.push({ name: album.name, id: album.id, cover: 'https://e.snmc.io/i/600/w/39e1badce8994960bfb051184dacea0b/7585491/pierre-bourne-the-life-of-pierre-4-Cover-Art.jpg' })
       /*       for (const album of data)
         console.log(album) */
     },
