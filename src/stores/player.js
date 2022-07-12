@@ -8,45 +8,43 @@ export const usePlayerStore = defineStore('player', {
     previousQueue: [],
     playingIndex: 0,
     searchQuery: null,
-    isPlaying: false,
+    isPlaying: false
   }),
 
   actions: {
-    setNowPlaying(payload) {
+    setNowPlaying (payload) {
       this.nowPlaying = payload
     },
-    setPreviousPlaying(payload) {
+    setPreviousPlaying (payload) {
       this.previousPlaying = payload
     },
-    setQueue(payload) {
+    setQueue (payload) {
       this.queue = payload
     },
-    addToQueue(payload) {
+    addToQueue (payload) {
       this.queue.push(payload)
     },
-    addToPQueue(payload) {
+    addToPQueue (payload) {
       this.previousQueue.push(payload)
     },
-    setSearchQuery(payload) {
+    setSearchQuery (payload) {
       this.searchQuery = payload
     },
-    setIsPlaying(payload) {
+    setIsPlaying (payload) {
       this.isPlaying = payload
     },
-    setPlayingIndex(payload) {
+    setPlayingIndex (payload) {
       this.playingIndex = payload
     },
-    setCurrentTheme(payload) {
+    setCurrentTheme (payload) {
       this.currentTheme = payload
     },
-    previousTrack() {
-      if (this.playingIndex > 0)
-        this.playingIndex--
+    previousTrack () {
+      if (this.playingIndex > 0) { this.playingIndex-- }
     },
-    nextTrack() {
+    nextTrack () {
       const tp = this.playingIndex + 1
-      if (this.queue[tp])
-        this.playingIndex++
-    },
-  },
+      if (this.queue[tp]) { this.playingIndex++ }
+    }
+  }
 })

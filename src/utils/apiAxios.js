@@ -5,25 +5,25 @@ const token = import.meta.env.VITE_TOKEN
 const s = import.meta.env.VITE_S
 
 class DeaftoneConnector {
-  constructor() {
+  constructor () {
     console.log(userName)
     this.axios = axios.create({
       adapter: window.__TAURI__ ? axiosTauriAdapter : null,
       baseURL: 'https://apollo.raspi.local',
       timeout: 5000,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' }
     })
   }
 
-  async getArtists() {
+  async getArtists () {
     return (await this.axios.get('/artists')).data
   }
 
-  async getArtist(artistId) {
+  async getArtist (artistId) {
     return (await this.axios.get(`/artists/${artistId}`)).data
   }
 
-  async getAlbums(size, offset) {
+  async getAlbums (size, offset) {
     /*  return (await this.axios.get('/getAlbumList', {
       params: {
         type: 'newest',
@@ -34,27 +34,27 @@ class DeaftoneConnector {
     return await this.axios.get('/getAlbumList')
   }
 
-  async getArtistAlbum(albumId) {
+  async getArtistAlbum (albumId) {
     return (await this.axios.get('/getArtistAlbum', {
       params: {
-        id: albumId,
-      },
+        id: albumId
+      }
     })).data
   }
 
-  stream(id) {
+  stream (id) {
     return `${this.axios.defaults.baseURL}/stream/${id}`
   }
 
-  async getArtistAlbums(artistId) {
+  async getArtistAlbums (artistId) {
     return (await this.axios.get('/getAlbum', {
       params: {
-        id: artistId,
-      },
+        id: artistId
+      }
     })).data
   }
 
-  getCover(id) {
+  getCover (id) {
     return 'https://e.snmc.io/i/600/w/39e1badce8994960bfb051184dacea0b/7585491/pierre-bourne-the-life-of-pierre-4-Cover-Art.jpg'
     // return `https://navi.raspi.local/rest/getCoverArt?u=${this.axios.defaults.params.u}&s=${this.axios.defaults.params.s}&t=${this.axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${id}`
   }

@@ -5,8 +5,8 @@ export default {
   name: 'Home',
   components: { AlbumList, ArtistList },
   props: {
-    msg: String,
-  },
+    msg: String
+  }
 }
 </script>
 
@@ -52,7 +52,10 @@ export default {
     <h2 class="pl-10">
       New Albums
     </h2>
-    <AlbumList :size="8" :scroller="false" />
+    <AlbumList
+      :size="8"
+      :scroller="false"
+    />
   </div>
   <div class="divider" />
   <div>

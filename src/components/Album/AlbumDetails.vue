@@ -38,12 +38,12 @@ export default {
       store.setPlayingIndex(0)
       store.setNowPlaying(_songs[0])
     }
-    function convertTime (seconds) {
+    /*     function convertTime (seconds) {
       const format = (val) => `0${Math.floor(val)}`.slice(-2)
       // var hours = seconds / 3600;
       const minutes = (seconds % 3600) / 60
       return [minutes, seconds % 60].map(format).join(':')
-    }
+    } */
     function onElementObserved (e) {
       e.forEach(({ target, isIntersecting }) => {
         albumBar.value.classList.toggle('bg-base-200', !isIntersecting)
@@ -84,7 +84,6 @@ export default {
       info.artist = data.artistName
       info.artistId = data.artistId
       info.albumId = data.id
-      const tempPlaying = null
       info.cover = $deaftone.getCover(props.id)
 
       for (const song of data.songs) {
@@ -104,7 +103,7 @@ export default {
     })
     // Check if currently playing song in in this track list. If so save and highlight it
     nextTick(() => {
-      if (tempPlaying) { highLightNowPlaying(null, tempPlaying) }
+      // if (tempPlaying) { highLightNowPlaying(null, tempPlaying) }
     })
     onUnmounted(() => {
       observer.disconnect()
