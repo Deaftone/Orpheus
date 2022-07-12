@@ -138,19 +138,18 @@ export default {
         </header>
         <main
           role="main"
-
-          class="w-full h-full overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700 "
+          class="overflow-y-scroll flex-1 scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700 "
         >
           <router-view v-slot="{ Component }">
-            <transition name="fade">
-              <component :is="Component" />
-            </transition>
+            <!--             <transition name="fade"> -->
+            <component :is="Component" />
+            <!--             </transition> -->
           </router-view>
         </main>
       </div>
-      <div class="flex flex-col w-64 bg-neutral">
+      <!--       <div class="flex flex-col w-64 bg-neutral">
         <RightSidebar />
-      </div>
+      </div> -->
     </div>
     <!-- If we remove the pt-1 and bg we get a weird 1 px size bug for the background image on the ArtistDetails page -->
     <footer class="text-center bg-base-200">
@@ -174,11 +173,12 @@ export default {
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
+
 </style>
