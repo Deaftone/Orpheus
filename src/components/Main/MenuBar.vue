@@ -6,8 +6,8 @@ export default {
   name: 'MenuBar',
   components: {
     SearchBox,
-    ThemeSwitcher,
-  },
+    ThemeSwitcher
+  }
 }
 </script>
 

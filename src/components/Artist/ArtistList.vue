@@ -5,19 +5,18 @@ export default {
   props: {
     size: {
       type: Number,
-      default: 56,
-    },
+      default: 56
+    }
   },
-  setup(props) {
+  setup (props) {
     const $deaftone = inject('$deaftone')
     const artists = ref([])
     onMounted(async () => {
       const data = await $deaftone.getArtists()
-      for (const artist of data)
-        artists.value.push({ name: artist.name, id: artist.id })
+      for (const artist of data) { artists.value.push({ name: artist.name, id: artist.id }) }
     })
     return { artists }
-  },
+  }
 }
 </script>
 

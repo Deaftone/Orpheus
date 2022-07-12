@@ -4,9 +4,9 @@ import { computed, reactive, ref, watch } from 'vue'
 import { usePlayerStore } from '../../stores/player'
 export default {
   components: {
-    draggable,
+    draggable
   },
-  setup() {
+  setup () {
     const store = usePlayerStore()
     const playingQueue = computed(() => store.queue)
     const nowPlaying = computed(() => store.nowPlaying)
@@ -16,8 +16,7 @@ export default {
       setTimeout(() => {
         let oldP
 
-        if (oldValue)
-          oldP = document.getElementById(`${oldValue.id}_sidebar`)
+        if (oldValue) { oldP = document.getElementById(`${oldValue.id}_sidebar`) }
 
         const newP = document.getElementById(`${newValue.id}_sidebar`)
 
@@ -37,9 +36,9 @@ export default {
     })
     return {
       playingQueue,
-      nowPlaying,
+      nowPlaying
     }
-  },
+  }
 }
 </script>
 

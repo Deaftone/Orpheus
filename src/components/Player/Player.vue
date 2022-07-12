@@ -10,9 +10,9 @@ const s = import.meta.env.VITE_S
 export default ({
   components: {
     Slider,
-    AvCanvas,
+    AvCanvas
   },
-  setup() {
+  setup () {
     const $deaftone = inject('$deaftone')
     const store = usePlayerStore()
     const appPlayer = ref(null)
@@ -27,8 +27,7 @@ export default ({
     let paused = false
     watch(isPlaying, (currentValue, oldValue) => {
       console.log('test')
-      if (isPlaying.value)
-        console.log('Audio playback started.')
+      if (isPlaying.value) { console.log('Audio playback started.') }
       console.log(listenerActive)
       // prevent starting multiple listeners at the same time
       if (!listenerActive) {
@@ -59,7 +58,7 @@ export default ({
       volumeChange(25)
     })
 
-    function toggleVis() {
+    function toggleVis () {
       /*
         Fix me
         For some reason when creating a new AudioCtx the player volume goes up
@@ -69,23 +68,22 @@ export default ({
       if (this.visToggled) {
         // this.src.connect(this.myAnalyser)
         // this.myAnalyser.connect(this.ctx.destination)
-      }
-      else {
+      } else {
         // this.src.disconnect(this.myAnalyser)
         // this.myAnalyser.disconnect(this.ctx.destination)
 
       }
       // document.getElementById('barC').classList.toggle('pb-3')
     }
-    function setMediaControls(title, artist, album, src) {
+    function setMediaControls (title, artist, album, src) {
       if ('mediaSession' in navigator) {
         navigator.mediaSession.metadata = new MediaMetadata({
           title,
           artist,
           album,
           artwork: [
-            { src: src || '', sizes: '256x256', type: 'image/png' },
-          ],
+            { src: src || '', sizes: '256x256', type: 'image/png' }
+          ]
         })
 
         navigator.mediaSession.setActionHandler('play', () => { playPause() })
@@ -94,17 +92,17 @@ export default ({
         navigator.mediaSession.setActionHandler('nexttrack', () => { nextTrack() })
       }
     }
-    function convertTime(seconds) {
+    function convertTime (seconds) {
       const format = val => `0${Math.floor(val)}`.slice(-2)
       // var hours = seconds / 3600;
       const minutes = (seconds % 3600) / 60
       return [minutes, seconds % 60].map(format).join(':')
     }
-    function goTo(p) {
+    function goTo (p) {
       console.log(p)
       this.$router.push({ path: `/${p}` })
     }
-    function createAnalyser() {
+    function createAnalyser () {
       this.ctx = new AudioContext()
       this.src = this.ctx.createMediaElementSource(appPlayer)
       this.ctx.crossOrigin = 'anonymous'
@@ -114,7 +112,7 @@ export default ({
       this.myAnalyser.fftSize = 8192
       this.myAnalyser.connect(this.ctx.destination)
     }
-    function barChange(e) {
+    function barChange (e) {
       const time = e / 100 * appPlayer.value.duration
       const diff = Math.abs(time - appPlayer.value.currentTime)
       if (diff > 0.1) {
@@ -122,15 +120,14 @@ export default ({
         appPlayer.value.currentTime = time
       }
     }
-    function previosTrack() {
+    function previosTrack () {
       const track = store.previousQueue.pop()
       store.previousTrack()
-      if (track)
-        store.setNowPlaying(track)
+      if (track) { store.setNowPlaying(track) }
 
       console.log('Previous track clicked')
     }
-    function nextTrack() {
+    function nextTrack () {
       // console.log(this.$store.state.queue.length)
       // console.log(this.$store.state.playingIndex)
       console.log(`Adding to pqueue${JSON.stringify(store.nowPlaying)}`)
@@ -138,14 +135,13 @@ export default ({
       store.nextTrack()
       const track = store.queue[store.playingIndex]
       console.log(`Next track update ${JSON.stringify(track)}`)
-      if (track)
-        store.setNowPlaying(track)
+      if (track) { store.setNowPlaying(track) }
     }
-    function volumeChange(e) {
+    function volumeChange (e) {
       appPlayer.value.volume = e / 100 / 2
       console.log(appPlayer.value.volume)
     }
-    function playPause() {
+    function playPause () {
       if (paused) {
         console.log('Play/Pause -- Resume')
         store.isPlaying = true
@@ -153,8 +149,7 @@ export default ({
         appPlayer.value.play()
         store.setIsPlaying(true)
         currentIcon.value = 'pause'
-      }
-      else {
+      } else {
         console.log('Play/Pause -- Pause')
         store.isPlaying = false
         paused = true
@@ -163,7 +158,7 @@ export default ({
         currentIcon.value = 'play'
       }
     }
-    function playTrack(track) {
+    function playTrack (track) {
       /*       if (!this.myAnalyser)
         this.createAnalyser()
  */
@@ -173,7 +168,7 @@ export default ({
       store.setIsPlaying(true)
       currentIcon.value = 'pause'
     }
-    function playbackListener() {
+    function playbackListener () {
       const percentage = (appPlayer.value.currentTime / appPlayer.value.duration) * 100
       duration.value = convertTime(appPlayer.value.duration)
       percentPlayed.value = percentage
@@ -183,12 +178,11 @@ export default ({
     }
     const clicked = false
 
-    function togglePlayButton() {
+    function togglePlayButton () {
       if (store.isPlaying) {
         currentIcon.value = 'play'
         console.log('Set to play')
-      }
-      else {
+      } else {
         currentIcon.value = 'pause'
         console.log('Set to pause')
       }
@@ -210,19 +204,19 @@ export default ({
       percentPlayed,
       playTrack,
       playbackListener,
-      currentIcon,
+      currentIcon
     }
   },
-  data() {
+  data () {
     return {
       myAnalyser: null,
       myAnalyserHidden: null,
       ctx: null,
       src: null,
       visToggled: false,
-      volume: 25,
+      volume: 25
     }
-  },
+  }
 })
 </script>
 

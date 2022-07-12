@@ -10,53 +10,51 @@ export default {
     Player,
     TitleBar,
     MenuBar,
-    RightSidebar,
+    RightSidebar
   },
-  data() {
+  data () {
     return {
-      isOpen: true,
+      isOpen: true
     }
   },
   computed: {
-    count() {
+    count () {
       return this.$store.state.count
-    },
+    }
   },
-  mounted() {
+  mounted () {
     // With the Tauri global script:
     document.addEventListener('DOMContentLoaded', () => {
       // This will wait for the window to load, but you could
       // run this function on whatever trigger you want
-      if (this.isTauri())
-        this.loaded()
+      if (this.isTauri()) { this.loaded() }
     })
   },
   methods: {
-    loaded() {
+    loaded () {
       console.log('Splash removed')
       invoke('close_splashscreen')
     },
-    goTo(p) {
+    goTo (p) {
       console.log(p)
       this.$router.push({ path: `/${p}` })
     },
-    open() {
+    open () {
       if (this.isOpen) {
         this.isOpen = false
         console.log('Got close')
-      }
-      else {
+      } else {
         console.log('Got open')
         this.isOpen = true
       }
     },
-    isTauri() {
+    isTauri () {
       if (window.__TAURI__) {
         console.log('Tauri')
         return true
       } return false
-    },
-  },
+    }
+  }
 }
 </script>
 
@@ -138,7 +136,7 @@ export default {
         </header>
         <main
           role="main"
-          class="overflow-y-scroll flex-1 scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700 "
+          class="flex-1 overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700 "
         >
           <router-view v-slot="{ Component }">
             <!--             <transition name="fade"> -->

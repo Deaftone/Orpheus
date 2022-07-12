@@ -1,31 +1,333 @@
 <script>
 export default {
-  name: 'Test',
-  data() {
-    return {
-      artists: [{ name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }, { name: 'Eminem', image: 'https://e-cdn-images.dzcdn.net/images/artist/0707267475580b1b82f4da20a1b295c6/264x264-000000-80-0-0.jpg' }],
-    }
+  name: 'TestVue',
+  setup(props) {
   },
 }
 </script>
+
 <template>
-  <div class="grid w-full grid-cols-1 gap-4 p-5 md:grid-cols-6 lg:grid-cols-10">
+  <div
+    class="h-full bg-image bg-[url(https://media.vogue.co.uk/photos/60898f2d9825ee933d17acfb/2:3/w_2240,c_limit/Billie%20Eilish%20insert_02.jpg)]"
+  >
     <div
-      v-for="artist in artists"
-      :key="artist.name"
-      class="flex justify-center p-1 rounded-lg bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500"
+      class="p-10 bg-filter min-h-full"
     >
-      <div class="text-center">
-        <img
-          class="rounded-full"
-          src="https://e-cdn-images.dzcdn.net/images/artist/8b6e535e08ad7c5cb312102a5ede6c1e/264x264-000000-80-0-0.jpg"
+      <div class="grid overflow-hidden grid-cols-5 auto-rows-auto gap-2 ">
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
         >
-        <a>{{ artist.name }}</a>
+          10
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          11
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          12
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          13
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          14
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          15
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          16
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          17
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          18
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          19
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          20
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          21
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          22
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          23
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          24
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          25
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          26
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          27
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          28
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          29
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          30
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          30
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          30
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          30
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          30
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          30
+        </div>
+
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          30
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          30
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          30
+        </div>
+        <div
+          class="	
+		text-gray-100
+		min-w-full
+		h-32
+		min-h-full
+		rounded"
+        >
+          30
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.bg-image {
 
+  background-size: cover;
+  background-attachment: fixed;
+
+}
+.bg-filter {
+  backdrop-filter: blur(7px) brightness(30%);
+}
 </style>

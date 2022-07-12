@@ -3,6 +3,8 @@
 "editor.detectIndentation": false,
 "eslint.alwaysShowStatus": true,
 "prettier.enable": false,
+"vetur.validation.style": false,
+"vetur.validation.template": false,
 "editor.codeActionsOnSave": {
   "source.fixAll.eslint": true
 },
@@ -31,5 +33,11 @@
 "**/venv/**": true,
 "env-*": true
 },
-"editor.tabSize": 2
+"editor.tabSize": 2,
+"[vue]": {
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+},
+"[javascript]": {
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint""
+},
 }

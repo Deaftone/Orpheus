@@ -1,12 +1,20 @@
 <script>
-import { computed, inject, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
-import deaftone from '../../utils/apiAxios'
+import {
+  computed,
+  inject,
+  nextTick,
+  onMounted,
+  onUnmounted,
+  reactive,
+  ref,
+  watch
+} from 'vue'
 import { usePlayerStore } from '../../stores/player'
 
 export default {
   name: 'AlbumDetails',
   props: { id: { type: String, required: true } },
-  setup(props) {
+  setup (props) {
     const $deaftone = inject('$deaftone')
     const store = usePlayerStore()
     const sticky = ref(null)
@@ -14,49 +22,60 @@ export default {
     const info = reactive({})
     const songs = reactive([])
     const nowPlaying = computed(() => store.nowPlaying)
-    const observer = new IntersectionObserver(
-      onElementObserved,
-      {
-        root: null,
-        threshold: 0.9,
-      },
-    )
+    const observer = new IntersectionObserver(onElementObserved, {
+      root: null,
+      threshold: 0.9
+    })
     watch(nowPlaying, (newValue, oldPlaying) => {
       highLightNowPlaying(oldPlaying, newValue)
     })
-    function playTrack(title, id) {
+    function playTrack (title, id) {
       // Get clicked song index
-      const index = this.songs.findIndex(x => x.id === id)
+      const index = this.songs.findIndex((x) => x.id === id)
       // Slice songs at picked index
       const _songs = this.songs.slice(index, this.songs.length)
       store.setQueue(_songs)
       store.setPlayingIndex(0)
       store.setNowPlaying(_songs[0])
     }
-    function convertTime(seconds) {
-      const format = val => `0${Math.floor(val)}`.slice(-2)
+    function convertTime (seconds) {
+      const format = (val) => `0${Math.floor(val)}`.slice(-2)
       // var hours = seconds / 3600;
       const minutes = (seconds % 3600) / 60
       return [minutes, seconds % 60].map(format).join(':')
     }
-    function onElementObserved(e) {
+    function onElementObserved (e) {
       e.forEach(({ target, isIntersecting }) => {
         albumBar.value.classList.toggle('bg-base-200', !isIntersecting)
       })
     }
-    function highLightNowPlaying(oldPlaying, newPlaying) {
+
+    function highLightNowPlaying (oldPlaying, newPlaying) {
       let oldP
 
-      if (oldPlaying)
-        oldP = document.getElementById(oldPlaying.id)
+      if (oldPlaying) oldP = document.getElementById(oldPlaying.id)
 
       const newP = document.getElementById(newPlaying.id)
 
-      if (oldP)
-        oldP.classList.remove('gradient-border', 'border-solid', 'border-4', 'border-primary', 'font-bold')
+      if (oldP) {
+        oldP.classList.remove(
+          'gradient-border',
+          'border-solid',
+          'border-4',
+          'border-primary',
+          'font-bold'
+        )
+      }
 
-      if (newP)
-        newP.classList.add('gradient-border', 'border-solid', 'border-4', 'border-primary', 'font-bold')
+      if (newP) {
+        newP.classList.add(
+          'gradient-border',
+          'border-solid',
+          'border-4',
+          'border-primary',
+          'font-bold'
+        )
+      }
     }
     onMounted(async () => {
       observer.observe(sticky.value)
@@ -68,14 +87,24 @@ export default {
       const tempPlaying = null
       info.cover = $deaftone.getCover(props.id)
 
-      for (const song of data.songs)
-        songs.push({ id: song.id, number: 'FIX', title: song.title, cover: info.cover, albumName: info.title, artistId: info.artistId, albumId: info.albumId, artist: info.artist, type: 'test', length: 'test' })
-
-      // Check if currently playing song in in this track list. If so save and highlight it
-      nextTick(() => {
-        if (tempPlaying)
-          highLightNowPlaying(null, tempPlaying)
-      })
+      for (const song of data.songs) {
+        songs.push({
+          id: song.id,
+          number: 'FIX',
+          title: song.title,
+          cover: info.cover,
+          albumName: info.title,
+          artistId: info.artistId,
+          albumId: info.albumId,
+          artist: info.artist,
+          type: 'test',
+          length: 'test'
+        })
+      }
+    })
+    // Check if currently playing song in in this track list. If so save and highlight it
+    nextTick(() => {
+      if (tempPlaying) { highLightNowPlaying(null, tempPlaying) }
     })
     onUnmounted(() => {
       observer.disconnect()
@@ -89,15 +118,15 @@ export default {
       highLightNowPlaying,
       sticky,
       songs,
-      info,
+      info
     }
-  },
+  }
 }
 </script>
 
 <template>
   <div class="grid grid-cols-1 gap-5 pt-10">
-    <div class=" justify-center pl-10 pr-10 lg:pr-40 lg:pl-40 lg:block">
+    <div class="justify-center pl-10 pr-10 lg:pr-40 lg:pl-40 lg:block">
       <div class="card lg:card-side bg-base-300">
         <figure>
           <img
@@ -105,7 +134,7 @@ export default {
             :src="info.cover"
           >
         </figure>
-        <div class="card-body ">
+        <div class="card-body">
           <h2 class="text-xl font-bold card-title lg:text-6xl">
             {{ info.title }}
           </h2>
@@ -120,7 +149,7 @@ export default {
     </div>
     <div
       ref="sticky"
-      style="height:0.1px"
+      style="height: 0.1px"
     />
     <!-- Bug where the currently playing track is above this in z-index -->
     <div
