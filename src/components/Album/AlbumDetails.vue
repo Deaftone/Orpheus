@@ -96,11 +96,14 @@ export default {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-5 pt-10 pb-10">
-    <div class="flex justify-center w-full pl-10 pr-10 lg:pr-40 lg:pl-40 lg:block">
+  <div class="grid grid-cols-1 gap-5 pt-10">
+    <div class=" justify-center pl-10 pr-10 lg:pr-40 lg:pl-40 lg:block">
       <div class="card lg:card-side bg-base-300">
         <figure>
-          <img class="object-contain w-full h-72" :src="info.cover">
+          <img
+            class="object-contain w-full h-72"
+            :src="info.cover"
+          >
         </figure>
         <div class="card-body ">
           <h2 class="text-xl font-bold card-title lg:text-6xl">
@@ -115,7 +118,10 @@ export default {
         </div>
       </div>
     </div>
-    <div ref="sticky" style="height:0.1px" />
+    <div
+      ref="sticky"
+      style="height:0.1px"
+    />
     <!-- Bug where the currently playing track is above this in z-index -->
     <div
       ref="albumBar"
