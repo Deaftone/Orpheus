@@ -45,14 +45,7 @@
         "timestampUrl": ""
       }
     },
-    "updater": {
-      "dialog": true,
-      "active": true,
-      "endpoints": [
-        "https://update.deaftone.org/v1/{{target}}/{{arch}}/{{current_version}}",
-        "https://update.deaftone.org/{{target}}/{{current_version}}"
-      ]
-    },
+
     "allowlist": {
       "all": true,
       "http": {
