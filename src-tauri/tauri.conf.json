@@ -1,7 +1,7 @@
 {
   "package": {
     "productName": "Orpheus",
-    "version": "0.1.2"
+    "version": "0.1.1"
   },
   "build": {
     "distDir": "../dist",
@@ -10,6 +10,7 @@
     "beforeBuildCommand": "",
     "withGlobalTauri": true
   },
+  
   "tauri": {
     "bundle": {
       "active": true,
@@ -45,7 +46,12 @@
       }
     },
     "updater": {
-      "active": false
+      "dialog": true,
+      "active": true,
+      "endpoints": [
+        "https://update.deaftone.org/v1/{{target}}/{{arch}}/{{current_version}}",
+        "https://update.deaftone.org/{{target}}/{{current_version}}"
+      ]
     },
     "allowlist": {
       "all": true,
