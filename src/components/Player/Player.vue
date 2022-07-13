@@ -4,9 +4,6 @@ import '../../freqtimeupdate'
 import { computed, inject, onMounted, ref, watch } from 'vue'
 import { usePlayerStore } from '../../stores/player'
 import AvCanvas from './Visualiser.vue'
-const userName = import.meta.env.VITE_USERNAME
-const token = import.meta.env.VITE_TOKEN
-const s = import.meta.env.VITE_S
 export default ({
   components: {
     Slider,
@@ -176,7 +173,7 @@ export default ({
       eTime.value = convertTime(seconds)
       // this.playbackTime = appPlayer.value.currentTime
     }
-    const clicked = false
+    /*     const clicked = false
 
     function togglePlayButton () {
       if (store.isPlaying) {
@@ -186,7 +183,7 @@ export default ({
         currentIcon.value = 'pause'
         console.log('Set to pause')
       }
-    }
+    } */
     return {
       nowPlaying,
       playingIndex,
