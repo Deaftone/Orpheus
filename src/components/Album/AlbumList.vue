@@ -66,8 +66,7 @@ export default {
         this.albums.push({
           name: album.name,
           id: album.id,
-          cover:
-            'https://e.snmc.io/i/600/w/39e1badce8994960bfb051184dacea0b/7585491/pierre-bourne-the-life-of-pierre-4-Cover-Art.jpg'
+          cover: album.cover
         })
       }
       /*       for (const album of data)
@@ -97,7 +96,7 @@ export default {
         <div>
           <div class="overflow-hidden">
             <img
-              :src="album.cover"
+              :src="album.cover ? $deaftone.getCover(album.id) : 'https://e.snmc.io/i/600/w/39e1badce8994960bfb051184dacea0b/7585491/pierre-bourne-the-life-of-pierre-4-Cover-Art.jpg'"
               style="width: auto; height: auto"
             >
 
