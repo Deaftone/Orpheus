@@ -81,7 +81,7 @@ export default {
       observer.observe(sticky.value)
       const data = await $deaftone.getArtistAlbum(props.id)
       info.title = data.name
-      info.artist = data.artistName
+      info.artist = data.artist
       info.artistId = data.artistId
       info.albumId = data.id
       info.cover = $deaftone.getCover(props.id)
@@ -124,7 +124,7 @@ export default {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-5 pt-10">
+  <div class="grid grid-cols-1 gap-5 pt-10 pb-10">
     <div class="justify-center pl-10 pr-10 lg:pr-40 lg:pl-40 lg:block">
       <div class="card lg:card-side bg-base-300">
         <figure>
