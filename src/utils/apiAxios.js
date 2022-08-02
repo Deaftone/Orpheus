@@ -31,11 +31,11 @@ class DeaftoneConnector {
         offset,
       },
     })).data */
-    return await this.axios.get('/getAlbumList')
+    return await this.axios.get('/albums')
   }
 
   async getArtistAlbum (albumId) {
-    return (await this.axios.get('/getArtistAlbum', {
+    return (await this.axios.get(`/albums/${albumId}`, {
       params: {
         id: albumId
       }
