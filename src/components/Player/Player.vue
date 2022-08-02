@@ -284,12 +284,12 @@ export default ({
       >
         <a
           class="cursor-pointer hover:text-primary"
-          @click="goTo(`ArtistDetails/${nowPlaying.artistId}`)"
+          @click="$router.push({ path: `/ArtistDetails/${nowPlaying.artistId}` })"
         >{{ nowPlaying.artist }}</a>
         <a> &nbsp;-&nbsp; </a>
         <a
           class="cursor-pointer hover:text-primary"
-          @click="goTo(`AlbumDetails/${nowPlaying.albumId}`)"
+          @click="$router.push({ path: `/AlbumDetails/${nowPlaying.albumId}` })"
         >{{ nowPlaying.title }}</a>
       </div>
       <audio
