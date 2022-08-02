@@ -10,6 +10,7 @@ export default {
     const albums = reactive([])
     info.artistImage =
       'https://www.offset.com/images/v2/artist_bio_placeholder.png'
+    info.bio = 'Unknown'
     onMounted(async () => {
       const data = await $deaftone.getArtist(props.id)
       if (data.image) {
@@ -20,20 +21,20 @@ export default {
         document.getElementById('filter').classList.toggle('bg-filter')
       }
       for (const album of data.albums) {
+        let cover = 'https://e.snmc.io/i/600/w/39e1badce8994960bfb051184dacea0b/7585491/pierre-bourne-the-life-of-pierre-4-Cover-Art.jpg'
+
+        if (album.cover) {
+          cover = $deaftone.getCover(album.id)
+        }
         albums.push({
           id: album.id,
           title: album.name,
-          cover:
-            'https://e.snmc.io/i/600/w/39e1badce8994960bfb051184dacea0b/7585491/pierre-bourne-the-life-of-pierre-4-Cover-Art.jpg'
+          cover
+
         })
       }
-
-      // const artistImage = await $deaftone.axios.get(`http://localhost:3001/${info.artistName}`)
-      // console.log(artistImage)
-      // info.artistImage = artistImage.data.image
-      // info.bio = `${artistImage.data.bio.slice(0, 1435)}....`
-      info.artistImage = data.image
-      info.bio = data.bio
+      if (data.image) info.artistImage = data.image
+      if (data.bio) info.bio = data.bio
       info.artistName = data.name
     }).bind(this)
     onUnmounted(async () => {
@@ -78,7 +79,8 @@ export default {
       <div
         v-for="album in albums"
         :key="album.id"
-        class="rounded shadow-xl bg-neutral"
+        class="rounded shadow-xl bg-neutral tooltip tooltip-top"
+        :data-tip="album.title"
         @click="$router.push({ path: `/AlbumDetails/${album.id}` })"
       >
         <div>
@@ -87,10 +89,10 @@ export default {
               style="width: auto; height: auto"
               :src="album.cover"
             >
-            <div class="justify-center p-4">
-              <a class="text-center text-clip overflow-hidden ...">
-                {{ album.title }}
-              </a>
+            <div class="justify-center p-4 ">
+              <p class="overflow-hidden text-center text-clip">
+                {{ album.title.slice(0, 26) }}
+              </p>
             </div>
           </div>
         </div>
