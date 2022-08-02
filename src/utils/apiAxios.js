@@ -55,7 +55,7 @@ class DeaftoneConnector {
   }
 
   getCover (id) {
-    return 'https://e.snmc.io/i/600/w/39e1badce8994960bfb051184dacea0b/7585491/pierre-bourne-the-life-of-pierre-4-Cover-Art.jpg'
+    return `https://apollo.raspi.local/albums/${id}/cover`
     // return `https://navi.raspi.local/rest/getCoverArt?u=${this.axios.defaults.params.u}&s=${this.axios.defaults.params.s}&t=${this.axios.defaults.params.t}&f=json&c=Orpheus&v=1.8.0&id=${id}`
   }
 }
