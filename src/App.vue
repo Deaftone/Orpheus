@@ -4,13 +4,15 @@ import Player from './components/Player/Player.vue'
 import MenuBar from './components/Main/MenuBar.vue'
 import TitleBar from './components/Main/TitleBar.vue'
 import RightSidebar from './components/Main/RightSidebar.vue'
+import LeftSidebar from './components/Main/LeftSidebar.vue'
 export default {
   name: 'App',
   components: {
     Player,
     TitleBar,
     MenuBar,
-    RightSidebar
+    RightSidebar,
+    LeftSidebar
   },
   data () {
     return {
@@ -64,70 +66,7 @@ export default {
     <div class="flex flex-col flex-grow w-full h-full overflow-hidden sm:flex-row">
       <div class="flex-grow-0 flex-shrink hidden p-3 md:inline-flex bg-neutral md:visible">
         <div class="sticky top-0 flex rounded-xl ">
-          <nav class="h-full ">
-            <!--             <div class="pb-5 lg:flex">
-              <span class="text-2xl font-bold">
-                Orpheus
-              </span>
-            </div> -->
-            <div
-              class="relative flex items-center justify-center w-12 h-12 mx-auto mt-2 mb-2 text-green-500 transition-all duration-300 ease-linear bg-gray-400 shadow-lg cursor-pointer tooltip tooltip-right hover:bg-green-600 dark:bg-base-100 hover:text-white hover:rounded-xl rounded-3xl hover:bg-primary"
-              data-tip="Home"
-              @click="goTo(&quot;/&quot;)"
-            >
-              <font-awesome-icon
-                icon="home"
-                class=""
-                color="gray"
-              />
-            </div>
-            <div class="divider" />
-            <div
-              class="relative flex items-center justify-center w-12 h-12 mx-auto mt-2 mb-2 text-green-500 transition-all duration-300 ease-linear bg-gray-400 shadow-lg cursor-pointer tooltip tooltip-right hover:bg-green-600 dark:bg-base-100 hover:text-white hover:rounded-xl rounded-3xl hover:bg-primary"
-              data-tip="Artists"
-              @click="goTo(&quot;ArtistList&quot;)"
-            >
-              <font-awesome-icon
-                icon="microphone-alt"
-                class=""
-                color="gray"
-              />
-            </div>
-
-            <div
-              data-tip="Albums"
-
-              class="relative flex items-center justify-center w-12 h-12 mx-auto mt-2 mb-2 text-green-500 transition-all duration-300 ease-linear bg-gray-400 shadow-lg cursor-pointer tooltip tooltip-right hover:bg-green-600 dark:bg-base-100 hover:text-white hover:rounded-xl rounded-3xl hover:bg-primary"
-              @click="goTo(&quot;AlbumDetails&quot;)"
-            >
-              <font-awesome-icon
-                icon="compact-disc"
-                class=""
-                color="gray"
-              />
-            </div>
-            <!--             <ul class="pl-2">
-              <li
-                class="cursor-pointer s-item hover:text-primary"
-              >
-                <font-awesome-icon
-                  icon="compact-disc"
-                  color="gray"
-                />
-                Artists
-              </li>
-              <li
-                class="cursor-pointer s-item hover:text-primary"
-                @click="goTo(&quot;AlbumDetails&quot;)"
-              >
-                <font-awesome-icon
-                  icon="compact-disc"
-                  color="gray"
-                />
-                Albums
-              </li>
-            </ul> -->
-          </nav>
+          <LeftSidebar />
         </div>
       </div>
       <div class="flex flex-col justify-between w-full">
