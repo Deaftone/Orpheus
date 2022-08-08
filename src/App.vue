@@ -84,9 +84,9 @@ export default {
           </router-view>
         </main>
       </div>
-      <!--       <div class="flex flex-col w-64 bg-neutral">
+      <div class="flex flex-col w-64 bg-neutral">
         <RightSidebar />
-      </div> -->
+      </div>
     </div>
     <!-- If we remove the pt-1 and bg we get a weird 1 px size bug for the background image on the ArtistDetails page -->
     <footer class="text-center bg-base-200">
