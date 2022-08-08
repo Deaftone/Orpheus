@@ -21,7 +21,7 @@ export default {
         document.getElementById('filter').classList.toggle('bg-filter')
       }
       for (const album of data.albums) {
-        const cover = album.cover ? $deaftone.getCover(album.id) : 'https://e.snmc.io/i/600/w/39e1badce8994960bfb051184dacea0b/7585491/pierre-bourne-the-life-of-pierre-4-Cover-Art.jpg'
+        const cover = $deaftone.getCover(album.id)
         albums.push({
           id: album.id,
           title: album.name,

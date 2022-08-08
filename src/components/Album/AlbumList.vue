@@ -80,7 +80,6 @@ export default {
   }
 }
 </script>
-
 <template>
   <div class="m-5">
     <div
@@ -96,7 +95,7 @@ export default {
         <div>
           <div class="overflow-hidden">
             <img
-              :src="album.cover ? $deaftone.getCover(album.id) : 'https://e.snmc.io/i/600/w/39e1badce8994960bfb051184dacea0b/7585491/pierre-bourne-the-life-of-pierre-4-Cover-Art.jpg'"
+              :src="$deaftone.getCover(album.id)"
               style="width: auto; height: auto"
             >
 
