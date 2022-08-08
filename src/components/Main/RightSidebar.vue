@@ -1,6 +1,7 @@
+
 <script >
 import draggable from 'vuedraggable'
-import { computed, reactive, ref, watch } from 'vue'
+import { watch, ref, computed } from 'vue'
 import { usePlayerStore } from '../../stores/player'
 export default {
   components: {
@@ -8,9 +9,8 @@ export default {
   },
   setup () {
     const store = usePlayerStore()
-    const playingQueue = computed(() => store.queue)
     const nowPlaying = computed(() => store.nowPlaying)
-
+    const playingQueue = computed(() => store.queue)
     watch(nowPlaying, (newValue, oldValue) => {
       // Absolute hack. We need to delay the highlighting of the now playing on the sidebar or else its no rendered when we call to highlight
       setTimeout(() => {
@@ -34,18 +34,16 @@ export default {
         }
       }, 10)
     })
+
     return {
-      playingQueue,
-      nowPlaying
+      playingQueue
     }
   }
 }
 </script>
-
 <template>
   <draggable
     v-model="playingQueue"
-    :list="playingQueue"
     tag="ul"
     class="overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700"
     item-key="id"
