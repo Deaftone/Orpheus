@@ -1,11 +1,11 @@
 // router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
-import ArtistList from '../components/Artist/ArtistList.vue'
-import AlbumDetails from '../components/Album/AlbumDetails.vue'
-import AlbumList from '../components/Album/AlbumList.vue'
-import ArtistDetails from '../components/Artist/ArtistDetails.vue'
-import Home from '../components/Home.vue'
-import TestVue from '../components/Test.vue'
+import ArtistList from '../views/ArtistList.vue'
+import AlbumDetails from '../views/AlbumDetails.vue'
+import AlbumList from '../views/AlbumList.vue'
+import ArtistDetails from '../views/ArtistDetails.vue'
+import Home from '../views/Home.vue'
+import TestVue from '../views/Test.vue'
 const routes = [
   {
     path: '/',

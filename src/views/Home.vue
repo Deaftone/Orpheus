@@ -1,6 +1,6 @@
 <script>
-import AlbumList from './Album/AlbumList.vue'
-import ArtistList from './Artist/ArtistList.vue'
+import AlbumList from './AlbumList.vue'
+import ArtistList from './ArtistList.vue'
 export default {
   name: 'Home',
   components: { AlbumList, ArtistList },

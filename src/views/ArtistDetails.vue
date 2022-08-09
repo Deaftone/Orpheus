@@ -1,8 +1,10 @@
 <script>
 import { inject, onMounted, onUnmounted, reactive } from 'vue'
+import AlbumCard from '../components/Album/AlbumCard.vue'
 
 export default {
   name: 'ArtistDetails',
+  components: { AlbumCard },
   props: { id: { type: String, required: true } },
   setup (props) {
     const $deaftone = inject('$deaftone')
@@ -24,7 +26,7 @@ export default {
         const cover = $deaftone.getCover(album.id)
         albums.push({
           id: album.id,
-          title: album.name,
+          name: album.name,
           cover
         })
       }
@@ -75,22 +77,13 @@ export default {
         v-for="album in albums"
         :key="album.id"
         class="rounded shadow-xl bg-neutral tooltip tooltip-top"
-        :data-tip="album.title"
+        :data-tip="album.name"
         @click="$router.push({ path: `/AlbumDetails/${album.id}` })"
       >
-        <div>
-          <div class="overflow-hidden">
-            <img
-              style="width: auto; height: auto"
-              :src="album.cover"
-            >
-            <div class="justify-center p-4 ">
-              <p class="overflow-hidden text-center text-clip">
-                {{ album.title.slice(0, 26) }}
-              </p>
-            </div>
-          </div>
-        </div>
+        <AlbumCard
+          :id="album.id"
+          :name="album.name"
+        />
       </div>
     </div>
   </div>

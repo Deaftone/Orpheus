@@ -1,8 +1,10 @@
 <script>
 import 'v3-infinite-loading/lib/style.css'
+import AlbumCard from '../components/Album/AlbumCard.vue'
+
 export default {
   name: 'AlbumList',
-  components: {},
+  components: { AlbumCard },
   inject: ['$deaftone'],
   props: {
     size: {
@@ -92,20 +94,10 @@ export default {
         class="transition duration-300 ease-in-out delay-150 shadow-xl rounded-xl bg-neutral card hover:-translate-y-1 hover:scale-105"
         @click="$router.push({ path: `/AlbumDetails/${album.id}` })"
       >
-        <div>
-          <div class="overflow-hidden">
-            <img
-              :src="$deaftone.getCover(album.id)"
-              style="width: auto; height: auto"
-            >
-
-            <div class="justify-center pt-5 pb-5 card-body">
-              <p class="text-center">
-                {{ truncateString(album.name, 18) }}
-              </p>
-            </div>
-          </div>
-        </div>
+        <AlbumCard
+          :id="album.id"
+          :name="album.name"
+        />
       </div>
     </div>
     <div
