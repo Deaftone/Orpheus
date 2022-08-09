@@ -41,7 +41,7 @@ export default {
       document.addEventListener('DOMContentLoaded', () => {
       // This will wait for the window to load, but you could
       // run this function on whatever trigger you want
-        if (this.isTauri()) { this.loaded() }
+        if (isTauri()) { loaded() }
       })
     })
 
