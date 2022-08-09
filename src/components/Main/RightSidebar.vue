@@ -1,7 +1,7 @@
 
 <script >
 import draggable from 'vuedraggable'
-import { watch, ref, computed } from 'vue'
+import { watch, computed, reactive } from 'vue'
 import { usePlayerStore } from '../../stores/player'
 export default {
   components: {
@@ -10,7 +10,14 @@ export default {
   setup () {
     const store = usePlayerStore()
     const nowPlaying = computed(() => store.nowPlaying)
-    const playingQueue = computed(() => store.queue)
+    const playingQueue = computed({
+      get () {
+        return store.queue
+      },
+      set (newValue) {
+        store.queue = newValue
+      }
+    })
     watch(nowPlaying, (newValue, oldValue) => {
       // Absolute hack. We need to delay the highlighting of the now playing on the sidebar or else its no rendered when we call to highlight
       setTimeout(() => {
@@ -48,7 +55,7 @@ export default {
     class="overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700"
     item-key="id"
   >
-    <template #item="{ element }">
+    <template #item="{element}">
       <li
         :id="`${element.id}_sidebar`"
         class="items-center justify-between p-3 m-3 text-sm transition duration-300 ease-in-out delay-150 rounded-lg shadow-xl cursor-move bg-base-100 hover:scale-105"
@@ -70,33 +77,4 @@ export default {
       </li>
     </template>
   </draggable>
-  <!--  <draggable
-    tag="ul"
-    class="w-full max-w-md"
-    v-model="queue"
-    :list="queue"
-  >
-    <li
-      v-for="song in queue"
-      :id="song.id + '_sidebar'"
-      :key="song.id"
-      class="items-center justify-between p-2 m-2 text-sm rounded-lg shadow cursor-move bg-base-100"
-    >
-
-      <div class="relative flex overflow-x-hidden">
-        <div
-          :id="song.id + '_scroller'"
-          class="whitespace-nowrap"
-        >
-          <span class="">{{ song.artist }} - {{ song.title }}</span>
-        </div>
-        <div
-          :id="song.id + '_scroller2'"
-          class="absolute top-0 whitespace-nowrap"
-        >
-          <span class="">{{ song.artist }} - {{ song.title }}</span>
-        </div>
-      </div>
-    </li>
-  </draggable> -->
 </template>
