@@ -6,10 +6,6 @@ export default {
       { name: 'Artists', route: '/ArtistList', icon: 'microphone-alt' },
       { name: 'Albums', route: '/AlbumDetails', icon: 'compact-disc' }
     ]
-
-    function goTo (p) {
-      console.log(p)
-    }
     return {
       routes
     }
