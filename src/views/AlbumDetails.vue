@@ -87,8 +87,10 @@ export default {
       info.albumId = data.id
       info.cover = deaftone.getCover(data.id)
       info.songCount = 0
+      let totalDuration = 0
       for (const song of data.songs) {
         info.songCount++
+        totalDuration = totalDuration + song.duration
         songs.push({
           id: song.id,
           number: 'FIX',
@@ -102,6 +104,8 @@ export default {
           length: (new Date(song.duration * 1000).toISOString().substr(14, 5))
         })
       }
+
+      info.totalDuration = (new Date(totalDuration * 1000).toISOString().substr(14, 5))
     })
     // Check if currently playing song in in this track list. If so save and highlight it
     nextTick(() => {
@@ -140,11 +144,16 @@ export default {
             {{ info.title }}
           </h2>
           <div class="card-actions text-primary">
-            <a>{{ info.songCount }} tracks | {{ info.year }} | </a>
-            <a
+            <p>
+              {{ info.songCount }} tracks | {{ info.year }} | {{ info.totalDuration }} <br><br><a
+                class="cursor-pointer"
+                @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
+              >{{ info.artist }}</a>
+            </p>
+            <!--             <a
               class="cursor-pointer"
               @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
-            >{{ info.artist }}</a>
+            >{{ info.artist }}</a> -->
           </div>
         </div>
       </div>
