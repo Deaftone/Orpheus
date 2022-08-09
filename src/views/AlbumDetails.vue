@@ -83,10 +83,12 @@ export default {
       info.title = data.name
       info.artist = data.artist
       info.artistId = data.artistId
+      info.year = data.year
       info.albumId = data.id
       info.cover = deaftone.getCover(data.id)
-
+      info.songCount = 0
       for (const song of data.songs) {
+        info.songCount++
         songs.push({
           id: song.id,
           number: 'FIX',
@@ -97,7 +99,7 @@ export default {
           albumId: info.albumId,
           artist: info.artist,
           type: 'test',
-          length: 'test'
+          length: (new Date(song.duration * 1000).toISOString().substr(14, 5))
         })
       }
     })
@@ -134,10 +136,11 @@ export default {
           >
         </figure>
         <div class="card-body">
-          <h2 class="text-xl font-bold card-title lg:text-6xl">
+          <h2 class="text-xl font-bold card-title lg:text-5xl">
             {{ info.title }}
           </h2>
           <div class="card-actions text-primary">
+            <a>{{ info.songCount }} tracks | {{ info.year }} | </a>
             <a
               class="cursor-pointer"
               @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
