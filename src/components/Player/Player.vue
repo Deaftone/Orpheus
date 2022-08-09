@@ -4,6 +4,7 @@ import '../../freqtimeupdate'
 import { computed, inject, onMounted, ref, watch } from 'vue'
 import { usePlayerStore } from '../../stores/player'
 import AvCanvas from './Visualiser.vue'
+import { current } from 'tailwindcss/colors'
 export default ({
   components: {
     Slider,
@@ -21,7 +22,6 @@ export default ({
     const percentPlayed = ref(0)
     const currentIcon = ref('play')
     let listenerActive = false
-    let paused = false
     watch(isPlaying, (currentValue, oldValue) => {
       console.log('test')
       if (isPlaying.value) { console.log('Audio playback started.') }
@@ -125,8 +125,6 @@ export default ({
       console.log('Previous track clicked')
     }
     function nextTrack () {
-      // console.log(this.$store.state.queue.length)
-      // console.log(this.$store.state.playingIndex)
       console.log(`Adding to pqueue${JSON.stringify(store.nowPlaying)}`)
       store.addToPQueue(store.nowPlaying)
       store.nextTrack()
@@ -139,20 +137,16 @@ export default ({
       console.log(appPlayer.value.volume)
     }
     function playPause () {
-      if (paused) {
-        console.log('Play/Pause -- Resume')
-        store.isPlaying = true
-        paused = false
-        appPlayer.value.play()
-        store.setIsPlaying(true)
-        currentIcon.value = 'pause'
-      } else {
+      if (isPlaying.value) {
         console.log('Play/Pause -- Pause')
-        store.isPlaying = false
-        paused = true
         appPlayer.value.pause()
         store.setIsPlaying(false)
-        currentIcon.value = 'play'
+        setPlayIcon('play')
+      } else {
+        console.log('Play/Pause -- Resume')
+        appPlayer.value.play()
+        store.setIsPlaying(true)
+        setPlayIcon('pause')
       }
     }
     function playTrack (track) {
@@ -163,7 +157,11 @@ export default ({
       appPlayer.value.src = deaftone.stream(track.id)
       appPlayer.value.play()
       store.setIsPlaying(true)
-      currentIcon.value = 'pause'
+      setPlayIcon('pause')
+    }
+
+    function setPlayIcon (value) {
+      currentIcon.value = value
     }
     function playbackListener () {
       const percentage = (appPlayer.value.currentTime / appPlayer.value.duration) * 100
@@ -171,19 +169,8 @@ export default ({
       percentPlayed.value = percentage
       const seconds = appPlayer.value.currentTime
       eTime.value = convertTime(seconds)
-      // this.playbackTime = appPlayer.value.currentTime
     }
-    /*     const clicked = false
 
-    function togglePlayButton () {
-      if (store.isPlaying) {
-        currentIcon.value = 'play'
-        console.log('Set to play')
-      } else {
-        currentIcon.value = 'pause'
-        console.log('Set to pause')
-      }
-    } */
     return {
       nowPlaying,
       playingIndex,
