@@ -93,7 +93,7 @@ export default {
         totalDuration = totalDuration + song.duration
         songs.push({
           id: song.id,
-          number: 'FIX',
+          number: song.track,
           title: song.title,
           cover: info.cover,
           albumName: info.title,
@@ -150,10 +150,6 @@ export default {
                 @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
               >{{ info.artist }}</a>
             </p>
-            <!--             <a
-              class="cursor-pointer"
-              @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
-            >{{ info.artist }}</a> -->
           </div>
         </div>
       </div>
