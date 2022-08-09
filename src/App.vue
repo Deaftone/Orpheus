@@ -5,8 +5,13 @@ import MenuBar from './components/Main/MenuBar.vue'
 import TitleBar from './components/Main/TitleBar.vue'
 import RightSidebar from './components/Main/RightSidebar.vue'
 import LeftSidebar from './components/Main/LeftSidebar.vue'
+import {
+  computed,
+  onMounted
+} from 'vue'
+import { usePlayerStore } from './stores/player'
 export default {
-  name: 'App',
+
   components: {
     Player,
     TitleBar,
@@ -14,47 +19,36 @@ export default {
     RightSidebar,
     LeftSidebar
   },
-  data () {
-    return {
-      isOpen: true
-    }
-  },
-  computed: {
-    count () {
-      return this.$store.state.count
-    }
-  },
-  mounted () {
-    // With the Tauri global script:
-    document.addEventListener('DOMContentLoaded', () => {
-      // This will wait for the window to load, but you could
-      // run this function on whatever trigger you want
-      if (this.isTauri()) { this.loaded() }
-    })
-  },
-  methods: {
-    loaded () {
+  setup () {
+    const store = usePlayerStore()
+    function loaded () {
       console.log('Splash removed')
       invoke('close_splashscreen')
-    },
-    goTo (p) {
+    }
+    function goTo (p) {
       console.log(p)
       this.$router.push({ path: `/${p}` })
-    },
-    open () {
-      if (this.isOpen) {
-        this.isOpen = false
-        console.log('Got close')
-      } else {
-        console.log('Got open')
-        this.isOpen = true
-      }
-    },
-    isTauri () {
+    }
+
+    function isTauri () {
       if (window.__TAURI__) {
         console.log('Tauri')
         return true
       } return false
+    }
+    onMounted(() => {
+    // With the Tauri global script:
+      document.addEventListener('DOMContentLoaded', () => {
+      // This will wait for the window to load, but you could
+      // run this function on whatever trigger you want
+        if (this.isTauri()) { this.loaded() }
+      })
+    })
+
+    return {
+      loaded,
+      goTo,
+      isTauri
     }
   }
 }
