@@ -1,6 +1,5 @@
 import axios from 'axios'
 import axiosTauriAdapter from 'axios-tauri-adapter'
-const userName = import.meta.env.VITE_USERNAME
 
 class DeaftoneConnector {
   constructor () {
