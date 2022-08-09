@@ -9,10 +9,10 @@ export default {
     }
   },
   setup (props) {
-    const $deaftone = inject('$deaftone')
+    const deaftone = inject('$deaftone')
     const artists = ref([])
     onMounted(async () => {
-      const data = await $deaftone.getArtists()
+      const data = await deaftone.getArtists()
       for (const artist of data) { artists.value.push({ name: artist.name, id: artist.id }) }
     })
     return { artists }

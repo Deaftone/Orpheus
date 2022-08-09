@@ -4,10 +4,10 @@ import { inject } from 'vue'
 export default {
   props: { name: { type: String, required: true }, id: { type: String, required: true } },
   setup (props) {
-    const $deaftone = inject('$deaftone')
+    const deaftone = inject('$deaftone')
 
     return {
-      $deaftone,
+      deaftone,
       props
     }
   }
@@ -17,7 +17,7 @@ export default {
   <div>
     <div class="overflow-hidden">
       <img
-        :src="$deaftone.getCover(props.id)"
+        :src="deaftone.getCover(props.id)"
         style="width: auto; height: auto"
       >
 

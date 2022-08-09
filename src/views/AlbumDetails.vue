@@ -15,7 +15,7 @@ export default {
   name: 'AlbumDetails',
   props: { id: { type: String, required: true } },
   setup (props) {
-    const $deaftone = inject('$deaftone')
+    const deaftone = inject('$deaftone')
     const store = usePlayerStore()
     const sticky = ref(null)
     const albumBar = ref(null)
@@ -79,12 +79,12 @@ export default {
     }
     onMounted(async () => {
       observer.observe(sticky.value)
-      const data = await $deaftone.getArtistAlbum(props.id)
+      const data = await deaftone.getArtistAlbum(props.id)
       info.title = data.name
       info.artist = data.artist
       info.artistId = data.artistId
       info.albumId = data.id
-      info.cover = $deaftone.getCover(data.id)
+      info.cover = deaftone.getCover(data.id)
 
       for (const song of data.songs) {
         songs.push({

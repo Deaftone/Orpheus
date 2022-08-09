@@ -7,14 +7,14 @@ export default {
   components: { AlbumCard },
   props: { id: { type: String, required: true } },
   setup (props) {
-    const $deaftone = inject('$deaftone')
+    const deaftone = inject('$deaftone')
     const info = reactive({})
     const albums = reactive([])
     info.artistImage =
       'https://www.offset.com/images/v2/artist_bio_placeholder.png'
     info.bio = 'Unknown'
     onMounted(async () => {
-      const data = await $deaftone.getArtist(props.id)
+      const data = await deaftone.getArtist(props.id)
       if (data.image) {
         document.documentElement.style.setProperty(
           '--bg-image',
@@ -23,7 +23,7 @@ export default {
         document.getElementById('filter').classList.toggle('bg-filter')
       }
       for (const album of data.albums) {
-        const cover = $deaftone.getCover(album.id)
+        const cover = deaftone.getCover(album.id)
         albums.push({
           id: album.id,
           name: album.name,
