@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       albums: [],
-      offset: 0,
+      page: 0,
       firstLoad: true
     }
   },
@@ -62,7 +62,9 @@ export default {
       else return str
     },
     async getAlbums () {
-      const data = await this.$deaftone.getAlbums(this.size)
+      const data = await this.$deaftone.getAlbums(this.size, this.page)
+      this.page++
+
       console.log(data.data)
       for (const album of data.data) {
         this.albums.push({
