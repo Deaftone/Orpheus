@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
-import DeaftoneConnector from './utils/apiAxios'
+import DeaftoneConnector from './services/deaftoneApi'
 
 const app = createApp(App)
 app.use(createPinia())
