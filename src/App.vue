@@ -1,6 +1,8 @@
 <script>
 import { invoke } from '@tauri-apps/api/tauri'
 import Player from './components/Player/Player.vue'
+import NewPlayer from './components/Player/NewPlayer.vue'
+
 import MenuBar from './components/Main/MenuBar.vue'
 import TitleBar from './components/Main/TitleBar.vue'
 import RightSidebar from './components/Main/RightSidebar.vue'
@@ -17,7 +19,8 @@ export default {
     TitleBar,
     MenuBar,
     RightSidebar,
-    LeftSidebar
+    LeftSidebar,
+    NewPlayer
   },
   setup () {
     const store = usePlayerStore()
@@ -69,7 +72,7 @@ export default {
         </header>
         <main
           role="main"
-          class="flex-1 overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700 "
+          class="flex-1 mb-13 overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700"
         >
           <router-view v-slot="{ Component }">
             <!--             <transition name="fade"> -->
@@ -78,13 +81,17 @@ export default {
           </router-view>
         </main>
       </div>
-      <div class="flex flex-col w-64 bg-neutral">
+      <div
+        class="flex flex-col w-64 bg-neutral"
+        v-if="false"
+      >
         <RightSidebar />
       </div>
     </div>
     <!-- If we remove the pt-1 and bg we get a weird 1 px size bug for the background image on the ArtistDetails page -->
-    <footer class="text-center bg-base-200">
-      <Player />
+    <footer class="flex text-center bg-base-200">
+<!--       <Player />
+ -->      <NewPlayer />
     </footer>
   </div>
 </template>

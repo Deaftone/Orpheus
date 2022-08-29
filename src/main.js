@@ -8,10 +8,13 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import DeaftoneConnector from './services/deaftoneApi'
+import Player from './services/player'
 
 const app = createApp(App)
 app.use(createPinia())
 app.provide('$deaftone', new DeaftoneConnector())
+app.provide('$player', new Player())
+
 app.use(router)
 library.add(faHome)
 library.add(faPlay)
