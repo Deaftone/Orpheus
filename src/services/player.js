@@ -14,11 +14,17 @@ class Player {
       src: [this.deaftone.stream(track.id)],
       html5: true,
       preload: true,
-      format: ['flac']
+      format: ['flac'],
+      onend: this.onEnd
     })
     this.howler.play()
     this.playerStore.setIsPlaying(true)
     this.playerStore.setNowPlaying(track)
+  }
+
+  onEnd () {
+    console.log('PLAYER_SERVICE: TRACK_END')
+    this.playerStore.nextTrack()
   }
 
   pause () {
