@@ -16,6 +16,8 @@ export default {
   props: { id: { type: String, required: true } },
   setup (props) {
     const deaftone = inject('$deaftone')
+    const player = inject('$player')
+
     const store = usePlayerStore()
     const sticky = ref(null)
     const albumBar = ref(null)
@@ -37,6 +39,7 @@ export default {
       store.setQueue(_songs)
       store.setPlayingIndex(0)
       store.setNowPlaying(_songs[0])
+      player.play(deaftone.stream(_songs[0].id))
     }
     /*     function convertTime (seconds) {
       const format = (val) => `0${Math.floor(val)}`.slice(-2)

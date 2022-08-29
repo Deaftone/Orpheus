@@ -4,6 +4,7 @@ import VueSlider from 'vue-slider-component'
 import '../../freqtimeupdate'
 import { computed, inject, onMounted, ref, watch } from 'vue'
 import { usePlayerStore } from '../../stores/player'
+import { storeToRefs } from 'pinia'
 export default ({
   components: {
     VueSlider
@@ -12,66 +13,53 @@ export default ({
     const deaftone = inject('$deaftone')
     const player = inject('$player')
     const store = usePlayerStore()
+    const { isPlaying, nowPlaying } = storeToRefs(store)
     const appPlayer = ref(null)
-    const nowPlaying = computed(() => store.nowPlaying)
     const playingIndex = computed(() => store.playingIndex)
-    const isPlaying = computed(() => store.isPlaying)
     const eTime = ref('00:00')
     const viewDuration = ref('00:00')
     const duration = ref(0)
     const percentPlayed = ref(0)
     const currentIcon = ref('play')
-    let listenerActive = false
+    const listenerActive = false
+    /*     store.$subscribe(nowPlayingfunc, { detached: true })
+    function nowPlayingfunc (value) {
+      console.log('SUB')
+    } */
+
     watch(isPlaying, (currentValue, oldValue) => {
       console.log('test')
-      if (isPlaying.value) { console.log('Audio playback started.') }
+      if (isPlaying.value) { setPlayIcon('pause') } else {
+        setPlayIcon('play')
+      }
       console.log(listenerActive)
-      // prevent starting multiple listeners at the same time
+      /*       // prevent starting multiple listeners at the same time
       if (!listenerActive) {
         console.log('Add listener')
-        viewDuration.value = convertTime(appPlayer.value.duration)
+                 viewDuration.value = convertTime(appPlayer.value.duration)
         duration.value = appPlayer.value.duration
         listenerActive = true
         // for a more consistent timeupdate, include freqtimeupdate.js and replace both instances of 'timeupdate' with 'freqtimeupdate'
         // frequent.add(appPlayer, this.playbackListener)
         appPlayer.value.addEventListener('freqtimeupdate', playbackListener)
-      }
+      } */
     })
-    watch(nowPlaying, (newValue, oldValue) => {
+    /*     watch(nowPlaying, (newValue, oldValue) => {
       console.log(`Now playing old ${oldValue}`)
       console.log(`Now playing update ${newValue}`)
       console.log(newValue.cover)
-      playTrack(newValue)
+      // playTrack(newValue)
       setMediaControls(newValue.title, newValue.artist, newValue.albumName, newValue.cover)
       store.setNowPlaying(newValue)
     })
     watch(playingIndex, (newValue, oldValue) => {
       store.setPlayingIndex(newValue)
     })
-    /*     watch(newPlaying, (currentValue, newValue) => {
-
-    }) */
+  */
     onMounted(async () => {
       volumeChange(25)
     })
 
-    function toggleVis () {
-      /*
-        Fix me
-        For some reason when creating a new AudioCtx the player volume goes up
-        I would like to have it destroyed when hidden
-      */
-      this.visToggled ^= true
-      if (this.visToggled) {
-        // this.src.connect(this.myAnalyser)
-        // this.myAnalyser.connect(this.ctx.destination)
-      } else {
-        // this.src.disconnect(this.myAnalyser)
-        // this.myAnalyser.disconnect(this.ctx.destination)
-
-      }
-      // document.getElementById('barC').classList.toggle('pb-3')
-    }
     function setMediaControls (title, artist, album, src) {
       if ('mediaSession' in navigator) {
         navigator.mediaSession.metadata = new MediaMetadata({
@@ -99,16 +87,7 @@ export default ({
       console.log(p)
       this.$router.push({ path: `/${p}` })
     }
-    /*     function createAnalyser () {
-      this.ctx = new AudioContext()
-      this.src = this.ctx.createMediaElementSource(appPlayer)
-      this.ctx.crossOrigin = 'anonymous'
-      this.$refs.appPlayer.crossOrigin = 'anonymous'
-      this.myAnalyser = this.ctx.createAnalyser()
-      this.src.connect(this.myAnalyser)
-      this.myAnalyser.fftSize = 8192
-      this.myAnalyser.connect(this.ctx.destination)
-    } */
+
     function barChange (e) {
       const time = e / 100 * appPlayer.value.duration
       const diff = Math.abs(time - appPlayer.value.currentTime)
@@ -137,27 +116,23 @@ export default ({
       console.log(appPlayer.value.volume)
     }
     function playPause () {
-      /*       if (isPlaying.value) {
+      if (isPlaying.value) {
         console.log('Play/Pause -- Pause')
-        appPlayer.value.pause()
-        store.setIsPlaying(false)
-        setPlayIcon('play')
+        // appPlayer.value.pause()
+        // setPlayIcon('play')
       } else {
         console.log('Play/Pause -- Resume')
-        appPlayer.value.play()
-        store.setIsPlaying(true)
-        setPlayIcon('pause')
-      } */
-      player.play()
+        // appPlayer.value.play()
+        // setPlayIcon('pause')
+      }
+      player.togglePlay()
     }
     function playTrack (track) {
       /*       if (!this.myAnalyser)
         this.createAnalyser()
  */
       console.log(`Got play track ${JSON.stringify(track)}`)
-      appPlayer.value.src = deaftone.stream(track.id)
-      appPlayer.value.play()
-      store.setIsPlaying(true)
+      player.play(deaftone.stream(track.id))
       setPlayIcon('pause')
     }
 
