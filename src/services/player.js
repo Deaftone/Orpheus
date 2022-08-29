@@ -1,37 +1,34 @@
 import { Howl, Howler } from 'howler'
 import { usePlayerStore } from '../stores/player'
-import { watch } from 'vue'
-
+import { DeaftoneConnector } from './deaftoneApi'
 class Player {
   constructor () {
     this.howler = null
     this.playerStore = usePlayerStore()
-
-    watch(this.playerStore.nowPlaying, (newValue, oldValue) => {
-      console.log(`Now playing old ${oldValue}`)
-      console.log(`Now playing update ${newValue}`)
-      /*       console.log(newValue.cover)
-      // playTrack(newValue)
-      setMediaControls(newValue.title, newValue.artist, newValue.albumName, newValue.cover)
-      store.setNowPlaying(newValue) */
-    })
+    this.deaftone = new DeaftoneConnector()
   }
 
-  play (source) {
+  play (track) {
     Howler.unload()
     this.howler = new Howl({
-      src: [source],
+      src: [this.deaftone.stream(track.id)],
       html5: true,
       preload: true,
       format: ['flac']
     })
-    this.togglePlay()
+    this.howler.play()
+    this.playerStore.setIsPlaying(true)
+    this.playerStore.setNowPlaying(track)
+  }
+
+  pause () {
+    this.howler.pause()
+    this.playerStore.setIsPlaying(false)
   }
 
   togglePlay () {
     if (this.howler.playing()) {
       console.log('PLAYER_SERVICE: PAUSE')
-
       this.howler.pause()
       this.playerStore.setIsPlaying(false)
     } else {
@@ -39,7 +36,15 @@ class Player {
       this.howler.play()
       this.playerStore.setIsPlaying(true)
     }
-    // return this.howler.playing() ? this.howler.pause() : this.howler.play()
   }
+
+  nextTrack () {
+    const previousTrack = this.playerStore.previousQueue.pop()
+    if (previousTrack) {
+      console.log(`PLAYER_SERVICE: NEXT_TRACK ${JSON.stringify(previousTrack)}`)
+    }
+  }
+
+  previousTrack () {}
 }
 export default Player
