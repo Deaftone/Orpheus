@@ -140,7 +140,7 @@ export default {
           </h2>
           <div class="card-actions text-primary">
             <p>
-              {{ info.songCount }} tracks | {{ info.year }} | {{ info.totalDuration }} <br><br><a
+              {{ info.year }} | {{ info.songCount }} Songs | {{ info.totalDuration }} <br><br><a
                 class="cursor-pointer"
                 @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
               >{{ info.artist }}</a>
@@ -154,7 +154,7 @@ export default {
       style="height: 0.1px"
     />
     <!-- Bug where the currently playing track is above this in z-index -->
-    <div
+    <!--    <div
       ref="albumBar"
       class="sticky top-0 w-full p-1 pl-5 pr-5 -mt-5 text-sm lg:pl-40 lg:pr-40 bg-base-200 z-1"
     >
@@ -166,13 +166,13 @@ export default {
         <a>Type</a>
       </div>
       <a class="pl-7">Title</a>
-    </div>
+    </div> -->
     <div class="grid w-full grid-cols-1 gap-5 pl-5 pr-5 lg:pr-40 lg:pl-40">
       <div
         v-for="song in songs"
         :id="song.id"
         :key="song.number"
-        class="flex justify-center p-1 text-lg transition duration-300 ease-in-out delay-150 rounded-lg shadow cursor-pointer bg-base-300 hover:scale-105"
+        class="flex justify-center p-1 text-lg transition duration-300 ease-in-out delay-150 rounded-lg shadow cursor-pointer bg-base-300 hover:bg-neutral hover:scale-105"
         @click="playTrack(song.title, song.id)"
       >
         <div class="w-full p-2">
