@@ -11,6 +11,7 @@ export default ({
   },
   setup () {
     const player = inject('$player')
+    const router = inject('$router')
     const store = usePlayerStore()
     const { isPlaying, nowPlaying, progress, volume } = storeToRefs(store)
     const playingIndex = computed(() => store.playingIndex)
@@ -38,9 +39,11 @@ export default ({
       const minutes = (seconds % 3600) / 60
       return [minutes, seconds % 60].map(format).join(':')
     }
-    function goTo (p) {
-      console.log(p)
-      this.$router.push({ path: `/${p}` })
+    function goToAlbum (id) {
+      router.push({ path: `/AlbumDetails/${id}` })
+    }
+    function goToArtist (id) {
+      router.push({ path: `/ArtistDetails/${id}` })
     }
     function seek (e, t) {
       console.log(`SEEK: ${e}`)
@@ -74,7 +77,8 @@ export default ({
       volume,
       playingIndex,
       convertTime,
-      goTo,
+      goToArtist,
+      goToAlbum,
       seek,
       previousTrack,
       nextTrack,
@@ -291,29 +295,33 @@ export default ({
             class="container"
             @click.stop
           >
-            <!--          <img
-            loading="lazy"
-            :src="currentTrack.al && currentTrack.al.picUrl | resizeImage(224)"
-            @click="goToAlbum"
-          > -->
+            <img
+              loading="lazy"
+              :src="nowPlaying.cover"
+              @click="$router.push({ path: `/AlbumDetails/${nowPlaying.albumId}` })"
+            >
             <div
               class="track-info"
             >
-            <!--             <div
-              :class="['name', { 'has-list': hasList() }]"
-              @click="hasList() && goToList()"
-            >
-              {{ currentTrack.name }}
-            </div> -->
-            <!--             <div class="artist">
-              <span
-                v-for="(ar, index) in currentTrack.ar"
-                :key="ar.id"
-                @click="ar.id && goToArtist(ar.id)"
-              >
-                <span :class="{ ar: ar.id }"> {{ ar.name }} </span><span v-if="index !== currentTrack.ar.length - 1">, </span>
-              </span>
-            </div> -->
+              <div>
+                <span
+                  class="hover:cursor-pointer hover:underline"
+                  @click="$router.push({ path: `/AlbumDetails/${nowPlaying.albumId}` })"
+                >{{ nowPlaying.title }}</span>
+              </div>
+              <div class="artist">
+                <span
+                  class="hover:cursor-pointer hover:underline"
+                  @click="$router.push({ path: `/ArtistDetails/${nowPlaying.artistId}` })"
+                >{{ nowPlaying.artist }}</span>
+                <!--                 <span
+                  v-for="(ar, index) in currentTrack.ar"
+                  :key="ar.id"
+                  @click="ar.id && goToArtist(ar.id)"
+                >
+                  <span :class="{ ar: ar.id }"> {{ ar.name }} </span><span v-if="index !== currentTrack.ar.length - 1">, </span>
+                </span> -->
+              </div>
             </div>
           <!--           <div class="like-button">
             <button-icon
@@ -366,7 +374,8 @@ export default ({
 
             <!-- Previous Button -->
             <button
-              class="px-4 py-2 font-bold text-gray-800 co"
+              class="px-4 py-2 mr-2 font-bold text-gray-800 co btn bg-base-100 hover:bg-base-300"
+
               @click="previousTrack"
             >
               <font-awesome-icon
@@ -376,7 +385,7 @@ export default ({
             </button>
             <!-- Play Button -->
             <button
-              class="px-4 py-2 font-bold text-gray-800 co"
+              class="px-4 py-2 font-bold co btn bg-base-100 hover:bg-base-300"
               @click="playPause"
             >
               <font-awesome-icon
@@ -386,7 +395,7 @@ export default ({
             </button>
             <!-- Next Button -->
             <button
-              class="px-4 py-2 font-bold text-gray-800 co"
+              class="px-4 py-2 ml-2 font-bold text-gray-800 co btn bg-base-100 hover:bg-base-300"
               @click="nextTrack"
             >
               <font-awesome-icon
