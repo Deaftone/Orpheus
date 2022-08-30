@@ -8,10 +8,18 @@ export const usePlayerStore = defineStore('player', {
     previousQueue: [],
     playingIndex: 0,
     searchQuery: null,
-    isPlaying: false
+    isPlaying: false,
+    progress: 0,
+    volume: 1
   }),
 
   actions: {
+    setVolume (payload) {
+      this.volume = payload
+    },
+    setProgress (payload) {
+      this.progress = payload
+    },
     setNowPlaying (payload) {
       this.nowPlaying = payload
     },

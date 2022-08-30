@@ -10,73 +10,28 @@ export default ({
     VueSlider
   },
   setup () {
-    const deaftone = inject('$deaftone')
     const player = inject('$player')
     const store = usePlayerStore()
-    const { isPlaying, nowPlaying } = storeToRefs(store)
-    const appPlayer = ref(null)
+    const { isPlaying, nowPlaying, progress, volume } = storeToRefs(store)
     const playingIndex = computed(() => store.playingIndex)
     const eTime = ref('00:00')
     const viewDuration = ref('00:00')
     const duration = ref(0)
-    const percentPlayed = ref(0)
     const currentIcon = ref('play')
-    const listenerActive = false
-    /*     store.$subscribe(nowPlayingfunc, { detached: true })
-    function nowPlayingfunc (value) {
-      console.log('SUB')
-    } */
 
     watch(isPlaying, (currentValue, oldValue) => {
       console.log('test')
       if (isPlaying.value) { setPlayIcon('pause') } else {
         setPlayIcon('play')
       }
-      console.log(listenerActive)
-      /*       // prevent starting multiple listeners at the same time
-      if (!listenerActive) {
-        console.log('Add listener')
-                 viewDuration.value = convertTime(appPlayer.value.duration)
-        duration.value = appPlayer.value.duration
-        listenerActive = true
-        // for a more consistent timeupdate, include freqtimeupdate.js and replace both instances of 'timeupdate' with 'freqtimeupdate'
-        // frequent.add(appPlayer, this.playbackListener)
-        appPlayer.value.addEventListener('freqtimeupdate', playbackListener)
-      } */
+      viewDuration.value = convertTime(store.nowPlaying.duration)
+      duration.value = store.nowPlaying.length
     })
-    /*     watch(nowPlaying, (newValue, oldValue) => {
-      console.log(`Now playing old ${oldValue}`)
-      console.log(`Now playing update ${newValue}`)
-      console.log(newValue.cover)
-      // playTrack(newValue)
-      setMediaControls(newValue.title, newValue.artist, newValue.albumName, newValue.cover)
-      store.setNowPlaying(newValue)
-    })
-    watch(playingIndex, (newValue, oldValue) => {
-      store.setPlayingIndex(newValue)
-    })
-  */
+
     onMounted(async () => {
       volumeChange(25)
     })
 
-    function setMediaControls (title, artist, album, src) {
-      if ('mediaSession' in navigator) {
-        navigator.mediaSession.metadata = new MediaMetadata({
-          title,
-          artist,
-          album,
-          artwork: [
-            { src: src || '', sizes: '256x256', type: 'image/png' }
-          ]
-        })
-
-        navigator.mediaSession.setActionHandler('play', () => { playPause() })
-        navigator.mediaSession.setActionHandler('pause', () => { playPause() })
-        navigator.mediaSession.setActionHandler('previoustrack', () => { previosTrack() })
-        navigator.mediaSession.setActionHandler('nexttrack', () => { nextTrack() })
-      }
-    }
     function convertTime (seconds) {
       const format = val => `0${Math.floor(val)}`.slice(-2)
       // var hours = seconds / 3600;
@@ -87,82 +42,46 @@ export default ({
       console.log(p)
       this.$router.push({ path: `/${p}` })
     }
-
-    function barChange (e) {
-      const time = e / 100 * appPlayer.value.duration
-      const diff = Math.abs(time - appPlayer.value.currentTime)
-      if (diff > 0.1) {
-        console.log(diff)
-        appPlayer.value.currentTime = time
-      }
+    function seek (e, t) {
+      console.log(`SEEK: ${e}`)
+      player.seekTrack(e)
     }
-    function previosTrack () {
-      const track = store.previousQueue.pop()
-      store.previousTrack()
-      if (track) { store.setNowPlaying(track) }
-
-      console.log('Previous track clicked')
+    function previousTrack () {
+      player.previousTrack()
     }
     function nextTrack () {
-      console.log(`Adding to pqueue${JSON.stringify(store.nowPlaying)}`)
-      store.addToPQueue(store.nowPlaying)
-      store.nextTrack()
-      const track = store.queue[store.playingIndex]
-      console.log(`Next track update ${JSON.stringify(track)}`)
-      if (track) { store.setNowPlaying(track) }
+      player.nextTrack()
     }
     function volumeChange (e) {
-      appPlayer.value.volume = e / 100 / 2
-      console.log(appPlayer.value.volume)
+      player.changeVolume(e)
     }
     function playPause () {
       if (isPlaying.value) {
         console.log('Play/Pause -- Pause')
-        // appPlayer.value.pause()
-        // setPlayIcon('play')
       } else {
         console.log('Play/Pause -- Resume')
-        // appPlayer.value.play()
-        // setPlayIcon('pause')
       }
       player.togglePlay()
-    }
-    function playTrack (track) {
-      /*       if (!this.myAnalyser)
-        this.createAnalyser()
- */
-      console.log(`Got play track ${JSON.stringify(track)}`)
-      player.play(deaftone.stream(track.id))
-      setPlayIcon('pause')
     }
 
     function setPlayIcon (value) {
       currentIcon.value = value
     }
-    function playbackListener () {
-      const percentage = (appPlayer.value.currentTime / appPlayer.value.duration) * 100
-      viewDuration.value = convertTime(appPlayer.value.duration)
-      percentPlayed.value = percentage
-      const seconds = appPlayer.value.currentTime
-      eTime.value = convertTime(seconds)
-    }
 
     return {
       nowPlaying,
+      progress,
+      volume,
       playingIndex,
-      appPlayer,
       convertTime,
       goTo,
-      barChange,
-      previosTrack,
+      seek,
+      previousTrack,
       nextTrack,
       eTime,
       duration,
       volumeChange,
       playPause,
-      percentPlayed,
-      playTrack,
-      playbackListener,
       currentIcon
     }
   }
@@ -342,15 +261,6 @@ export default ({
 </style>
 <template>
   <main class="grid grid-cols-3 text-sm grid-row-1">
-    <audio
-      id="appPlayer"
-      ref="appPlayer"
-      class="hidden"
-      name="appPlayer"
-      style="hidden"
-      preload
-      @ended="nextTrack"
-    />
     <div
       class="player"
       @click="toggleLyrics"
@@ -361,7 +271,7 @@ export default ({
         @click.stop
       >
         <vue-slider
-          v-model="percentPlayed"
+          v-model="progress"
           :min="0"
           :max="duration"
           :interval="1"
@@ -369,9 +279,10 @@ export default ({
           :duration="0"
           :dot-size="12"
           :height="2"
-          :tooltip-formatter="formatTrackTime"
+          :tooltip-formatter="convertTime"
           :lazy="true"
           :silent="true"
+          @change="seek"
         />
       </div>
       <div class="controls">
@@ -387,7 +298,6 @@ export default ({
           > -->
             <div
               class="track-info"
-              :title="audioSource"
             >
             <!--             <div
               :class="['name', { 'has-list': hasList() }]"
@@ -457,7 +367,7 @@ export default ({
             <!-- Previous Button -->
             <button
               class="px-4 py-2 font-bold text-gray-800 co"
-              @click="previosTrack"
+              @click="previousTrack"
             >
               <font-awesome-icon
                 icon="fast-backward"
@@ -504,6 +414,7 @@ export default ({
                   :duration="0"
                   tooltip="none"
                   :dot-size="12"
+                  @change="volumeChange"
                 />
               </div>
             </div>

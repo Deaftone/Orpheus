@@ -1,14 +1,22 @@
 import { Howl, Howler } from 'howler'
 import { usePlayerStore } from '../stores/player'
-import { DeaftoneConnector } from './deaftoneApi'
+import DeaftoneConnector from './deaftoneApi'
 class Player {
   constructor () {
     this.howler = null
     this.playerStore = usePlayerStore()
     this.deaftone = new DeaftoneConnector()
+    this.progress = 0
+    this.init()
+  }
+
+  init () {
+    // this.progressUpdate()
   }
 
   play (track) {
+    console.log(`PLAYER_SERVICE: PLAY_TRACK ${track}`)
+
     Howler.unload()
     this.howler = new Howl({
       src: [this.deaftone.stream(track.id)],
@@ -17,9 +25,35 @@ class Player {
       format: ['flac'],
       onend: this.onEnd
     })
+    this.howler.volume(this.playerStore.volume)
     this.howler.play()
     this.playerStore.setIsPlaying(true)
     this.playerStore.setNowPlaying(track)
+    this.setMediaControls(track)
+  }
+
+  progressUpdate () {
+    setInterval(() => {
+      if (this.howler === null) return
+      this.progress = this.howler.seek()
+      this.playerStore.setProgress(this.progress)
+    }, 100)
+  }
+
+  playQueue (queue) {
+    this.playerStore.setQueue(queue)
+    this.playerStore.setPlayingIndex(0)
+    this.playerStore.setNowPlaying(queue[0])
+    this.play(queue[0])
+  }
+
+  seekTrack (value) {
+    this.howler.seek(value)
+  }
+
+  changeVolume (value) {
+    this.howler.volume(value)
+    this.playerStore.setVolume(value)
   }
 
   onEnd () {
@@ -45,12 +79,41 @@ class Player {
   }
 
   nextTrack () {
-    const previousTrack = this.playerStore.previousQueue.pop()
-    if (previousTrack) {
-      console.log(`PLAYER_SERVICE: NEXT_TRACK ${JSON.stringify(previousTrack)}`)
+    this.playerStore.addToPQueue(this.playerStore.nowPlaying)
+    this.playerStore.nextTrack()
+    const track = this.playerStore.queue[this.playerStore.playingIndex]
+    console.log(`PLAYER_SERVICE: PREVIOUS_TRACK ${JSON.stringify(track)}`)
+    this.play(track)
+  }
+
+  previousTrack () {
+    const track = this.playerStore.previousQueue.pop()
+    this.playerStore.previousTrack()
+    if (track) {
+      console.log(`PLAYER_SERVICE: PREVIOUS_TRACK ${JSON.stringify(track)}`)
+      this.playerStore.setNowPlaying(track)
+      this.play(track)
     }
   }
 
-  previousTrack () {}
+  setMediaControls (track) {
+    console.log(`PLAYER_SERVICE: SET_MEDIA_CONTROLS ${JSON.stringify(track)}`)
+
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: track.title,
+        artist: track.artist,
+        album: track.album,
+        artwork: [
+          { src: track.cover || '', sizes: '256x256', type: 'image/png' }
+        ]
+      })
+
+      navigator.mediaSession.setActionHandler('play', () => { this.togglePlay() })
+      navigator.mediaSession.setActionHandler('pause', () => { this.togglePlay() })
+      navigator.mediaSession.setActionHandler('previoustrack', () => { this.previousTrack() })
+      navigator.mediaSession.setActionHandler('nexttrack', () => { this.nextTrack() })
+    }
+  }
 }
 export default Player

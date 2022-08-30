@@ -36,17 +36,9 @@ export default {
       const index = this.songs.findIndex((x) => x.id === id)
       // Slice songs at picked index
       const _songs = this.songs.slice(index, this.songs.length)
-      store.setQueue(_songs)
-      store.setPlayingIndex(0)
-      store.setNowPlaying(_songs[0])
-      player.play(deaftone.stream(_songs[0].id))
+      player.playQueue(_songs)
     }
-    /*     function convertTime (seconds) {
-      const format = (val) => `0${Math.floor(val)}`.slice(-2)
-      // var hours = seconds / 3600;
-      const minutes = (seconds % 3600) / 60
-      return [minutes, seconds % 60].map(format).join(':')
-    } */
+
     function onElementObserved (e) {
       e.forEach(({ target, isIntersecting }) => {
         albumBar.value.classList.toggle('bg-base-200', !isIntersecting)
@@ -104,7 +96,7 @@ export default {
           albumId: info.albumId,
           artist: info.artist,
           type: 'test',
-          length: (new Date(song.duration * 1000).toISOString().substr(14, 5))
+          length: song.duration
         })
       }
 
@@ -191,7 +183,7 @@ export default {
             <a>{{ song.title }}</a>
           </div>
           <div class="float-right">
-            <a>{{ song.length }}</a>
+            <a>{{ (new Date(song.length * 1000).toISOString().substr(14, 5)) }}</a>
           </div>
           <div
             class="float-right pl-1 pr-1 mr-5 text-sm border-4 border-solid rounded-lg border-primary"
