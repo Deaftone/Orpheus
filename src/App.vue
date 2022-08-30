@@ -72,7 +72,7 @@ export default {
         </header>
         <main
           role="main"
-          class="flex-1 overflow-y-scroll mb-11 scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700"
+          class="flex-1 overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700"
         >
           <router-view v-slot="{ Component }">
             <!--             <transition name="fade"> -->

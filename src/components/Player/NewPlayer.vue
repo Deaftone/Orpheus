@@ -103,7 +103,7 @@ export default ({
   justify-content: space-around;
   height: 64px;
   backdrop-filter: saturate(180%) blur(30px);
-  // background-color: rgba(255, 255, 255, 0.86);
+  background-color: rgba(255, 255, 255, 0.86);
   background-color: var(--color-navbar-bg);
   z-index: 100;
 }
@@ -264,14 +264,13 @@ export default ({
 }
 </style>
 <template>
-  <main class="grid grid-cols-3 text-sm grid-row-1">
+  <main class="w-full text-sm bg-neutral text-neutral-content">
     <div
-      class="player"
+      class="flex flex-col items-center justify-center w-full pb-2"
       @click="toggleLyrics"
     >
       <div
-        class="progress-bar"
-
+        class="pb-2 progress-bar"
         @click.stop
       >
         <vue-slider
@@ -335,7 +334,7 @@ export default ({
           </div>
           <div class="blank" />
         </div>
-        <div class="middle-control-buttons">
+        <div class="ml-32 mr-32 middle-control-buttons">
           <div class="blank" />
           <div
             class="container"
@@ -374,7 +373,7 @@ export default ({
 
             <!-- Previous Button -->
             <button
-              class="px-4 py-2 mr-2 font-bold text-gray-800 co btn bg-base-100 hover:bg-base-300"
+              class="px-4 py-2 mr-2 font-bold text-gray-800 co btn hover:bg-base-300"
 
               @click="previousTrack"
             >
@@ -385,7 +384,7 @@ export default ({
             </button>
             <!-- Play Button -->
             <button
-              class="px-4 py-2 font-bold co btn bg-base-100 hover:bg-base-300"
+              class="px-4 py-2 font-bold co btn hover:bg-base-300"
               @click="playPause"
             >
               <font-awesome-icon
@@ -395,7 +394,7 @@ export default ({
             </button>
             <!-- Next Button -->
             <button
-              class="px-4 py-2 ml-2 font-bold text-gray-800 co btn bg-base-100 hover:bg-base-300"
+              class="px-4 py-2 ml-2 font-bold text-gray-800 co btn hover:bg-base-300"
               @click="nextTrack"
             >
               <font-awesome-icon

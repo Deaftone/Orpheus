@@ -11,7 +11,7 @@ class Player {
   }
 
   init () {
-    // this.progressUpdate()
+    this.progressUpdate()
   }
 
   play (track) {
