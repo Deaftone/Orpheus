@@ -2,8 +2,8 @@ import { defineStore } from 'pinia'
 
 export const usePlayerStore = defineStore('player', {
   state: () => ({
-    previousPlaying: null,
-    nowPlaying: null,
+    previousPlaying: {},
+    nowPlaying: {},
     queue: [],
     previousQueue: [],
     playingIndex: 0,
