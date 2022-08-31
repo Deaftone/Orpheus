@@ -62,7 +62,7 @@ export default {
           {{ info.artistName }}
         </h2>
         <div class="card-actions text-primary">
-          <a class="cursor-pointer">{{ info.bio }}</a>
+          <a class="text-xl cursor-pointer">{{ info.bio }}</a>
         </div>
       </div>
     </div>

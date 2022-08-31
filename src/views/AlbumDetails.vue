@@ -172,7 +172,7 @@ export default {
         v-for="song in songs"
         :id="song.id"
         :key="song.number"
-        class="flex justify-center p-1 text-lg transition duration-300 ease-in-out delay-150 rounded-lg shadow cursor-pointer bg-base-300 hover:bg-neutral hover:scale-105"
+        class="flex justify-center p-1 text-lg transition duration-300 ease-in-out delay-150 rounded-lg shadow cursor-pointer bg-base-300 hover:bg-neutral hover:scale-105 "
         @click="playTrack(song.title, song.id)"
       >
         <div class="w-full p-2">
