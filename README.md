@@ -20,6 +20,6 @@ Then just run ``npm install`` and then ``npm run dev`` for tauri app or ``npx vi
 Tauri only allows connection to https endpoints so you will need to reverse proxy your Navidrom instance and trust the certificate
 
 
-![ops_1](https://i.imgur.com/bOjPwTX.png)
-![ops_2](https://i.imgur.com/jZ5jU7v.png)
-![ops_3](https://i.imgur.com/xmegG09.png)
+![ops_1](https://files.catbox.moe/e1mzcy.png)
+![ops_2](https://files.catbox.moe/kdpbn7.png)
+![ops_3](https://files.catbox.moe/3ftuca.png)
