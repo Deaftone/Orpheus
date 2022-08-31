@@ -1,10 +1,10 @@
 <script>
-import '../../assets/slider.css'
-import VueSlider from 'vue-slider-component'
-import '../../freqtimeupdate'
-import { computed, inject, onMounted, ref, watch } from 'vue'
-import { usePlayerStore } from '../../stores/player'
 import { storeToRefs } from 'pinia'
+import { computed, inject, onMounted, ref, watch } from 'vue'
+import VueSlider from 'vue-slider-component'
+import '../../assets/slider.css'
+import '../../freqtimeupdate'
+import { usePlayerStore } from '../../stores/player'
 export default ({
   components: {
     VueSlider
@@ -30,7 +30,7 @@ export default ({
     })
 
     onMounted(async () => {
-      volumeChange(25)
+      volumeChange(0.2)
     })
 
     function convertTime (seconds) {
@@ -93,7 +93,7 @@ export default ({
 </script>
 
 <style lang="scss" scoped>
-.player {
+/* .player {
   position: fixed;
   bottom: 0;
   right: 0;
@@ -112,14 +112,8 @@ export default ({
   .player {
     background-color: var(--color-body-bg);
   }
-}
-
-.progress-bar {
-  margin-top: -6px;
-  margin-bottom: -6px;
-  width: 100%;
-}
-
+} */
+/*
 .controls {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -134,18 +128,10 @@ export default ({
   .controls {
     padding: 0 5vw;
   }
-}
-
-.blank {
-  flex-grow: 1;
-}
-
-.playing {
-  display: flex;
-}
+} */
 
 .playing .container {
-  display: flex;
+/*   display: flex;
   align-items: center;
   img {
     height: 46px;
@@ -153,7 +139,7 @@ export default ({
     box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.16);
     cursor: pointer;
     user-select: none;
-  }
+  } */
   .track-info {
     height: 46px;
     margin-left: 12px;
@@ -197,9 +183,9 @@ export default ({
   }
 }
 
-.middle-control-buttons {
+/* .middle-control-buttons {
   display: flex;
-}
+} */
 
 .middle-control-buttons .container {
   flex: 1;
@@ -270,7 +256,7 @@ export default ({
       @click="toggleLyrics"
     >
       <div
-        class="pb-2 progress-bar"
+        class="w-full pb-2 -mt-1.5 -mb-1.5"
         @click.stop
       >
         <vue-slider
@@ -288,19 +274,21 @@ export default ({
           @change="seek"
         />
       </div>
-      <div class="controls">
-        <div class="playing">
+      <div class="grid h-full grid-cols-3 pl-2 pr-2">
+        <div class="flex items-center">
           <div
-            class="container"
+            class="flex items-center"
             @click.stop
           >
             <img
               loading="lazy"
+              class="w-12 h-12 rounded"
               :src="nowPlaying.cover"
               @click="$router.push({ path: `/AlbumDetails/${nowPlaying.albumId}` })"
             >
+            <!-- Track info -->
             <div
-              class="track-info"
+              class="flex flex-col ml-2 text-left"
             >
               <div>
                 <span
@@ -332,12 +320,12 @@ export default ({
             </button-icon>
           </div> -->
           </div>
-          <div class="blank" />
+          <div class="grow" />
         </div>
-        <div class="ml-32 mr-32 middle-control-buttons">
-          <div class="blank" />
+        <div class="flex md:ml-32 md:mr-32">
+          <div class="flex items-center justify-center" />
           <div
-            class="container"
+            class="flex flex-1"
             @click.stop
           >
             <!--           <button-icon
@@ -403,10 +391,10 @@ export default ({
               />
             </button>
           </div>
-          <div class="blank" />
+          <div class="grow" />
         </div>
         <div class="right-control-buttons">
-          <div class="blank" />
+          <div class="grow" />
           <div
             class="container"
             @click.stop
