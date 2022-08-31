@@ -281,8 +281,9 @@ export default ({
             @click.stop
           >
             <img
+              v-if="nowPlaying.cover"
               loading="lazy"
-              class="w-12 h-12 rounded"
+              class="w-12 h-12 rounded select-none"
               :src="nowPlaying.cover"
               @click="$router.push({ path: `/AlbumDetails/${nowPlaying.albumId}` })"
             >
