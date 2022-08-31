@@ -278,10 +278,10 @@ export default ({
         <div class="flex items-center">
           <div
             class="flex items-center"
+            v-if="nowPlaying.title"
             @click.stop
           >
             <img
-              v-if="nowPlaying.cover"
               loading="lazy"
               class="w-12 h-12 rounded select-none"
               :src="nowPlaying.cover"
