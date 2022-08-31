@@ -15,7 +15,7 @@ export default {
 </script>
 <template>
   <div>
-    <div class="overflow-hidden">
+    <div class="overflow-hidden rounded-xl">
       <img
         :src="deaftone.getCover(props.id)"
         style="width: auto; height: auto"
