@@ -13,6 +13,7 @@
   "dependencies": {
     "@antfu/eslint-config": "^0.25.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-regular-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^3.0.0-4",
     "@tauri-apps/api": "^1.0.2",

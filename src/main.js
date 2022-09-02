@@ -1,15 +1,16 @@
 import { createApp } from 'vue'
 
-import './index.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faArrowLeft, faArrowRight, faCompactDisc, faFastBackward, faFastForward, faHome, faMicrophoneAlt, faPause, faPlay, faWindowClose, faWindowMaximize, faWindowMinimize } from '@fortawesome/free-solid-svg-icons'
+
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
+import { faArrowLeft, faArrowRight, faCompactDisc, faFastBackward, faFastForward, faHeart, faHome, faMicrophoneAlt, faPause, faPlay, faWindowClose, faWindowMaximize, faWindowMinimize } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { createPinia } from 'pinia'
 import App from './App.vue'
+import './index.css'
 import router from './router'
 import DeaftoneConnector from './services/deaftoneApi'
 import Player from './services/player'
-
 const app = createApp(App)
 app.use(createPinia())
 app.provide('$deaftone', new DeaftoneConnector())
@@ -28,5 +29,7 @@ library.add(faFastForward)
 library.add(faPause)
 library.add(faCompactDisc)
 library.add(faMicrophoneAlt)
+library.add(faHeart)
+library.add(farHeart)
 app.component('FontAwesomeIcon', FontAwesomeIcon)
 app.mount('#app')

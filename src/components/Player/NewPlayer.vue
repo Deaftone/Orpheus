@@ -19,7 +19,7 @@ export default ({
     const viewDuration = ref('00:00')
     const duration = ref(0)
     const currentIcon = ref('play')
-
+    const isLiked = ref(true)
     watch(isPlaying, (currentValue, oldValue) => {
       console.log('test')
       if (isPlaying.value) { setPlayIcon('pause') } else {
@@ -33,6 +33,13 @@ export default ({
       volumeChange(0.2)
     })
 
+    function likeSong () {
+      if (isLiked.value) {
+        isLiked.value = false
+      } else {
+        isLiked.value = true
+      }
+    }
     function convertTime (seconds) {
       const format = val => `0${Math.floor(val)}`.slice(-2)
       // var hours = seconds / 3600;
@@ -72,6 +79,8 @@ export default ({
     }
 
     return {
+      likeSong,
+      isLiked,
       nowPlaying,
       progress,
       volume,
@@ -311,17 +320,22 @@ export default ({
                 </span> -->
               </div>
             </div>
-          <!--           <div class="like-button">
-            <button-icon
-              :title="$t('player.like')"
-              @click.native="likeATrack(player.currentTrack.id)"
-            >
-              <i-fluent:heart-20-regular v-show="!player.isCurrentTrackLiked" />
-              <i-fluent:heart-16-filled v-show="player.isCurrentTrackLiked" />
-            </button-icon>
-          </div> -->
+            <div class="pl-3">
+              <button
+                @click="likeSong"
+                class="font-bold co btn hover:bg-base-300"
+              >
+                <font-awesome-icon
+                  v-show="isLiked"
+                  :icon="['far', 'heart']"
+                />
+                <font-awesome-icon
+                  v-show="!isLiked"
+                  :icon="['fas', 'heart']"
+                />
+              </button>
+            </div>
           </div>
-          <div class="grow" />
         </div>
         <div class="flex md:ml-32 md:mr-32">
           <div class="flex items-center justify-center" />
