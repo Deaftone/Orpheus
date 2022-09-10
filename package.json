@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "main": "main.js",
   "scripts": {
-    "dev-web": "vite",
-    "build-vite": "vite build",
+    "build:vite": "vite build",
+    "build:tauri":"tauri build",
     "build": "vite-tauri build",
-    "serve": "vite preview",
+    "preview": "vite preview",
     "dev": "vite-tauri dev",
+    "dev:vite": "vite",
+    "dev:tauri": "tauri dev",
     "test": "jest"
   },
   "dependencies": {
