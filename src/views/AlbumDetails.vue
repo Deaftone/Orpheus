@@ -1,13 +1,11 @@
 <script>
 import {
-  computed,
-  inject,
-  nextTick,
-  onMounted,
-  onUnmounted,
-  reactive,
-  ref,
-  watch
+computed,
+inject,
+nextTick,
+onMounted, reactive,
+ref,
+watch
 } from 'vue'
 import { usePlayerStore } from '../stores/player'
 
@@ -24,10 +22,10 @@ export default {
     const info = reactive({})
     const songs = reactive([])
     const nowPlaying = computed(() => store.nowPlaying)
-    const observer = new IntersectionObserver(onElementObserved, {
+    /*     const observer = new IntersectionObserver(onElementObserved, {
       root: null,
       threshold: 0.9
-    })
+    }) */
     watch(nowPlaying, (newValue, oldPlaying) => {
       highLightNowPlaying(oldPlaying, newValue)
     })
@@ -39,11 +37,11 @@ export default {
       player.playQueue(_songs)
     }
 
-    function onElementObserved (e) {
+    /*     function onElementObserved (e) {
       e.forEach(({ target, isIntersecting }) => {
         albumBar.value.classList.toggle('bg-base-200', !isIntersecting)
       })
-    }
+    } */
 
     function highLightNowPlaying (oldPlaying, newPlaying) {
       let oldP
@@ -73,7 +71,7 @@ export default {
       }
     }
     onMounted(async () => {
-      observer.observe(sticky.value)
+      // observer.observe(sticky.value)
       const data = await deaftone.getArtistAlbum(props.id)
       info.title = data.name
       info.artist = data.artist
@@ -106,15 +104,15 @@ export default {
     nextTick(() => {
       // if (tempPlaying) { highLightNowPlaying(null, tempPlaying) }
     })
-    onUnmounted(() => {
+    /*     onUnmounted(() => {
       observer.disconnect()
-    })
+    }) */
 
     return {
       nowPlaying,
       playTrack,
       albumBar,
-      onElementObserved,
+      // onElementObserved,
       highLightNowPlaying,
       sticky,
       songs,
