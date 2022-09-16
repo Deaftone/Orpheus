@@ -20,6 +20,7 @@ class Player {
     Howler.unload()
     this.howler = new Howl({
       src: [this.deaftone.stream(track.id)],
+      autoplay: true,
       html5: true,
       preload: true,
       format: ['flac'],
