@@ -1,11 +1,8 @@
 import axios from 'axios'
-import axiosTauriAdapter from 'axios-tauri-adapter'
 import {
-  setupCache,
-  defaultKeyGenerator,
-  defaultHeaderInterpreter,
-  buildWebStorage
+  buildWebStorage, defaultHeaderInterpreter, defaultKeyGenerator, setupCache
 } from 'axios-cache-interceptor'
+import axiosTauriAdapter from 'axios-tauri-adapter'
 class DeaftoneConnector {
   constructor () {
     /*     this.axios = axios.create({
@@ -84,7 +81,7 @@ class DeaftoneConnector {
   }
 
   stream (id) {
-    return `${this.axios.defaults.baseURL}/stream/${id}`
+    return `${this.axios.defaults.baseURL}/stream/transcode/${id}`
   }
 
   getCover (id) {
