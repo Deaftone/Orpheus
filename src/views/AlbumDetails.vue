@@ -1,11 +1,11 @@
 <script>
 import {
-computed,
-inject,
-nextTick,
-onMounted, reactive,
-ref,
-watch
+  computed,
+  inject,
+  nextTick,
+  onMounted, reactive,
+  ref,
+  watch
 } from 'vue'
 import { usePlayerStore } from '../stores/player'
 
@@ -121,7 +121,7 @@ export default {
 <template>
   <div class="grid grid-cols-1 gap-3 pt-6 pb-6">
     <div class="justify-center pl-10 pr-10 lg:pr-40 lg:pl-40 lg:block ">
-      <div class="pb-3 card lg:card-side">
+      <div class="p-4 cursor-default card lg:card-side">
         <figure>
           <img
             class="object-contain w-full shadow-lg rounded-xl h-72"
@@ -135,7 +135,7 @@ export default {
           <div class="card-title text-primary">
             <p>
               {{ info.year }} | {{ info.songCount }} Songs | {{ info.totalDuration }} <br><br><a
-                class="cursor-pointer"
+                class="cursor-pointer hover:underline"
                 @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
               >{{ info.artist }}</a>
             </p>
