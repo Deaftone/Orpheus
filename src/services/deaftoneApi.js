@@ -81,6 +81,10 @@ class DeaftoneConnector {
   }
 
   stream (id) {
+    return `${this.axios.defaults.baseURL}/stream/${id}`
+  }
+
+  streamTranscode (id) {
     return `${this.axios.defaults.baseURL}/stream/transcode/${id}`
   }
 
