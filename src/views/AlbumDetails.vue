@@ -52,20 +52,16 @@ export default {
 
       if (oldP) {
         oldP.classList.remove(
-          'gradient-border',
-          'border-solid',
-          'border-4',
-          'border-primary',
+          'text-primary',
+          'bg-neutral-focus',
           'font-bold'
         )
       }
 
       if (newP) {
         newP.classList.add(
-          'gradient-border',
-          'border-solid',
-          'border-4',
-          'border-primary',
+          'text-primary',
+          'bg-neutral-focus',
           'font-bold'
         )
       }
@@ -128,7 +124,7 @@ export default {
       <div class="card lg:card-side bg-base-300">
         <figure>
           <img
-            class="object-contain w-full h-72"
+            class="object-contain w-full rounded-xl h-72"
             :src="info.cover"
           >
         </figure>
@@ -136,13 +132,18 @@ export default {
           <h2 class="text-xl font-bold card-title lg:text-5xl">
             {{ info.title }}
           </h2>
-          <div class="card-actions text-primary">
+          <div class="card-title text-primary">
             <p>
               {{ info.year }} | {{ info.songCount }} Songs | {{ info.totalDuration }} <br><br><a
                 class="cursor-pointer"
                 @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
               >{{ info.artist }}</a>
             </p>
+          </div>
+          <div class="justify-end mt-5 card-actions">
+            <button class="btn btn-primary">
+              Play
+            </button>
           </div>
         </div>
       </div>
@@ -170,7 +171,7 @@ export default {
         v-for="song in songs"
         :id="song.id"
         :key="song.number"
-        class="flex justify-center p-1 text-lg transition duration-300 ease-in-out delay-150 rounded-lg shadow cursor-pointer bg-base-300 hover:bg-neutral hover:scale-105 "
+        class="flex justify-center p-1 text-lg rounded-lg shadow cursor-pointer bg-base-300 hover:bg-neutral "
         @click="playTrack(song.title, song.id)"
       >
         <div class="w-full p-2">
