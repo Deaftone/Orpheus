@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
 const { resolve } = require('path')
 // import path from 'path'
 // import ViewLauncherVuePlugin from '@view-launcher/rollup-plugin-vue'
@@ -11,21 +11,21 @@ export default defineConfig(() => {
   return {
     build: {
       target: ['es2021', 'chrome97', 'safari13'],
-      minify: !process.env.TAURI_DEBUG,
+      minify: !process.env.TAURI_DEBUG ? 'esbuild' : false,
       sourcemap: !!process.env.TAURI_DEBUG,
       emptyOutDir: true,
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'index.html'),
-          nested: resolve(__dirname, 'splashscreen.html'),
-        },
-      },
+          nested: resolve(__dirname, 'splashscreen.html')
+        }
+      }
     },
     server: {
       fs: {
         // Allow serving files from one level up to the project root
-        allow: ['..'],
-      },
+        allow: ['..']
+      }
     },
     // base: path.resolve(__dirname, './dist/'),
     plugins: [
@@ -34,11 +34,11 @@ export default defineConfig(() => {
         theme: 'dark',
         editor: env.VITE_EDITOR || 'vscode',
       }), */
-      vue(),
+      vue()
 
     ],
     define: {
-      'process.env': {},
-    },
+      'process.env': {}
+    }
   }
 })
