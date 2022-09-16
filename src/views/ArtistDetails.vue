@@ -52,7 +52,7 @@ export default {
     <div class="card lg:card-side">
       <figure>
         <img
-          class="object-contain"
+          class="object-contain rounded-2xl"
           style="width: 320px; height: 320px"
           :src="info.artistImage"
         >
@@ -76,7 +76,7 @@ export default {
       <div
         v-for="album in albums"
         :key="album.id"
-        class="rounded shadow-xl bg-neutral tooltip tooltip-top"
+        class="rounded-lg shadow-xl bg-neutral tooltip tooltip-top card"
         :data-tip="album.name"
         @click="$router.push({ path: `/AlbumDetails/${album.id}` })"
       >

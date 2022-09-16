@@ -14,18 +14,16 @@ export default {
 }
 </script>
 <template>
-  <div>
-    <div class="overflow-hidden rounded-xl">
-      <img
-        :src="deaftone.getCover(props.id)"
-        style="width: auto; height: auto"
-      >
+  <div class="overflow-hidden">
+    <img
+      :src="deaftone.getCover(props.id)"
+      style="width: auto; height: auto"
+    >
 
-      <div class="justify-center pt-5 pb-5 card-body">
-        <p class="text-center truncate">
-          {{ props.name }}
-        </p>
-      </div>
+    <div class="justify-center pt-5 pb-5 card-body">
+      <p class="text-center truncate">
+        {{ props.name }}
+      </p>
     </div>
   </div>
 </template>
