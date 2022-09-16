@@ -1,6 +1,6 @@
 <script>
 import { storeToRefs } from 'pinia'
-import { computed, inject, onMounted, ref, watch } from 'vue'
+import { computed, inject, ref, watch } from 'vue'
 import VueSlider from 'vue-slider-component'
 import '../../assets/slider.css'
 import '../../freqtimeupdate'
@@ -29,9 +29,9 @@ export default ({
       duration.value = store.nowPlaying.length
     })
 
-    onMounted(async () => {
+    /*     onMounted(async () => {
       volumeChange(0.2)
-    })
+    }) */
 
     function likeSong () {
       if (isLiked.value) {
@@ -268,7 +268,7 @@ export default ({
         class="w-full pb-2 -mt-1.5 -mb-1.5"
         @click.stop
       >
-        <vue-slider
+        <!--         Currently there is a bug where streaming transcoded songs breaks the bar if you skip -->        <vue-slider
           v-model="progress"
           :min="0"
           :max="duration"
@@ -278,7 +278,7 @@ export default ({
           :dot-size="12"
           :height="2"
           :tooltip-formatter="convertTime"
-          :lazy="true"
+          :lazy="false"
           :silent="true"
           @change="seek"
         />
