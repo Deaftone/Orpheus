@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
-import { faArrowLeft, faArrowRight, faCompactDisc, faFastBackward, faFastForward, faHeart, faHome, faMicrophoneAlt, faPause, faPlay, faWindowClose, faWindowMaximize, faWindowMinimize } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faArrowRight, faCog, faCompactDisc, faFastBackward, faFastForward, faHeart, faHome, faMicrophoneAlt, faPause, faPlay, faWindowClose, faWindowMaximize, faWindowMinimize } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { createPinia } from 'pinia'
 import App from './App.vue'
@@ -31,5 +31,6 @@ library.add(faCompactDisc)
 library.add(faMicrophoneAlt)
 library.add(faHeart)
 library.add(farHeart)
+library.add(faCog)
 app.component('FontAwesomeIcon', FontAwesomeIcon)
 app.mount('#app')

@@ -6,6 +6,7 @@ import AlbumList from '../views/AlbumList.vue'
 import ArtistDetails from '../views/ArtistDetails.vue'
 import Home from '../views/Home.vue'
 import TestVue from '../views/Test.vue'
+import Settings from '../views/Settings.vue'
 const routes = [
   {
     path: '/',
@@ -34,6 +35,11 @@ const routes = [
     name: 'ArtistDetails',
     component: ArtistDetails,
     props: true
+  },
+  {
+    path: '/Settings',
+    name: 'Settings',
+    component: Settings
   },
   {
     path: '/TestVue',
