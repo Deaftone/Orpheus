@@ -60,10 +60,13 @@
         "title": "Orpheus",
         "width": 1920,
         "height": 1080,
+        "minHeight": 720,
+        "minWidth": 1280,
         "resizable": true,
         "url": "index.html",
         "visible": false,
-        "decorations": false
+        "decorations": false,
+        "center": true
       },
       {
         "width": 300,
@@ -71,7 +74,8 @@
         "decorations": false,
         "visible": true,
         "url": "splashscreen.html",
-        "label": "splashscreen"
+        "label": "splashscreen",
+        "center": true
       }
     ],
     "security": {
