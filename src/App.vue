@@ -9,6 +9,7 @@ import RightSidebar from './components/Main/RightSidebar.vue'
 import LeftSidebar from './components/Main/LeftSidebar.vue'
 import {
   computed,
+  onBeforeMount,
   onMounted
 } from 'vue'
 import { usePlayerStore } from './stores/player'
@@ -23,7 +24,6 @@ export default {
     NewPlayer
   },
   setup () {
-    const store = usePlayerStore()
     function loaded () {
       console.log('Splash removed')
       invoke('close_splashscreen')
@@ -39,6 +39,20 @@ export default {
         return true
       } return false
     }
+    function handleScroll () {
+      console.log('Got scroll')
+      const scrollBtn = this.$refs.scrollToTop
+
+      if (window.scrollY > 0) {
+        scrollBtn.classList.remove('invisible')
+      } else {
+        scrollBtn.classList.add('invisible')
+      }
+    }
+    function scrollTop () {
+      console.log('test')
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
     onMounted(() => {
     // With the Tauri global script:
       document.addEventListener('DOMContentLoaded', () => {
@@ -46,10 +60,14 @@ export default {
       // run this function on whatever trigger you want
         if (isTauri()) { loaded() }
       })
+      window.addEventListener('scroll', handleScroll)
     })
-
+    onBeforeMount(() => {
+      window.removeEventListener('scroll', handleScroll)
+    })
     return {
       loaded,
+      scrollTop,
       goTo,
       isTauri
     }
@@ -78,6 +96,21 @@ export default {
             <!--             <transition name="fade"> -->
             <component :is="Component" />
             <!--             </transition> -->
+            <div
+              ref="scrollTopButton"
+              class="sticky bottom-0 flex justify-end w-full pb-3 pr-5 transition lg:pr-16"
+            >
+              <!--               <div
+                class="text-gray-400 transition hover:text-blue-400"
+              >
+                <button
+                  ref="scrollToTop"
+                  @click="scrollTop"
+                >
+                  Scroll to top
+                </button>
+              </div> -->
+            </div>
           </router-view>
         </main>
       </div>
