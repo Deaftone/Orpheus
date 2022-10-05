@@ -11,7 +11,13 @@ import './index.css'
 import router from './router'
 import DeaftoneConnector from './services/deaftoneApi'
 import Player from './services/player'
+import devtools from '@vue/devtools'
 const app = createApp(App)
+
+if (process.env.NODE_ENV === 'development') {
+  devtools.connect('http://localhost', 8098)
+}
+
 app.use(createPinia())
 app.provide('$deaftone', new DeaftoneConnector())
 app.provide('$player', new Player())

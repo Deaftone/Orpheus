@@ -5,10 +5,11 @@
   },
   "build": {
     "distDir": "../dist",
-    "devPath": "http://localhost:3000",
-    "beforeDevCommand": "",
-    "beforeBuildCommand": "",
+    "devPath": "http://localhost:5173",
+    "beforeDevCommand": "npm run vite:dev",
+    "beforeBuildCommand": "npm run vite:build",
     "withGlobalTauri": true
+    
   },
   
   "tauri": {
