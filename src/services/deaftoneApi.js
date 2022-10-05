@@ -16,7 +16,7 @@ class DeaftoneConnector {
       // axios instance
       axios.create({
         adapter: window.__TAURI__ ? axiosTauriAdapter : null,
-        baseURL: 'https://apollo.raspi.local',
+        baseURL: 'http://localhost:3030',
         timeout: 5000,
         headers: { 'Content-Type': 'application/json' }
       }),
