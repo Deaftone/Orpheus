@@ -14,17 +14,22 @@ class Player {
     this.progressUpdate()
   }
 
+  onEnd (instance) {
+    console.log('PLAYER_SERVICE: TRACK_END')
+  }
+
   play (track) {
     console.log(`PLAYER_SERVICE: PLAY_TRACK ${track}`)
 
     Howler.unload()
     this.howler = new Howl({
       src: [this.deaftone.stream(track.id)],
-      autoplay: true,
       html5: true,
       preload: true,
       format: ['flac'],
-      onend: this.onEnd
+      onend: function () {
+        this.nextTrack()
+      }.bind(this)
     })
     this.howler.volume(this.playerStore.volume)
     this.howler.play()
@@ -55,11 +60,6 @@ class Player {
   changeVolume (value) {
     this.howler.volume(value)
     this.playerStore.setVolume(value)
-  }
-
-  onEnd () {
-    console.log('PLAYER_SERVICE: TRACK_END')
-    this.playerStore.nextTrack()
   }
 
   pause () {
