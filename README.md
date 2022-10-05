@@ -22,7 +22,7 @@ Tauri only allows connection to https endpoints so you will need to reverse prox
 
 ## Screenshots
 
-<a href="https://files.catbox.moe/e1mzcy.png" width="49.5%"/></a>
-<a href="https://files.catbox.moe/kdpbn7.png" width="49.5%"/></a>
-<a href="https://files.catbox.moe/3ftuca.png" width="49.5%"/></a>
+<a href="https://raw.githubusercontent.com/Ortygia/Orpheus/master/.github/screenshots/OPS_DEV_1.png" width="49.5%"/></a>
+<a href="https://raw.githubusercontent.com/Ortygia/Orpheus/master/.github/screenshots/OPS_DEV_2.png" width="49.5%"/></a>
+<a href="https://raw.githubusercontent.com/Ortygia/Orpheus/master/.github/screenshots/OPS_DEV_3.png" width="49.5%"/></a>
 
