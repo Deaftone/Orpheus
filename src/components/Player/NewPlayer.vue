@@ -60,7 +60,9 @@ export default ({
       player.nextTrack()
     }
     function volumeChange (e) {
-      player.changeVolume(e)
+      settings.set('volume', e).then(() => {
+        player.changeVolume(e)
+      })
     }
     function playPause () {
       if (isPlaying.value) {
@@ -102,119 +104,6 @@ export default ({
 </script>
 
 <style lang="scss" scoped>
-/* .player {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 64px;
-  backdrop-filter: saturate(180%) blur(30px);
-  background-color: rgba(255, 255, 255, 0.86);
-  background-color: var(--color-navbar-bg);
-  z-index: 100;
-}
-
-@supports (-moz-appearance: none) {
-  .player {
-    background-color: var(--color-body-bg);
-  }
-} */
-/*
-.controls {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  height: 100%;
-  padding: {
-    right: 10vw;
-    left: 10vw;
-  }
-}
-
-@media (max-width: 1336px) {
-  .controls {
-    padding: 0 5vw;
-  }
-} */
-
-.playing .container {
-/*   display: flex;
-  align-items: center;
-  img {
-    height: 46px;
-    border-radius: 5px;
-    box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.16);
-    cursor: pointer;
-    user-select: none;
-  } */
-  .track-info {
-    height: 46px;
-    margin-left: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    .name {
-      font-weight: 600;
-      font-size: 16px;
-      opacity: 0.88;
-      color: var(--color-text);
-      margin-bottom: 4px;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
-      overflow: hidden;
-      word-break: break-all;
-    }
-    .has-list {
-      cursor: pointer;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-    .artist {
-      font-size: 12px;
-      opacity: 0.58;
-      color: var(--color-text);
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
-      overflow: hidden;
-      word-break: break-all;
-      span.ar {
-        cursor: pointer;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-}
-
-/* .middle-control-buttons {
-  display: flex;
-} */
-
-.middle-control-buttons .container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 8px;
-  .button-icon {
-    margin: 0 8px;
-  }
-  .play {
-    height: 42px;
-    width: 42px;
-    .svg-icon {
-      width: 24px;
-      height: 24px;
-    }
-  }
-}
-
 .right-control-buttons {
   display: flex;
 }
@@ -230,9 +119,7 @@ export default ({
       width: 24px;
     }
   }
-  .active .svg-icon {
-    color: var(--color-primary);
-  }
+
   .volume-control {
     margin-left: 4px;
     display: flex;
@@ -243,20 +130,6 @@ export default ({
   }
 }
 
-.like-button {
-  margin-left: 16px;
-}
-
-.button-icon.disabled {
-  cursor: default;
-  opacity: 0.38;
-  &:hover {
-    background: none;
-  }
-  &:active {
-    transform: unset;
-  }
-}
 </style>
 <template>
   <main class="w-full text-sm bg-neutral text-neutral-content">
@@ -268,7 +141,8 @@ export default ({
         class="w-full pb-2 -mt-1.5 -mb-1.5"
         @click.stop
       >
-        <!--         Currently there is a bug where streaming transcoded songs breaks the bar if you skip -->        <vue-slider
+        <!--         Currently there is a bug where streaming transcoded songs breaks the bar if you skip -->
+        <vue-slider
           v-model="progress"
           :min="0"
           :max="duration"
@@ -343,41 +217,9 @@ export default ({
             class="flex flex-1"
             @click.stop
           >
-            <!--           <button-icon
-            v-show="!player.isPersonalFM"
-            :title="$t('player.previous')"
-            @click.native="playPrevTrack()"
-          >
-            <i-fluent-previous-16-filled />
-          </button-icon>
-          <button-icon
-            v-show="player.isPersonalFM"
-            title="不喜欢"
-            @click.native="moveToFMTrash()"
-          >
-            <i-fa:thumbs-down id="thumbs-down" />
-          </button-icon> -->
-            <!--          <button-icon
-            class="play"
-            :title="$t(player.playing ? 'player.pause' : 'player.play')"
-            @click.native="playOrPause"
-          >
-            <i-fluent-play-12-filled v-if="!player.playing" />
-            <i-fluent-pause-12-filled v-else />
-          </button-icon>
-          <button-icon
-            :title="$t('player.next')"
-            @click.native="playNextTrack"
-          >
-            <i-fluent-previous-16-filled
-              style="transform: rotate(180deg)"
-            />
-          </button-icon> -->
-
             <!-- Previous Button -->
             <button
               class="px-4 py-2 mr-2 font-bold text-gray-800 co btn hover:bg-base-300"
-
               @click="previousTrack"
             >
               <font-awesome-icon
@@ -387,7 +229,7 @@ export default ({
             </button>
             <!-- Play Button -->
             <button
-              class="px-4 py-2 font-bold co btn hover:bg-base-300"
+              class="px-4 py-2 font-bold co btn hover:bg-base-300 w-11"
               @click="playPause"
             >
               <font-awesome-icon
@@ -408,7 +250,8 @@ export default ({
           </div>
           <div class="grow" />
         </div>
-        <div class="right-control-buttons">
+        <!-- Volume slider -->
+        <div class="flex right-control-buttons">
           <div class="grow" />
           <div
             class="container"
