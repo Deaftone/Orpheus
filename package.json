@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "concurrently -k \"npx tauri dev\" \"npm run devtools\"",
     "build": "tauri build",
+    "build:debig": "tauri build -d",
     "vite:dev": "vite dev",
     "vite:build": "vite build",
     "devtools": "vue-devtools",
