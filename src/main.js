@@ -12,6 +12,7 @@ import router from './router'
 import DeaftoneConnector from './services/deaftoneApi'
 import Player from './services/player'
 import devtools from '@vue/devtools'
+import SettingsManager from './services/settings'
 const app = createApp(App)
 
 if (process.env.NODE_ENV === 'development') {
@@ -21,7 +22,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(createPinia())
 app.provide('$deaftone', new DeaftoneConnector())
 app.provide('$player', new Player())
-
+app.provide('$settings', new SettingsManager())
 app.use(router)
 library.add(faHome)
 library.add(faPlay)

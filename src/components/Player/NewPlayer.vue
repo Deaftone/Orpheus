@@ -1,6 +1,6 @@
 <script>
 import { storeToRefs } from 'pinia'
-import { computed, inject, ref, watch } from 'vue'
+import { computed, inject, ref, watch, onMounted } from 'vue'
 import VueSlider from 'vue-slider-component'
 import '../../assets/slider.css'
 import '../../freqtimeupdate'
@@ -11,6 +11,7 @@ export default ({
   },
   setup () {
     const player = inject('$player')
+    const settings = inject('$settings')
     const router = inject('$router')
     const store = usePlayerStore()
     const { isPlaying, nowPlaying, progress, volume } = storeToRefs(store)
@@ -28,10 +29,6 @@ export default ({
       viewDuration.value = convertTime(store.nowPlaying.duration)
       duration.value = store.nowPlaying.length
     })
-
-    /*     onMounted(async () => {
-      volumeChange(0.2)
-    }) */
 
     function likeSong () {
       if (isLiked.value) {
@@ -77,7 +74,10 @@ export default ({
     function setPlayIcon (value) {
       currentIcon.value = value
     }
-
+    // Update volume from settings store
+    onMounted(async () => {
+      store.setVolume(await settings.get('volume'))
+    })
     return {
       likeSong,
       isLiked,

@@ -1,6 +1,7 @@
 import { Howl, Howler } from 'howler'
 import { usePlayerStore } from '../stores/player'
 import DeaftoneConnector from './deaftoneApi'
+
 class Player {
   constructor () {
     this.howler = null
@@ -10,7 +11,7 @@ class Player {
     this.init()
   }
 
-  init () {
+  async init () {
     this.progressUpdate()
   }
 
@@ -58,8 +59,8 @@ class Player {
   }
 
   changeVolume (value) {
-    this.howler.volume(value)
     this.playerStore.setVolume(value)
+    this.howler.volume(value)
   }
 
   pause () {
