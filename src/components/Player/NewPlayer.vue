@@ -22,7 +22,6 @@ export default ({
     const currentIcon = ref('play')
     const isLiked = ref(true)
     watch(isPlaying, (currentValue, oldValue) => {
-      console.log('test')
       if (isPlaying.value) { setPlayIcon('pause') } else {
         setPlayIcon('play')
       }
