@@ -39,7 +39,7 @@ export default {
         return true
       } return false
     }
-    function handleScroll () {
+    /*     function handleScroll () {
       console.log('Got scroll')
       const scrollBtn = this.$refs.scrollToTop
 
@@ -52,7 +52,7 @@ export default {
     function scrollTop () {
       console.log('test')
       window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
+    } */
     onMounted(() => {
     // With the Tauri global script:
       document.addEventListener('DOMContentLoaded', () => {
@@ -60,14 +60,14 @@ export default {
       // run this function on whatever trigger you want
         if (isTauri()) { loaded() }
       })
-      window.addEventListener('scroll', handleScroll)
+      // window.addEventListener('scroll', handleScroll)
     })
-    onBeforeMount(() => {
+    /*     onBeforeMount(() => {
       window.removeEventListener('scroll', handleScroll)
-    })
+    }) */
     return {
       loaded,
-      scrollTop,
+      // scrollTop,
       goTo,
       isTauri
     }
@@ -94,7 +94,14 @@ export default {
         >
           <router-view v-slot="{ Component }">
             <!--             <transition name="fade"> -->
-            <component :is="Component" />
+            <Suspense>
+              <!-- component with nested async dependencies -->
+              <component :is="Component" />
+              <!-- loading state via #fallback slot -->
+              <template #fallback>
+                <h1>test</h1>
+              </template>
+            </Suspense>
             <!--             </transition> -->
             <div
               ref="scrollTopButton"
