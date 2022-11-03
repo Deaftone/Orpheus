@@ -76,7 +76,7 @@ export default {
       <div
         v-for="album in albums"
         :key="album.id"
-        class="rounded-lg shadow-xl bg-neutral tooltip tooltip-top card"
+        class="bg-neutral tooltip tooltip-top card"
         :data-tip="album.name"
         @click="$router.push({ path: `/AlbumDetails/${album.id}` })"
       >
