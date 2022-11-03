@@ -1,7 +1,7 @@
 <script>
 import { useGenericStore } from '../../stores/generic'
 export default {
-  setup() {
+  setup () {
     const store = useGenericStore()
     const themes = [
       'light',
@@ -32,15 +32,15 @@ export default {
       'lemonade',
       'night',
       'coffee',
-      'winter',
+      'winter'
 
     ]
-    function themeSwitch(theme) {
+    function themeSwitch (theme) {
       document.documentElement.setAttribute('data-theme', theme)
       store.setCurrentTheme(theme)
     }
     return { themes, themeSwitch }
-  },
+  }
 }
 </script>
 <template>
@@ -73,15 +73,41 @@ export default {
       </div>
       <ul
         tabindex="0"
-        class="p-2 overflow-auto overflow-y-scroll shadow scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 menu dropdown-content bg-neutral rounded-box w-52 h-96"
+        class=" scrollbar-thin  scrollbar-track-gray-800 scrollbar-thumb-gray-500 dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box top-px max-h-96 h-[70vh] w-52 overflow-y-auto shadow-2xl mt-16"
       >
-        <li
+        <div
+          class="grid grid-cols-1 p-1"
           v-for="theme in themes"
           :key="theme"
+          :data-set-theme="theme"
+
           @click="themeSwitch(theme)"
         >
-          <a>{{ theme }}</a>
-        </li>
+          <div
+            class="overflow-hidden rounded-lg outline-base-content outline-2 outline-offset-2"
+            data-act-class="outline"
+            :data-set-theme="theme"
+          >
+            <div
+              class="w-full font-sans cursor-pointer bg-base-100 text-base-content"
+              :data-set-theme="theme"
+            >
+              <div class="grid grid-cols-5 grid-rows-3">
+                <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
+                  <div class="flex-grow text-sm font-bold">
+                    {{ theme }}
+                  </div>
+                  <div class="flex flex-wrap flex-shrink-0 gap-1">
+                    <div class="w-2 rounded bg-primary" />
+                    <div class="w-2 rounded bg-secondary" />
+                    <div class="w-2 rounded bg-accent" />
+                    <div class="w-2 rounded bg-neutral" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </ul>
     </div>
   </div>
