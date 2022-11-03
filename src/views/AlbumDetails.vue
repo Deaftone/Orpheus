@@ -75,7 +75,7 @@ export default {
       info.artistId = data.artistId
       info.year = data.year
       info.albumId = data.id
-      info.albumDescription = data.albumDescription.slice(0, 485) + '...'
+      info.albumDescription = (data.albumDescription ? data.albumDescription.slice(0, 485) + '...' : '')
       info.cover = deaftone.getCover(data.id)
       info.songCount = 0
       let totalDuration = 0
