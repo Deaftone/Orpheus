@@ -57,11 +57,11 @@ export default {
           :src="info.artistImage"
         >
       </figure>
-      <div class="card-body">
-        <h2 class="text-xl font-bold card-title lg:text-6xl">
+      <div class="w-min card-body">
+        <h2 class="text-xl font-bold card-title lg:text-6xl text-primary">
           {{ info.artistName }}
         </h2>
-        <div class="card-actions text-primary">
+        <div class="card-actions ">
           <a class="text-xl cursor-pointer">{{ info.bio }}</a>
         </div>
       </div>

@@ -69,11 +69,13 @@ export default {
     onMounted(async () => {
       // observer.observe(sticky.value)
       const data = await deaftone.getArtistAlbum(props.id)
+      console.log(data)
       info.title = data.name
       info.artist = data.artist
       info.artistId = data.artistId
       info.year = data.year
       info.albumId = data.id
+      info.albumDescription = data.albumDescription.slice(0, 485) + '...'
       info.cover = deaftone.getCover(data.id)
       info.songCount = 0
       let totalDuration = 0
@@ -128,16 +130,18 @@ export default {
             :src="info.cover"
           >
         </figure>
-        <div class="card-body">
+        <div class="w-1 pt-0 pb-0 card-body">
           <h2 class="text-xl font-bold card-title lg:text-5xl">
             {{ info.title }}
           </h2>
-          <div class="card-title text-primary">
+          <div class="card-title ">
             <p>
-              {{ info.year }} | {{ info.songCount }} Songs | {{ info.totalDuration }} <br><br><a
-                class="cursor-pointer hover:underline"
+              <a
+                class="cursor-pointer hover:underline text-primary"
                 @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
-              >{{ info.artist }}</a>
+              >{{ info.artist }}</a><br>
+              <a class="gap-0 text-m">{{ info.albumDescription }}</a><br>
+              <a class="text-primary">{{ info.year }} | {{ info.songCount }} Songs | {{ info.totalDuration }}</a>
             </p>
           </div>
           <div class="justify-start mt-5 card-actions">
