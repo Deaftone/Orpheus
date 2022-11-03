@@ -12,7 +12,7 @@ import { usePlayerStore } from '../stores/player'
 export default {
   name: 'AlbumDetails',
   props: { id: { type: String, required: true } },
-  setup (props) {
+  async setup (props) {
     const deaftone = inject('$deaftone')
     const player = inject('$player')
 
@@ -22,13 +22,44 @@ export default {
     const info = reactive({})
     const songs = reactive([])
     const nowPlaying = computed(() => store.nowPlaying)
+    watch(nowPlaying, (newValue, oldPlaying) => {
+      highLightNowPlaying(oldPlaying, newValue)
+    })
+    const data = await deaftone.getArtistAlbum(props.id)
+    console.log(data)
+    info.title = data.name
+    info.artist = data.artist
+    info.artistId = data.artistId
+    info.year = data.year
+    info.albumId = data.id
+    info.albumDescription = data.albumDescription
+    info.cover = deaftone.getCover(data.id)
+    info.songCount = 0
+    let totalDuration = 0
+    for (const song of data.songs) {
+      info.songCount++
+      totalDuration = totalDuration + song.duration
+      songs.push({
+        id: song.id,
+        number: song.track,
+        title: song.title,
+        cover: info.cover,
+        albumName: info.title,
+        artistId: info.artistId,
+        albumId: info.albumId,
+        artist: info.artist,
+        type: 'test',
+        length: song.duration
+      })
+    }
+
+    info.totalDuration = (new Date(totalDuration * 1000).toISOString().substr(14, 5))
+
     /*     const observer = new IntersectionObserver(onElementObserved, {
       root: null,
       threshold: 0.9
     }) */
-    watch(nowPlaying, (newValue, oldPlaying) => {
-      highLightNowPlaying(oldPlaying, newValue)
-    })
+
     function playTrack (title, id) {
       // Get clicked song index
       const index = this.songs.findIndex((x) => x.id === id)
@@ -42,7 +73,10 @@ export default {
         albumBar.value.classList.toggle('bg-base-200', !isIntersecting)
       })
     } */
-
+    function toggleText () {
+      const albumDescription = document.getElementById('albumDescription')
+      albumDescription.classList.toggle('line-clamp-4')
+    }
     function highLightNowPlaying (oldPlaying, newPlaying) {
       let oldP
 
@@ -66,38 +100,8 @@ export default {
         )
       }
     }
-    onMounted(async () => {
-      // observer.observe(sticky.value)
-      const data = await deaftone.getArtistAlbum(props.id)
-      console.log(data)
-      info.title = data.name
-      info.artist = data.artist
-      info.artistId = data.artistId
-      info.year = data.year
-      info.albumId = data.id
-      info.albumDescription = (data.albumDescription ? data.albumDescription.slice(0, 485) + '...' : '')
-      info.cover = deaftone.getCover(data.id)
-      info.songCount = 0
-      let totalDuration = 0
-      for (const song of data.songs) {
-        info.songCount++
-        totalDuration = totalDuration + song.duration
-        songs.push({
-          id: song.id,
-          number: song.track,
-          title: song.title,
-          cover: info.cover,
-          albumName: info.title,
-          artistId: info.artistId,
-          albumId: info.albumId,
-          artist: info.artist,
-          type: 'test',
-          length: song.duration
-        })
-      }
+    // observer.observe(sticky.value)
 
-      info.totalDuration = (new Date(totalDuration * 1000).toISOString().substr(14, 5))
-    })
     // Check if currently playing song in in this track list. If so save and highlight it
     nextTick(() => {
       // if (tempPlaying) { highLightNowPlaying(null, tempPlaying) }
@@ -110,6 +114,7 @@ export default {
       nowPlaying,
       playTrack,
       albumBar,
+      toggleText,
       // onElementObserved,
       highLightNowPlaying,
       sticky,
@@ -121,15 +126,17 @@ export default {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-3 pt-6 pb-6">
-    <div class="justify-center pl-10 pr-10 lg:pr-40 lg:pl-40 lg:block ">
-      <div class="p-4 cursor-default card lg:card-side">
-        <figure>
-          <img
-            class="object-contain w-full shadow-lg rounded-xl h-72"
-            :src="info.cover"
-          >
-        </figure>
+  <div class="grid grid-cols-1 gap-3 pt-6 pb-6 select-none">
+    <div class="justify-center pl-10 pr-10 lg:pr-40 lg:pl-40 lg:block">
+      <div class="p-4 align-top cursor-default card lg:card-side">
+        <div>
+          <figure>
+            <img
+              class="object-contain w-full shadow-lg rounded-xl h-72"
+              :src="info.cover"
+            >
+          </figure>
+        </div>
         <div class="w-1 pt-0 pb-0 card-body">
           <h2 class="text-xl font-bold card-title lg:text-5xl">
             {{ info.title }}
@@ -139,8 +146,14 @@ export default {
               <a
                 class="cursor-pointer hover:underline text-primary"
                 @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
-              >{{ info.artist }}</a><br>
-              <a class="gap-0 text-m">{{ info.albumDescription }}</a><br>
+              >{{ info.artist }}</a>
+              <br>
+              <a
+                class="gap-0 text-m line-clamp-4 hover:cursor-pointer"
+                id="albumDescription"
+                @click="toggleText"
+              >{{ info.albumDescription }} </a>
+              <br>
               <a class="text-primary">{{ info.year }} | {{ info.songCount }} Songs | {{ info.totalDuration }}</a>
             </p>
           </div>
@@ -215,4 +228,13 @@ export default {
     border-color: var(--pf);
   }
 }
+
+.line-clamp-4 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /* truncate to 4 lines */
+  -webkit-line-clamp: 4;
+}
+
 </style>
