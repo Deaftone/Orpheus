@@ -6,38 +6,36 @@ export default {
   name: 'ArtistDetails',
   components: { AlbumCard },
   props: { id: { type: String, required: true } },
-  setup (props) {
+  async setup (props) {
+    onUnmounted(async () => {
+      document.documentElement.style.setProperty('--bg-image', '')
+      document.getElementById('filter').classList.remove('bg-filter')
+    })
     const deaftone = inject('$deaftone')
     const info = reactive({})
     const albums = reactive([])
     info.artistImage =
       'https://www.offset.com/images/v2/artist_bio_placeholder.png'
     info.bio = 'Unknown'
-    onMounted(async () => {
-      const data = await deaftone.getArtist(props.id)
-      if (data.image) {
-        document.documentElement.style.setProperty(
-          '--bg-image',
+    const data = await deaftone.getArtist(props.id)
+    if (data.image) {
+      document.documentElement.style.setProperty(
+        '--bg-image',
           `url('${data.image}')`
-        )
-        document.getElementById('filter').classList.toggle('bg-filter')
-      }
-      for (const album of data.albums) {
-        const cover = deaftone.getCover(album.id)
-        albums.push({
-          id: album.id,
-          name: album.name,
-          cover
-        })
-      }
-      if (data.image) info.artistImage = data.image
-      if (data.bio) info.bio = data.bio
-      info.artistName = data.name
-    }).bind(this)
-    onUnmounted(async () => {
-      document.documentElement.style.setProperty('--bg-image', '')
-      document.getElementById('filter').classList.remove('bg-filter')
-    })
+      )
+      document.getElementById('filter').classList.toggle('bg-filter')
+    }
+    for (const album of data.albums) {
+      const cover = deaftone.getCover(album.id)
+      albums.push({
+        id: album.id,
+        name: album.name,
+        cover
+      })
+    }
+    if (data.image) info.artistImage = data.image
+    if (data.bio) info.bio = data.bio
+    info.artistName = data.name
 
     return {
       info,
