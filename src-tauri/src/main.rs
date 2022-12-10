@@ -4,7 +4,7 @@
 )]
 use tauri::Manager;
 use window_shadows::set_shadow;
-use tauri_plugin_store::PluginBuilder;
+use tauri_plugin_store::PluginBuilder as store;
 
 // Create the command:
 #[tauri::command]
@@ -21,7 +21,7 @@ async fn close_splashscreen(window: tauri::Window) {
 // Register the command:
 fn main() {
   tauri::Builder::default()
-    .plugin(PluginBuilder::default().build())
+    .plugin(store::default().build())
     .setup(|app| {
       let window = app.get_window("main").unwrap();
       set_shadow(&window, true).expect("Unsupported platform!");
