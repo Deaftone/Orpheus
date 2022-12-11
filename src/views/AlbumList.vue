@@ -11,6 +11,10 @@ export default {
       type: Number,
       default: 56
     },
+    sort: {
+      type: String,
+      default: ''
+    },
     scroller: {
       type: Boolean,
       default: true

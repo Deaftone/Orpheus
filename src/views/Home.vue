@@ -62,7 +62,10 @@ export default {
     <h2 class="pl-10">
       New Arists
     </h2>
-    <ArtistList :size="11" />
+    <ArtistList
+      :size="11"
+      sort="latest"
+    />
   </div>
 </template>
 

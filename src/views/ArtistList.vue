@@ -6,13 +6,17 @@ export default {
     size: {
       type: Number,
       default: 56
+    },
+    sort: {
+      type: String,
+      default: ''
     }
   },
   setup (props) {
     const deaftone = inject('$deaftone')
     const artists = ref([])
     onMounted(async () => {
-      const data = await deaftone.getArtists()
+      const data = await deaftone.getArtists(props.size, props.sort)
       for (const artist of data) { artists.value.push({ name: artist.name, id: artist.id }) }
     })
     return { artists }
