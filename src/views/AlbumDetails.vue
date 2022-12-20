@@ -49,7 +49,8 @@ export default {
         albumId: info.albumId,
         artist: info.artist,
         type: 'test',
-        length: song.duration
+        length: song.duration,
+        liked: song.liked
       })
     }
 

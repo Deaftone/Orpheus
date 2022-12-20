@@ -11,6 +11,7 @@ export default ({
   },
   setup () {
     const player = inject('$player')
+    const deaftone = inject('$deaftone')
     const settings = inject('$settings')
     const router = inject('$router')
     const store = usePlayerStore()
@@ -20,7 +21,7 @@ export default ({
     const viewDuration = ref('00:00')
     const duration = ref(0)
     const currentIcon = ref('play')
-    const isLiked = ref(true)
+    const isLiked = ref(false)
     watch(isPlaying, (currentValue, oldValue) => {
       if (isPlaying.value) { setPlayIcon('pause') } else {
         setPlayIcon('play')
@@ -28,13 +29,13 @@ export default ({
       viewDuration.value = convertTime(store.nowPlaying.duration)
       duration.value = store.nowPlaying.length
     })
-
-    function likeSong () {
-      if (isLiked.value) {
-        isLiked.value = false
-      } else {
-        isLiked.value = true
-      }
+    watch(nowPlaying, (currentValue) => {
+      isLiked.value = currentValue.liked
+    })
+    async function likeSong () {
+      const data = await deaftone.likeSong(store.nowPlaying.id)
+      store.nowPlaying.liked = data.liked
+      isLiked.value = data.liked
     }
     function convertTime (seconds) {
       const format = val => `0${Math.floor(val)}`.slice(-2)
@@ -199,11 +200,11 @@ export default ({
                 class="font-bold co btn hover:bg-base-300"
               >
                 <font-awesome-icon
-                  v-show="isLiked"
+                  v-show="!isLiked"
                   :icon="['far', 'heart']"
                 />
                 <font-awesome-icon
-                  v-show="!isLiked"
+                  v-show="isLiked"
                   :icon="['fas', 'heart']"
                 />
               </button>

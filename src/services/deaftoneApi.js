@@ -60,6 +60,11 @@ class DeaftoneConnector {
     return (await this.axios.get(`/artists/${artistId}`)).data
   }
 
+  async likeSong (songId) {
+    const song = (await this.axios.post(`/songs/${songId}/like`)).data
+    return song
+  }
+
   async getAlbums (size, page, sort) {
     return await this.axios.get('/albums', {
       params: {

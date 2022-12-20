@@ -41,7 +41,7 @@ class Player {
 
   progressUpdate () {
     setInterval(() => {
-      if (this.howler === null) return
+      if (this.howler === null || !this.howler.playing()) return
       this.progress = this.howler.seek()
       this.playerStore.setProgress(this.progress)
     }, 100)
