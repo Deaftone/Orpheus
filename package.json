@@ -12,24 +12,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@antfu/eslint-config": "^0.29.3",
+    "@antfu/eslint-config": "^0.34.0",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^3.0.0-4",
     "@vueform/slider": "^2.1.5",
-    "axios": "^1.1.3",
+    "axios": "^1.2.1",
     "axios-cache-interceptor": "^0.10.7",
     "axios-tauri-adapter": "^0.2.0",
-    "daisyui": "^2.38.0",
+    "daisyui": "^2.45.0",
     "dotenv": "^16.0.3",
     "howler": "^2.2.3",
-    "pinia": "^2.0.23",
+    "pinia": "^2.0.28",
     "tailwind-scrollbar": "^2.0.1",
     "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store#dev",
     "v-lazy-image": "^2.1.1",
     "v3-infinite-loading": "^1.2.1",
-    "vue": "^3.2.41",
+    "vue": "^3.2.45",
     "vue-router": "^4.1.6",
     "vue-slider-component": "^4.1.0-beta.2",
     "vuedraggable": "^4.1.0"
@@ -42,7 +42,7 @@
     "@vue/devtools": "^6.4.3",
     "autoprefixer": "^10.4.12",
     "concurrently": "^7.4.0",
-    "eslint": "^8.24.0",
+    "eslint": "^8.30.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.3.0",
@@ -54,7 +54,7 @@
     "puppeteer": "^18.1.0",
     "sass": "^1.55.0",
     "start-server-and-test": "^1.14.0",
-    "tailwindcss": "^3.1.8",
-    "vite": "^3.1.4"
+    "tailwindcss": "^3.2.4",
+    "vite": "^4.0.2"
   }
 }
