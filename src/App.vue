@@ -8,11 +8,8 @@ import TitleBar from './components/Main/TitleBar.vue'
 import RightSidebar from './components/Main/RightSidebar.vue'
 import LeftSidebar from './components/Main/LeftSidebar.vue'
 import {
-  computed,
-  onBeforeMount,
   onMounted
 } from 'vue'
-import { usePlayerStore } from './stores/player'
 export default {
 
   components: {
