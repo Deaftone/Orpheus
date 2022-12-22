@@ -1,6 +1,6 @@
 <script>
 import { inject, onMounted, ref } from 'vue'
-import ArtistCard from '../components/Artist/ArtistCard.vue'
+import ArtistCard from '@/components/Artist/ArtistCard.vue'
 export default {
   components: { ArtistCard },
   props: {

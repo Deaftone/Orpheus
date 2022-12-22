@@ -1,6 +1,6 @@
 <script>
 import { inject, onMounted, onUnmounted, reactive } from 'vue'
-import AlbumCard from '../components/Album/AlbumCard.vue'
+import AlbumCard from '@/components/Album/AlbumCard.vue'
 
 export default {
   name: 'ArtistDetails',

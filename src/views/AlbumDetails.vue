@@ -7,7 +7,7 @@ import {
   ref,
   watch
 } from 'vue'
-import { usePlayerStore } from '../stores/player'
+import { usePlayerStore } from '@/stores/player'
 
 export default {
   name: 'AlbumDetails',

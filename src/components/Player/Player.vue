@@ -1,8 +1,8 @@
 <script>
 import Slider from '@vueform/slider'
-import '../../freqtimeupdate'
+import '@/freqtimeupdate'
 import { computed, inject, onMounted, ref, watch } from 'vue'
-import { usePlayerStore } from '../../stores/player'
+import { usePlayerStore } from '@/stores/player'
 import AvCanvas from './Visualiser.vue'
 import { current } from 'tailwindcss/colors'
 export default ({

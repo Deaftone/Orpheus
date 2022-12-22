@@ -1,5 +1,5 @@
 import { Howl, Howler } from 'howler'
-import { usePlayerStore } from '../stores/player'
+import { usePlayerStore } from '@/stores/player'
 import DeaftoneConnector from './deaftoneApi'
 
 class Player {

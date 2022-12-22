@@ -1,6 +1,6 @@
 <script>
 import 'v3-infinite-loading/lib/style.css'
-import imgUrl from '../../assets/unknown_album.jpg'
+import imgUrl from '@/assets/unknown_album.jpg'
 import { inject } from 'vue'
 import VLazyImage from 'v-lazy-image'
 export default {

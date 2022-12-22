@@ -1,5 +1,5 @@
 <script>
-import { useGenericStore } from '../../stores/generic'
+import { useGenericStore } from '@/stores/generic'
 export default {
   setup () {
     const store = useGenericStore()
