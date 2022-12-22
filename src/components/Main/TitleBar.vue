@@ -2,16 +2,22 @@
 import { appWindow } from '@tauri-apps/api/window'
 export default {
   name: 'TitleBar',
-  methods: {
-    close () {
+  setup () {
+    function close () {
       appWindow.close()
-    },
-    toggleMaximize () {
+    }
+    function toggleMaximize () {
       appWindow.toggleMaximize()
-    },
-    minimize () {
+    }
+    function minimize () {
       appWindow.minimize()
       // appWindow.res
+    }
+
+    return {
+      close,
+      toggleMaximize,
+      minimize
     }
   }
 }
