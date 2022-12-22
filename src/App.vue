@@ -1,12 +1,12 @@
 <script>
 import { invoke } from '@tauri-apps/api/tauri'
-import Player from './components/Player/Player.vue'
-import NewPlayer from './components/Player/NewPlayer.vue'
+import Player from '@/components/Player/Player.vue'
+import NewPlayer from '@/components/Player/NewPlayer.vue'
 
-import MenuBar from './components/Main/MenuBar.vue'
-import TitleBar from './components/Main/TitleBar.vue'
-import RightSidebar from './components/Main/RightSidebar.vue'
-import LeftSidebar from './components/Main/LeftSidebar.vue'
+import MenuBar from '@/components/Main/MenuBar.vue'
+import TitleBar from '@/components/Main/TitleBar.vue'
+import RightSidebar from '@/components/Main/RightSidebar.vue'
+import LeftSidebar from '@/components/Main/LeftSidebar.vue'
 import {
   onMounted
 } from 'vue'
