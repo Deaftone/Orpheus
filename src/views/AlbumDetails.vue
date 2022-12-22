@@ -3,7 +3,7 @@ import {
   computed,
   inject,
   nextTick,
-  onMounted, reactive,
+  reactive,
   ref,
   watch
 } from 'vue'
