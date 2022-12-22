@@ -1,8 +1,27 @@
 <script>
+import { ref } from 'vue'
+import { checkUpdate, installUpdate } from '@tauri-apps/api/updater'
+import { relaunch } from '@tauri-apps/api/process'
 
 export default {
   setup (props) {
-    return { }
+    const disabled = ref(false)
+    async function update () {
+      disabled.value = true
+      try {
+        const { shouldUpdate, manifest } = await checkUpdate()
+        if (shouldUpdate) {
+          // display dialog
+          await installUpdate()
+          // install complete, restart app
+          await relaunch()
+        }
+      } catch (error) {
+        disabled.value = false
+        console.log(error)
+      }
+    }
+    return { update, disabled }
   }
 }
 </script>
@@ -46,6 +65,13 @@ export default {
       </button>
     </div>
     <div class="divider" />
+    <button
+      :class="{'btn-disabled': disabled}"
+      class="btn btn-primary"
+      @click="update()"
+    >
+      Update
+    </button>
   </div>
 </template>
 
