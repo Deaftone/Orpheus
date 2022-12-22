@@ -1,6 +1,6 @@
 <script>
-import ThemeSwitcher from '../Util/ThemeSwitcher.vue'
-import SearchBox from '../Util/SearchBox.vue'
+import ThemeSwitcher from '@/components/Util/ThemeSwitcher.vue'
+import SearchBox from '@/components/Util/SearchBox.vue'
 
 export default {
   name: 'MenuBar',

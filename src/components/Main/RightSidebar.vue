@@ -1,8 +1,9 @@
 
-<script >
+<script>
 import draggable from 'vuedraggable'
 import { watch, computed } from 'vue'
-import { usePlayerStore } from '../../stores/player'
+import { usePlayerStore } from '@/stores/player'
+
 export default {
   components: {
     draggable

@@ -1,6 +1,6 @@
 <script>
 import 'v3-infinite-loading/lib/style.css'
-import AlbumCard from '../components/Album/AlbumCard.vue'
+import AlbumCard from '@/components/Album/AlbumCard.vue'
 
 export default {
   name: 'AlbumList',

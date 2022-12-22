@@ -2,9 +2,9 @@
 import { storeToRefs } from 'pinia'
 import { computed, inject, ref, watch, onMounted } from 'vue'
 import VueSlider from 'vue-slider-component'
-import '../../assets/slider.css'
-import '../../freqtimeupdate'
-import { usePlayerStore } from '../../stores/player'
+import '@/assets/slider.css'
+import '@/freqtimeupdate'
+import { usePlayerStore } from '@/stores/player'
 export default ({
   components: {
     VueSlider
@@ -17,8 +17,8 @@ export default ({
     const store = usePlayerStore()
     const { isPlaying, nowPlaying, progress, volume } = storeToRefs(store)
     const playingIndex = computed(() => store.playingIndex)
-    const eTime = ref('00:00')
-    const viewDuration = ref('00:00')
+    /*     const eTime = ref('00:00')
+    const viewDuration = ref('00:00') */
     const duration = ref(0)
     const currentIcon = ref('play')
     const isLiked = ref(false)
@@ -26,7 +26,7 @@ export default ({
       if (isPlaying.value) { setPlayIcon('pause') } else {
         setPlayIcon('play')
       }
-      viewDuration.value = convertTime(store.nowPlaying.duration)
+      // viewDuration.value = convertTime(store.nowPlaying.duration)
       duration.value = store.nowPlaying.length
     })
     watch(nowPlaying, (currentValue) => {
@@ -93,7 +93,6 @@ export default ({
       seek,
       previousTrack,
       nextTrack,
-      eTime,
       duration,
       volumeChange,
       playPause,
