@@ -13,6 +13,7 @@ module.exports = {
   },
   rules: {
     'no-var': 'error',
+    'vue/multi-word-component-names': 'off',
     'vue/component-api-style': [
       'error',
       ['script-setup', 'composition'] // "script-setup", "composition", "composition-vue2", or "options"
