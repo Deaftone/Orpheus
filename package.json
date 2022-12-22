@@ -27,6 +27,7 @@
     "pinia": "^2.0.23",
     "tailwind-scrollbar": "^2.0.1",
     "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store#dev",
+    "v-lazy-image": "^2.1.1",
     "v3-infinite-loading": "^1.2.1",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6",
