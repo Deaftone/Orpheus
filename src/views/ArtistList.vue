@@ -1,7 +1,8 @@
 <script>
 import { inject, onMounted, ref } from 'vue'
-
+import ArtistCard from '../components/Artist/ArtistCard.vue'
 export default {
+  components: { ArtistCard },
   props: {
     size: {
       type: Number,
@@ -29,17 +30,13 @@ export default {
     <div
       v-for="artist in artists"
       :key="artist.id"
-      class="mx-auto transition duration-300 ease-in-out delay-150 hover:-translate-y-1 hover:scale-105"
       @click=" $router.push({ path: `/ArtistDetails/${artist.id}` })
       "
     >
-      <img
-        class="rounded-full shadow-xl ring ring-primary"
-        src="https://www.offset.com/images/v2/artist_bio_placeholder.png"
-      >
-      <div class="font-bold text-center">
-        <a>{{ artist.name }}</a>
-      </div>
+      <ArtistCard
+        :id="artist.id"
+        :name="artist.name"
+      />
     </div>
     <!--     <div
       v-for="artist in artists"
