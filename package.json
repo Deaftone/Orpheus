@@ -1,6 +1,6 @@
 {
   "name": "orpheus",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "main": "main.js",
   "scripts": {
     "dev": "concurrently -k \"npx tauri dev\" \"npm run devtools\"",
