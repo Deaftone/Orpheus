@@ -21,6 +21,11 @@ export default defineConfig(() => {
         }
       }
     },
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, './src')
+      }
+    },
     server: {
       fs: {
         // Allow serving files from one level up to the project root
