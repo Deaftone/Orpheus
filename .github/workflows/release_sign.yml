@@ -1,4 +1,4 @@
-name: "publish"
+name: "publish-sign"
 on:
   push:
     branches:
