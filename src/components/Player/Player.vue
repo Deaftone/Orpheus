@@ -55,23 +55,23 @@ export default ({
       volumeChange(25)
     })
 
-    function toggleVis () {
+    /*     function toggleVis () {
       /*
         Fix me
         For some reason when creating a new AudioCtx the player volume goes up
         I would like to have it destroyed when hidden
-      */
+
       this.visToggled ^= true
       if (this.visToggled) {
-        // this.src.connect(this.myAnalyser)
-        // this.myAnalyser.connect(this.ctx.destination)
+        this.src.connect(this.myAnalyser)
+        this.myAnalyser.connect(this.ctx.destination)
       } else {
-        // this.src.disconnect(this.myAnalyser)
-        // this.myAnalyser.disconnect(this.ctx.destination)
+        this.src.disconnect(this.myAnalyser)
+        this.myAnalyser.disconnect(this.ctx.destination)
 
       }
-      // document.getElementById('barC').classList.toggle('pb-3')
-    }
+      document.getElementById('barC').classList.toggle('pb-3')
+    } */
     function setMediaControls (title, artist, album, src) {
       if ('mediaSession' in navigator) {
         navigator.mediaSession.metadata = new MediaMetadata({
@@ -189,16 +189,6 @@ export default ({
       playTrack,
       playbackListener,
       currentIcon
-    }
-  },
-  data () {
-    return {
-      myAnalyser: null,
-      myAnalyserHidden: null,
-      ctx: null,
-      src: null,
-      visToggled: false,
-      volume: 25
     }
   }
 })
