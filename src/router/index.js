@@ -7,7 +7,10 @@ import ArtistDetails from '@/views/ArtistDetails.vue'
 import Home from '@/views/Home.vue'
 import TestVue from '@/views/Test.vue'
 import Settings from '@/views/Settings.vue'
-const routes = [
+
+import { setupLayouts } from 'virtual:generated-layouts'
+
+const routes = setupLayouts([
   {
     path: '/',
     name: 'Home',
@@ -47,7 +50,7 @@ const routes = [
     component: TestVue,
     props: true
   }
-]
+])
 
 const router = createRouter({
   history: createWebHistory(),

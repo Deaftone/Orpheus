@@ -7,6 +7,7 @@ import MenuBar from '@/components/Main/MenuBar.vue'
 import TitleBar from '@/components/Main/TitleBar.vue'
 import RightSidebar from '@/components/Main/RightSidebar.vue'
 import LeftSidebar from '@/components/Main/LeftSidebar.vue'
+import ConnectionModal from '@/components/Modal/ConnectionModal.vue'
 import {
   onMounted
 } from 'vue'
@@ -18,9 +19,11 @@ export default {
     MenuBar,
     RightSidebar,
     LeftSidebar,
-    NewPlayer
+    NewPlayer,
+    ConnectionModal
   },
   setup () {
+    const active = true
     function loaded () {
       console.log('Splash removed')
       invoke('close_splashscreen')
@@ -66,6 +69,7 @@ export default {
       loaded,
       // scrollTop,
       goTo,
+      active,
       isTauri
     }
   }
@@ -73,22 +77,46 @@ export default {
 </script>
 
 <template>
-  <router-view v-slot="{ Component }">
-    <!--             <transition name="fade"> -->
+  <!--   <div
+    :class="{'modal-open': active}"
+    class="modal "
+  >
     <Suspense>
-      <!-- component with nested async dependencies -->
-      <component :is="Component" />
-      <!-- loading state via #fallback slot -->
-      <template #fallback>
-        <h1>test</h1>
-      </template>
-    </Suspense>
-    <!--             </transition> -->
-    <div
-      ref="scrollTopButton"
-      class="sticky bottom-0 flex justify-end w-full pb-3 pr-5 transition lg:pr-16"
-    >
-      <!--               <div
+      <ConnectionModal />
+    </suspense>
+  </div> -->
+  <div class="flex flex-col h-screen overflow-hidden">
+    <TitleBar v-if="isTauri()" />
+    <div class="flex flex-col flex-grow w-full h-full overflow-hidden sm:flex-row">
+      <div class="flex-grow-0 flex-shrink hidden p-3 md:inline-flex bg-neutral md:visible">
+        <div class="sticky top-0 flex rounded-xl ">
+          <LeftSidebar />
+        </div>
+      </div>
+      <div class="flex flex-col justify-between w-full">
+        <header>
+          <MenuBar />
+        </header>
+        <main
+          role="main"
+          class="flex-1 overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700"
+        >
+          <router-view v-slot="{ Component }">
+            <!--             <transition name="fade"> -->
+            <Suspense>
+              <!-- component with nested async dependencies -->
+              <component :is="Component" />
+              <!-- loading state via #fallback slot -->
+              <template #fallback>
+                <h1>test</h1>
+              </template>
+            </Suspense>
+            <!--             </transition> -->
+            <div
+              ref="scrollTopButton"
+              class="sticky bottom-0 flex justify-end w-full pb-3 pr-5 transition lg:pr-16"
+            >
+              <!--               <div
                 class="text-gray-400 transition hover:text-blue-400"
               >
                 <button
@@ -98,8 +126,23 @@ export default {
                   Scroll to top
                 </button>
               </div> -->
+            </div>
+          </router-view>
+        </main>
+      </div>
+      <div
+        class="flex flex-col w-64 bg-neutral"
+        v-if="false"
+      >
+        <RightSidebar />
+      </div>
     </div>
-  </router-view>
+    <!-- If we remove the pt-1 and bg we get a weird 1 px size bug for the background image on the ArtistDetails page -->
+    <footer class="flex text-center bg-base-200">
+<!--       <Player />
+ -->      <NewPlayer />
+    </footer>
+  </div>
 </template>
 
 <style>

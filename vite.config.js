@@ -1,5 +1,6 @@
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
+import Layouts from 'vite-plugin-vue-layouts'
 const { resolve } = require('path')
 // import path from 'path'
 // import ViewLauncherVuePlugin from '@view-launcher/rollup-plugin-vue'
@@ -39,7 +40,10 @@ export default defineConfig(() => {
         theme: 'dark',
         editor: env.VITE_EDITOR || 'vscode',
       }), */
-      vue()
+      vue(),
+      Layouts({
+        defaultLayout: 'Default'
+      })
 
     ],
     define: {
