@@ -1,5 +1,4 @@
 <script>
-import { invoke } from '@tauri-apps/api/tauri'
 import Player from '@/components/Player/Player.vue'
 import NewPlayer from '@/components/Player/NewPlayer.vue'
 
@@ -8,9 +7,7 @@ import TitleBar from '@/components/Main/TitleBar.vue'
 import RightSidebar from '@/components/Main/RightSidebar.vue'
 import LeftSidebar from '@/components/Main/LeftSidebar.vue'
 import ConnectionModal from '@/components/Modal/ConnectionModal.vue'
-import {
-  onMounted
-} from 'vue'
+
 export default {
 
   components: {
@@ -23,16 +20,6 @@ export default {
     ConnectionModal
   },
   setup () {
-    const active = true
-    function loaded () {
-      console.log('Splash removed')
-      invoke('close_splashscreen')
-    }
-    function goTo (p) {
-      console.log(p)
-      this.$router.push({ path: `/${p}` })
-    }
-
     function isTauri () {
       if (window.__TAURI__) {
         return true
@@ -52,23 +39,11 @@ export default {
       console.log('test')
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } */
-    onMounted(() => {
-    // With the Tauri global script:
-      document.addEventListener('DOMContentLoaded', () => {
-      // This will wait for the window to load, but you could
-      // run this function on whatever trigger you want
-        // if (isTauri()) { loaded() }
-      })
-      // window.addEventListener('scroll', handleScroll)
-    })
     /*     onBeforeMount(() => {
       window.removeEventListener('scroll', handleScroll)
     }) */
     return {
-      loaded,
       // scrollTop,
-      goTo,
-      active,
       isTauri
     }
   }
@@ -76,14 +51,6 @@ export default {
 </script>
 
 <template>
-  <!--   <div
-    :class="{'modal-open': active}"
-    class="modal "
-  >
-    <Suspense>
-      <ConnectionModal />
-    </suspense>
-  </div> -->
   <div class="flex flex-col h-screen overflow-hidden">
     <TitleBar v-if="isTauri()" />
     <div class="flex flex-col flex-grow w-full h-full overflow-hidden sm:flex-row">
