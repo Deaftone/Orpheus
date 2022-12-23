@@ -20,8 +20,12 @@ class SettingsManager {
   }
 
   async get (setting) {
-    const { value } = await this.store.get(setting)
-    return value
+    try {
+      const { value } = await this.store.get(setting)
+      return value
+    } catch (error) {
+      return null
+    }
   }
 }
 
