@@ -1,105 +1,25 @@
 <script>
-import { invoke } from '@tauri-apps/api/tauri'
-import Player from '@/components/Player/Player.vue'
-import NewPlayer from '@/components/Player/NewPlayer.vue'
+import { inject, onMounted } from 'vue'
 
-import MenuBar from '@/components/Main/MenuBar.vue'
-import TitleBar from '@/components/Main/TitleBar.vue'
-import RightSidebar from '@/components/Main/RightSidebar.vue'
-import LeftSidebar from '@/components/Main/LeftSidebar.vue'
-import {
-  onMounted
-} from 'vue'
 export default {
-
   components: {
-    Player,
-    TitleBar,
-    MenuBar,
-    RightSidebar,
-    LeftSidebar,
-    NewPlayer
   },
+
   setup () {
-    function loaded () {
-      console.log('Splash removed')
-      invoke('close_splashscreen')
-    }
-    function goTo (p) {
-      console.log(p)
-      this.$router.push({ path: `/${p}` })
-    }
-
-    function isTauri () {
-      if (window.__TAURI__) {
-        console.log('Tauri')
-        return true
-      } return false
-    }
-    /*     function handleScroll () {
-      console.log('Got scroll')
-      const scrollBtn = this.$refs.scrollToTop
-
-      if (window.scrollY > 0) {
-        scrollBtn.classList.remove('invisible')
-      } else {
-        scrollBtn.classList.add('invisible')
+    const deaftone = inject('$deaftone')
+    onMounted(async () => {
+      if (!deaftone.hasInit) {
+        await deaftone.init()
       }
-    }
-    function scrollTop () {
-      console.log('test')
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    } */
-    onMounted(() => {
-    // With the Tauri global script:
-      document.addEventListener('DOMContentLoaded', () => {
-      // This will wait for the window to load, but you could
-      // run this function on whatever trigger you want
-        if (isTauri()) { loaded() }
-      })
-      // window.addEventListener('scroll', handleScroll)
     })
-    /*     onBeforeMount(() => {
-      window.removeEventListener('scroll', handleScroll)
-    }) */
-    return {
-      loaded,
-      // scrollTop,
-      goTo,
-      isTauri
-    }
   }
 }
 </script>
 
 <template>
-  <router-view v-slot="{ Component }">
-    <!--             <transition name="fade"> -->
-    <Suspense>
-      <!-- component with nested async dependencies -->
-      <component :is="Component" />
-      <!-- loading state via #fallback slot -->
-      <template #fallback>
-        <h1>test</h1>
-      </template>
-    </Suspense>
-    <!--             </transition> -->
-    <div
-      ref="scrollTopButton"
-      class="sticky bottom-0 flex justify-end w-full pb-3 pr-5 transition lg:pr-16"
-    >
-      <!--               <div
-                class="text-gray-400 transition hover:text-blue-400"
-              >
-                <button
-                  ref="scrollToTop"
-                  @click="scrollTop"
-                >
-                  Scroll to top
-                </button>
-              </div> -->
-    </div>
-  </router-view>
+  <Suspense>
+    <router-view />
+  </Suspense>
 </template>
 
 <style>
