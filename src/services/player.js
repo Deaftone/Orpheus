@@ -67,6 +67,11 @@ class Player {
     this.playerStore.setIsPlaying(false)
   }
 
+  resume () {
+    this.howler.play()
+    this.playerStore.setIsPlaying(true)
+  }
+
   togglePlay () {
     if (this.howler.playing()) {
       console.log('PLAYER_SERVICE: PAUSE')
