@@ -21,6 +21,7 @@ async fn close_splashscreen(window: tauri::Window) {
 // Register the command:
 fn main() {
   tauri::Builder::default()
+    .plugin(tauri_plugin_window_state::Builder::default().build())
     .plugin(store::default().build())
     .setup(|app| {
       let window = app.get_window("main").unwrap();

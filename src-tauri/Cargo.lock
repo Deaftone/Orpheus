@@ -103,6 +103,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9e1b586273c5702936fe7b7d6896644d8be71e6314cfe09d3167c95f712589e8"
 
 [[package]]
+name = "bincode"
+version = "1.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b1f45e9417d87227c7a56d22e471c6206462cba514c7590c09aff4cf6d1ddcad"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "bitflags"
 version = "1.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1393,12 +1402,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "minisign-verify"
-version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "933dca44d65cdd53b355d0b73d380a2ff5da71f87f036053188bf1eab6a19881"
-
-[[package]]
 name = "miniz_oxide"
 version = "0.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1687,6 +1690,7 @@ dependencies = [
  "tauri-build",
  "tauri-plugin-localhost",
  "tauri-plugin-store",
+ "tauri-plugin-window-state",
  "window-shadows",
 ]
 
@@ -2699,7 +2703,6 @@ checksum = "efbf22abd61d95ca9b2becd77f9db4c093892f73e8a07d21d8b0b2bf71a7bcea"
 dependencies = [
  "anyhow",
  "attohttpc",
- "base64",
  "cocoa",
  "dirs-next",
  "embed_plist",
@@ -2712,7 +2715,6 @@ dependencies = [
  "heck 0.4.0",
  "http",
  "ignore",
- "minisign-verify",
  "notify-rust",
  "objc",
  "once_cell",
@@ -2738,14 +2740,12 @@ dependencies = [
  "tauri-utils",
  "tempfile",
  "thiserror",
- "time",
  "tokio",
  "url",
  "uuid 1.2.1",
  "webkit2gtk",
  "webview2-com",
  "windows 0.39.0",
- "zip",
 ]
 
 [[package]]
@@ -2823,6 +2823,18 @@ dependencies = [
  "log",
  "serde",
  "serde_json",
+ "tauri",
+ "thiserror",
+]
+
+[[package]]
+name = "tauri-plugin-window-state"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2f15dab0be2ce3ce8a57d0d2de17d201d0c2f3230d68981ff3f0942684de03eb"
+dependencies = [
+ "bincode",
+ "serde",
  "tauri",
  "thiserror",
 ]
@@ -3787,14 +3799,3 @@ name = "xml-rs"
 version = "0.8.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d2d7d3948613f75c98fd9328cfdcc45acc4d360655289d0a7d4ec931392200a3"
-
-[[package]]
-name = "zip"
-version = "0.6.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "537ce7411d25e54e8ae21a7ce0b15840e7bfcff15b51d697ec3266cc76bdf080"
-dependencies = [
- "byteorder",
- "crc32fast",
- "crossbeam-utils",
-]
