@@ -1,12 +1,11 @@
 import { Howl, Howler } from 'howler'
 import { usePlayerStore } from '@/stores/player'
-import DeaftoneConnector from './deaftoneApi'
 
 class Player {
-  constructor () {
+  constructor (deaftone) {
     this.howler = null
     this.playerStore = usePlayerStore()
-    this.deaftone = new DeaftoneConnector()
+    this.deaftone = deaftone
     this.progress = 0
     this.init()
   }

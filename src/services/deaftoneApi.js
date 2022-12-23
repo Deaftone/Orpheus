@@ -4,7 +4,16 @@ import {
 } from 'axios-cache-interceptor'
 import axiosTauriAdapter from 'axios-tauri-adapter'
 class DeaftoneConnector {
-  constructor () {
+  constructor (settings) {
+    this.settings = settings
+    this.baseURL = null
+    this.cacheStorage = null
+    this.axios = null
+    this.hasInit = false
+  }
+
+  async init () {
+    this.baseURL = await this.settings.get('server')
     /*     this.axios = axios.create({
       adapter: window.__TAURI__ ? axiosTauriAdapter : null, this.cache],
       baseURL: 'https://apollo.raspi.local',
@@ -16,7 +25,7 @@ class DeaftoneConnector {
       // axios instance
       axios.create({
         adapter: window.__TAURI__ ? axiosTauriAdapter : null,
-        baseURL: 'http://localhost:3030',
+        baseURL: this.baseURL,
         timeout: 5000,
         headers: { 'Content-Type': 'application/json' }
       }),
@@ -46,12 +55,14 @@ class DeaftoneConnector {
         debug: undefined
       }
     )
+
+    this.hasInit = true
   }
 
-  async testConnection () {
+  async testConnection (address = this.baseURL) {
     // Delete cache before testiing the call
     await this.axios.storage.remove('test-connection')
-    return (await this.axios.get('/', {
+    return (await this.axios.get(address, {
       id: 'test-connection'
     }))
   }
@@ -98,15 +109,15 @@ class DeaftoneConnector {
   }
 
   stream (id) {
-    return `${this.axios.defaults.baseURL}/stream/${id}`
+    return `${this.baseURL}/stream/${id}`
   }
 
   streamTranscode (id) {
-    return `${this.axios.defaults.baseURL}/stream/transcode/${id}`
+    return `${this.baseURL}/stream/transcode/${id}`
   }
 
   getCover (id) {
-    return `${this.axios.defaults.baseURL}/albums/${id}/cover`
+    return `${this.baseURL}/albums/${id}/cover`
   }
 }
 

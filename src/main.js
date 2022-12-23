@@ -20,9 +20,14 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(createPinia())
-app.provide('$deaftone', new DeaftoneConnector())
-app.provide('$player', new Player())
-app.provide('$settings', new SettingsManager())
+const settings = new SettingsManager()
+const deaftone = new DeaftoneConnector(settings)
+app.provide('$settings', settings)
+
+app.provide('$deaftone', deaftone)
+app.provide('$player', new Player(deaftone))
+app.provide('$router', router)
+
 app.use(router)
 library.add(faHome)
 library.add(faPlay)
