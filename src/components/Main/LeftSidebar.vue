@@ -2,7 +2,7 @@
 export default {
   setup () {
     const routes = [
-      { name: 'Home', route: '/', icon: 'home' },
+      { name: 'Home', route: '/home', icon: 'home' },
       { name: 'Artists', route: '/ArtistList', icon: 'microphone-alt' },
       { name: 'Albums', route: '/AlbumDetails', icon: 'compact-disc' }
     ]
