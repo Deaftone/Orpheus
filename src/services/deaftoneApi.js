@@ -48,6 +48,14 @@ class DeaftoneConnector {
     )
   }
 
+  async testConnection () {
+    // Delete cache before testiing the call
+    await this.axios.storage.remove('test-connection')
+    return (await this.axios.get('/', {
+      id: 'test-connection'
+    }))
+  }
+
   async getArtists (limit, sort) {
     return (await this.axios.get('/artists', {
       params: {
