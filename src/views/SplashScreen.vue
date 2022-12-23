@@ -1,9 +1,8 @@
 <script>
-import { inject, onMounted } from 'vue'
 
 export default {
   async setup (props) {
-    onMounted(async () => {
+    /*     onMounted(async () => {
       const router = inject('$router')
 
       const deaftone = inject('$deaftone')
@@ -13,7 +12,9 @@ export default {
         const status = await deaftone.testConnection(await settings.get('server'))
         if (status.status === 200) {
           console.log('Connected to server')
-          router.push({ path: '/home' })
+          setTimeout(() => {
+            router.push({ path: '/home' })
+          }, 4000)
         } else {
           console.log('Failed to connect')
           router.push({ path: '/init' })
@@ -21,7 +22,7 @@ export default {
       } catch (e) {
         router.push({ path: '/init' })
       }
-    })
+    }) */
   }
 }
 </script>

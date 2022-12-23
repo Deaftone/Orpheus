@@ -15,6 +15,11 @@ export default {
   setup () {
     const address = ref('')
     const selected = ref('A')
+    const alert = ref({
+      show: false,
+      message: ''
+    })
+
     const deaftone = inject('$deaftone')
     const settings = inject('$settings')
     const router = inject('$router')
@@ -27,16 +32,17 @@ export default {
       { text: 'Deaftone', value: 'A' },
       { text: 'Subsonic', value: 'B' }
     ])
-    function goHome () {
-      this.$router.push({ path: '/home' })
-      console.log(this)
-    }
+
     onMounted(async () => {
       console.log(`Addresss ${await settings.get('server')
     }`)
     })
     async function connect () {
+      alert.value = {
+        show: false
+      }
       try {
+        console.log(address.value)
         const status = await iAxios.get(address.value)
         if (status.status === 200) {
           settings.set('server', address.value).then(async () => {
@@ -46,7 +52,11 @@ export default {
           })
         }
       } catch (error) {
-        console.log('Failed to connect to server')
+        alert.value = {
+          show: true,
+          message: error
+        }
+        console.log(`Failed to connect to server ${error}`)
         router.push({ path: '/init' })
       }
 
@@ -55,7 +65,7 @@ export default {
       console.log(address.value)
     }
     return {
-      goHome,
+      alert,
       connect,
       selected,
       options,
@@ -67,59 +77,7 @@ export default {
 
 <template>
   <TitleBar />
-  <!--   <div
-    class="grid justify-center"
-  >
-    <a>test</a>
-
-    <button
-      class="btn btn-primary"
-      @click="$router.push({ path: '/home' })"
-    />
-  </div> -->
-  <!--   <div class="flex flex-col items-center justify-center flex-1 h-full pt-10 pb-10 pl-24 pr-24 m-10 rounded-md shadow-md mr-36 ml-36 bg-neutral w-ful">
-    <h1 class="font-bold">
-      Setup
-    </h1>
-    <div class="divider" />
-    <div class="flex form-control">
-      <label class="flex label">
-        <span class="label-text">Server type</span>
-      </label>
-      <select class="w-full max-w-xs select select-bordered">
-        <option
-          disabled
-          selected
-        >
-          Deaftone
-        </option>
-        <option>Subsonic</option>
-        <option>Navidrome</option>
-      </select>
-
-      <div class="flex form-control">
-        <label class="flex label">
-          <span class="label-text">Server address</span>
-        </label>
-        <input
-          type="text"
-          placeholder="Server address"
-          class="w-full max-w-xs input input-bordered"
-        >
-      </div>
-    </div>
-
-    <div class="divider" />
-    <button
-      :class="{'btn-disabled': disabled}"
-      class="btn btn-primary"
-      @click="update()"
-    >
-      Update
-    </button>
-  </div> -->
-  <!-- Height hack is needed for menubar -->
-
+  <!--
   <div
     class="flex flex-col items-center justify-center flex-1 pt-10 pb-10 pl-24 pr-24 m-10 rounded-md shadow-md mr-36 ml-36 bg-neutral w-ful"
     style="height: 90vh"
@@ -127,26 +85,15 @@ export default {
     <h1 class="font-bold">
       Setup
     </h1>
-    <div class="divider" />
     <div class="flex form-control">
       <label class="flex label">
         <span class="label-text">Server type</span>
       </label>
-      <!--       <select class="w-full max-w-xs select select-bordered">
-        <option
-          disabled
-          selected
-        >
-          Deaftone
-        </option>
-        <option>Subsonic</option>
-        <option>Navidrome</option>
-      </select> -->
+
       <select
         v-model="selected"
         class="w-full max-w-xs select select-bordered"
       >
-        <!-- eslint-disable-next-line vue/require-v-for-key -->
         <option
           v-for="option in options"
           :value="option.value"
@@ -166,13 +113,123 @@ export default {
         >
       </div>
     </div>
-
-    <div class="divider" />
     <button
-      class="btn btn-primary"
+      class="mt-5 btn btn-primary"
       @click="connect()"
     >
       Connect
     </button>
+    <div
+      class="mt-5"
+    >
+      <div
+        class="shadow-lg alert alert-error"
+        v-if="alert.show"
+      >
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="flex-shrink-0 w-6 h-6 stroke-current"
+            fill="none"
+            viewBox="0 0 24 24"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          /></svg>
+          <span>Error! Failed to connect to server. {{ alert.message }}</span>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div
+    class="flex flex-col items-center justify-center"
+    style="height: 90vh"
+  >
+    <div class="px-8 py-6 mt-4 text-left shadow-2xl bg-base-300">
+      <h3 class="text-2xl font-bold text-center">
+        Connect to Deaftone
+      </h3>
+      <div>
+        <div class="mt-4">
+          <div>
+            <select
+              v-model="selected"
+              class="w-full max-w-xs select select-bordered"
+            >
+              <!-- eslint-disable-next-line vue/require-v-for-key -->
+              <option
+                v-for="option in options"
+                :value="option.value"
+              >
+                {{ option.text }}
+              </option>
+            </select>
+
+            <!--             <label
+              class="block"
+              for="email"
+            >Email<label>
+              <input
+                type="text"
+                placeholder="Email"
+                class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-bg-primary-focus"
+              >
+            </label></label> -->
+          </div>
+          <div class="mt-4">
+            <label class="label ">
+              <span class="label-text 00">Your Deaftone address</span>
+            </label>
+            <label class="input-group ">
+              <span class="bg-base-200">Address</span>
+              <input
+                type="text"
+                v-model="address"
+                placeholder="http://localhost:3030"
+                class="input input-bordered"
+              >
+            </label>
+          </div>
+          <div class="flex items-baseline justify-center">
+            <button
+              class="px-6 py-2 mt-4 btn btn-primary"
+              @click="connect()"
+            >
+              Connect
+            </button>
+            <!--             <a
+              href="#"
+              class="text-sm text-blue-600 hover:underline"
+            >Forgot password?</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="mt-11"
+    >
+      <div
+        class="shadow-lg alert alert-error"
+        v-if="alert.show"
+      >
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="flex-shrink-0 w-6 h-6 stroke-current"
+            fill="none"
+            viewBox="0 0 24 24"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          /></svg>
+          <span>Error! Failed to connect to server. {{ alert.message }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
