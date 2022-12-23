@@ -1,6 +1,6 @@
 [package]
 name = "orpheus"
-version = "0.0.2"
+version = "0.0.1"
 description = "Orpheus music player"
 authors = [ "112RG" ]
 license = ""
