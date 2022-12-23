@@ -7,12 +7,29 @@ import ArtistDetails from '@/views/ArtistDetails.vue'
 import Home from '@/views/Home.vue'
 import TestVue from '@/views/Test.vue'
 import Settings from '@/views/Settings.vue'
-
+import SplashScreen from '@/views/SplashScreen.vue'
+import AppInit from '@/views/AppInit.vue'
 import { setupLayouts } from 'virtual:generated-layouts'
 
 const routes = setupLayouts([
   {
     path: '/',
+    name: 'SplashScreen',
+    component: SplashScreen,
+    meta: {
+      layout: 'Test'
+    }
+  },
+  {
+    path: '/init',
+    name: 'AppInit',
+    component: AppInit,
+    meta: {
+      layout: 'Test'
+    }
+  },
+  {
+    path: '/home',
     name: 'Home',
     component: Home
   },
