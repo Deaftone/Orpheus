@@ -4,7 +4,8 @@
   "main": "main.js",
   "scripts": {
     "dev": "concurrently -k \"npx tauri dev\" \"npm run devtools\"",
-    "build": "tauri build",
+    "build": "tauri build -c ./src-tauri/tauri.conf.dev.json",
+    "build:sign": "tauri build",
     "build:debig": "tauri build -d",
     "vite:dev": "vite dev",
     "vite:build": "vite build",
