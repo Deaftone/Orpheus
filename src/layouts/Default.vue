@@ -35,7 +35,6 @@ export default {
 
     function isTauri () {
       if (window.__TAURI__) {
-        console.log('Tauri')
         return true
       } return false
     }
@@ -58,7 +57,7 @@ export default {
       document.addEventListener('DOMContentLoaded', () => {
       // This will wait for the window to load, but you could
       // run this function on whatever trigger you want
-        if (isTauri()) { loaded() }
+        // if (isTauri()) { loaded() }
       })
       // window.addEventListener('scroll', handleScroll)
     })
