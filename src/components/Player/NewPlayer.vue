@@ -22,6 +22,12 @@ export default ({
     const duration = ref(0)
     const currentIcon = ref('play')
     const isLiked = ref(false)
+
+    if (isPlaying.value) {
+      console.log('Found song playing')
+    } else {
+      console.log('Didn\'t song playing')
+    }
     watch(isPlaying, (currentValue, oldValue) => {
       if (isPlaying.value) { setPlayIcon('pause') } else {
         setPlayIcon('play')
