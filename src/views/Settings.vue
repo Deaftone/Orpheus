@@ -9,7 +9,7 @@ export default {
     async function update () {
       disabled.value = true
       try {
-        const { shouldUpdate, manifest } = await checkUpdate()
+        const { shouldUpdate } = await checkUpdate()
         if (shouldUpdate) {
           // display dialog
           await installUpdate()
