@@ -38,6 +38,7 @@ export default {
             router.push({ path: '/init' })
           }
         } catch (e) {
+          console.log(`App init error: ${e}`)
           router.push({ path: '/init' })
         }
       }
