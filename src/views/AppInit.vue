@@ -47,7 +47,6 @@ export default {
         show: false
       }
       try {
-        console.log(address.value)
         const status = await iAxios.get(address.value)
         if (status.status === 200) {
           settings.set('server', address.value).then(async () => {
