@@ -1,8 +1,12 @@
 import { Store } from 'tauri-plugin-store-api'
-
+import WebStore from './webStore'
 class SettingsManager {
   constructor () {
-    this.store = new Store('.settings.dat')
+    if (window.__TAURI__) {
+      this.store = new Store('.settings.dat')
+    } else {
+      this.store = new WebStore()
+    }
     // this.init()
   }
 
