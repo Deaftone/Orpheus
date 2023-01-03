@@ -8,7 +8,7 @@ class WebStore {
   }
 
   async get (setting) {
-    console.log('test_get')
+    return { value: 'http://localhost:3030' }
   }
 }
 
