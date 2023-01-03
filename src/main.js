@@ -15,7 +15,7 @@ import devtools from '@vue/devtools'
 import SettingsManager from './services/settings'
 const app = createApp(App)
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' && window.__TAURI__) {
   devtools.connect('http://localhost', 8098)
 }
 
