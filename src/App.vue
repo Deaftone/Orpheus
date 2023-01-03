@@ -18,19 +18,13 @@ export default {
       invoke('close_splashscreen')
     }
 
-    /*     document.addEventListener('DOMContentLoaded', () => {
-      // This will wait for the window to load, but you could
-      // run this function on whatever trigger you want
-      if (isTauri()) { loaded() }
-    }) */
-
     onUnmounted(() => {
       deaftone.hasInit = false
     })
     onMounted(async () => {
       if (!deaftone.hasInit) {
         await deaftone.init()
-        loaded()
+        if (window.__TAURI__) { loaded() }
         try {
           const status = await deaftone.testConnection(await settings.get('server'))
           if (status.status === 200) {
