@@ -14,13 +14,7 @@ class DeaftoneConnector {
 
   async init () {
     this.baseURL = await this.settings.get('server')
-    /*     this.axios = axios.create({
-      adapter: window.__TAURI__ ? axiosTauriAdapter : null, this.cache],
-      baseURL: 'https://apollo.raspi.local',
-      timeout: 5000,
-      headers: { 'Content-Type': 'application/json' }
-    }) */
-    this.cacheStorage = buildWebStorage(localStorage, 'axios-cache:')
+    // this.cacheStorage = buildWebStorage(localStorage, 'axios-cache:')
     this.axios = setupCache(
       // axios instance
       axios.create({
@@ -28,10 +22,10 @@ class DeaftoneConnector {
         baseURL: this.baseURL,
         timeout: 5000,
         headers: { 'Content-Type': 'application/json' }
-      }),
+      })
 
       // All options with their default values
-      {
+      /*       {
         // The storage to save the cache data. There are more available by default.
         //
         // https://axios-cache-interceptor.js.org/#/pages/storages
@@ -53,7 +47,7 @@ class DeaftoneConnector {
         // https://axios-cache-interceptor.js.org/#/pages/development-mode
         // https://axios-cache-interceptor.js.org/#/pages/global-configuration?id=debug
         debug: undefined
-      }
+      } */
     )
 
     this.hasInit = true

@@ -9,7 +9,6 @@ export default {
     const deaftone = inject('$deaftone')
     const settings = inject('$settings')
     const router = inject('$router')
-    const player = inject('$player')
 
     console.log('Loading splash')
     router.push({ path: '/' })
