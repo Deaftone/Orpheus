@@ -20,7 +20,8 @@ if (process.env.NODE_ENV === 'development' && window.__TAURI__) {
 }
 
 app.use(createPinia())
-const settings = new SettingsManager()
+
+const settings = new SettingsManager(!!window.__TAURI__)
 const deaftone = new DeaftoneConnector(settings)
 app.provide('$settings', settings)
 
