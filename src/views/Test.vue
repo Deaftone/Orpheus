@@ -1,7 +1,52 @@
 <script>
+import {
+  inject,
+  reactive
+} from 'vue'
 export default {
   name: 'TestVue',
-  setup (props) {
+  async setup (props) {
+    const player = inject('$player')
+    const deaftone = inject('$deaftone')
+    const info = {}
+    const songs = reactive([])
+
+    const data = await deaftone.getArtistAlbum('dc816c90-5742-4eb9-babc-2d73e969a97d')
+    console.log(data)
+    info.title = data.name
+    info.artist = data.artist
+    info.artistId = data.artistId
+    info.year = data.year
+    info.albumId = data.id
+    info.albumDescription = data.albumDescription
+    info.cover = deaftone.getCover(data.id)
+    info.songCount = 0
+    let totalDuration = 0
+    for (const song of data.songs) {
+      info.songCount++
+      totalDuration = totalDuration + song.duration
+      songs.push({
+        id: song.id,
+        number: song.track,
+        title: song.title,
+        cover: info.cover,
+        albumName: info.title,
+        artistId: info.artistId,
+        albumId: info.albumId,
+        artist: info.artist,
+        type: 'test',
+        length: song.duration,
+        liked: song.liked
+      })
+    }
+    function playTrack () {
+      // Get clicked song index
+      // Slice songs at picked index
+      const _songs = this.songs.slice(4, songs.length)
+      player.playQueue(_songs)
+    }
+
+    return playTrack
   }
 }
 </script>
@@ -16,154 +61,9 @@ export default {
       <div class="grid grid-cols-5 gap-2 overflow-hidden auto-rows-auto ">
         <div
           class="h-32 min-w-full min-h-full text-gray-100 rounded "
+          @click="playTrack()"
         >
           10
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          11
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          12
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          13
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          14
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          15
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          16
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          17
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          18
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          19
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          20
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          21
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          22
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          23
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          24
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          25
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          26
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          27
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          28
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          29
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          30
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          30
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          30
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          30
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          30
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          30
-        </div>
-
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          30
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          30
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          30
-        </div>
-        <div
-          class="h-32 min-w-full min-h-full text-gray-100 rounded "
-        >
-          30
         </div>
       </div>
     </div>

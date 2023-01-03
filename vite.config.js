@@ -1,6 +1,7 @@
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 import Layouts from 'vite-plugin-vue-layouts'
+const internalIp = require('internal-ip')
 const { resolve } = require('path')
 // import path from 'path'
 // import ViewLauncherVuePlugin from '@view-launcher/rollup-plugin-vue'
@@ -17,8 +18,8 @@ export default defineConfig(() => {
       emptyOutDir: true,
       rollupOptions: {
         input: {
-          main: resolve(__dirname, 'index.html'),
-          nested: resolve(__dirname, 'splashscreen.html')
+          main: resolve(__dirname, 'index.html')
+          // nested: resolve(__dirname, 'splashscreen.html')
         }
       }
     },
@@ -28,6 +29,14 @@ export default defineConfig(() => {
       }
     },
     server: {
+      host: '0.0.0.0', // listen on all addresses        host: '0.0.0.0', // listen on all addresses.168.1.2',
+      port: 5173,
+      strictPort: true,
+      hmr: {
+        protocol: 'ws',
+        host: '192.168.1.2',
+        port: 5183
+      },
       fs: {
         // Allow serving files from one level up to the project root
         allow: ['..']

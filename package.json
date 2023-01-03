@@ -25,6 +25,7 @@
     "daisyui": "^2.45.0",
     "dotenv": "^16.0.3",
     "howler": "^2.2.3",
+    "internal-ip": "6.2.0",
     "pinia": "^2.0.28",
     "tailwind-scrollbar": "^2.0.1",
     "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store#dev",
@@ -36,8 +37,8 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
-    "@tauri-apps/api": "^1.2.0",
-    "@tauri-apps/cli": "^1.2.2",
+    "@tauri-apps/api": "2.0.0-alpha.0",
+    "@tauri-apps/cli": "2.0.0-alpha.1",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/compiler-sfc": "^3.2.40",
     "@vue/devtools": "^6.4.3",

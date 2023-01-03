@@ -72,17 +72,8 @@
         "minWidth": 1024,
         "resizable": true,
         "url": "index.html",
-        "visible": false,
-        "decorations": false,
-        "center": true
-      },
-      {
-        "width": 300,
-        "height": 500,
-        "decorations": false,
         "visible": true,
-        "url": "splashscreen.html",
-        "label": "splashscreen",
+        "decorations": false,
         "center": true
       }
     ],

@@ -45,11 +45,14 @@ export default {
         console.log(address.value)
         const status = await iAxios.get(address.value)
         if (status.status === 200) {
-          settings.set('server', address.value).then(async () => {
+          /*           settings.set('server', address.value).then(async () => {
             console.log('Set server address')
             await deaftone.init()
             router.push({ path: '/home' })
-          })
+          }) */
+
+          await deaftone.init()
+          router.push({ path: '/home' })
         }
       } catch (error) {
         alert.value = {

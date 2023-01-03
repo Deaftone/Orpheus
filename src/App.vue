@@ -9,13 +9,13 @@ export default {
     const deaftone = inject('$deaftone')
     const settings = inject('$settings')
     const router = inject('$router')
-    const player = inject('$player')
+    //   const player = inject('$player')
 
     console.log('Loading splash')
-    router.push({ path: '/' })
+    router.push({ path: '/home' })
 
     function loaded () {
-      console.log('Splash removed')
+      console.log('Splash removedtest')
       invoke('close_splashscreen')
     }
 
@@ -29,25 +29,26 @@ export default {
       deaftone.hasInit = false
     })
     onMounted(async () => {
-      if (!deaftone.hasInit) {
-        await deaftone.init()
-        loaded()
-        try {
-          const status = await deaftone.testConnection(await settings.get('server'))
-          if (status.status === 200) {
-            console.log('Connected to sesrver')
-            setTimeout(() => {
-              // player.resume()
-              router.push({ path: '/home' })
-            }, 1000)
-          } else {
-            console.log('Failed to connect')
-            router.push({ path: '/init' })
-          }
-        } catch (e) {
+      await deaftone.init()
+      // if (!deaftone.hasInit) {
+      /*       await deaftone.init()
+      loaded()
+      try {
+        const status = await deaftone.testConnection(await settings.get('server'))
+        if (status.status === 200) {
+          console.log('Connected to sesrver')
+          setTimeout(() => {
+            // player.resume()
+            router.push({ path: '/home' })
+          }, 1000)
+        } else {
+          console.log('Failed to connect')
           router.push({ path: '/init' })
         }
-      }
+      } catch (e) {
+        router.push({ path: '/init' })
+      } */
+      //   }
     })
   }
 }

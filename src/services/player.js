@@ -20,7 +20,6 @@ class Player {
 
   play (track) {
     console.log(`PLAYER_SERVICE: PLAY_TRACK ${track}`)
-
     Howler.unload()
     this.howler = new Howl({
       src: [this.deaftone.stream(track.id)],
@@ -31,11 +30,11 @@ class Player {
         this.nextTrack()
       }.bind(this)
     })
-    this.howler.volume(this.playerStore.volume)
+    this.howler.volume(0.2)
     this.howler.play()
     this.playerStore.setIsPlaying(true)
     this.playerStore.setNowPlaying(track)
-    this.setMediaControls(track)
+    // this.setMediaControls(track)
   }
 
   progressUpdate () {
