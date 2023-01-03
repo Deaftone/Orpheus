@@ -37,6 +37,11 @@ export default {
       console.log(`Addresss ${await settings.get('server')
     }`)
     })
+    function isTauri () {
+      if (window.__TAURI__) {
+        return true
+      } return false
+    }
     async function connect () {
       alert.value = {
         show: false
@@ -69,14 +74,16 @@ export default {
       connect,
       selected,
       options,
-      address
+      address,
+      isTauri
     }
   }
 }
 </script>
 
 <template>
-  <TitleBar />
+  <TitleBar v-if="isTauri()" />
+
   <!--
   <div
     class="flex flex-col items-center justify-center flex-1 pt-10 pb-10 pl-24 pr-24 m-10 rounded-md shadow-md mr-36 ml-36 bg-neutral w-ful"
