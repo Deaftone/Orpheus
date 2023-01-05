@@ -5,4 +5,3 @@ dist-ssr
 *.local
 notes
 .env
-pnpm-lock.yaml
