@@ -1,8 +1,11 @@
-# Orpheus
-## This software is in early development
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Ortygia/Orpheus/master/.github/logo.png" alt="Orpheus logo" title="Orpheus" align="center" height="340" width="340" />
+</p>
 
 
 <div align="center">
+
+## This software is in early development
 
 [![license](https://img.shields.io/github/license/Ortygia/Deaftone)](https://github.com/Ortygia/Deaftone/blob/master/LICENSE)
 [![CI](https://github.com/Ortygia/Orpheus/actions/workflows/main.yml/badge.svg)](https://github.com/Ortygia/Deaftone/actions/workflows/build.yml)
@@ -10,9 +13,9 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/Ortygia/Orpheus)
 ![Lines of Code](https://aschey.tech/tokei/github/Ortygia/Orpheus)
 ![Version](https://img.shields.io/github/v/release/Ortygia/Orpheus)
-</div>
 
 A frontend client for ![Deaftone](https://github.com/Ortygia/Deaftone)
+</div>
 
 # Installation
 Installation should be as simple as downloading the correct release for your system. Then the follow the initial splash screen
