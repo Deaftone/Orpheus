@@ -12,15 +12,16 @@ import router from './router'
 import DeaftoneConnector from './services/deaftoneApi'
 import Player from './services/player'
 import devtools from '@vue/devtools'
-import SettingsManager from './services/settings'
+import SettingsManager from './services/settings/index'
 const app = createApp(App)
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' && window.__TAURI__) {
   devtools.connect('http://localhost', 8098)
 }
 
 app.use(createPinia())
-const settings = new SettingsManager()
+
+const settings = new SettingsManager(!!window.__TAURI__)
 const deaftone = new DeaftoneConnector(settings)
 app.provide('$settings', settings)
 

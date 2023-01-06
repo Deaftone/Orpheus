@@ -9,7 +9,6 @@ export default {
     const deaftone = inject('$deaftone')
     const settings = inject('$settings')
     const router = inject('$router')
-    //   const player = inject('$player')
 
     console.log('Loading splash')
     router.push({ path: '/home' })
@@ -19,35 +18,30 @@ export default {
       invoke('close_splashscreen')
     }
 
-    /*     document.addEventListener('DOMContentLoaded', () => {
-      // This will wait for the window to load, but you could
-      // run this function on whatever trigger you want
-      if (isTauri()) { loaded() }
-    }) */
-
     onUnmounted(() => {
       deaftone.hasInit = false
     })
     onMounted(async () => {
-      await deaftone.init()
-      // if (!deaftone.hasInit) {
-      /*       await deaftone.init()
-      loaded()
-      try {
-        const status = await deaftone.testConnection(await settings.get('server'))
-        if (status.status === 200) {
-          console.log('Connected to sesrver')
-          setTimeout(() => {
-            // player.resume()
-            router.push({ path: '/home' })
-          }, 1000)
-        } else {
-          console.log('Failed to connect')
+      if (!deaftone.hasInit) {
+        await deaftone.init()
+        if (window.__TAURI__) { loaded() }
+        try {
+          const status = await deaftone.testConnection(await settings.get('server'))
+          if (status.status === 200) {
+            console.log('Connected to sesrver')
+            setTimeout(() => {
+              // player.resume()
+              router.push({ path: '/home' })
+            }, 1000)
+          } else {
+            console.log('Failed to connect')
+            router.push({ path: '/init' })
+          }
+        } catch (e) {
+          console.log(`App init error: ${e}`)
           router.push({ path: '/init' })
         }
-      } catch (e) {
-        router.push({ path: '/init' })
-      } */
+      }
       //   }
     })
   }

@@ -6,7 +6,7 @@
     "dev": "concurrently -k \"npx tauri dev\" \"npm run devtools\"",
     "build": "tauri build -c ./src-tauri/tauri.conf.dev.json",
     "build:sign": "tauri build",
-    "build:debig": "tauri build -d",
+    "build:debug": "tauri build -d -c ./src-tauri/tauri.conf.dev.json",
     "vite:dev": "vite dev",
     "vite:build": "vite build",
     "devtools": "vue-devtools",

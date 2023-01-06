@@ -25,15 +25,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: setup node
+      - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: 17
-      - name: install Rust stable
+      - name: Install Rust stable
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - name: install webkit2gtk (ubuntu only)
+      - name: Install webkit2gtk (ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt-get update
@@ -53,7 +53,7 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
+          version: 7.17.1
           run_install: false
       - name: Get pnpm store directory
         id: pnpm-cache
