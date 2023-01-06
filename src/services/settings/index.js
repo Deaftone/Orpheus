@@ -2,13 +2,8 @@ import { Store } from 'tauri-plugin-store-api'
 import WebStore from './webStore'
 class SettingsManager {
   constructor (tauri) {
-    if (tauri) {
-      console.log('Using tauri store')
-      this.store = new Store('.orpheus_settings.dat')
-    } else {
-      console.log('Using web store')
-      this.store = new WebStore()
-    }
+    console.log('Using web store')
+    this.store = new WebStore()
     // this.init()
   }
 

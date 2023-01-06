@@ -8,7 +8,7 @@ class WebStore {
   }
 
   async get (setting) {
-    return { value: 'http://localhost:3030' }
+    return { value: 'http://192.168.1.2:3030' }
   }
 }
 
