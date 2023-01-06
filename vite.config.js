@@ -9,7 +9,7 @@ export default defineConfig(() => {
   // load the .env file
   // you may want to create one like `.env.development.local`
   // const env = loadEnv(mode, __dirname)
-
+  const host = internalIp.v4
   return {
     build: {
       target: ['es2021', 'chrome97', 'safari13'],
@@ -29,12 +29,12 @@ export default defineConfig(() => {
       }
     },
     server: {
-      host: '0.0.0.0', // listen on all addresses        host: '0.0.0.0', // listen on all addresses.168.1.2',
+      host: '0.0.0.0', // listen on all addresses
       port: 5173,
       strictPort: true,
       hmr: {
         protocol: 'ws',
-        host: '192.168.1.2',
+        host,
         port: 5183
       },
       fs: {
