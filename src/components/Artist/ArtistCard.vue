@@ -20,7 +20,7 @@ export default {
 </script>
 <template>
   <div
-    class="mx-auto transition duration-300 ease-in-out delay-150 hover:-translate-y-1 hover:scale-105"
+    class="mx-auto transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
   >
     <VLazyImage
       src="https://www.offset.com/images/v2/artist_bio_placeholder.png"
