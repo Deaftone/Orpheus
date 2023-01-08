@@ -97,7 +97,6 @@ export default {
       <div
         v-for="album in filterAlbums"
         :key="album.id"
-        class="transition duration-300 ease-in-out delay-150 rounded-lg shadow-xl bg-neutral card hover:-translate-y-1 hover:scale-105"
         @click="$router.push({ path: `/AlbumDetails/${album.id}` })"
       >
         <AlbumCard

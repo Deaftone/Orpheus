@@ -19,7 +19,9 @@ export default {
 }
 </script>
 <template>
-  <div class="overflow-hidden rounded-lg shadow-xl">
+  <div
+    class="overflow-hidden transition duration-300 ease-in-out rounded-lg shadow-xl bg-neutral card hover:-translate-y-1 hover:scale-105 "
+  >
     <VLazyImage
       :src="deaftone.getCover(props.id)"
       :src-placeholder="imgUrl"
