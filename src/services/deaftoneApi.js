@@ -51,7 +51,7 @@ class DeaftoneConnector {
         }
       )
     } else {
-      axios.create({
+      this.axios = axios.create({
         adapter: window.__TAURI__ ? axiosTauriAdapter : null,
         baseURL: this.baseURL,
         timeout: 5000,
