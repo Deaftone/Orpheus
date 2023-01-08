@@ -66,7 +66,7 @@ export default {
       else return str
     },
     async getAlbums () {
-      const data = await this.$deaftone.getAlbums(this.size, this.page)
+      const data = await this.$deaftone.getAlbums(this.size, this.page, this.sort)
       this.page++
 
       console.log(data.data)

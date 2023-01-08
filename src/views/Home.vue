@@ -55,6 +55,7 @@ export default {
     <AlbumList
       :size="8"
       :scroller="false"
+      :sort="latest"
     />
   </div>
   <div class="divider" />
