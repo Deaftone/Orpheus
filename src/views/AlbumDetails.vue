@@ -127,22 +127,22 @@ export default {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-3 pt-6 pb-6 select-none">
-    <div class="justify-center pl-10 pr-10 lg:pr-40 lg:pl-40 lg:block">
-      <div class="p-4 align-top cursor-default card lg:card-side">
+  <div class="grid grid-cols-1 gap-3 pt-6 pb-6 pl-10 pr-10 text-xs select-none xl:pr-40 xl:pl-40 lg:text-lg">
+    <div class="flex justify-center ">
+      <div class="w-full p-4 shadow-2xl cursor-default bg-base-300 card lg:card-side ">
         <div>
           <figure>
             <img
-              class="object-contain w-full shadow-lg rounded-xl h-72"
+              class="object-contain w-full rounded-xl h-72"
               :src="info.cover"
             >
           </figure>
         </div>
         <div class="w-1 pt-0 pb-0 card-body">
-          <h2 class="text-xl font-bold card-title lg:text-5xl">
+          <h2 class="text-sm font-bold card-title lg:text-5xl">
             {{ info.title }}
           </h2>
-          <div class="card-title ">
+          <div class="card-title lg:text-2xl">
             <p>
               <a
                 class="cursor-pointer hover:underline text-primary"
@@ -158,7 +158,10 @@ export default {
               <a class="text-primary">{{ info.year }} | {{ info.songCount }} Songs | {{ info.totalDuration }}</a>
             </p>
           </div>
-          <div class="justify-start mt-5 card-actions">
+          <div
+            class="mt-5 card-actions"
+            style="margin-top:auto"
+          >
             <button class="btn btn-primary">
               Play
             </button>
@@ -166,44 +169,31 @@ export default {
         </div>
       </div>
     </div>
+    <div class="divider" />
     <div
       ref="sticky"
       style="height: 0.1px"
     />
-    <!-- Bug where the currently playing track is above this in z-index -->
-    <!--    <div
-      ref="albumBar"
-      class="sticky top-0 w-full p-1 pl-5 pr-5 -mt-5 text-sm lg:pl-40 lg:pr-40 bg-base-200 z-1"
-    >
-      <a>#</a>
-      <div class="float-right">
-        <a>Length</a>
-      </div>
-      <div class="float-right pr-5">
-        <a>Type</a>
-      </div>
-      <a class="pl-7">Title</a>
-    </div> -->
-    <div class="grid w-full grid-cols-1 gap-5 pl-5 pr-5 lg:pr-40 lg:pl-40">
+    <div class="flex flex-col justify-center w-full gap-5 place-items-center">
       <div
         v-for="song in songs"
         :id="song.id"
         :key="song.number"
-        class="flex justify-center p-1 text-lg rounded-lg shadow cursor-pointer bg-base-300 hover:bg-neutral "
+        class="flex justify-center w-full p-1 rounded-lg cursor-pointer bg-base-300 hover:bg-neutral "
         @click="playTrack(song.title, song.id)"
       >
         <div class="w-full p-2">
           <div class="float-left pr-3">
             <a>{{ song.number }}</a>
           </div>
-          <div class="float-left">
+          <div class="float-left ">
             <a>{{ song.title }}</a>
           </div>
-          <div class="float-right">
+          <div class="float-right ">
             <a>{{ (new Date(song.length * 1000).toISOString().substr(14, 5)) }}</a>
           </div>
           <div
-            class="float-right pl-1 pr-1 mr-5 text-sm border-4 border-solid rounded-lg border-primary"
+            class="hidden float-right pl-1 pr-1 mr-5 border-4 border-solid rounded-lg border-primary lg:visible"
           >
             <a>{{ song.type }}</a>
           </div>
