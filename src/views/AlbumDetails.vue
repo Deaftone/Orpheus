@@ -127,9 +127,9 @@ export default {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-3 pt-6 pb-6 pl-10 pr-10 text-xs select-none xl:pr-40 xl:pl-40 lg:text-lg">
+  <div class="grid grid-cols-1 gap-3 pt-6 pb-6 pl-10 pr-10 text-sm select-none xl:pr-40 xl:pl-40 lg:text-lg">
     <div class="flex justify-center ">
-      <div class="w-full p-4 shadow-2xl cursor-default bg-base-300 card lg:card-side ">
+      <div class="w-full p-4 shadow-2xl cursor-default bg-base-300 card md:card-side">
         <div>
           <figure>
             <img
@@ -138,7 +138,7 @@ export default {
             >
           </figure>
         </div>
-        <div class="w-1 pt-0 pb-0 card-body">
+        <div class="pt-0 pb-0 lg:w-1 lg:card-body">
           <h2 class="text-sm font-bold card-title lg:text-5xl">
             {{ info.title }}
           </h2>
