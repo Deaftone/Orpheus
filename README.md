@@ -32,3 +32,11 @@ It will connect to a deaftone instance running on ``http://localhost:3030`` This
 <a href="https://raw.githubusercontent.com/Ortygia/Orpheus/master/.github/screenshots/OPS_DEV_1.png" width="49.5%"/><img src="https://raw.githubusercontent.com/Ortygia/Orpheus/master/.github/screenshots/OPS_DEV_1.png" width="49.5%"/></a>
 <a href="https://raw.githubusercontent.com/Ortygia/Orpheus/master/.github/screenshots/OPS_DEV_2.png" width="49.5%"/><img src="https://raw.githubusercontent.com/Ortygia/Orpheus/master/.github/screenshots/OPS_DEV_2.png" width="49.5%"/></a>
 <a href="https://raw.githubusercontent.com/Ortygia/Orpheus/master/.github/screenshots/OPS_DEV_3.png" width="49.5%"/><img src="https://raw.githubusercontent.com/Ortygia/Orpheus/master/.github/screenshots/OPS_DEV_3.png" width="49.5%"/></a>
+
+
+## Video Preview
+https://user-images.githubusercontent.com/13013625/211534269-150d8d06-784a-4890-9a9f-7ebe9cd96597.mp4
+
+
+
+
