@@ -28,7 +28,9 @@ export default {
       style="width: auto; height: auto"
     />
     <div class="font-bold text-center">
-      <a>{{ props.name }}</a>
+      <p class="text-center truncate">
+        {{ props.name }}
+      </p>
     </div>
   </div>
 
