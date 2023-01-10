@@ -33,7 +33,7 @@ module.exports = {
       }
     }
   },
-  plugins: [require('@vueform/slider/tailwind'), require('daisyui'), require('tailwind-scrollbar')],
+  plugins: [require('@vueform/slider/tailwind'), require('daisyui'), require('tailwind-scrollbar'), require('@tailwindcss/line-clamp')],
   daisyui: {
     styled: true,
     themes: true,

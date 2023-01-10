@@ -46,21 +46,45 @@ export default {
 </script>
 
 <template>
-  <div class="p-10">
-    <div class="card lg:card-side">
+  <div class="grid grid-cols-1 gap-3 pt-6 pb-6 pl-10 pr-10 text-sm select-none xl:pr-40 xl:pl-40 lg:text-lg ">
+    <!--  <div class="p-4 shadow-2xl cursor-default bg-base-300 card md:card-side">
+
       <figure>
         <img
-          class="object-contain rounded-2xl"
-          style="width: 320px; height: 320px"
+          class="w-full rounded-xl h-72"
           :src="info.artistImage"
         >
       </figure>
-      <div class="w-min card-body">
+      <div class="w-full card-body">
         <h2 class="text-xl font-bold card-title lg:text-6xl text-primary">
           {{ info.artistName }}
         </h2>
-        <div class="card-actions ">
-          <a class="text-xl cursor-pointer">{{ info.bio }}</a>
+        <div class="w-full card-actions ">
+          <p class="text-xl truncate cursor-pointer">
+            {{ info.bio }}
+          </p>
+        </div>
+      </div>
+    </div> -->
+    <div class="flex justify-center">
+      <div class="w-full p-4 shadow-2xl cursor-default bg-base-300 card md:card-side">
+        <div>
+          <figure>
+            <img
+              class="object-contain w-full rounded-xl h-72"
+              :src="info.artistImage"
+            >
+          </figure>
+        </div>
+        <div class="pt-0 pb-0 -mt-2 lg:w-1 lg:card-body">
+          <h2 class="text-sm font-bold card-title lg:text-5xl text-primary">
+            {{ info.artistName }}
+          </h2>
+          <div class="card-title ">
+            <p class="line-clamp-6">
+              {{ info.bio }}
+            </p>
+          </div>
         </div>
       </div>
     </div>

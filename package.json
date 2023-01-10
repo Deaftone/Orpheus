@@ -18,6 +18,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^3.0.0-4",
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@vueform/slider": "^2.1.5",
     "axios": "^1.2.1",
     "axios-cache-interceptor": "^0.10.7",
