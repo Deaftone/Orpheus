@@ -137,146 +137,145 @@ export default ({
 
 </style>
 <template>
-  <main class="w-full text-sm bg-neutral text-neutral-content">
+  <div
+    class="flex flex-col items-center justify-center w-full pb-2 text-sm bg-neutral text-neutral-content"
+    @click="toggleLyrics"
+  >
     <div
-      class="flex flex-col items-center justify-center w-full pb-2"
-      @click="toggleLyrics"
+      class="w-full pb-2 -mt-1.5 -mb-1.5"
+      @click.stop
     >
-      <div
-        class="w-full pb-2 -mt-1.5 -mb-1.5"
-        @click.stop
-      >
-        <!--         Currently there is a bug where streaming transcoded songs breaks the bar if you skip -->
-        <vue-slider
-          v-model="progress"
-          :min="0"
-          :max="duration"
-          :interval="1"
-          :drag-on-click="true"
-          :duration="0"
-          :dot-size="12"
-          :height="2"
-          :tooltip-formatter="convertTime"
-          :lazy="false"
-          :silent="true"
-          @change="seek"
-        />
-      </div>
-      <div class="grid h-full grid-cols-3 pl-2 pr-2">
-        <div class="flex items-center">
-          <div
-            class="flex items-center"
-            v-if="nowPlaying.title"
-            @click.stop
+      <!--         Currently there is a bug where streaming transcoded songs breaks the bar if you skip -->
+      <vue-slider
+        v-model="progress"
+        :min="0"
+        :max="duration"
+        :interval="1"
+        :drag-on-click="true"
+        :duration="0"
+        :dot-size="12"
+        :height="2"
+        :tooltip-formatter="convertTime"
+        :lazy="false"
+        :silent="true"
+        @change="seek"
+      />
+    </div>
+    <div class="grid h-full grid-cols-3 pl-2 pr-2">
+      <div class="flex items-center">
+        <div
+          class="flex items-center"
+          v-if="nowPlaying.title"
+          @click.stop
+        >
+          <img
+            loading="lazy"
+            class="w-12 h-12 rounded select-none "
+            :src="nowPlaying.cover"
+            @click="$router.push({ path: `/AlbumDetails/${nowPlaying.albumId}` })"
           >
-            <img
-              loading="lazy"
-              class="w-12 h-12 rounded select-none"
-              :src="nowPlaying.cover"
-              @click="$router.push({ path: `/AlbumDetails/${nowPlaying.albumId}` })"
-            >
-            <!-- Track info -->
-            <div
-              class="flex flex-col ml-2 text-left"
-            >
-              <div>
-                <span
-                  class="hover:cursor-pointer hover:underline"
-                  @click="$router.push({ path: `/AlbumDetails/${nowPlaying.albumId}` })"
-                >{{ nowPlaying.title }}</span>
-              </div>
-              <div class="artist">
-                <span
-                  class="hover:cursor-pointer hover:underline"
-                  @click="$router.push({ path: `/ArtistDetails/${nowPlaying.artistId}` })"
-                >{{ nowPlaying.artist }}</span>
-                <!--                 <span
+          <!-- Track info -->
+          <div
+            class="flex flex-col ml-2 text-left"
+          >
+            <div>
+              <span
+                class="hover:cursor-pointer hover:underline"
+                @click="$router.push({ path: `/AlbumDetails/${nowPlaying.albumId}` })"
+              >{{ nowPlaying.title }}</span>
+            </div>
+            <div class="artist">
+              <span
+                class="hover:cursor-pointer hover:underline"
+                @click="$router.push({ path: `/ArtistDetails/${nowPlaying.artistId}` })"
+              >{{ nowPlaying.artist }}</span>
+              <!--                 <span
                   v-for="(ar, index) in currentTrack.ar"
                   :key="ar.id"
                   @click="ar.id && goToArtist(ar.id)"
                 >
                   <span :class="{ ar: ar.id }"> {{ ar.name }} </span><span v-if="index !== currentTrack.ar.length - 1">, </span>
                 </span> -->
-              </div>
-            </div>
-            <div class="pl-3">
-              <button
-                @click="likeSong"
-                class="font-bold co btn hover:bg-base-300"
-              >
-                <font-awesome-icon
-                  v-show="!isLiked"
-                  :icon="['far', 'heart']"
-                />
-                <font-awesome-icon
-                  v-show="isLiked"
-                  :icon="['fas', 'heart']"
-                />
-              </button>
             </div>
           </div>
-        </div>
-        <div class="flex md:ml-32 md:mr-32">
-          <div class="flex items-center justify-center" />
-          <div
-            class="flex flex-1"
-            @click.stop
-          >
-            <!-- Previous Button -->
+          <div class="pl-3 ">
             <button
-              class="px-4 py-2 mr-2 font-bold text-gray-800 co btn hover:bg-base-300"
-              @click="previousTrack"
+              @click="likeSong"
+              class="font-bold co btn hover:bg-base-300"
             >
               <font-awesome-icon
-                icon="fast-backward"
-                color="gray"
+                v-show="!isLiked"
+                :icon="['far', 'heart']"
               />
-            </button>
-            <!-- Play Button -->
-            <button
-              class="px-4 py-2 font-bold co btn hover:bg-base-300 w-11"
-              @click="playPause"
-            >
               <font-awesome-icon
-                :icon="currentIcon"
-                color="gray"
-              />
-            </button>
-            <!-- Next Button -->
-            <button
-              class="px-4 py-2 ml-2 font-bold text-gray-800 co btn hover:bg-base-300"
-              @click="nextTrack"
-            >
-              <font-awesome-icon
-                icon="fast-forward"
-                color="gray"
+                v-show="isLiked"
+                :icon="['fas', 'heart']"
               />
             </button>
           </div>
-          <div class="grow" />
         </div>
-        <!-- Volume slider -->
-        <div class="flex right-control-buttons">
-          <div class="grow" />
-          <div
-            class="container"
-            @click.stop
+      </div>
+      <div class="flex md:ml-32 md:mr-32">
+        <div class="flex items-center justify-center" />
+        <div
+          class="flex flex-1"
+          @click.stop
+        >
+          <!-- Previous Button -->
+          <button
+            class="px-4 py-2 mr-2 font-bold text-gray-800 co btn hover:bg-base-300"
+            @click="previousTrack"
           >
-            <div class="volume-control">
-              <div class="volume-bar">
-                <vue-slider
-                  v-model="volume"
-                  :min="0"
-                  :max="1"
-                  :interval="0.01"
-                  :drag-on-click="true"
-                  :duration="0"
-                  tooltip="none"
-                  :dot-size="12"
-                  @change="volumeChange"
-                />
-              </div>
+            <font-awesome-icon
+              icon="fast-backward"
+              color="gray"
+            />
+          </button>
+          <!-- Play Button -->
+          <button
+            class="px-4 py-2 font-bold co btn hover:bg-base-300 w-11"
+            @click="playPause"
+          >
+            <font-awesome-icon
+              :icon="currentIcon"
+              color="gray"
+            />
+          </button>
+          <!-- Next Button -->
+          <button
+            class="px-4 py-2 ml-2 font-bold text-gray-800 co btn hover:bg-base-300"
+            @click="nextTrack"
+          >
+            <font-awesome-icon
+              icon="fast-forward"
+              color="gray"
+            />
+          </button>
+        </div>
+        <div class="grow" />
+      </div>
+      <!-- Volume slider -->
+      <div class="flex right-control-buttons">
+        <div class="grow" />
+        <div
+          class="container"
+          @click.stop
+        >
+          <div class="volume-control">
+            <div class="volume-bar">
+              <vue-slider
+                v-model="volume"
+                :min="0"
+                :max="1"
+                :interval="0.01"
+                :drag-on-click="true"
+                :duration="0"
+                tooltip="none"
+                :dot-size="12"
+                @change="volumeChange"
+              />
             </div>
+          </div>
           <!--
           <button-icon
             class="lyrics-button"
@@ -286,9 +285,8 @@ export default ({
           >
             <i-fluent:chevron-up-12-filled />
           </button-icon> -->
-          </div>
         </div>
       </div>
     </div>
-  </main>
+  </div>
 </template>
