@@ -128,7 +128,7 @@ export default {
 
 <template>
   <div class="grid grid-cols-1 gap-3 pt-6 pb-6 pl-10 pr-10 text-sm select-none xl:pr-40 xl:pl-40 lg:text-lg">
-    <div class="flex justify-center ">
+    <div class="flex justify-center">
       <div class="w-full p-4 shadow-2xl cursor-default bg-base-300 card md:card-side">
         <div>
           <figure>
