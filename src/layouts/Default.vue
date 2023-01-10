@@ -55,7 +55,7 @@ export default {
     <TitleBar v-if="isTauri()" />
     <div class="flex flex-col flex-grow w-full h-full overflow-hidden sm:flex-row">
       <div class="flex-grow-0 flex-shrink hidden p-3 md:inline-flex bg-neutral md:visible">
-        <div class="sticky top-0 flex rounded-xl ">
+        <div class="sticky top-0 flex rounded-xl">
           <LeftSidebar />
         </div>
       </div>
@@ -68,31 +68,12 @@ export default {
           class="flex-1 overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700"
         >
           <router-view v-slot="{ Component }">
-            <!--             <transition name="fade"> -->
             <Suspense>
-              <!-- component with nested async dependencies -->
               <component :is="Component" />
-              <!-- loading state via #fallback slot -->
               <template #fallback>
                 <h1>test</h1>
               </template>
             </Suspense>
-            <!--             </transition> -->
-            <div
-              ref="scrollTopButton"
-              class="sticky bottom-0 flex justify-end w-full pb-3 pr-5 transition lg:pr-16"
-            >
-              <!--               <div
-                class="text-gray-400 transition hover:text-blue-400"
-              >
-                <button
-                  ref="scrollToTop"
-                  @click="scrollTop"
-                >
-                  Scroll to top
-                </button>
-              </div> -->
-            </div>
           </router-view>
         </main>
       </div>
@@ -103,10 +84,8 @@ export default {
         <RightSidebar />
       </div>
     </div>
-    <!-- If we remove the pt-1 and bg we get a weird 1 px size bug for the background image on the ArtistDetails page -->
     <footer class="flex text-center bg-base-200">
-<!--       <Player />
- -->      <NewPlayer />
+      <NewPlayer />
     </footer>
   </div>
 </template>
