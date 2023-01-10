@@ -72,10 +72,10 @@ class DeaftoneConnector {
     }))
   }
 
-  async getArtists (limit, sort) {
+  async getArtists (size, sort) {
     return (await this.axios.get('/artists', {
       params: {
-        limit, sort
+        size, sort
       }
     })).data
   }
