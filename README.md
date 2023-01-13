@@ -4,8 +4,8 @@
 
 <div align="center">
 
-## This software is in early development
-
+# Orpheus
+## Alpha software
 [![license](https://img.shields.io/github/license/Ortygia/Deaftone)](https://github.com/Ortygia/Deaftone/blob/master/LICENSE)
 [![CI](https://github.com/Ortygia/Orpheus/actions/workflows/main.yml/badge.svg)](https://github.com/Ortygia/Deaftone/actions/workflows/build.yml)
 ![codecov](https://codecov.io/gh/Ortygia/Orpheus/branch/main/graph/badge.svg?token=NWS6Q3W4FP)
