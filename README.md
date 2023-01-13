@@ -1,12 +1,11 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Ortygia/Orpheus/master/.github/logo.png" alt="Orpheus logo" title="Orpheus" align="center" height="340" width="340" />
+  <img src="https://user-images.githubusercontent.com/13013625/212403139-445ad0b3-0366-4aa2-8615-650d63d4d7e6.png" alt="Orpheus logo" title="Orpheus" align="center" height="340" width="340" />
 </p>
-
 
 <div align="center">
 
-## This software is in early development
-
+# Orpheus
+## Alpha software
 [![license](https://img.shields.io/github/license/Ortygia/Deaftone)](https://github.com/Ortygia/Deaftone/blob/master/LICENSE)
 [![CI](https://github.com/Ortygia/Orpheus/actions/workflows/main.yml/badge.svg)](https://github.com/Ortygia/Deaftone/actions/workflows/build.yml)
 ![codecov](https://codecov.io/gh/Ortygia/Orpheus/branch/main/graph/badge.svg?token=NWS6Q3W4FP)
