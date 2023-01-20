@@ -39,8 +39,8 @@ export default {
         </button>
       </span>
     </div>
-    <div class="flex-1 lg:flex-none">
-      <!-- <SearchBox /> -->
+    <div class="flex-1 pr-2 lg:flex-none">
+      <SearchBox />
     </div>
     <div class="flex-1 lg:flex-none">
       <ThemeSwitcher />
