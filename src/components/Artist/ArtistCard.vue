@@ -1,6 +1,7 @@
 <script>
 import 'v3-infinite-loading/lib/style.css'
-import imgUrl from '@/assets/unknown_album.jpg'
+import imgUrl from '@/assets/unknown_artist.png'
+
 import { inject } from 'vue'
 import VLazyImage from 'v-lazy-image'
 export default {
@@ -23,7 +24,8 @@ export default {
     class="mx-auto transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
   >
     <VLazyImage
-      src="https://www.offset.com/images/v2/artist_bio_placeholder.png"
+      :src="imgUrl"
+      :src-placeholder="imgUrl"
       class="rounded-full shadow-xl ring ring-primary"
       style="width: auto; height: auto"
     />
