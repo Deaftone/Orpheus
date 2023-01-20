@@ -1,35 +1,40 @@
 <script>
 export default {
   name: 'SearchBox',
-  data() {
+  data () {
     return {
-      search: '',
+      search: ''
     }
   },
-  watch: {
+  /*   watch: {
     $route() {
       this.$store.commit('setSearchQuery', null)
       this.$refs.search.value = ''
     },
-  },
+  }, */
   methods: {
-    updateSearch(e) {
+    updateSearch (e) {
       this.$store.commit('setSearchQuery', e.target.value)
-    },
-  },
+    }
+  }
 }
 </script>
 <template>
   <div class="flex-1 lg:flex-none">
-    <div class="form-control">
-      <input
+    <button
+      class="font-bold co btn hover:bg-base-300"
+    >
+      <font-awesome-icon
+        :icon="['fa', 'magnifying-glass']"
+      />
+    </button>
+    <!--       <input
         ref="search"
-        class="input input-ghost hover:bg-neutral focus:bg-neutral"
+        class="input input-ghost focus:bg-neutral hover:bg-neutral"
         type="search"
         placeholder="Search"
         @input="updateSearch"
-      >
-    </div>
+      > -->
   </div>
 </template>
 
