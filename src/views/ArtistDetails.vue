@@ -68,7 +68,7 @@ export default {
     </div> -->
     <div class="flex justify-center">
       <div class="w-full p-4 shadow-2xl cursor-default bg-base-300 card md:card-side">
-        <div>
+        <div class="w-72">
           <figure>
             <img
               class="object-contain w-full rounded-xl h-72"
