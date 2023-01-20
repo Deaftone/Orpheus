@@ -21,6 +21,9 @@ module.exports = {
         marquee: 'marquee 15s linear infinite',
         marquee2: 'marquee2 15s linear infinite'
       },
+      transitionProperty: {
+        width: 'width'
+      },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0%)' },
