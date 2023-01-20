@@ -51,22 +51,19 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col h-screen overflow-hidden">
-    <TitleBar v-if="isTauri()" />
-    <div class="flex flex-col flex-grow w-full h-full overflow-hidden sm:flex-row">
-      <div class="flex-grow-0 flex-shrink hidden p-3 md:inline-flex bg-neutral md:visible">
-        <div class="sticky top-0 flex rounded-xl">
-          <LeftSidebar />
-        </div>
-      </div>
-      <div class="flex flex-col justify-between w-full">
-        <header>
+  <div class="flex flex-col h-screen min-h-screen">
+    <!-- Menu bar -->
+    <header class=" bg-red-50">
+      <TitleBar v-if="isTauri()" />
+    </header>
+    <div class="flex flex-row flex-1 overflow-y-hidden">
+      <div class="flex flex-col flex-1">
+        <!-- Header bar -->
+        <header class="w-full ">
           <MenuBar />
         </header>
-        <main
-          role="main"
-          class="flex-1 overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700"
-        >
+        <!-- main container -->
+        <main class="flex-1 overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500">
           <router-view v-slot="{ Component }">
             <Suspense>
               <component :is="Component" />
@@ -77,14 +74,16 @@ export default {
           </router-view>
         </main>
       </div>
-      <div
-        class="flex flex-col w-64 bg-neutral"
-        v-if="false"
-      >
-        <RightSidebar />
-      </div>
+
+      <nav class="order-first overflow-y-auto bg-neutral ">
+        <LeftSidebar />
+      </nav>
+
+      <!--       <aside class="overflow-y-auto bg-yellow-100 sm:w-32">
+        Right Sidebar
+      </aside> -->
     </div>
-    <footer class="flex text-center bg-base-200">
+    <footer class="bg-gray-100">
       <NewPlayer />
     </footer>
   </div>
