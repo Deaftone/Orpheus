@@ -27,7 +27,7 @@ export default {
 
 <template>
   <div
-    class="flex flex-col items-left h-full p-3 transition-[width] duration-300 ease-in-out gap-3 overflow-hidden"
+    class="flex flex-col items-left h-full p-3 transition-[width] duration-500 ease-in-out gap-3 overflow-hidden "
     :class="expanded ? 'w-48' : 'w-[72px]' "
   >
     <div
@@ -48,7 +48,7 @@ export default {
       @click="$router.push({ path: route.route })"
     >
       <div
-        class="flex items-center justify-start h-12 transition-[width] duration-300 ease-in-out rounded cursor-pointer hover:text-white hover:rounded-xl hover:bg-neutral-content bg-base-300"
+        class="flex items-center justify-start h-12 transition-all duration-500 ease-in-out rounded cursor-pointer hover:text-white hover:rounded-xl hover:bg-neutral-content bg-base-300"
         :class="expanded ? 'w-[168px] ' : 'w-[48px]' "
       >
         <font-awesome-icon
@@ -57,12 +57,14 @@ export default {
           color="gray"
         />
         <div
-          class="pl-5"
-          :class="expanded ? 'visible' : 'hidden' "
+          class="fixed block pl-5 duration-500 ease-in-out opacity-0"
+          :class="expanded ? 'visible opacity-100' : 'h duration-300' "
         >
-          <span
-            class="font-bold "
-          >{{ route.name }}</span>
+          <p
+            class="pl-[48px] font-bold "
+          >
+            {{ route.name }}
+          </p>
         </div>
       </div>
     </div>
@@ -70,7 +72,7 @@ export default {
     <div
       @click="$router.push({ path: '/Settings' })"
       data-tip="Settings"
-      class="flex items-center justify-start h-12 mt-auto duration-200 rounded cursor-pointer hover:text-white hover:rounded-xl hover:bg-neutral-content bg-base-300"
+      class="flex items-center justify-start h-12 mt-auto duration-500 ease-in-out rounded cursor-pointer hover:text-white hover:rounded-xl hover:bg-neutral-content bg-base-300"
       :class="expanded ? 'w-[168px] ' : 'w-[48px]' "
     >
       <font-awesome-icon
@@ -79,13 +81,20 @@ export default {
         class="justify-center w-12"
       />
       <div
-        class="pl-5 duration-300 delay-300 "
-        :class="expanded ? 'visible' : 'hidden' "
+        class="fixed block pl-5 duration-500 ease-in-out opacity-0"
+        :class="expanded ? 'visible opacity-100' : 'h duration-300' "
       >
-        <span
-          class="w-full font-bold"
-        >Settings</span>
+        <p
+          class="pl-[48px] font-bold "
+        >
+          Settings
+        </p>
       </div>
     </div>
   </div>
 </template>
+<style>
+  .h {
+    font-size: 0px;
+  }
+</style>
