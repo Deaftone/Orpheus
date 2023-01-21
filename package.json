@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@tauri-apps/api": "^1.2.0",
-    "@tauri-apps/cli": "^1.2.2",
+    "@tauri-apps/cli": "^1.2.3",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/compiler-sfc": "^3.2.40",
     "@vue/devtools": "^6.4.3",
