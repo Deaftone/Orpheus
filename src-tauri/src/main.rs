@@ -3,8 +3,8 @@
   windows_subsystem = "windows"
 )]
 use tauri::Manager;
-use window_shadows::set_shadow;
 use tauri_plugin_store::PluginBuilder as store;
+use window_shadows::set_shadow;
 
 // Create the command:
 #[tauri::command]
@@ -25,6 +25,7 @@ fn main() {
     .plugin(store::default().build())
     .setup(|app| {
       let window = app.get_window("main").unwrap();
+      #[cfg(any(windows, target_os = "macos"))]
       set_shadow(&window, true).expect("Unsupported platform!");
       Ok(())
     })
