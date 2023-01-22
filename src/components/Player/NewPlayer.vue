@@ -161,7 +161,7 @@ export default ({
         @change="seek"
       />
     </div>
-    <div class="grid h-full grid-cols-3 pl-2 pr-2">
+    <div class="grid grid-cols-3 pl-2 pr-2">
       <div class="flex items-center">
         <div
           class="flex items-center"
