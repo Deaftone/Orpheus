@@ -8,8 +8,10 @@ import {
   watch
 } from 'vue'
 import { usePlayerStore } from '@/stores/player'
+import VLazyImage from 'v-lazy-image'
 
 export default {
+  components: { VLazyImage },
   name: 'AlbumDetails',
   props: { id: { type: String, required: true } },
   async setup (props) {
@@ -115,6 +117,7 @@ export default {
       nowPlaying,
       playTrack,
       albumBar,
+      deaftone,
       toggleText,
       // onElementObserved,
       highLightNowPlaying,
@@ -132,17 +135,18 @@ export default {
       <div class="w-full p-4 shadow-2xl cursor-default bg-base-300 card md:card-side">
         <div>
           <figure>
-            <img
-              class="object-contain w-full rounded-xl h-72"
-              :src="info.cover"
-            >
+            <VLazyImage
+              :src="deaftone.getCover(info.albumId)"
+              :src-placeholder="deaftone.getCover(info.albumId)"
+              class="object-contain md:w-72 md:h-72 sm:w-52 sm:h-52 rounded-xl"
+            />
           </figure>
         </div>
-        <div class="pt-0 pb-0 lg:w-1 lg:card-body">
-          <h2 class="text-sm font-bold card-title lg:text-5xl">
+        <div class="pt-0 pb-0 lg:w-1 md:card-body">
+          <h2 class="text-2xl font-bold card-title md:text-5xl">
             {{ info.title }}
           </h2>
-          <div class="card-title lg:text-2xl">
+          <div class="text-xl card-title lg:text-3xl">
             <p>
               <a
                 class="cursor-pointer hover:underline text-primary"
