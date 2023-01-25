@@ -31,10 +31,10 @@ export default {
     console.log(data)
     info.title = data.name
     info.artist = data.artist
-    info.artistId = data.artistId
+    info.artistId = data.artist_id
     info.year = data.year
     info.albumId = data.id
-    info.albumDescription = data.albumDescription
+    info.albumDescription = data.album_description
     info.cover = deaftone.getCover(data.id)
     info.songCount = 0
     let totalDuration = 0
