@@ -27,7 +27,7 @@ export default {
       :src-placeholder="imgUrl"
       style="width: auto; height: auto"
     />
-    <div class="justify-center pt-3 pb-3 text-sm card-body">
+    <div class="justify-center pt-3 pb-3 card-body">
       <p class="text-center truncate ">
         {{ props.name }}
       </p>
