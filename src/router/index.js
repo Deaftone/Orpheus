@@ -72,8 +72,7 @@ const routes = setupLayouts([
 const router = createRouter({
   history: createWebHistory(),
   scrollBehavior (to, from, savedPosition) {
-  // always scroll to top
-    return { top: 0 }
+    setTimeout(async function () { document.getElementById('main').scroll({ top: 0 }) }, 300)
   },
   routes
 })

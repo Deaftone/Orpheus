@@ -63,7 +63,10 @@ export default {
           <MenuBar />
         </header>
         <!-- main container -->
-        <main class="flex-1 overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500">
+        <main
+          id="main"
+          class="flex-1 overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500"
+        >
           <router-view v-slot="{ Component }">
             <Suspense>
               <component :is="Component" />
