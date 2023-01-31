@@ -27,28 +27,28 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col flex-1 pt-10 pb-10 pl-24 pr-24 m-10 rounded-md shadow-md mr-36 ml-36 h-1/2 bg-neutral">
+  <div class="m-10 mx-36 flex h-1/2 flex-1 flex-col rounded-md bg-neutral py-10 px-24 shadow-md">
     <h1 class="font-bold">
       Server settings
     </h1>
     <div class="divider" />
-    <div class="flex form-control">
-      <label class="flex label">
+    <div class="form-control flex">
+      <label class="label flex">
         <span class="label-text">Server address</span>
       </label>
       <label class="input-group">
         <input
           type="text"
           placeholder="http://localhost:3030"
-          class="input input-bordered"
+          class="input-bordered input"
         >
       </label>
     </div>
-    <div class="flex form-control">
-      <label class="flex label">
+    <div class="form-control flex">
+      <label class="label flex">
         <span class="label-text">Server type</span>
       </label>
-      <select class="w-full max-w-xs select select-bordered">
+      <select class="select-bordered select w-full max-w-xs">
         <option
           disabled
           selected
@@ -60,14 +60,14 @@ export default {
       </select>
     </div>
     <div class="flex justify-center">
-      <button class="btn btn-primary">
+      <button class="btn-primary btn">
         Save
       </button>
     </div>
     <div class="divider" />
     <button
       :class="{'btn-disabled': disabled}"
-      class="btn btn-primary"
+      class="btn-primary btn"
       @click="update()"
     >
       Update

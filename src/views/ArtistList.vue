@@ -26,7 +26,7 @@ export default {
 </script>
 
 <template>
-  <div class="grid w-full grid-cols-3 gap-4 p-5 xl:grid-cols-11 lg:grid-cols-6">
+  <div class="grid w-full grid-cols-3 gap-4 p-5 lg:grid-cols-6 xl:grid-cols-11">
     <div
       v-for="artist in artists"
       :key="artist.id"

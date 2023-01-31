@@ -46,18 +46,18 @@ export default {
 <template>
   <div
     title="Change Theme"
-    class="dropdown dropdown-end"
+    class="dropdown-end dropdown"
   >
     <div class="dropdown">
       <div
         tabindex="0"
-        class="m-1 btn"
+        class="btn m-1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          class="inline-block w-6 h-6 stroke-current md:mr-2"
+          class="inline-block h-6 w-6 stroke-current md:mr-2"
         ><path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -68,12 +68,12 @@ export default {
         </span> <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1792 1792"
-          class="inline-block w-4 h-4 ml-1 fill-current"
+          class="ml-1 inline-block h-4 w-4 fill-current"
         ><path d="M1395 736q0 13-10 23l-466 466q-10 10-23 10t-23-10l-466-466q-10-10-10-23t10-23l50-50q10-10 23-10t23 10l393 393 393-393q10-10 23-10t23 10l50 50q10 10 10 23z" /></svg>
       </div>
       <ul
         tabindex="0"
-        class=" scrollbar-thin  scrollbar-track-gray-800 scrollbar-thumb-gray-500 dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box top-px max-h-96 h-[70vh] w-52 overflow-y-auto shadow-2xl mt-16"
+        class=" dropdown-content  rounded-t-box rounded-b-box top-px mt-16 h-[70vh] max-h-96 w-52 overflow-y-auto bg-base-200 text-base-content shadow-2xl scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500"
       >
         <div
           class="grid grid-cols-1 p-1"
@@ -84,20 +84,20 @@ export default {
           @click="themeSwitch(theme)"
         >
           <div
-            class="overflow-hidden rounded-lg outline-base-content outline-2 outline-offset-2"
+            class="overflow-hidden rounded-lg outline-2 outline-offset-2 outline-base-content"
             data-act-class="outline"
             :data-set-theme="theme"
           >
             <div
-              class="w-full font-sans cursor-pointer bg-base-100 text-base-content"
+              class="w-full cursor-pointer bg-base-100 font-sans text-base-content"
               :data-set-theme="theme"
             >
               <div class="grid grid-cols-5 grid-rows-3">
-                <div class="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
-                  <div class="flex-grow text-sm font-bold">
+                <div class="col-span-5 row-span-3 row-start-1 flex gap-1 px-4 py-3">
+                  <div class="grow text-sm font-bold">
                     {{ theme }}
                   </div>
-                  <div class="flex flex-wrap flex-shrink-0 gap-1">
+                  <div class="flex shrink-0 flex-wrap gap-1">
                     <div class="w-2 rounded bg-primary" />
                     <div class="w-2 rounded bg-secondary" />
                     <div class="w-2 rounded bg-accent" />

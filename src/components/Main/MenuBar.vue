@@ -20,7 +20,7 @@ export default {
     <div class="flex-1 lg:flex">
       <span class="text-lg font-bold">
         <button
-          class="px-4 py-2 font-bold text-gray-800 co"
+          class="px-4 py-2 font-bold text-gray-800 "
           @click="$router.go(-1)"
         >
           <font-awesome-icon
@@ -29,7 +29,7 @@ export default {
           />
         </button>
         <button
-          class="px-4 py-2 font-bold text-gray-800 co"
+          class="px-4 py-2 font-bold text-gray-800 "
           @click="$router.go(1)"
         >
           <font-awesome-icon

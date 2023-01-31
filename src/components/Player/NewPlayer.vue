@@ -138,11 +138,11 @@ export default ({
 </style>
 <template>
   <div
-    class="flex flex-col items-center justify-center w-full pb-2 text-sm bg-neutral text-neutral-content"
+    class="flex w-full flex-col items-center justify-center bg-neutral pb-2 text-sm text-neutral-content"
     @click="toggleLyrics"
   >
     <div
-      class="w-full pb-2 -mt-1.5 -mb-1.5"
+      class="-my-1.5 w-full pb-2"
       @click.stop
     >
       <!--         Currently there is a bug where streaming transcoded songs breaks the bar if you skip -->
@@ -161,7 +161,7 @@ export default ({
         @change="seek"
       />
     </div>
-    <div class="grid grid-cols-3 pl-2 pr-2">
+    <div class="grid grid-cols-3 px-2">
       <div class="flex items-center">
         <div
           class="flex items-center"
@@ -170,13 +170,13 @@ export default ({
         >
           <img
             loading="lazy"
-            class="w-12 h-12 rounded select-none "
+            class="h-12 w-12 select-none rounded "
             :src="nowPlaying.cover"
             @click="$router.push({ path: `/AlbumDetails/${nowPlaying.albumId}` })"
           >
           <!-- Track info -->
           <div
-            class="flex flex-col ml-2 text-left"
+            class="ml-2 flex flex-col text-left"
           >
             <div>
               <span
@@ -184,7 +184,7 @@ export default ({
                 @click="$router.push({ path: `/AlbumDetails/${nowPlaying.albumId}` })"
               >{{ nowPlaying.title }}</span>
             </div>
-            <div class="artist">
+            <div>
               <span
                 class="hover:cursor-pointer hover:underline"
                 @click="$router.push({ path: `/ArtistDetails/${nowPlaying.artistId}` })"
@@ -201,7 +201,7 @@ export default ({
           <div class="pl-3 ">
             <button
               @click="likeSong"
-              class="font-bold co btn hover:bg-base-300"
+              class="btn font-bold hover:bg-base-300"
             >
               <font-awesome-icon
                 v-show="!isLiked"
@@ -215,7 +215,7 @@ export default ({
           </div>
         </div>
       </div>
-      <div class="flex md:ml-32 md:mr-32">
+      <div class="flex md:mx-32">
         <div class="flex items-center justify-center" />
         <div
           class="flex flex-1"
@@ -223,7 +223,7 @@ export default ({
         >
           <!-- Previous Button -->
           <button
-            class="px-4 py-2 mr-2 font-bold text-gray-800 co btn hover:bg-base-300"
+            class="btn mr-2 px-4 py-2 font-bold text-gray-800 hover:bg-base-300"
             @click="previousTrack"
           >
             <font-awesome-icon
@@ -233,7 +233,7 @@ export default ({
           </button>
           <!-- Play Button -->
           <button
-            class="px-4 py-2 font-bold co btn hover:bg-base-300 w-11"
+            class="btn w-11 px-4 py-2 font-bold hover:bg-base-300"
             @click="playPause"
           >
             <font-awesome-icon
@@ -243,7 +243,7 @@ export default ({
           </button>
           <!-- Next Button -->
           <button
-            class="px-4 py-2 ml-2 font-bold text-gray-800 co btn hover:bg-base-300"
+            class="btn ml-2 px-4 py-2 font-bold text-gray-800 hover:bg-base-300"
             @click="nextTrack"
           >
             <font-awesome-icon
@@ -255,7 +255,7 @@ export default ({
         <div class="grow" />
       </div>
       <!-- Volume slider -->
-      <div class="flex right-control-buttons">
+      <div class="right-control-buttons flex">
         <div class="grow" />
         <div
           class="container"

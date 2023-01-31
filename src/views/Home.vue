@@ -12,7 +12,7 @@ export default {
 
 <template>
   <div class="grid justify-center">
-    <div class="p-10 text-xl shadow-xl stats">
+    <div class="stats p-10 text-xl shadow-xl">
       <div class="stat">
         <div class=" stat-title">
           Albums

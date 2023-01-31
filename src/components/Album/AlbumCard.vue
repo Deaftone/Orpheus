@@ -20,15 +20,15 @@ export default {
 </script>
 <template>
   <div
-    class="overflow-hidden transition duration-300 ease-in-out rounded-lg shadow-xl bg-neutral card hover:-translate-y-1 hover:scale-105 "
+    class="card overflow-hidden rounded-lg bg-neutral shadow-xl transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 "
   >
     <VLazyImage
       :src="deaftone.getCover(props.id)"
       :src-placeholder="imgUrl"
       style="width: auto; height: auto"
     />
-    <div class="justify-center pt-3 pb-3 card-body">
-      <p class="text-center truncate ">
+    <div class="card-body justify-center py-3">
+      <p class="truncate text-center ">
         {{ props.name }}
       </p>
     </div>

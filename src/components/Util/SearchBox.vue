@@ -1,6 +1,14 @@
 <script>
 export default {
-  name: 'SearchBox',
+  setup (props) {
+    function updateSearch (e) {
+      this.$store.commit('setSearchQuery', e.target.value)
+    }
+    return {
+      updateSearch
+    }
+  }
+/*   name: 'SearchBox',
   data () {
     return {
       search: ''
@@ -11,18 +19,18 @@ export default {
       this.$store.commit('setSearchQuery', null)
       this.$refs.search.value = ''
     },
-  }, */
+  },
   methods: {
     updateSearch (e) {
       this.$store.commit('setSearchQuery', e.target.value)
     }
-  }
+  } */
 }
 </script>
 <template>
   <div class="flex-1 lg:flex-none">
     <button
-      class="font-bold co btn hover:bg-base-300"
+      class=" btn font-bold hover:bg-base-300"
     >
       <font-awesome-icon
         :icon="['fa', 'magnifying-glass']"

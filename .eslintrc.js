@@ -5,12 +5,19 @@ module.exports = {
   },
   extends: [
     'standard',
+    'plugin:tailwindcss/recommended',
     'plugin:vue/vue3-strongly-recommended',
     'eslint:recommended'
   ],
   parserOptions: {
     ecmaVersion: 2021
   },
+  overrides: [
+    {
+      files: ['*.vue'],
+      parser: 'vue-eslint-parser'
+    }
+  ],
   rules: {
     'no-var': 'error',
     'vue/multi-word-component-names': 'off',

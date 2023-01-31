@@ -51,13 +51,13 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col h-screen min-h-screen">
+  <div class="flex h-screen min-h-screen flex-col">
     <!-- Menu bar -->
     <header class=" bg-red-50">
       <TitleBar v-if="isTauri()" />
     </header>
-    <div class="flex flex-row flex-1 overflow-y-hidden">
-      <div class="flex flex-col flex-1">
+    <div class="flex flex-1 flex-row overflow-y-hidden">
+      <div class="flex flex-1 flex-col">
         <!-- Header bar -->
         <header class="w-full ">
           <MenuBar />

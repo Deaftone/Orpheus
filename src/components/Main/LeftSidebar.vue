@@ -27,7 +27,7 @@ export default {
 
 <template>
   <div
-    class="flex flex-col items-left h-full p-3 transition-[width] duration-500 ease-in-out gap-3 overflow-hidden "
+    class="flex h-full flex-col gap-3 overflow-hidden p-3 transition-[width] duration-500 ease-in-out "
     :class="expanded ? 'w-48' : 'w-[72px]' "
   >
     <div
@@ -37,7 +37,7 @@ export default {
       <VLazyImage
         :src="imgUrl"
         :src-placeholder="imgUrl"
-        class="w-12 h-12 rounded-3xl"
+        class="h-12 w-12 rounded-3xl"
       />
     </div>
     <div class="divider" />
@@ -48,16 +48,16 @@ export default {
       @click="$router.push({ path: route.route })"
     >
       <div
-        class="flex items-center justify-start h-12 transition-all duration-500 ease-in-out rounded cursor-pointer hover:text-white hover:rounded-xl hover:bg-neutral-content bg-base-300"
+        class="flex h-12 cursor-pointer items-center justify-start rounded bg-base-300 transition-all duration-500 ease-in-out hover:rounded-xl hover:bg-neutral-content"
         :class="expanded ? 'w-[168px] ' : 'w-[48px]' "
       >
         <font-awesome-icon
           :icon="route.icon"
-          class="justify-center w-12"
+          class="w-12 justify-center"
           color="gray"
         />
         <div
-          class="fixed block pl-5 duration-500 ease-in-out opacity-0"
+          class="fixed block pl-5 opacity-0 duration-500 ease-in-out"
           :class="expanded ? 'visible opacity-100' : 'h duration-300' "
         >
           <p
@@ -72,16 +72,16 @@ export default {
     <div
       @click="$router.push({ path: '/Settings' })"
       data-tip="Settings"
-      class="flex items-center justify-start h-12 mt-auto duration-500 ease-in-out rounded cursor-pointer hover:text-white hover:rounded-xl hover:bg-neutral-content bg-base-300"
+      class="mt-auto flex h-12 cursor-pointer items-center justify-start rounded bg-base-300 duration-500 ease-in-out hover:rounded-xl hover:bg-neutral-content"
       :class="expanded ? 'w-[168px] ' : 'w-[48px]' "
     >
       <font-awesome-icon
         icon="cog"
         color="gray"
-        class="justify-center w-12"
+        class="w-12 justify-center"
       />
       <div
-        class="fixed block pl-5 duration-500 ease-in-out opacity-0"
+        class="fixed block pl-5 opacity-0 duration-500 ease-in-out"
         :class="expanded ? 'visible opacity-100' : 'h duration-300' "
       >
         <p

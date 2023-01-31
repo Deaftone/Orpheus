@@ -29,8 +29,8 @@ export default {
       class="rounded-full shadow-xl ring ring-primary"
       style="width: auto; height: auto"
     />
-    <div class="font-bold text-center">
-      <p class="text-center truncate">
+    <div class="text-center font-bold">
+      <p class="truncate text-center">
         {{ props.name }}
       </p>
     </div>

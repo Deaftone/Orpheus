@@ -130,31 +130,31 @@ export default {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-3 pt-6 pb-6 pl-10 pr-10 text-sm select-none xl:pr-40 xl:pl-40 lg:text-lg">
+  <div class="grid select-none grid-cols-1 gap-3 px-10 py-6 text-sm lg:text-lg xl:px-40">
     <div class="flex justify-center">
-      <div class="w-full p-4 shadow-2xl cursor-default bg-base-300 card md:card-side">
+      <div class="card w-full cursor-default bg-base-300 p-4 shadow-2xl md:card-side">
         <div>
           <figure>
             <VLazyImage
               :src="deaftone.getCover(info.albumId)"
               :src-placeholder="deaftone.getCover(info.albumId)"
-              class="object-contain md:w-72 md:h-72 sm:w-52 sm:h-52 rounded-xl"
+              class="rounded-xl object-contain sm:h-52 sm:w-52 md:h-72 md:w-72"
             />
           </figure>
         </div>
-        <div class="pt-0 pb-0 lg:w-1 md:card-body">
-          <h2 class="text-2xl font-bold card-title md:text-5xl">
+        <div class="py-0 md:card-body lg:w-1">
+          <h2 class="card-title text-2xl font-bold md:text-5xl">
             {{ info.title }}
           </h2>
-          <div class="text-xl card-title lg:text-3xl">
+          <div class="card-title text-xl lg:text-3xl">
             <p>
               <a
-                class="cursor-pointer hover:underline text-primary"
+                class="cursor-pointer text-primary hover:underline"
                 @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
               >{{ info.artist }}</a>
               <br>
               <a
-                class="gap-0 text-m line-clamp-4 hover:cursor-pointer"
+                class="gap-0 text-sm line-clamp-4 hover:cursor-pointer"
                 id="albumDescription"
                 @click="toggleText"
               >{{ info.albumDescription }} </a>
@@ -163,10 +163,10 @@ export default {
             </p>
           </div>
           <div
-            class="mt-5 card-actions"
+            class="card-actions mt-5"
             style="margin-top:auto"
           >
-            <button class="btn btn-primary">
+            <button class="btn-primary btn">
               Play
             </button>
           </div>
@@ -178,12 +178,12 @@ export default {
       ref="sticky"
       style="height: 0.1px"
     />
-    <div class="flex flex-col justify-center w-full gap-5 place-items-center">
+    <div class="flex w-full flex-col place-items-center justify-center gap-5">
       <div
         v-for="song in songs"
         :id="song.id"
         :key="song.number"
-        class="flex justify-center w-full p-1 rounded-lg cursor-pointer bg-base-300 hover:bg-neutral "
+        class="flex w-full cursor-pointer justify-center rounded-lg bg-base-300 p-1 hover:bg-neutral "
         @click="playTrack(song.title, song.id)"
       >
         <div class="w-full p-2">
@@ -197,7 +197,7 @@ export default {
             <a>{{ (new Date(song.length * 1000).toISOString().substr(14, 5)) }}</a>
           </div>
           <div
-            class="hidden float-right pl-1 pr-1 mr-5 border-4 border-solid rounded-lg border-primary lg:visible"
+            class="float-right mr-5 hidden rounded-lg border-4 border-solid border-primary px-1 lg:visible"
           >
             <a>{{ song.type }}</a>
           </div>

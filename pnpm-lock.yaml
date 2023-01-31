@@ -25,6 +25,7 @@ specifiers:
   eslint-plugin-import: ^2.26.0
   eslint-plugin-n: ^15.3.0
   eslint-plugin-promise: ^6.0.1
+  eslint-plugin-tailwindcss: ^3.8.3
   eslint-plugin-vue: ^9.6.0
   howler: ^2.2.3
   jest: ^29.1.2
@@ -42,6 +43,7 @@ specifiers:
   vite: ^4.0.2
   vite-plugin-vue-layouts: ^0.7.0
   vue: ^3.2.45
+  vue-eslint-parser: ^9.1.0
   vue-router: ^4.1.6
   vue-slider-component: ^4.1.0-beta.2
   vuedraggable: ^4.1.0
@@ -83,6 +85,7 @@ devDependencies:
   eslint-plugin-import: 2.26.0_eslint@8.31.0
   eslint-plugin-n: 15.6.0_eslint@8.31.0
   eslint-plugin-promise: 6.1.1_eslint@8.31.0
+  eslint-plugin-tailwindcss: 3.8.3_tailwindcss@3.2.4
   eslint-plugin-vue: 9.8.0_eslint@8.31.0
   jest: 29.3.1
   jest-puppeteer: 6.2.0_puppeteer@18.2.1
@@ -93,6 +96,7 @@ devDependencies:
   tailwindcss: 3.2.4_postcss@8.4.20
   vite: 4.0.4_sass@1.57.1
   vite-plugin-vue-layouts: 0.7.0_oh6kquo6biweymmreht6aj34oy
+  vue-eslint-parser: 9.1.0_eslint@8.31.0
 
 packages:
 
@@ -3001,6 +3005,17 @@ packages:
       eslint: ^7.0.0 || ^8.0.0
     dependencies:
       eslint: 8.31.0
+
+  /eslint-plugin-tailwindcss/3.8.3_tailwindcss@3.2.4:
+    resolution: {integrity: sha512-wfzfCmc9yONNW+TqfR+QWZ+syFPQ8zMOrIGx500lS4XITEm0HJYGyKh1sC1tQ9+Wmt58bnHzW3Yc31vy5RlJww==}
+    engines: {node: '>=12.13.0'}
+    peerDependencies:
+      tailwindcss: ^3.2.2
+    dependencies:
+      fast-glob: 3.2.12
+      postcss: 8.4.20
+      tailwindcss: 3.2.4_postcss@8.4.20
+    dev: true
 
   /eslint-plugin-unicorn/45.0.2_eslint@8.31.0:
     resolution: {integrity: sha512-Y0WUDXRyGDMcKLiwgL3zSMpHrXI00xmdyixEGIg90gHnj0PcHY4moNv3Ppje/kDivdAy5vUeUr7z211ImPv2gw==}

@@ -154,8 +154,8 @@ export default {
     class="flex flex-col items-center justify-center"
     style="height: 90vh"
   >
-    <div class="px-8 py-6 mt-4 text-left shadow-2xl bg-base-300">
-      <h3 class="text-2xl font-bold text-center">
+    <div class="mt-4 bg-base-300 px-8 py-6 text-left shadow-2xl">
+      <h3 class="text-center text-2xl font-bold">
         Connect to Deaftone
       </h3>
       <div>
@@ -163,7 +163,7 @@ export default {
           <div>
             <select
               v-model="selected"
-              class="w-full max-w-xs select select-bordered"
+              class="select-bordered select w-full max-w-xs"
             >
               <!-- eslint-disable-next-line vue/require-v-for-key -->
               <option
@@ -187,7 +187,7 @@ export default {
           </div>
           <div class="mt-4">
             <label class="label ">
-              <span class="label-text 00">Your Deaftone address</span>
+              <span class="label-text">Your Deaftone address</span>
             </label>
             <label class="input-group ">
               <span class="bg-base-200">Address</span>
@@ -195,13 +195,13 @@ export default {
                 type="text"
                 v-model="address"
                 placeholder="http://localhost:3030"
-                class="input input-bordered"
+                class="input-bordered input"
               >
             </label>
           </div>
           <div class="flex items-baseline justify-center">
             <button
-              class="px-6 py-2 mt-4 btn btn-primary"
+              class="btn-primary btn mt-4 px-6 py-2"
               @click="connect()"
             >
               Connect
@@ -218,13 +218,13 @@ export default {
       class="mt-11"
     >
       <div
-        class="shadow-lg alert alert-error"
+        class="alert alert-error shadow-lg"
         v-if="alert.show"
       >
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="flex-shrink-0 w-6 h-6 stroke-current"
+            class="h-6 w-6 shrink-0 stroke-current"
             fill="none"
             viewBox="0 0 24 24"
           ><path

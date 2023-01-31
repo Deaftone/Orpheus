@@ -46,7 +46,7 @@ export default {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-3 pt-6 pb-6 pl-10 pr-10 text-sm select-none xl:pr-40 xl:pl-40 lg:text-lg ">
+  <div class="grid select-none grid-cols-1 gap-3 px-10 py-6 text-sm lg:text-lg xl:px-40">
     <!--  <div class="p-4 shadow-2xl cursor-default bg-base-300 card md:card-side">
 
       <figure>
@@ -67,17 +67,17 @@ export default {
       </div>
     </div> -->
     <div class="flex justify-center">
-      <div class="w-full p-4 shadow-2xl cursor-default bg-base-300 card md:card-side">
+      <div class="card w-full cursor-default bg-base-300 p-4 shadow-2xl md:card-side">
         <div class="w-72">
           <figure>
             <img
-              class="object-contain w-full rounded-xl h-72"
+              class="h-72 w-full rounded-xl object-contain"
               :src="info.artistImage"
             >
           </figure>
         </div>
-        <div class="pt-0 pb-0 -mt-2 lg:w-1 lg:card-body">
-          <h2 class="text-sm font-bold card-title lg:text-5xl text-primary">
+        <div class="-mt-2 py-0 lg:w-1 lg:card-body">
+          <h2 class="card-title text-sm font-bold text-primary lg:text-5xl">
             {{ info.artistName }}
           </h2>
           <div class="card-title ">
@@ -89,7 +89,7 @@ export default {
       </div>
     </div>
     <div class="divider" />
-    <div class="pt-3 pb-3 pl-30">
+    <div class="py-3 ">
       <span class="text-2xl">Albums</span>
     </div>
     <div
@@ -98,7 +98,7 @@ export default {
       <div
         v-for="album in albums"
         :key="album.id"
-        class="bg-neutral tooltip tooltip-top card"
+        class="card tooltip tooltip-top bg-neutral"
         :data-tip="album.name"
         @click="$router.push({ path: `/AlbumDetails/${album.id}` })"
       >

@@ -53,13 +53,13 @@ export default {
   <draggable
     v-model="playingQueue"
     tag="ul"
-    class="overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500 hover:scrollbar-thumb-green-700"
+    class="overflow-y-scroll scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-500"
     item-key="id"
   >
     <template #item="{element}">
       <li
         :id="`${element.id}_sidebar`"
-        class="items-center justify-between p-3 m-3 text-sm transition duration-300 ease-in-out delay-150 rounded-lg shadow-xl cursor-move bg-base-100 hover:scale-105"
+        class="m-3 cursor-move items-center justify-between rounded-lg bg-base-100 p-3 text-sm shadow-xl transition delay-150 duration-300 ease-in-out hover:scale-105"
       >
         <div class="relative flex overflow-x-hidden">
           <div

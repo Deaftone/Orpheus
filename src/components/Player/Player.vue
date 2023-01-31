@@ -199,7 +199,7 @@ export default ({
     <!-- Test -->
     <div
       id="container"
-      class="grid grid-cols-3 text-sm grid-row-1"
+      class="grid grid-cols-3 grid-rows-1 text-sm "
     >
       <!-- This is hacked I couldnt get it allign center vertically any other way then puttin it inside a div -->
       <div class="flex items-center justify-center">
@@ -215,7 +215,7 @@ export default ({
           />
         </div>
         <a
-          class="pl-10 cursor-pointer hover:text-primary"
+          class="cursor-pointer pl-10 hover:text-primary"
           @click="toggleVis"
         >Visualiser</a>
       </div>
@@ -226,7 +226,7 @@ export default ({
       >
         <!-- Previous Button -->
         <button
-          class="px-4 py-2 font-bold text-gray-800 co"
+          class="co px-4 py-2 font-bold text-gray-800"
           @click="previosTrack"
         >
           <font-awesome-icon
@@ -236,7 +236,7 @@ export default ({
         </button>
         <!-- Play Button -->
         <button
-          class="px-4 py-2 font-bold text-gray-800 co"
+          class="co px-4 py-2 font-bold text-gray-800"
           @click="playPause"
         >
           <font-awesome-icon
@@ -246,7 +246,7 @@ export default ({
         </button>
         <!-- Next Button -->
         <button
-          class="px-4 py-2 font-bold text-gray-800 co"
+          class="co px-4 py-2 font-bold text-gray-800"
           @click="nextTrack"
         >
           <font-awesome-icon
@@ -257,7 +257,7 @@ export default ({
       </div>
       <div
         v-if="nowPlaying"
-        class="flex items-center justify-center col-start-3"
+        class="col-start-3 flex items-center justify-center"
       >
         <a
           class="cursor-pointer hover:text-primary"
@@ -282,12 +282,12 @@ export default ({
 
     <div
       id="barC"
-      class="grid w-full pb-3 text-xs grid-row-1 "
+      class="grid-row-1 grid w-full pb-3 text-xs "
     >
       <a>{{ eTime }} / {{ duration }}</a>
       <div
         id="playbar"
-        class="mt-2 mb-2 ml-96 mr-96"
+        class="my-2 mx-96"
       >
         <Slider
           v-model="percentPlayed"

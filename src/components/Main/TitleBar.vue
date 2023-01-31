@@ -27,23 +27,23 @@ export default {
   <div
     id="titleBar"
     data-tauri-drag-region
-    class="pt-1 pb-5 titlebar bg-neutral text-primary"
+    class="titlebar bg-neutral pt-1 pb-5 text-primary"
   >
     <font-awesome-icon
       id="minIcon"
-      class="cursor-pointer text-primary titlebar-button hover:text-primary-focus"
+      class="titlebar-button cursor-pointer text-primary hover:text-primary-focus"
       icon="window-minimize"
       color="gray"
       @click="minimize"
     />
     <font-awesome-icon
-      class="cursor-pointer text-primary titlebar-button hover:text-primary-focus"
+      class="titlebar-button cursor-pointer text-primary hover:text-primary-focus"
       icon="window-maximize"
       color="gray"
       @click="toggleMaximize"
     />
     <font-awesome-icon
-      class="cursor-pointer text-primary titlebar-button hover:text-primary-focus"
+      class="titlebar-button cursor-pointer text-primary hover:text-primary-focus"
       icon="window-close"
       color="gray"
       @click="close"
