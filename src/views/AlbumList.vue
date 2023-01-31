@@ -13,7 +13,7 @@ export default {
     },
     sort: {
       type: String,
-      default: ''
+      default: 'name'
     },
     scroller: {
       type: Boolean,
@@ -49,7 +49,8 @@ export default {
       // }
     }
     async function getAlbums () {
-      const data = await deaftone.getAlbums(props.size, props.page, props.sort)
+      const data = await deaftone.getAlbums(props.size, page.value, props.sort)
+      page.value++
       for (const album of data.data) {
         albums.value.push({
           name: album.name,
@@ -69,7 +70,7 @@ export default {
         threshold: 0.9
       })
       if (props.scroller) observer.observe(document.getElementById('sticky'))
-      else this.getAlbums()
+      else getAlbums()
     })
     return {
       albums,
