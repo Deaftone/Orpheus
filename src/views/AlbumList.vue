@@ -1,11 +1,11 @@
 <script>
 import 'v3-infinite-loading/lib/style.css'
 import AlbumCard from '@/components/Album/AlbumCard.vue'
+import { inject, onMounted, ref } from 'vue'
 
 export default {
   name: 'AlbumList',
   components: { AlbumCard },
-  inject: ['$deaftone'],
   props: {
     size: {
       type: Number,
@@ -20,15 +20,21 @@ export default {
       default: true
     }
   },
-  data () {
-    return {
-      albums: [],
-      page: 0,
-      firstLoad: true
+  async setup (props) {
+    const deaftone = inject('$deaftone')
+    const albums = ref([])
+    const page = ref(0)
+    let observer = null
+    function searchQuery (query) {
+      console.log(query)
     }
-  },
-  computed: {
-    filterAlbums () {
+
+    function truncateString (str, num) {
+      if (str.length > num) return `${str.slice(0, num)}...`
+      else return str
+    }
+
+    function filterAlbums () {
       /*       const query = this.$store.state.searchQuery
       if (query) {
         console.log(query)
@@ -42,51 +48,36 @@ export default {
       return this.albums
       // }
     }
-  },
-  watch: {
-    searchQuery (query) {
-      console.log(query)
-    }
-  }, // injecting in a component that wants it
-  created () {
-    this.observer = new IntersectionObserver(this.onElementObserved, {
-      root: null,
-      threshold: 0.9
-    })
-  },
-  async mounted () {
-    // await this.getAlbums()
-    console.log(this.$refs.sticky)
-    if (this.scroller) this.observer.observe(this.$refs.sticky)
-    else this.getAlbums()
-  },
-  methods: {
-    truncateString (str, num) {
-      if (str.length > num) return `${str.slice(0, num)}...`
-      else return str
-    },
-    async getAlbums () {
-      const data = await this.$deaftone.getAlbums(this.size, this.page, this.sort)
-      this.page++
-
-      console.log(data.data)
+    async function getAlbums () {
+      const data = await deaftone.getAlbums(props.size, props.page, props.sort)
       for (const album of data.data) {
-        this.albums.push({
+        albums.value.push({
           name: album.name,
           id: album.id,
           cover: album.cover
         })
       }
-      /*       for (const album of data)
-        console.log(album) */
-    },
-    onElementObserved (e) {
+    }
+    function onElementObserved (e) {
       e.forEach(({ target, isIntersecting }) => {
-        this.getAlbums()
+        getAlbums()
       })
+    }
+    onMounted(async () => {
+      observer = new IntersectionObserver(onElementObserved, {
+        root: null,
+        threshold: 0.9
+      })
+      if (props.scroller) observer.observe(document.getElementById('sticky'))
+      else this.getAlbums()
+    })
+    return {
+      albums,
+      page
     }
   }
 }
+
 </script>
 <template>
   <div class="m-5">
@@ -95,7 +86,7 @@ export default {
       class="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8"
     >
       <div
-        v-for="album in filterAlbums"
+        v-for="album in albums"
         :key="album.id"
         @click="$router.push({ path: `/AlbumDetails/${album.id}` })"
       >
@@ -106,7 +97,7 @@ export default {
       </div>
     </div>
     <div
-      ref="sticky"
+      id="sticky"
       class
       style="height: 0.1px"
     />
