@@ -40,7 +40,7 @@ export default {
     let totalDuration = 0
     for (const song of data.songs) {
       info.songCount++
-      totalDuration = totalDuration + song.duration
+      totalDuration = totalDuration + song.length
       songs.push({
         id: song.id,
         number: song.track,
@@ -51,7 +51,7 @@ export default {
         albumId: info.albumId,
         artist: info.artist,
         type: 'test',
-        length: song.duration,
+        length: song.length,
         liked: song.liked
       })
     }
