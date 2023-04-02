@@ -16,6 +16,25 @@
 A frontend client for ![Deaftone](https://github.com/Ortygia/Deaftone)
 </div>
 
+# Overview
+
+This is a music player frontend for Deaftone, a fast and lightweight self-hosted music server written in Rust. The player is built using Vue.js and daisyUI, and styled with Tailwind CSS. It provides a modern and intuitive user interface to search, browse, and play music from the Deaftone server.
+Features
+
+# Features (Some MIA)
+* Browse music by artist, album, genre, or playlist
+* Search music by title, artist, or album
+* Create and manage playlists
+* Play and pause music, skip tracks, and control volume
+* Display album art and track information
+* Support for keyboard shortcuts and media keys
+* Dark mode and responsive design
+
+# Technologies
+* Vue.js: a progressive JavaScript framework for building user interfaces
+* daisyUI: a lightweight component library for Tailwind CSS
+* Tailwind CSS: a utility-first CSS framework for rapidly building custom designs
+
 # Installation
 Installation should be as simple as downloading the correct release for your system. Then the follow the initial splash screen
 
