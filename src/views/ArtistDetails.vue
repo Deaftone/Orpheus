@@ -1,10 +1,11 @@
 <script>
 import { inject, onUnmounted, reactive } from 'vue'
 import AlbumCard from '@/components/Album/AlbumCard.vue'
+import VLazyImage from 'v-lazy-image'
 
 export default {
   name: 'ArtistDetails',
-  components: { AlbumCard },
+  components: { AlbumCard, VLazyImage },
   props: { id: { type: String, required: true } },
   async setup (props) {
     onUnmounted(async () => {
@@ -39,6 +40,7 @@ export default {
 
     return {
       info,
+      deaftone,
       albums
     }
   }
@@ -47,37 +49,20 @@ export default {
 
 <template>
   <div class="grid select-none grid-cols-1 gap-3 px-10 py-6 text-sm lg:text-lg xl:px-40">
-    <!--  <div class="p-4 shadow-2xl cursor-default bg-base-300 card md:card-side">
-
-      <figure>
-        <img
-          class="w-full rounded-xl h-72"
-          :src="info.artistImage"
-        >
-      </figure>
-      <div class="w-full card-body">
-        <h2 class="text-xl font-bold card-title lg:text-6xl text-primary">
-          {{ info.artistName }}
-        </h2>
-        <div class="w-full card-actions ">
-          <p class="text-xl truncate cursor-pointer">
-            {{ info.bio }}
-          </p>
-        </div>
-      </div>
-    </div> -->
     <div class="flex justify-center">
       <div class="card w-full cursor-default bg-base-300 p-4 shadow-2xl md:card-side">
         <div class="w-72">
           <figure>
-            <img
-              class="h-72 w-full rounded-xl object-contain"
+            <VLazyImage
               :src="info.artistImage"
-            >
+              :src-placeholder="info.artistImage"
+              class="justify-center rounded-xl object-contain sm:h-52 sm:w-52 md:h-72 md:w-72"
+            />
           </figure>
         </div>
-        <div class="-mt-2 py-0 lg:w-1 lg:card-body">
-          <h2 class="card-title text-sm font-bold text-primary lg:text-5xl">
+
+        <div class="py-0 md:card-body lg:w-1">
+          <h2 class="card-title text-2xl font-bold text-primary md:text-5xl">
             {{ info.artistName }}
           </h2>
           <div class="card-title ">
@@ -89,7 +74,36 @@ export default {
       </div>
     </div>
     <div class="divider" />
-    <div class="py-3 ">
+    <span class="text-2xl">Top Tracks</span>
+    <div
+      class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-5"
+    >
+      <div
+        v-for="album in albums"
+        :key="album.id"
+        class="card tooltip tooltip-top rounded-lg bg-neutral transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
+        :data-tip="album.name"
+      >
+        <div
+          class="flex items-center"
+        >
+          <p class="p-1 text-primary">
+            1
+          </p>
+          <VLazyImage
+            :src="deaftone.getCover(album.id)"
+            :src-placeholder="imgUrl"
+            class="h-12 w-12 select-none rounded-lg p-1 "
+          />
+
+          <p class="truncate text-center ">
+            top track
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="divider" />
+    <div>
       <span class="text-2xl">Albums</span>
     </div>
     <div
