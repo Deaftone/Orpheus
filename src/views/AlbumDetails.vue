@@ -130,36 +130,34 @@ export default {
 </script>
 
 <template>
-  <div class="grid select-none grid-cols-1 gap-3 px-10 py-6 text-sm lg:text-lg xl:px-40">
+  <div class="grid select-none grid-cols-1 gap-3 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 px-10 py-6 text-sm lg:text-lg xl:px-40">
     <div class="flex justify-center">
       <div class="card w-full cursor-default bg-base-300 p-4 shadow-2xl md:card-side">
-        <div>
+        <div class="w-72">
           <figure>
             <VLazyImage
               :src="deaftone.getCover(info.albumId)"
               :src-placeholder="deaftone.getCover(info.albumId)"
-              class="rounded-xl object-contain sm:h-52 sm:w-52 md:h-72 md:w-72"
+              class="justify-center rounded-xl object-contain sm:h-52 sm:w-52 md:h-72 md:w-72"
             />
           </figure>
         </div>
         <div class="py-0 md:card-body lg:w-1">
-          <h2 class="card-title text-2xl font-bold md:text-5xl">
+          <h2 class="card-title text-xl font-bold text-primary md:text-3xl">
             {{ info.title }}
           </h2>
-          <div class="card-title text-xl lg:text-3xl">
+          <div class="card-title text-xl lg:text-2xl">
             <p>
-              <a
-                class="cursor-pointer text-primary hover:underline"
-                @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
-              >{{ info.artist }}</a>
-              <br>
-              <a
-                class="gap-0 text-sm line-clamp-4 hover:cursor-pointer"
+              <!--               <a
+                class="gap-0 text-sm hover:cursor-pointer"
                 id="albumDescription"
                 @click="toggleText"
               >{{ info.albumDescription }} </a>
-              <br>
-              <a class="text-primary">{{ info.year }} | {{ info.songCount }} Songs | {{ info.totalDuration }}</a>
+              <br> -->
+              <a><a
+                class="cursor-pointer text-primary hover:underline"
+                @click="$router.push({ path: `/ArtistDetails/${info.artistId}` })"
+              >{{ info.artist }}</a> | {{ info.year }} | {{ info.songCount }} Tracks | {{ info.totalDuration }}</a>
             </p>
           </div>
           <div
