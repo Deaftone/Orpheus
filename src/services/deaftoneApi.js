@@ -77,11 +77,11 @@ class DeaftoneConnector {
       params: {
         size, sort
       }
-    })).data
+    })).data.data
   }
 
   async getArtist (artistId) {
-    return (await this.axios.get(`/artists/${artistId}`)).data
+    return (await this.axios.get(`/artists/${artistId}`)).data.data
   }
 
   async likeSong (songId) {
@@ -90,11 +90,11 @@ class DeaftoneConnector {
   }
 
   async getAlbums (size, page, sort) {
-    return await this.axios.get('/albums', {
+    return (await this.axios.get('/albums', {
       params: {
         size, page, sort
       }
-    })
+    })).data.data
   }
 
   async getArtistAlbum (albumId) {
@@ -102,7 +102,7 @@ class DeaftoneConnector {
       params: {
         id: albumId
       }
-    })).data
+    })).data.data
   }
 
   async getArtistAlbums (artistId) {
@@ -110,7 +110,7 @@ class DeaftoneConnector {
       params: {
         id: artistId
       }
-    })).data
+    })).data.data
   }
 
   stream (id) {
