@@ -2,6 +2,7 @@
 import { inject, onUnmounted, reactive } from 'vue'
 import AlbumCard from '@/components/Album/AlbumCard.vue'
 import VLazyImage from 'v-lazy-image'
+import imgUrl from '@/assets/logo.png'
 
 export default {
   name: 'ArtistDetails',
@@ -41,7 +42,8 @@ export default {
     return {
       info,
       deaftone,
-      albums
+      albums,
+      imgUrl
     }
   }
 }
@@ -62,9 +64,39 @@ export default {
         </div>
 
         <div class="py-0 md:card-body lg:w-1">
-          <h2 class="card-title text-2xl font-bold text-primary md:text-5xl">
-            {{ info.artistName }}
-          </h2>
+          <div class="flex gap-1 ">
+            <h2 class="card-title text-2xl font-bold text-primary md:text-5xl">
+              {{ info.artistName }}
+            </h2>
+            <button
+              class="btn border-0 bg-base-300 font-bold hover:bg-neutral"
+            >
+              <font-awesome-icon
+                :icon="['fa-brands', 'fa-twitter']"
+              />
+            </button>
+            <button
+              class="btn border-0 bg-base-300 font-bold hover:bg-neutral"
+            >
+              <font-awesome-icon
+                :icon="['fa-brands', 'fa-facebook']"
+              />
+            </button>
+            <button
+              class="btn border-0 bg-base-300 font-bold hover:bg-neutral"
+            >
+              <font-awesome-icon
+                :icon="['fa-brands', 'fa-spotify']"
+              />
+            </button>
+            <button
+              class="btn border-0 bg-base-300 font-bold hover:bg-neutral"
+            >
+              <font-awesome-icon
+                :icon="['fa-brands', 'fa-deezer']"
+              />
+            </button>
+          </div>
           <div class="card-title ">
             <p class="line-clamp-6">
               {{ info.bio }}

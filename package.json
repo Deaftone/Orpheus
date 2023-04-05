@@ -14,9 +14,10 @@
   },
   "dependencies": {
     "@antfu/eslint-config": "^0.34.0",
-    "@fortawesome/fontawesome-svg-core": "^6.2.0",
-    "@fortawesome/free-regular-svg-icons": "^6.2.0",
-    "@fortawesome/free-solid-svg-icons": "^6.2.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
+    "@fortawesome/free-brands-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/vue-fontawesome": "^3.0.0-4",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@vueform/slider": "^2.1.5",
@@ -59,14 +60,7 @@
     "start-server-and-test": "^1.14.0",
     "tailwindcss": "^3.2.4",
     "vite": "^4.0.2",
-    "vite-plugin-vue-layouts": "^0.7.0",
+    "vite-plugin-vue-layouts": "^0.8.0",
     "vue-eslint-parser": "^9.1.0"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowAny": [
-        "vite"
-      ]
-    }
   }
 }

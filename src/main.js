@@ -13,6 +13,7 @@ import DeaftoneConnector from './services/deaftoneApi'
 import Player from './services/player'
 import devtools from '@vue/devtools'
 import SettingsManager from './services/settings/index'
+import { faDeezer, faFacebook, faSpotify, faTwitter } from '@fortawesome/free-brands-svg-icons'
 const app = createApp(App)
 
 if (process.env.NODE_ENV === 'development' && window.__TAURI__) {
@@ -30,6 +31,10 @@ app.provide('$player', new Player(deaftone))
 app.provide('$router', router)
 
 app.use(router)
+library.add(faTwitter)
+library.add(faFacebook)
+library.add(faSpotify)
+library.add(faDeezer)
 library.add(faHome)
 library.add(faPlay)
 library.add(faWindowMinimize)
