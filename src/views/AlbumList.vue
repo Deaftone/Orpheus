@@ -51,7 +51,7 @@ export default {
     async function getAlbums () {
       const data = await deaftone.getAlbums(props.size, page.value, props.sort)
       page.value++
-      for (const album of data.data) {
+      for (const album of data) {
         albums.value.push({
           name: album.name,
           id: album.id,
