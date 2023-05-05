@@ -133,16 +133,16 @@ export default {
   <div class="grid select-none grid-cols-1 gap-3 px-10 py-6 text-sm lg:text-lg xl:px-40">
     <div class="flex justify-center">
       <div class="card w-full cursor-default bg-base-300 p-4 shadow-2xl md:card-side">
-        <div>
+        <div class="w-72">
           <figure>
             <VLazyImage
               :src="deaftone.getCover(info.albumId)"
               :src-placeholder="deaftone.getCover(info.albumId)"
-              class="rounded-xl object-contain sm:h-52 sm:w-52 md:h-72 md:w-72"
+              class="justify-center rounded-xl object-contain sm:h-52 sm:w-52 md:h-72 md:w-72"
             />
           </figure>
         </div>
-        <div class="py-0 md:card-body lg:w-1">
+        <div class="-m-2 py-0 md:card-body lg:w-1">
           <h2 class="card-title text-2xl font-bold md:text-5xl">
             {{ info.title }}
           </h2>
@@ -163,8 +163,7 @@ export default {
             </p>
           </div>
           <div
-            class="card-actions mt-5"
-            style="margin-top:auto"
+            class=""
           >
             <button class="btn-primary btn">
               Play
