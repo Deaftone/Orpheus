@@ -1,5 +1,4 @@
 <script>
-import Player from '@/components/Player/Player.vue'
 import NewPlayer from '@/components/Player/NewPlayer.vue'
 
 import MenuBar from '@/components/Main/MenuBar.vue'
@@ -11,7 +10,6 @@ import ConnectionModal from '@/components/Modal/ConnectionModal.vue'
 export default {
 
   components: {
-    Player,
     TitleBar,
     MenuBar,
     RightSidebar,
