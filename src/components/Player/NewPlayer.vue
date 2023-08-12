@@ -5,7 +5,7 @@ import VueSlider from 'vue-slider-component'
 import '@/assets/slider.css'
 import '@/freqtimeupdate'
 import { usePlayerStore } from '@/stores/player'
-export default ({
+export default {
   components: {
     VueSlider
   },
@@ -105,7 +105,7 @@ export default ({
       currentIcon
     }
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>
@@ -180,7 +180,7 @@ export default ({
           >
             <div>
               <span
-                class="hover:cursor-pointer hover:underline"
+                class="line-clamp-1 hover:cursor-pointer hover:underline"
                 @click="$router.push({ path: `/AlbumDetails/${nowPlaying.albumId}` })"
               >{{ nowPlaying.title }}</span>
             </div>
@@ -198,10 +198,10 @@ export default ({
                 </span> -->
             </div>
           </div>
-          <div class="pl-3 ">
+          <div class="pl-3">
             <button
               @click="likeSong"
-              class="btn font-bold hover:bg-base-300"
+              class="btn bg-base-100 font-bold hover:bg-base-200"
             >
               <font-awesome-icon
                 v-show="!isLiked"
@@ -223,7 +223,7 @@ export default ({
         >
           <!-- Previous Button -->
           <button
-            class="btn mr-2 px-4 py-2 font-bold text-gray-800 hover:bg-base-300"
+            class="btn mr-2 bg-base-100 px-4 py-2 font-bold hover:bg-base-200"
             @click="previousTrack"
           >
             <font-awesome-icon
@@ -233,7 +233,7 @@ export default ({
           </button>
           <!-- Play Button -->
           <button
-            class="btn w-11 px-4 py-2 font-bold hover:bg-base-300"
+            class="btn w-11 bg-base-100 px-4 py-2 font-bold hover:bg-base-200"
             @click="playPause"
           >
             <font-awesome-icon
@@ -243,7 +243,7 @@ export default ({
           </button>
           <!-- Next Button -->
           <button
-            class="btn ml-2 px-4 py-2 font-bold text-gray-800 hover:bg-base-300"
+            class="btn ml-2 bg-base-100 px-4 py-2 font-bold hover:bg-base-200"
             @click="nextTrack"
           >
             <font-awesome-icon
