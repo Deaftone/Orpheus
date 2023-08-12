@@ -48,9 +48,11 @@ export default {
 </script>
 
 <template>
-  <Suspense>
-    <router-view />
-  </Suspense>
+  <KeepAlive :max="10">
+    <Suspense>
+      <router-view />
+    </Suspense>
+  </KeepAlive>
 </template>
 
 <style>
