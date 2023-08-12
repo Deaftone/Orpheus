@@ -6,19 +6,41 @@ export default {
   props: {
     size: {
       type: Number,
-      default: 56
+      default: 66
     },
     sort: {
       type: String,
       default: ''
+    },
+    scroller: {
+      type: Boolean,
+      default: true
     }
   },
   setup (props) {
     const deaftone = inject('$deaftone')
     const artists = ref([])
-    onMounted(async () => {
-      const data = await deaftone.getArtists(props.size, props.sort)
+    const page = ref(0)
+    let observer = null
+
+    async function getArtists () {
+      const data = await deaftone.getArtists(props.size, page.value)
+      page.value++
       for (const artist of data) { artists.value.push({ name: artist.name, id: artist.id }) }
+    }
+
+    function onElementObserved (e) {
+      e.forEach(({ target, isIntersecting }) => {
+        getArtists()
+      })
+    }
+    onMounted(async () => {
+      observer = new IntersectionObserver(onElementObserved, {
+        root: null,
+        threshold: 0.9
+      })
+      if (props.scroller) observer.observe(document.getElementById('sticky'))
+      else getArtists()
     })
     return { artists }
   }
@@ -38,15 +60,11 @@ export default {
         :name="artist.name"
       />
     </div>
-    <!--     <div
-      v-for="artist in artists"
-      :key="artist.id"
-      class="flex justify-center p-1 transition-opacity rounded-lg bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500"
-      @click=" $router.push({path: `/ArtistDetails/${artist.id}`})
-      "
-    >
-
-    </div> -->
+    <div
+      id="sticky"
+      class
+      style="height: 0.1px"
+    />
   </div>
 </template>
 

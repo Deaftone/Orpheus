@@ -36,8 +36,9 @@ export default {
       })
     }
     if (data.image) info.artistImage = data.image
-    if (data.bio) info.bio = data.bio
+    if (data.biography) info.bio = data.biography
     info.artistName = data.name
+    info.links = Object.fromEntries(Object.entries(data.links).filter(([_, v]) => v != null))
 
     return {
       info,
@@ -52,7 +53,7 @@ export default {
 <template>
   <div class="grid select-none grid-cols-1 gap-3 px-10 py-6 text-sm lg:text-lg xl:px-40">
     <div class="flex justify-center">
-      <div class="card w-full cursor-default bg-base-300 p-4 shadow-2xl md:card-side">
+      <div class="card w-full cursor-default bg-neutral p-4 shadow-2xl md:card-side">
         <div class="w-72">
           <figure>
             <VLazyImage
@@ -68,7 +69,7 @@ export default {
             <h2 class="card-title text-2xl font-bold text-primary md:text-5xl">
               {{ info.artistName }}
             </h2>
-            <button
+            <!--             <button
               class="btn border-0 bg-base-300 font-bold hover:bg-neutral"
             >
               <font-awesome-icon
@@ -95,7 +96,21 @@ export default {
               <font-awesome-icon
                 :icon="['fa-brands', 'fa-deezer']"
               />
-            </button>
+            </button> -->
+            <div
+              v-for="link in info.links"
+              :key="link"
+              class="card tooltip tooltip-top rounded-lg bg-neutral transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
+              :data-tip="info.link"
+            >
+              <button
+                class="btn border-0 bg-base-300 font-bold hover:bg-neutral"
+              >
+                <font-awesome-icon
+                  :icon="['fa-brands', 'fa-twitter']"
+                />
+              </button>
+            </div>
           </div>
           <div class="card-title ">
             <p class="line-clamp-6">

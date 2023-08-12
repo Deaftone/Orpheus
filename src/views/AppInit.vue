@@ -154,7 +154,7 @@ export default {
     class="flex flex-col items-center justify-center"
     style="height: 90vh"
   >
-    <div class="mt-4 bg-base-300 px-8 py-6 text-left shadow-2xl">
+    <div class="mt-4 bg-base-200 px-8 py-6 text-left shadow-2xl">
       <h3 class="text-center text-2xl font-bold">
         Connect to Deaftone
       </h3>
@@ -163,7 +163,7 @@ export default {
           <div>
             <select
               v-model="selected"
-              class="select-bordered select w-full max-w-xs"
+              class="select select-bordered w-full max-w-xs"
             >
               <!-- eslint-disable-next-line vue/require-v-for-key -->
               <option
@@ -195,13 +195,13 @@ export default {
                 type="text"
                 v-model="address"
                 placeholder="http://localhost:3030"
-                class="input-bordered input"
+                class="input input-bordered"
               >
             </label>
           </div>
           <div class="flex items-baseline justify-center">
             <button
-              class="btn-primary btn mt-4 px-6 py-2"
+              class="btn btn-primary mt-4 px-6 py-2"
               @click="connect()"
             >
               Connect

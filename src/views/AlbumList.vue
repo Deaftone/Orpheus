@@ -73,8 +73,7 @@ export default {
       else getAlbums()
     })
     return {
-      albums,
-      page
+      albums
     }
   }
 }
