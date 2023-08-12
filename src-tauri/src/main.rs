@@ -3,7 +3,6 @@
   windows_subsystem = "windows"
 )]
 use tauri::Manager;
-use tauri_plugin_store::PluginBuilder as store;
 use window_shadows::set_shadow;
 
 // Create the command:
@@ -22,7 +21,7 @@ async fn close_splashscreen(window: tauri::Window) {
 fn main() {
   tauri::Builder::default()
     //.plugin(tauri_plugin_window_state::Builder::default().build())
-    .plugin(store::default().build())
+    .plugin(tauri_plugin_store::Builder::default().build())
     .setup(|app| {
       let window = app.get_window("main").unwrap();
       #[cfg(any(windows, target_os = "macos"))]
