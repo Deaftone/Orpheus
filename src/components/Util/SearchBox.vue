@@ -30,7 +30,7 @@ export default {
 <template>
   <div class="flex-1 lg:flex-none">
     <button
-      class=" btn font-bold hover:bg-base-300"
+      class=" btn font-bold hover:bg-base-200"
     >
       <font-awesome-icon
         :icon="['fa', 'magnifying-glass']"
