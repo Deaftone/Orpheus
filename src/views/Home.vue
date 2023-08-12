@@ -11,8 +11,8 @@ export default {
 </script>
 
 <template>
-  <div class="grid justify-center">
-    <div class="stats p-10 text-xl shadow-xl">
+  <div class="grid grid-cols-3 justify-center gap-3 p-4">
+    <div class="stats bg-neutral text-xl shadow-xl">
       <div class="stat">
         <div class=" stat-title">
           Albums
@@ -30,13 +30,60 @@ export default {
         </div>
       </div>
       <div class="stat">
-        <div class="stat-figure text-secondary">
-          <font-awesome-icon
-            icon="microphone-alt"
-            class=""
-            color="gray"
-          />
+        <div class="stat-title">
+          Artists
         </div>
+        <div class="stat-value" />
+        <div class="stat-value">
+          1,000
+        </div>
+      </div>
+    </div>
+    <div class="stats bg-neutral p-10 text-xl shadow-xl">
+      <div class="stat">
+        <div class=" stat-title">
+          Albums
+        </div>
+        <div class="stat-value">
+          400
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-title">
+          Songs
+        </div>
+        <div class="stat-value">
+          51,000
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-title">
+          Artists
+        </div>
+        <div class="stat-value" />
+        <div class="stat-value">
+          1,000
+        </div>
+      </div>
+    </div>
+    <div class="stats bg-neutral p-10 text-xl shadow-xl">
+      <div class="stat">
+        <div class=" stat-title">
+          Albums
+        </div>
+        <div class="stat-value">
+          400
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-title">
+          Songs
+        </div>
+        <div class="stat-value">
+          51,000
+        </div>
+      </div>
+      <div class="stat">
         <div class="stat-title">
           Artists
         </div>
