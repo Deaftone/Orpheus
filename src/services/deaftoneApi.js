@@ -14,7 +14,7 @@ class DeaftoneConnector {
 
   async init () {
     this.baseURL = await this.settings.get('server')
-    if (process.env.NODE_ENV !== 'development') {
+    /*     if (process.env.NODE_ENV !== 'development') {
       this.cacheStorage = buildWebStorage(localStorage, 'axios-cache:')
       this.axios = setupCache(
         // axios instance
@@ -50,14 +50,14 @@ class DeaftoneConnector {
           debug: undefined
         }
       )
-    } else {
-      this.axios = axios.create({
-        adapter: window.__TAURI__ ? axiosTauriAdapter : null,
-        baseURL: this.baseURL,
-        timeout: 5000,
-        headers: { 'Content-Type': 'application/json' }
-      })
-    }
+    } else { */
+    this.axios = axios.create({
+      adapter: window.__TAURI__ ? axiosTauriAdapter : null,
+      baseURL: this.baseURL,
+      timeout: 5000,
+      headers: { 'Content-Type': 'application/json' }
+    })
+    /* } */
     this.hasInit = true
   }
 
@@ -72,10 +72,10 @@ class DeaftoneConnector {
     }))
   }
 
-  async getArtists (size, sort) {
+  async getArtists (size, page, sort) {
     return (await this.axios.get('/artists', {
       params: {
-        size, sort
+        size, page, sort
       }
     })).data.data
   }
