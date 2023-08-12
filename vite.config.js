@@ -10,6 +10,13 @@ export default defineConfig(() => {
   // const env = loadEnv(mode, __dirname)
 
   return {
+    plugins: [
+      vue(),
+      Layouts({
+        defaultLayout: 'Default'
+      })
+
+    ],
     build: {
       target: ['es2021', 'chrome97', 'safari13'],
       minify: !process.env.TAURI_DEBUG ? 'esbuild' : false,
@@ -34,18 +41,7 @@ export default defineConfig(() => {
       }
     },
     // base: path.resolve(__dirname, './dist/'),
-    plugins: [
-      /*       ViewLauncherVuePlugin({
-        entry: path.resolve(__dirname, 'src/main.js'),
-        theme: 'dark',
-        editor: env.VITE_EDITOR || 'vscode',
-      }), */
-      vue(),
-      Layouts({
-        defaultLayout: 'Default'
-      })
 
-    ],
     define: {
       'process.env': {}
     }
