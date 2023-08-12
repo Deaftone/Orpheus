@@ -48,7 +48,7 @@ export default {
       @click="$router.push({ path: route.route })"
     >
       <div
-        class="flex h-12 cursor-pointer items-center justify-start rounded bg-base-300 transition-all duration-500 ease-in-out hover:rounded-xl hover:bg-neutral-content"
+        class="flex h-12 cursor-pointer items-center justify-start rounded bg-base-100 transition-all duration-500 ease-in-out hover:rounded-xl hover:bg-neutral-content"
         :class="expanded ? 'w-[168px] ' : 'w-[48px]' "
       >
         <font-awesome-icon
@@ -57,7 +57,7 @@ export default {
           color="gray"
         />
         <div
-          class="fixed block pl-5 opacity-0 duration-500 ease-in-out"
+          class="fixed block pl-5 opacity-0 duration-500 ease-in-out "
           :class="expanded ? 'visible opacity-100' : 'h duration-300' "
         >
           <p
@@ -72,7 +72,7 @@ export default {
     <div
       @click="$router.push({ path: '/Settings' })"
       data-tip="Settings"
-      class="mt-auto flex h-12 cursor-pointer items-center justify-start rounded bg-base-300 duration-500 ease-in-out hover:rounded-xl hover:bg-neutral-content"
+      class="mt-auto flex h-12 cursor-pointer items-center justify-start rounded bg-base-100 duration-500 ease-in-out hover:rounded-xl hover:bg-neutral-content"
       :class="expanded ? 'w-[168px] ' : 'w-[48px]' "
     >
       <font-awesome-icon
